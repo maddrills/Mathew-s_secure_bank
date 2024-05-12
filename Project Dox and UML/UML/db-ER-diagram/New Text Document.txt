@@ -1,0 +1,3 @@
+download starUML
+then open Bank app
+db is defined in Mathew-s_secure_bank\The Application\db\MySQL
