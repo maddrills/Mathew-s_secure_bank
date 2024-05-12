@@ -4483,6 +4483,78 @@
 							},
 							"lineStyle": 1,
 							"points": "605:471;695:401"
+						},
+						{
+							"_type": "ERDEntityView",
+							"_id": "AAAAAAGPbMiBSKYH9io=",
+							"_parent": {
+								"$ref": "AAAAAAGPZ4XK0A8pfxI="
+							},
+							"model": {
+								"$ref": "AAAAAAGPbMiBR6YF2Xw="
+							},
+							"subViews": [
+								{
+									"_type": "LabelView",
+									"_id": "AAAAAAGPbMiBSKYI+pM=",
+									"_parent": {
+										"$ref": "AAAAAAGPbMiBSKYH9io="
+									},
+									"fillColor": "#ffd8d8",
+									"font": "Arial;13;1",
+									"left": 1864,
+									"top": 925,
+									"width": 248,
+									"height": 13,
+									"text": "website_visited"
+								},
+								{
+									"_type": "ERDColumnCompartmentView",
+									"_id": "AAAAAAGPbMiBSKYJNSU=",
+									"_parent": {
+										"$ref": "AAAAAAGPbMiBSKYH9io="
+									},
+									"model": {
+										"$ref": "AAAAAAGPbMiBR6YF2Xw="
+									},
+									"subViews": [
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAGPbMmPE6YVhVE=",
+											"_parent": {
+												"$ref": "AAAAAAGPbMiBSKYJNSU="
+											},
+											"model": {
+												"$ref": "AAAAAAGPbMmO4qYS/X0="
+											},
+											"fillColor": "#ffd8d8",
+											"font": "Arial;13;0",
+											"left": 1869,
+											"top": 948,
+											"width": 238,
+											"height": 13
+										}
+									],
+									"fillColor": "#ffd8d8",
+									"font": "Arial;13;0",
+									"left": 1864,
+									"top": 943,
+									"width": 248,
+									"height": 23
+								}
+							],
+							"fillColor": "#ffd8d8",
+							"font": "Arial;13;0",
+							"left": 1864,
+							"top": 920,
+							"width": 248,
+							"height": 73,
+							"nameLabel": {
+								"$ref": "AAAAAAGPbMiBSKYI+pM="
+							},
+							"columnCompartment": {
+								"$ref": "AAAAAAGPbMiBSKYJNSU="
+							}
 						}
 					]
 				},
@@ -6263,6 +6335,26 @@
 							"length": 0,
 							"primaryKey": true,
 							"foreignKey": true
+						}
+					]
+				},
+				{
+					"_type": "ERDEntity",
+					"_id": "AAAAAAGPbMiBR6YF2Xw=",
+					"_parent": {
+						"$ref": "AAAAAAGPZ4XK0A8o7Js="
+					},
+					"name": "website_visited",
+					"columns": [
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAGPbMmO4qYS/X0=",
+							"_parent": {
+								"$ref": "AAAAAAGPbMiBR6YF2Xw="
+							},
+							"name": "visited_date",
+							"type": "DATE",
+							"length": 0
 						}
 					]
 				}
