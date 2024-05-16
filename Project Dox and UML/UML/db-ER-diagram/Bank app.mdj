@@ -1075,6 +1075,22 @@
 											"top": 1143,
 											"width": 207.56689453125,
 											"height": 13
+										},
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAGPghsuSmuDuNc=",
+											"_parent": {
+												"$ref": "AAAAAAGPaJwvy9wMDvU="
+											},
+											"model": {
+												"$ref": "AAAAAAGPghsuGWuAjn8="
+											},
+											"fillColor": "#fcffaf",
+											"font": "Arial;13;0",
+											"left": 365,
+											"top": 1158,
+											"width": 207.56689453125,
+											"height": 13
 										}
 									],
 									"fillColor": "#fcffaf",
@@ -1082,7 +1098,7 @@
 									"left": 360,
 									"top": 1063,
 									"width": 217.56689453125,
-									"height": 98
+									"height": 113
 								}
 							],
 							"fillColor": "#fcffaf",
@@ -1090,7 +1106,7 @@
 							"left": 360,
 							"top": 1040,
 							"width": 217.56689453125,
-							"height": 121,
+							"height": 136,
 							"nameLabel": {
 								"$ref": "AAAAAAGPaJwvy9wLl9A="
 							},
@@ -4504,7 +4520,7 @@
 								"$ref": "AAAAAAGPaJwvy9wKITU="
 							},
 							"lineStyle": 1,
-							"points": "578:1146;687:1192"
+							"points": "578:1150;687:1194"
 						},
 						{
 							"_type": "UMLNoteLinkView",
@@ -4974,6 +4990,35 @@
 							},
 							"lineStyle": 1,
 							"points": "1987:1199;1987:1145"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAGPgh4t0GuIE4Q=",
+							"_parent": {
+								"$ref": "AAAAAAGPZ4XK0A8pfxI="
+							},
+							"font": "Arial;13;0",
+							"left": 256,
+							"top": 1264,
+							"width": 200,
+							"height": 57,
+							"text": "can_withdraw turns true once a year then when withdrawn turns false then repeat "
+						},
+						{
+							"_type": "UMLNoteLinkView",
+							"_id": "AAAAAAGPgh7an2uPv5o=",
+							"_parent": {
+								"$ref": "AAAAAAGPZ4XK0A8pfxI="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAGPaJwvy9wKITU="
+							},
+							"tail": {
+								"$ref": "AAAAAAGPgh4t0GuIE4Q="
+							},
+							"lineStyle": 1,
+							"points": "373:1263;426:1176"
 						}
 					]
 				},
@@ -5761,6 +5806,16 @@
 							},
 							"name": "created",
 							"type": "DATETIME",
+							"length": 0
+						},
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAGPghsuGWuAjn8=",
+							"_parent": {
+								"$ref": "AAAAAAGPaJwvytwII6w="
+							},
+							"name": "can_withdraw",
+							"type": "BOOLEAN",
 							"length": 0
 						}
 					]
