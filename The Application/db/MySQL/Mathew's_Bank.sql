@@ -148,6 +148,11 @@ CREATE TABLE `user_acount`(
 `joint_ac_id` INTEGER UNIQUE
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
+-- ADMIN SSSTUFF --
+
+CREATE TABLE `lone_type`(
+
+);
 
 
 
