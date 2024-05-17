@@ -3247,38 +3247,6 @@
 											"top": 593,
 											"width": 254,
 											"height": 13
-										},
-										{
-											"_type": "ERDColumnView",
-											"_id": "AAAAAAGPbDBPj74xikU=",
-											"_parent": {
-												"$ref": "AAAAAAGPa7rkvLvOCrc="
-											},
-											"model": {
-												"$ref": "AAAAAAGPbDBPZL4uSjM="
-											},
-											"fillColor": "#d8f2ff",
-											"font": "Arial;13;0",
-											"left": 1429,
-											"top": 608,
-											"width": 254,
-											"height": 13
-										},
-										{
-											"_type": "ERDColumnView",
-											"_id": "AAAAAAGPbDBTs743mYE=",
-											"_parent": {
-												"$ref": "AAAAAAGPa7rkvLvOCrc="
-											},
-											"model": {
-												"$ref": "AAAAAAGPbDBTjb40DP0="
-											},
-											"fillColor": "#d8f2ff",
-											"font": "Arial;13;0",
-											"left": 1429,
-											"top": 623,
-											"width": 254,
-											"height": 13
 										}
 									],
 									"fillColor": "#d8f2ff",
@@ -3286,7 +3254,7 @@
 									"left": 1424,
 									"top": 543,
 									"width": 264,
-									"height": 98
+									"height": 68
 								}
 							],
 							"fillColor": "#d8f2ff",
@@ -3856,6 +3824,22 @@
 										},
 										{
 											"_type": "ERDColumnView",
+											"_id": "AAAAAAGPhlHZp+r8hIk=",
+											"_parent": {
+												"$ref": "AAAAAAGPbA/kUL0urR8="
+											},
+											"model": {
+												"$ref": "AAAAAAGPhlHZYer5qXM="
+											},
+											"fillColor": "#d8f2ff",
+											"font": "Arial;13;0",
+											"left": 1453,
+											"top": 275,
+											"width": 238,
+											"height": 13
+										},
+										{
+											"_type": "ERDColumnView",
 											"_id": "AAAAAAGPbBBasL1BvU4=",
 											"_parent": {
 												"$ref": "AAAAAAGPbA/kUL0urR8="
@@ -3866,7 +3850,7 @@
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
 											"left": 1453,
-											"top": 275,
+											"top": 290,
 											"width": 238,
 											"height": 13
 										},
@@ -3882,7 +3866,7 @@
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
 											"left": 1453,
-											"top": 290,
+											"top": 305,
 											"width": 238,
 											"height": 13
 										},
@@ -3898,7 +3882,7 @@
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
 											"left": 1453,
-											"top": 305,
+											"top": 320,
 											"width": 238,
 											"height": 13
 										},
@@ -3914,7 +3898,7 @@
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
 											"left": 1453,
-											"top": 320,
+											"top": 335,
 											"width": 238,
 											"height": 13
 										},
@@ -3930,7 +3914,7 @@
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
 											"left": 1453,
-											"top": 335,
+											"top": 350,
 											"width": 238,
 											"height": 13
 										}
@@ -3940,7 +3924,7 @@
 									"left": 1448,
 									"top": 255,
 									"width": 248,
-									"height": 98
+									"height": 113
 								}
 							],
 							"fillColor": "#d8f2ff",
@@ -4565,7 +4549,7 @@
 							"top": 464,
 							"width": 184,
 							"height": 57,
-							"text": "emp_number starts with 0,000,001 and incremented from that point"
+							"text": "emp_number starts with 1,000,001 and incremented from that point"
 						},
 						{
 							"_type": "UMLNoteLinkView",
@@ -4943,8 +4927,8 @@
 							"left": 2184,
 							"top": 848,
 							"width": 96,
-							"height": 129,
-							"text": "only admin and manager can make changes to this table acount id starts with 101"
+							"height": 142,
+							"text": "only admin and manager can make changes to this table account type hold the name of the account "
 						},
 						{
 							"_type": "UMLNoteLinkView",
@@ -4960,7 +4944,7 @@
 								"$ref": "AAAAAAGPgS5p6kOpgfo="
 							},
 							"lineStyle": 1,
-							"points": "2112:906;2183:910"
+							"points": "2112:909;2183:914"
 						},
 						{
 							"_type": "UMLNoteView",
@@ -6547,28 +6531,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGPa7rku7vK8Ks="
 							},
-							"name": "return_years",
-							"type": "SMALLINT",
-							"length": 0
-						},
-						{
-							"_type": "ERDColumn",
-							"_id": "AAAAAAGPbDBPZL4uSjM=",
-							"_parent": {
-								"$ref": "AAAAAAGPa7rku7vK8Ks="
-							},
-							"name": "return_months",
-							"type": "SMALLINT",
-							"length": 0
-						},
-						{
-							"_type": "ERDColumn",
-							"_id": "AAAAAAGPbDBTjb40DP0=",
-							"_parent": {
-								"$ref": "AAAAAAGPa7rku7vK8Ks="
-							},
-							"name": "return_days",
-							"type": "SMALLINT",
+							"name": "return_date",
+							"type": "DATETIME",
 							"length": 0
 						}
 					]
@@ -6815,6 +6779,16 @@
 						},
 						{
 							"_type": "ERDColumn",
+							"_id": "AAAAAAGPhlHZYer5qXM=",
+							"_parent": {
+								"$ref": "AAAAAAGPbA/kT70qtqo="
+							},
+							"name": "phone_number",
+							"type": "CHAR",
+							"length": 0
+						},
+						{
+							"_type": "ERDColumn",
 							"_id": "AAAAAAGPbBBai70+G+k=",
 							"_parent": {
 								"$ref": "AAAAAAGPbA/kT70qtqo="
@@ -6946,8 +6920,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGPgS5p6kOnmbE="
 							},
-							"name": "account_id",
-							"type": "INTEGER",
+							"name": "account_type",
+							"type": "VARCHAR",
 							"length": 0,
 							"primaryKey": true
 						},
