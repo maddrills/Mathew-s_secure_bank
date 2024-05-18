@@ -128,26 +128,27 @@ CREATE TABLE `spouse_acount`(
 `sa_ac_no` INTEGER NOT NULL AUTO_INCREMENT, 
 `amount` DOUBLE NOT NULl DEFAULT 0.00 CHECK(`amount` >= 0.00),
 -- FOREIGN KEY SECTION 
-`joint_acc` INTEGER NOT NULL,
+`joint_account_id` INTEGER NOT NULL,
 CONSTRAINT `spouse_acount_pk` PRIMARY KEY (`sa_ac_no`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 105000001, DEFAULT CHARSET 'latin1';
 
 CREATE TABLE `busniss_people`(
 `b_id` INTEGER NOT NULL AUTO_INCREMENT,
 -- FOREIGN KEY SECTION 
-`user_id` INTEGER,
+`user_joint_acount` INTEGER,
 `business_ac_no` INTEGER,
 CONSTRAINT `busniss_people_pk` PRIMARY KEY (`b_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
 CREATE TABLE `spouse`(
 `s_id` INTEGER NOT NULL AUTO_INCREMENT,
-`husband_user_id` INTEGER UNIQUE NOT NULL,
-`wife_user_id` INTEGER UNIQUE NOT NULL,
+`husband_joint_acount` INTEGER UNIQUE NOT NULL,
+`wife_joint_acount` INTEGER UNIQUE NOT NULL,
+`sa_ac_no` INTEGER UNIQUE NOT NULL,
 CONSTRAINT `spouse_pk` PRIMARY KEY (`s_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
-CREATE TABLE `user_acount`(
+CREATE TABLE `user_account`(
 `u_acc_id` INTEGER NOT NULL AUTO_INCREMENT,
 -- all fks go here
 `s_ac_no` INTEGER UNIQUE NOT NULL ,
@@ -208,27 +209,43 @@ CREATE TABLE `time_space`(
 
 
 
--- CREATE TABLE `user_acount`(
--- `u_acc_id` INTEGER NOT NULL AUTO_INCREMENT,
--- -- all fks go here
--- `s_ac_no` INTEGER NOT NULL UNIQUE,
--- `ack_ac_no` INTEGER UNIQUE,
--- `b_ac_no` INTEGER UNIQUE,
--- `joint_ac_id` INTEGER UNIQUE,
--- CONSTRAINT `user_acount_pk` PRIMARY KEY (`u_acc_id`)
--- )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
-
-
-
 -- users foreign keys
  -- ALTER TABLE `user_acount` ADD CONSTRAINT `user_acount_unique` UNIQUE (`s_ac_no`,`ack_ac_no`,`b_ac_no`,`joint_ac_id`);
-ALTER TABLE `user_acount` ADD CONSTRAINT `user_acount_fk_to_savings` FOREIGN KEY(`s_ac_no`) REFERENCES `savings`(`s_account_number`);
-ALTER TABLE `user_acount` ADD CONSTRAINT `user_acount_fk_to_checking` FOREIGN KEY(`ack_ac_no`) REFERENCES `checking`(`chk_account_number`);
-ALTER TABLE `user_acount` ADD CONSTRAINT `user_acount_fk_to_build_up` FOREIGN KEY(`b_ac_no`) REFERENCES `build_up`(`b_account_number`);
-ALTER TABLE `user_acount` ADD CONSTRAINT `user_acount_fk_to_joint_accounts` FOREIGN KEY(`joint_ac_id`) REFERENCES `joint_accounts`(`joint_acount_id`);
+ALTER TABLE `user_account` ADD CONSTRAINT `user_acount_fk_to_savings` FOREIGN KEY(`s_ac_no`) REFERENCES `savings`(`s_account_number`);
+ALTER TABLE `user_account` ADD CONSTRAINT `user_acount_fk_to_checking` FOREIGN KEY(`ack_ac_no`) REFERENCES `checking`(`chk_account_number`);
+ALTER TABLE `user_account` ADD CONSTRAINT `user_acount_fk_to_build_up` FOREIGN KEY(`b_ac_no`) REFERENCES `build_up`(`b_account_number`);
+ALTER TABLE `user_account` ADD CONSTRAINT `user_acount_fk_to_joint_accounts` FOREIGN KEY(`joint_ac_id`) REFERENCES `joint_accounts`(`joint_acount_id`);
+DESC `user_account`;
 
-DESC `user_acount`;
+ALTER TABLE `busniss_acount` ADD CONSTRAINT `busniss_acount_fk_to_joint_accounts` FOREIGN KEY(`joint_acount_id`) REFERENCES `joint_accounts`(`joint_acount_id`);
+DESC `busniss_acount`;
+
+ALTER TABLE `spouse_acount` ADD CONSTRAINT `spouse_acount_fk_to_joint_accounts` FOREIGN KEY(`joint_account_id`) REFERENCES `joint_accounts`(`joint_acount_id`);
+DESC `spouse_acount`;
 
 
+ALTER TABLE `busniss_people` ADD CONSTRAINT `busniss_people_fk_to_joint_accounts` FOREIGN KEY(`user_joint_acount`) REFERENCES `joint_accounts`(`joint_acount_id`);
+ALTER TABLE `busniss_people` ADD CONSTRAINT `busniss_people_fk_to_busniss_account` FOREIGN KEY(`business_ac_no`) REFERENCES `busniss_acount`(`business_ac_no`);
+DESC `busniss_people`;
 
+ALTER TABLE `spouse` ADD CONSTRAINT `spouseH_fk_to_joint_accounts` FOREIGN KEY(`husband_joint_acount`) REFERENCES `joint_accounts`(`joint_acount_id`);
+ALTER TABLE `spouse` ADD CONSTRAINT `spouseW_fk_to_joint_accounts` FOREIGN KEY(`wife_joint_acount`) REFERENCES `joint_accounts`(`joint_acount_id`);
+ALTER TABLE `spouse` ADD CONSTRAINT `spouse_fk_to_spouse_account` FOREIGN KEY(`sa_ac_no`) REFERENCES `spouse_acount`(`sa_ac_no`);
+DESC `spouse`;
 
+ALTER TABLE `user` ADD CONSTRAINT `user_fk_to_joint_accounts` FOREIGN KEY(`user_account_id`) REFERENCES `user_account`(`u_acc_id`);
+DESC `user`;
+
+ALTER TABLE `user_details` ADD CONSTRAINT `user_details_fk_to_user` FOREIGN KEY(`u_id`) REFERENCES `user`(`u_id`);
+DESC `user_details`;
+
+ALTER TABLE `notification` ADD CONSTRAINT `notification_fk_to_user` FOREIGN KEY(`u_id`) REFERENCES `user`(`u_id`);
+DESC `notification`;
+
+ALTER TABLE `user_lones` ADD CONSTRAINT `user_lones_fk_to_user` FOREIGN KEY(`u_id`) REFERENCES `user`(`u_id`);
+ALTER TABLE `user_lones` ADD CONSTRAINT `user_lones_loneType_fk_to_user` FOREIGN KEY(`lone_type_id`) REFERENCES `lone_type`(`lone_type_id`);
+DESC `user_lones`;
+
+ALTER TABLE `user_roles` ADD CONSTRAINT `user_lones_U_fk_to_user` FOREIGN KEY(`u_id`) REFERENCES `user`(`u_id`);
+ALTER TABLE `user_roles` ADD CONSTRAINT `user_lones_R_fk_to_user` FOREIGN KEY(`role_id`) REFERENCES `roles`(`role_id`);
+DESC `user_roles`;
