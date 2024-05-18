@@ -227,5 +227,8 @@ ALTER TABLE `user_acount` ADD CONSTRAINT `user_acount_fk_to_checking` FOREIGN KE
 ALTER TABLE `user_acount` ADD CONSTRAINT `user_acount_fk_to_build_up` FOREIGN KEY(`b_ac_no`) REFERENCES `build_up`(`b_account_number`);
 ALTER TABLE `user_acount` ADD CONSTRAINT `user_acount_fk_to_joint_accounts` FOREIGN KEY(`joint_ac_id`) REFERENCES `joint_accounts`(`joint_acount_id`);
 
-
 DESC `user_acount`;
+
+
+
+
