@@ -966,7 +966,7 @@
 									"font": "Arial;13;1",
 									"left": 360,
 									"top": 1045,
-									"width": 217.56689453125,
+									"width": 233.44873046875,
 									"height": 13,
 									"text": "build_up"
 								},
@@ -993,7 +993,7 @@
 											"font": "Arial;13;0",
 											"left": 365,
 											"top": 1068,
-											"width": 207.56689453125,
+											"width": 223.44873046875,
 											"height": 13
 										},
 										{
@@ -1009,7 +1009,7 @@
 											"font": "Arial;13;0",
 											"left": 365,
 											"top": 1083,
-											"width": 207.56689453125,
+											"width": 223.44873046875,
 											"height": 13
 										},
 										{
@@ -1025,7 +1025,7 @@
 											"font": "Arial;13;0",
 											"left": 365,
 											"top": 1098,
-											"width": 207.56689453125,
+											"width": 223.44873046875,
 											"height": 13
 										},
 										{
@@ -1041,7 +1041,7 @@
 											"font": "Arial;13;0",
 											"left": 365,
 											"top": 1113,
-											"width": 207.56689453125,
+											"width": 223.44873046875,
 											"height": 13
 										},
 										{
@@ -1057,7 +1057,7 @@
 											"font": "Arial;13;0",
 											"left": 365,
 											"top": 1128,
-											"width": 207.56689453125,
+											"width": 223.44873046875,
 											"height": 13
 										},
 										{
@@ -1073,7 +1073,7 @@
 											"font": "Arial;13;0",
 											"left": 365,
 											"top": 1143,
-											"width": 207.56689453125,
+											"width": 223.44873046875,
 											"height": 13
 										},
 										{
@@ -1089,7 +1089,7 @@
 											"font": "Arial;13;0",
 											"left": 365,
 											"top": 1158,
-											"width": 207.56689453125,
+											"width": 223.44873046875,
 											"height": 13
 										}
 									],
@@ -1097,7 +1097,7 @@
 									"font": "Arial;13;0",
 									"left": 360,
 									"top": 1063,
-									"width": 217.56689453125,
+									"width": 233.44873046875,
 									"height": 113
 								}
 							],
@@ -1105,7 +1105,7 @@
 							"font": "Arial;13;0",
 							"left": 360,
 							"top": 1040,
-							"width": 217.56689453125,
+							"width": 233.44873046875,
 							"height": 136,
 							"nameLabel": {
 								"$ref": "AAAAAAGPaJwvy9wLl9A="
@@ -1311,7 +1311,7 @@
 										"$ref": "AAAAAAGPaKAB7NxOLKE="
 									},
 									"font": "Arial;13;0",
-									"left": 602,
+									"left": 617,
 									"top": 1075,
 									"height": 13,
 									"alpha": 0.5235987755982988,
@@ -1346,7 +1346,7 @@
 								"$ref": "AAAAAAGPaJwvy9wKITU="
 							},
 							"lineStyle": 2,
-							"points": "577:1096;760:1096;760:736",
+							"points": "592:1096;760:1096;760:736",
 							"nameLabel": {
 								"$ref": "AAAAAAGPaKAB7NxPrVg="
 							},
@@ -4504,7 +4504,7 @@
 								"$ref": "AAAAAAGPaJwvy9wKITU="
 							},
 							"lineStyle": 1,
-							"points": "578:1150;687:1194"
+							"points": "593:1155;687:1193"
 						},
 						{
 							"_type": "UMLNoteLinkView",
@@ -4983,7 +4983,7 @@
 							},
 							"font": "Arial;13;0",
 							"left": 256,
-							"top": 1264,
+							"top": 1256,
 							"width": 200,
 							"height": 57,
 							"text": "can_withdraw turns true once a year then when withdrawn turns false then repeat "
@@ -5002,7 +5002,7 @@
 								"$ref": "AAAAAAGPgh4t0GuIE4Q="
 							},
 							"lineStyle": 1,
-							"points": "373:1263;426:1176"
+							"points": "375:1255;429:1176"
 						}
 					]
 				},
@@ -5355,7 +5355,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGPZ5B6Yw99GgY="
 							},
-							"name": "chk_ac_no",
+							"name": "ack_ac_no",
 							"type": "INTEGER",
 							"length": 0,
 							"foreignKey": true,
@@ -5737,7 +5737,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGPaJwvytwII6w="
 							},
-							"name": "b_account_no",
+							"name": "b_account_number",
 							"type": "INTEGER",
 							"length": 0,
 							"primaryKey": true
@@ -5876,7 +5876,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGPaLqQ8dzTOdQ="
 							},
-							"name": "joint_account_id",
+							"name": "joint_acount_id",
 							"type": "INTEGER",
 							"length": 0,
 							"primaryKey": true

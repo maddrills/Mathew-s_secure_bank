@@ -150,7 +150,7 @@ CONSTRAINT `spouse_pk` PRIMARY KEY (`s_id`)
 CREATE TABLE `user_acount`(
 `u_acc_id` INTEGER NOT NULL AUTO_INCREMENT,
 -- all fks go here
-`s_ac_no` INTEGER NOT NULL UNIQUE,
+`s_ac_no` INTEGER UNIQUE NOT NULL ,
 `ack_ac_no` INTEGER UNIQUE,
 `b_ac_no` INTEGER UNIQUE,
 `joint_ac_id` INTEGER UNIQUE,
@@ -203,9 +203,29 @@ CREATE TABLE `time_space`(
 `days` SMALLINT NOT NULL DEFAULT 0 CHECK(`days` >=0),
 `months` SMALLINT NOT NULL DEFAULT 0 CHECK(`months` >=0),
 `years` SMALLINT NOT NULL DEFAULT 0 CHECK(`years` >=0 AND `years` < 100)
-)ENGINE = 'Innodb' , DEFAULT CHARSET 'latin1'
+)ENGINE = 'Innodb' , DEFAULT CHARSET 'latin1';
 
 
 
 
+-- CREATE TABLE `user_acount`(
+-- `u_acc_id` INTEGER NOT NULL AUTO_INCREMENT,
+-- -- all fks go here
+-- `s_ac_no` INTEGER NOT NULL UNIQUE,
+-- `ack_ac_no` INTEGER UNIQUE,
+-- `b_ac_no` INTEGER UNIQUE,
+-- `joint_ac_id` INTEGER UNIQUE,
+-- CONSTRAINT `user_acount_pk` PRIMARY KEY (`u_acc_id`)
+-- )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
+
+
+-- users foreign keys
+ -- ALTER TABLE `user_acount` ADD CONSTRAINT `user_acount_unique` UNIQUE (`s_ac_no`,`ack_ac_no`,`b_ac_no`,`joint_ac_id`);
+ALTER TABLE `user_acount` ADD CONSTRAINT `user_acount_fk_to_savings` FOREIGN KEY(`s_ac_no`) REFERENCES `savings`(`s_account_number`);
+ALTER TABLE `user_acount` ADD CONSTRAINT `user_acount_fk_to_checking` FOREIGN KEY(`ack_ac_no`) REFERENCES `checking`(`chk_account_number`);
+ALTER TABLE `user_acount` ADD CONSTRAINT `user_acount_fk_to_build_up` FOREIGN KEY(`b_ac_no`) REFERENCES `build_up`(`b_account_number`);
+ALTER TABLE `user_acount` ADD CONSTRAINT `user_acount_fk_to_joint_accounts` FOREIGN KEY(`joint_ac_id`) REFERENCES `joint_accounts`(`joint_acount_id`);
+
+
+DESC `user_acount`;
