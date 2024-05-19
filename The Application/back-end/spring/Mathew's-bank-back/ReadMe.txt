@@ -1,1 +1,1 @@
-spring 6.1.7 and spring security 6.2.4 goles here
+spring boot 3.2.5 and spring security 6.2.4 goles here
