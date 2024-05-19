@@ -192,6 +192,7 @@ CREATE TABLE `lone_type`(
 `lone_type_id` INTEGER NOT NULL AUTO_INCREMENT,
 `amount` DOUBLE NOT NULl DEFAULT 0.00 CHECK(`amount` >= 0.00),
 `return_date` DATETIME NOT NULL,
+`created_by` INTEGER NOT NULL,
 CONSTRAINT `lone_type_pk` PRIMARY KEY (`lone_type_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
@@ -207,6 +208,9 @@ CREATE TABLE `time_space`(
 )ENGINE = 'Innodb' , DEFAULT CHARSET 'latin1';
 
 
+CREATE TABLE `website_visited`(
+`visited_date` DATETIME
+)ENGINE = 'Innodb' , DEFAULT CHARSET 'latin1';
 
 
 -- users foreign keys
@@ -249,3 +253,23 @@ DESC `user_lones`;
 ALTER TABLE `user_roles` ADD CONSTRAINT `user_lones_U_fk_to_user` FOREIGN KEY(`u_id`) REFERENCES `user`(`u_id`);
 ALTER TABLE `user_roles` ADD CONSTRAINT `user_lones_R_fk_to_user` FOREIGN KEY(`role_id`) REFERENCES `roles`(`role_id`);
 DESC `user_roles`;
+
+
+
+
+-- employee details alter 
+
+
+
+ALTER TABLE `emp_details` ADD CONSTRAINT `emp_details_fk_to_employee` FOREIGN KEY(`emp_id`) REFERENCES `employee`(`emp_id`);
+DESC `emp_details`;
+
+ALTER TABLE `employee` ADD CONSTRAINT `employee_fk_to_employee` FOREIGN KEY(`reports_to`) REFERENCES `employee`(`emp_id`);
+DESC `employee`;
+
+ALTER TABLE `lone_type` ADD CONSTRAINT `lone_type_fk_to_employee` FOREIGN KEY(`created_by`) REFERENCES `employee`(`emp_id`);
+DESC `lone_type`;
+
+ALTER TABLE `emp_roles` ADD CONSTRAINT `emp_roles_fk_to_employee` FOREIGN KEY(`emp_id`) REFERENCES `employee`(`emp_id`);
+ALTER TABLE `emp_roles` ADD CONSTRAINT `emp_roles_fk_to_roles` FOREIGN KEY(`role_id`) REFERENCES `roles`(`role_id`);
+DESC `emp_roles`;
