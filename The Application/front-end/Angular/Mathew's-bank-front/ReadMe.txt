@@ -1,0 +1,1 @@
+Angular 17 SPA standalone C Front end goes here
