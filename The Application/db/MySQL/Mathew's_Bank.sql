@@ -234,8 +234,8 @@ CREATE TABLE `user_application`(
 `applyed_date` DATETIME DEFAULT now(),
 `status` BOOLEAN DEFAULT 0 NOT NULL,
 `approved_by` INTEGER,
-`created_usser_id` INTEGER,
-`branch_is` INTEGER NOT NULL,
+`created_user_id` INTEGER,
+`branch_id` INTEGER NOT NULL,
 CONSTRAINT `user_application_pk` PRIMARY KEY (`application_number`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 101, DEFAULT CHARSET 'latin1';
 
@@ -296,6 +296,7 @@ ALTER TABLE `emp_details` ADD CONSTRAINT `emp_details_fk_to_employee` FOREIGN KE
 DESC `emp_details`;
 
 ALTER TABLE `employee` ADD CONSTRAINT `employee_fk_to_employee` FOREIGN KEY(`reports_to`) REFERENCES `employee`(`emp_id`);
+ALTER TABLE `employee` ADD CONSTRAINT `employee_fk_to_branch` FOREIGN KEY(`branch_id`) REFERENCES `branch`(`branch_id`);
 DESC `employee`;
 
 ALTER TABLE `lone_type` ADD CONSTRAINT `lone_type_fk_to_employee` FOREIGN KEY(`created_by`) REFERENCES `employee`(`emp_id`);
@@ -304,3 +305,9 @@ DESC `lone_type`;
 ALTER TABLE `emp_roles` ADD CONSTRAINT `emp_roles_fk_to_employee` FOREIGN KEY(`emp_id`) REFERENCES `employee`(`emp_id`);
 ALTER TABLE `emp_roles` ADD CONSTRAINT `emp_roles_fk_to_roles` FOREIGN KEY(`role_id`) REFERENCES `roles`(`role_id`);
 DESC `emp_roles`;
+
+
+ALTER TABLE `user_application` ADD CONSTRAINT `user_application_fk_to_employee` FOREIGN KEY(`approved_by`) REFERENCES `employee`(`emp_id`);
+ALTER TABLE `user_application` ADD CONSTRAINT `user_application_fk_to_user` FOREIGN KEY(`created_user_id`) REFERENCES `user`(`u_id`);
+ALTER TABLE `user_application` ADD CONSTRAINT `user_application_fk_to_branch` FOREIGN KEY(`branch_id`) REFERENCES `branch`(`branch_id`);
+DESC `user_application`;

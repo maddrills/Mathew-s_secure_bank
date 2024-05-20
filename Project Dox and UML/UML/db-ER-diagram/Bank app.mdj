@@ -4500,8 +4500,8 @@
 									},
 									"fillColor": "#ffd8d8",
 									"font": "Arial;13;1",
-									"left": 1864,
-									"top": 1077,
+									"left": 1952,
+									"top": 1141,
 									"width": 248,
 									"height": 13,
 									"text": "website_visited"
@@ -4527,24 +4527,24 @@
 											},
 											"fillColor": "#ffd8d8",
 											"font": "Arial;13;0",
-											"left": 1869,
-											"top": 1100,
+											"left": 1957,
+											"top": 1164,
 											"width": 238,
 											"height": 13
 										}
 									],
 									"fillColor": "#ffd8d8",
 									"font": "Arial;13;0",
-									"left": 1864,
-									"top": 1095,
+									"left": 1952,
+									"top": 1159,
 									"width": 248,
 									"height": 23
 								}
 							],
 							"fillColor": "#ffd8d8",
 							"font": "Arial;13;0",
-							"left": 1864,
-							"top": 1072,
+							"left": 1952,
+							"top": 1136,
 							"width": 248,
 							"height": 73,
 							"nameLabel": {
@@ -4653,8 +4653,8 @@
 									},
 									"fillColor": "#d8f2ff",
 									"font": "Arial;13;1",
-									"left": 1864,
-									"top": 837,
+									"left": 1952,
+									"top": 941,
 									"width": 248,
 									"height": 13,
 									"text": "Time Space"
@@ -4680,8 +4680,8 @@
 											},
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
-											"left": 1869,
-											"top": 860,
+											"left": 1957,
+											"top": 964,
 											"width": 238,
 											"height": 13
 										},
@@ -4696,8 +4696,8 @@
 											},
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
-											"left": 1869,
-											"top": 875,
+											"left": 1957,
+											"top": 979,
 											"width": 238,
 											"height": 13
 										},
@@ -4712,8 +4712,8 @@
 											},
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
-											"left": 1869,
-											"top": 890,
+											"left": 1957,
+											"top": 994,
 											"width": 238,
 											"height": 13
 										},
@@ -4728,8 +4728,8 @@
 											},
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
-											"left": 1869,
-											"top": 905,
+											"left": 1957,
+											"top": 1009,
 											"width": 238,
 											"height": 13
 										},
@@ -4744,8 +4744,8 @@
 											},
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
-											"left": 1869,
-											"top": 920,
+											"left": 1957,
+											"top": 1024,
 											"width": 238,
 											"height": 13
 										},
@@ -4760,8 +4760,8 @@
 											},
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
-											"left": 1869,
-											"top": 935,
+											"left": 1957,
+											"top": 1039,
 											"width": 238,
 											"height": 13
 										},
@@ -4776,24 +4776,24 @@
 											},
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
-											"left": 1869,
-											"top": 950,
+											"left": 1957,
+											"top": 1054,
 											"width": 238,
 											"height": 13
 										}
 									],
 									"fillColor": "#d8f2ff",
 									"font": "Arial;13;0",
-									"left": 1864,
-									"top": 855,
+									"left": 1952,
+									"top": 959,
 									"width": 248,
 									"height": 113
 								}
 							],
 							"fillColor": "#d8f2ff",
 							"font": "Arial;13;0",
-							"left": 1864,
-							"top": 832,
+							"left": 1952,
+							"top": 936,
 							"width": 248,
 							"height": 137,
 							"nameLabel": {
@@ -4810,8 +4810,8 @@
 								"$ref": "AAAAAAGPZ4XK0A8pfxI="
 							},
 							"font": "Arial;13;0",
-							"left": 2184,
-							"top": 848,
+							"left": 2272,
+							"top": 976,
 							"width": 96,
 							"height": 142,
 							"text": "only admin and manager can make changes to this table account type hold the name of the account "
@@ -4830,7 +4830,7 @@
 								"$ref": "AAAAAAGPgS5p6kOpgfo="
 							},
 							"lineStyle": 1,
-							"points": "2112:909;2183:914"
+							"points": "2200:1026;2271:1038"
 						},
 						{
 							"_type": "UMLNoteView",
@@ -4839,8 +4839,8 @@
 								"$ref": "AAAAAAGPZ4XK0A8pfxI="
 							},
 							"font": "Arial;13;0",
-							"left": 1936,
-							"top": 1200,
+							"left": 2024,
+							"top": 1264,
 							"width": 104,
 							"height": 51,
 							"text": "only to collect user app usage data "
@@ -4859,7 +4859,7 @@
 								"$ref": "AAAAAAGPgT2PU0P/5R8="
 							},
 							"lineStyle": 1,
-							"points": "1987:1199;1987:1145"
+							"points": "2075:1263;2075:1209"
 						},
 						{
 							"_type": "UMLNoteView",
@@ -5601,7 +5601,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 983,
-									"top": 665,
+									"top": 669,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -5652,7 +5652,7 @@
 								"$ref": "AAAAAAGPZ4XeDQ8vV44="
 							},
 							"lineStyle": 2,
-							"points": "784:400;784:528;968:528;968:816;2219:816;2219:783",
+							"points": "784:400;784:528;968:528;968:824;2219:824;2219:783",
 							"nameLabel": {
 								"$ref": "AAAAAAGPlcAzNHyAKw0="
 							},
@@ -7777,6 +7777,7 @@
 								"$ref": "AAAAAAGPbAvoXLz1Ubk="
 							},
 							"name": "branch_id",
+							"type": "INTEGER",
 							"length": 0,
 							"foreignKey": true
 						}
