@@ -9,10 +9,11 @@ USE `mathew_bank_db`;
 -- foreign key to be added to this table in alter table form  
 CREATE TABLE `user`(
 `u_id` INTEGER NOT NULL AUTO_INCREMENT,
-`user_name` VARCHAR(70) NOT NULL,
+`user_name` VARCHAR(70) UNIQUE NOT NULL,
 `password` VARCHAR(68) NOT NULL,
 -- fk to uder_account 
-`user_account_id` INTEGER UNIQUE NOT NULL, 
+`user_account_id` INTEGER UNIQUE NOT NULL,
+`branch_id` INTEGER NOT NULL,
 CONSTRAINT `user_table_pk` PRIMARY KEY(`u_id`)
 )ENGINE = 'Innodb', AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
@@ -21,7 +22,7 @@ CREATE TABLE `user_details`(
 `ud_id` INTEGER NOT NULL AUTO_INCREMENT,
 `phone_number` CHAR(10) CHECK (length(`phone_number`)= 10),
 `DOB` DATE NOT NULL,
-`age` TINYINT NOT NULL,
+`age` TINYINT NOT NULL CHECK(`age` >= 5),
 `email` VARCHAR(100) NOT NULL,
 `u_id` INTEGER NOT NULL UNIQUE,
 CONSTRAINT `user_details_table_pk` PRIMARY KEY (`ud_id`)
@@ -165,6 +166,7 @@ CREATE TABLE `employee`(
 `password` VARCHAR(68) NOT NULL,
 -- self refer
 `reports_to` INTEGER,
+`branch_id` INTEGER,
 CONSTRAINT `employee_pk` PRIMARY KEY (`emp_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1000001, DEFAULT CHARSET 'latin1';
 
@@ -207,6 +209,35 @@ CREATE TABLE `time_space`(
 `years` SMALLINT NOT NULL DEFAULT 0 CHECK(`years` >=0 AND `years` < 100)
 )ENGINE = 'Innodb' , DEFAULT CHARSET 'latin1';
 
+
+
+
+CREATE TABLE `branch`(
+`branch_id` INTEGER NOT NULL AUTO_INCREMENT,
+`branch_name` VARCHAR(70) NOT NULL,
+`state` VARCHAR(30) NOT NULL,
+`country` VARCHAR(60) NOT NULL,
+`open` BOOLEAN DEFAULT 0 NOT NULL,
+CONSTRAINT `branch_pk` PRIMARY KEY (`branch_id`)
+)ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
+
+
+
+
+CREATE TABLE `user_application`(
+`application_number` INTEGER NOT NULL AUTO_INCREMENT,
+`full_name` VARCHAR(70) NOT NULL,
+`phone_number` CHAR(10) CHECK (length(`phone_number`) = 10),
+`dob` DATE NOT NULL,
+`age` TINYINT NOT NULL CHECK(`age` >= 5),
+`email` VARCHAR(100) NOT NULL,
+`applyed_date` DATETIME DEFAULT now(),
+`status` BOOLEAN DEFAULT 0 NOT NULL,
+`approved_by` INTEGER,
+`created_usser_id` INTEGER,
+`branch_is` INTEGER NOT NULL,
+CONSTRAINT `user_application_pk` PRIMARY KEY (`application_number`)
+)ENGINE = 'Innodb' AUTO_INCREMENT = 101, DEFAULT CHARSET 'latin1';
 
 CREATE TABLE `website_visited`(
 `visited_date` DATETIME
