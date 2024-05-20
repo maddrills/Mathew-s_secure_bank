@@ -20,6 +20,7 @@ CONSTRAINT `user_table_pk` PRIMARY KEY(`u_id`)
 
 CREATE TABLE `user_details`(
 `ud_id` INTEGER NOT NULL AUTO_INCREMENT,
+`full_name` VARCHAR(60) NOT NULL,
 `phone_number` CHAR(10) CHECK (length(`phone_number`)= 10),
 `DOB` DATE NOT NULL,
 `age` TINYINT NOT NULL CHECK(`age` >= 5),
@@ -156,6 +157,7 @@ CREATE TABLE `user_account`(
 `ack_ac_no` INTEGER UNIQUE,
 `b_ac_no` INTEGER UNIQUE,
 `joint_ac_id` INTEGER UNIQUE,
+`frozen` BOOLEAN NOT NULL DEFAULT 0,
 CONSTRAINT `user_acount_pk` PRIMARY KEY (`u_acc_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
@@ -269,6 +271,7 @@ ALTER TABLE `spouse` ADD CONSTRAINT `spouse_fk_to_spouse_account` FOREIGN KEY(`s
 DESC `spouse`;
 
 ALTER TABLE `user` ADD CONSTRAINT `user_fk_to_joint_accounts` FOREIGN KEY(`user_account_id`) REFERENCES `user_account`(`u_acc_id`);
+ALTER TABLE `user` ADD CONSTRAINT `user_fk_to_branch` FOREIGN KEY(`branch_id`) REFERENCES `branch`(`branch_id`);
 DESC `user`;
 
 ALTER TABLE `user_details` ADD CONSTRAINT `user_details_fk_to_user` FOREIGN KEY(`u_id`) REFERENCES `user`(`u_id`);

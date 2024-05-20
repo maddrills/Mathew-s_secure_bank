@@ -6195,6 +6195,7 @@
 								"$ref": "AAAAAAGPZ4XeDQ8t5fo="
 							},
 							"name": "branch_id",
+							"type": "INTEGER",
 							"length": 0,
 							"foreignKey": true
 						}
@@ -6351,6 +6352,7 @@
 								"$ref": "AAAAAAGPaBSl0QBjDVo="
 							},
 							"name": "full_name",
+							"type": "VARCHAR",
 							"length": 0
 						},
 						{
@@ -8110,6 +8112,7 @@
 								"$ref": "AAAAAAGPlbW7VnuiPdk="
 							},
 							"name": "approved_by",
+							"type": "INTEGER",
 							"length": 0,
 							"foreignKey": true
 						},
@@ -8120,6 +8123,7 @@
 								"$ref": "AAAAAAGPlbW7VnuiPdk="
 							},
 							"name": "created_user_id",
+							"type": "INTEGER",
 							"length": 0,
 							"foreignKey": true
 						},
@@ -8130,6 +8134,7 @@
 								"$ref": "AAAAAAGPlbW7VnuiPdk="
 							},
 							"name": "branch_id",
+							"type": "INTEGER",
 							"length": 0,
 							"foreignKey": true
 						}
