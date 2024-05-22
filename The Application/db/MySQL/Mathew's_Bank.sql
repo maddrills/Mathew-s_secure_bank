@@ -94,7 +94,7 @@ CREATE TABLE `checking`(
 `amount` DOUBLE NOT NULl DEFAULT 0.00 CHECK(`amount` >= 0.00),
 `next_interest_on`DATETIME NOT NULL,
 `created_on` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-`accoutn_type` VARCHAR(30) DEFAULT 'checking',
+`account_type` VARCHAR(30) DEFAULT 'checking',
 CONSTRAINT `checking_pk` PRIMARY KEY (`chk_account_number`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 101000001, DEFAULT CHARSET 'latin1';
 
@@ -105,7 +105,7 @@ CREATE TABLE `savings`(
 `amount` DOUBLE NOT NULl DEFAULT 0.00 CHECK(`amount` >= 0.00),
 `next_interest_on`DATETIME NOT NULL,
 `created_on` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-`accoutn_type` VARCHAR(30) DEFAULT 'savings',
+`account_type` VARCHAR(30) DEFAULT 'savings',
 CONSTRAINT `savings_pk` PRIMARY KEY (`s_account_number`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 102000001, DEFAULT CHARSET 'latin1';
 
@@ -117,7 +117,7 @@ CREATE TABLE `build_up`(
 `next_interest_on`DATETIME NOT NULL,
 `created_on` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 `can_withdraw` BOOLEAN NOT NULL DEFAULT 0,
-`accoutn_type` VARCHAR(30) DEFAULT 'build_up',
+`account_type` VARCHAR(30) DEFAULT 'build_up',
 CONSTRAINT `checking_pk` PRIMARY KEY (`b_account_number`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 103000001, DEFAULT CHARSET 'latin1';
 
@@ -128,30 +128,30 @@ CREATE TABLE `joint_accounts`(
 CONSTRAINT `joint_accounts_pk` PRIMARY KEY (`joint_acount_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
-CREATE TABLE `busniss_acount`(
+CREATE TABLE `business_account`(
 `business_ac_no` INTEGER NOT NULL AUTO_INCREMENT,
 `amount` DOUBLE NOT NULl DEFAULT 0 CHECK(`amount` >= 0.0),
 `people_count_limit` INTEGER DEFAULT 10 CHECK(`people_count_limit` >= 1),
 `min_amount` DOUBLE NOT NULl DEFAULT 0.00 CHECK(`min_amount` >= 0.00),
 `drw_limit` DOUBLE NOT NULl DEFAULT 0.00 CHECK(`drw_limit` >= 0.00),
 `busniss_name` VARCHAR(100) NOT NULL ,
-`accoutn_type` VARCHAR(30) DEFAULT 'busniss_acount',
+`account_type` VARCHAR(30) DEFAULT 'busniss_acount',
 CONSTRAINT `busniss_acount_pk` PRIMARY KEY (`business_ac_no`),
 -- FOREIGN KEY SECTION 
 `joint_acount_id` INTEGER NOT NULL,
 `creator` INTEGER NOT NULL
 )ENGINE = 'Innodb' AUTO_INCREMENT = 104000001, DEFAULT CHARSET 'latin1';
 
-CREATE TABLE `spouse_acount`(
+CREATE TABLE `spouse_account`(
 `sa_ac_no` INTEGER NOT NULL AUTO_INCREMENT, 
 `amount` DOUBLE NOT NULl DEFAULT 0.00 CHECK(`amount` >= 0.00),
 -- FOREIGN KEY SECTION 
 `joint_account_id` INTEGER NOT NULL,
-`accoutn_type` VARCHAR(30) DEFAULT 'spouse_acount',
+`account_type` VARCHAR(30) DEFAULT 'spouse_acount',
 CONSTRAINT `spouse_acount_pk` PRIMARY KEY (`sa_ac_no`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 105000001, DEFAULT CHARSET 'latin1';
 
-CREATE TABLE `busniss_people`(
+CREATE TABLE `business_people`(
 `b_id` INTEGER NOT NULL AUTO_INCREMENT,
 -- FOREIGN KEY SECTION 
 `user_joint_acount` INTEGER,
@@ -214,6 +214,7 @@ CREATE TABLE `lone_type`(
 `amount` DOUBLE NOT NULl DEFAULT 0.00 CHECK(`amount` >= 0.00),
 `return_date` DATETIME NOT NULL,
 `created_by` INTEGER NOT NULL,
+`active` BOOLEAN DEFAULT 0 NOT NULL,
 CONSTRAINT `lone_type_pk` PRIMARY KEY (`lone_type_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
@@ -225,7 +226,8 @@ CREATE TABLE `time_space`(
 `hour` SMALLINT NOT NULL DEFAULT 0 CHECK(`hour` >=0),
 `days` SMALLINT NOT NULL DEFAULT 0 CHECK(`days` >=0),
 `months` SMALLINT NOT NULL DEFAULT 0 CHECK(`months` >=0),
-`years` SMALLINT NOT NULL DEFAULT 0 CHECK(`years` >=0 AND `years` < 100)
+`years` SMALLINT NOT NULL DEFAULT 0 CHECK(`years` >=0 AND `years` < 100),
+CONSTRAINT `time_space_pk` PRIMARY KEY (`account_type`)
 )ENGINE = 'Innodb' , DEFAULT CHARSET 'latin1';
 
 
@@ -237,6 +239,7 @@ CREATE TABLE `branch`(
 `state` VARCHAR(30) NOT NULL,
 `country` VARCHAR(60) NOT NULL,
 `open` BOOLEAN DEFAULT 0 NOT NULL,
+`brantch_manager` INTEGER,
 CONSTRAINT `branch_pk` PRIMARY KEY (`branch_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
@@ -271,20 +274,20 @@ ALTER TABLE `user_account` ADD CONSTRAINT `user_acount_fk_to_build_up` FOREIGN K
 ALTER TABLE `user_account` ADD CONSTRAINT `user_acount_fk_to_joint_accounts` FOREIGN KEY(`joint_ac_id`) REFERENCES `joint_accounts`(`joint_acount_id`);
 DESC `user_account`;
 
-ALTER TABLE `busniss_acount` ADD CONSTRAINT `busniss_acount_fk_to_joint_accounts` FOREIGN KEY(`joint_acount_id`) REFERENCES `joint_accounts`(`joint_acount_id`);
-DESC `busniss_acount`;
+ALTER TABLE `business_account` ADD CONSTRAINT `business_acount_fk_to_joint_accounts` FOREIGN KEY(`joint_acount_id`) REFERENCES `joint_accounts`(`joint_acount_id`);
+DESC `business_account`;
 
-ALTER TABLE `spouse_acount` ADD CONSTRAINT `spouse_acount_fk_to_joint_accounts` FOREIGN KEY(`joint_account_id`) REFERENCES `joint_accounts`(`joint_acount_id`);
-DESC `spouse_acount`;
+ALTER TABLE `spouse_account` ADD CONSTRAINT `spouse_acount_fk_to_joint_accounts` FOREIGN KEY(`joint_account_id`) REFERENCES `joint_accounts`(`joint_acount_id`);
+DESC `spouse_account`;
 
 
-ALTER TABLE `busniss_people` ADD CONSTRAINT `busniss_people_fk_to_joint_accounts` FOREIGN KEY(`user_joint_acount`) REFERENCES `joint_accounts`(`joint_acount_id`);
-ALTER TABLE `busniss_people` ADD CONSTRAINT `busniss_people_fk_to_busniss_account` FOREIGN KEY(`business_ac_no`) REFERENCES `busniss_acount`(`business_ac_no`);
-DESC `busniss_people`;
+ALTER TABLE `business_people` ADD CONSTRAINT `business_people_fk_to_joint_accounts` FOREIGN KEY(`user_joint_acount`) REFERENCES `joint_accounts`(`joint_acount_id`);
+ALTER TABLE `business_people` ADD CONSTRAINT `business_people_fk_to_busniss_account` FOREIGN KEY(`business_ac_no`) REFERENCES `business_account`(`business_ac_no`);
+DESC `business_people`;
 
 ALTER TABLE `spouse` ADD CONSTRAINT `spouseH_fk_to_joint_accounts` FOREIGN KEY(`husband_joint_acount`) REFERENCES `joint_accounts`(`joint_acount_id`);
 ALTER TABLE `spouse` ADD CONSTRAINT `spouseW_fk_to_joint_accounts` FOREIGN KEY(`wife_joint_acount`) REFERENCES `joint_accounts`(`joint_acount_id`);
-ALTER TABLE `spouse` ADD CONSTRAINT `spouse_fk_to_spouse_account` FOREIGN KEY(`sa_ac_no`) REFERENCES `spouse_acount`(`sa_ac_no`);
+ALTER TABLE `spouse` ADD CONSTRAINT `spouse_fk_to_spouse_account` FOREIGN KEY(`sa_ac_no`) REFERENCES `spouse_account`(`sa_ac_no`);
 DESC `spouse`;
 
 ALTER TABLE `user` ADD CONSTRAINT `user_fk_to_joint_accounts` FOREIGN KEY(`user_account_id`) REFERENCES `user_account`(`u_acc_id`);
@@ -325,10 +328,28 @@ DESC `lone_type`;
 
 ALTER TABLE `emp_roles` ADD CONSTRAINT `emp_roles_fk_to_employee` FOREIGN KEY(`emp_id`) REFERENCES `employee`(`emp_id`);
 ALTER TABLE `emp_roles` ADD CONSTRAINT `emp_roles_fk_to_roles` FOREIGN KEY(`role_id`) REFERENCES `roles`(`role_id`);
-DESC `emp_roles`;
+DESC `emp_roles` ;
 
+ALTER TABLE `branch` ADD CONSTRAINT `branch_to_employee` FOREIGN KEY(`brantch_manager`) REFERENCES `employee`(`emp_id`); 
+DESC `branch`;
 
 ALTER TABLE `user_application` ADD CONSTRAINT `user_application_fk_to_employee` FOREIGN KEY(`approved_by`) REFERENCES `employee`(`emp_id`);
 ALTER TABLE `user_application` ADD CONSTRAINT `user_application_fk_to_user` FOREIGN KEY(`created_user_id`) REFERENCES `user`(`u_id`);
 ALTER TABLE `user_application` ADD CONSTRAINT `user_application_fk_to_branch` FOREIGN KEY(`branch_id`) REFERENCES `branch`(`branch_id`);
 DESC `user_application`;
+
+
+ALTER TABLE `savings` ADD CONSTRAINT `savings_fk_to_time_space` FOREIGN KEY(`account_type`) REFERENCES `time_space`(`account_type`);
+DESC `savings`;
+ALTER TABLE `checking` ADD CONSTRAINT `checking_to_time_space` FOREIGN KEY(`account_type`) REFERENCES `time_space`(`account_type`);
+DESC `checking`;
+ALTER TABLE `build_up` ADD CONSTRAINT `build_up_fk_to_time_space` FOREIGN KEY(`account_type`) REFERENCES `time_space`(`account_type`);
+DESC `build_up`;
+
+ALTER TABLE `business_account` ADD CONSTRAINT `business_account_fk_to_time_space` FOREIGN KEY(`account_type`) REFERENCES `time_space`(`account_type`);
+DESC `business_account`;
+ALTER TABLE `spouse_account` ADD CONSTRAINT `spouse_account_fk_to_time_space` FOREIGN KEY(`account_type`) REFERENCES `time_space`(`account_type`);
+DESC `spouse_account`;
+
+
+DESC `time_space`;
