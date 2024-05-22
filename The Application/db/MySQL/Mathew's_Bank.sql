@@ -18,6 +18,18 @@ CONSTRAINT `user_table_pk` PRIMARY KEY(`u_id`)
 )ENGINE = 'Innodb', AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
 
+CREATE TABLE `transactions`(
+`id` INTEGER NOT NULL AUTO_INCREMENT,
+`to_account_number` INTEGER NOT NULL,
+`from_account_number` INTEGER NOT NULL,
+`transaction_date` DATETIME DEFAULT now(),
+`deposited` BOOLEAN NOT NULL DEFAULT 0,
+`ammount` DOUBLE NOT NULL,
+`u_id` INTEGER NOT NULL,
+CONSTRAINT `transactions_pk` PRIMARY KEY(`id`)
+)ENGINE = 'Innodb', AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
+
+
 CREATE TABLE `user_details`(
 `ud_id` INTEGER NOT NULL AUTO_INCREMENT,
 `full_name` VARCHAR(60) NOT NULL,
@@ -82,6 +94,7 @@ CREATE TABLE `checking`(
 `amount` DOUBLE NOT NULl DEFAULT 0.00 CHECK(`amount` >= 0.00),
 `next_interest_on`DATETIME NOT NULL,
 `created_on` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+`accoutn_type` VARCHAR(30) DEFAULT 'checking',
 CONSTRAINT `checking_pk` PRIMARY KEY (`chk_account_number`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 101000001, DEFAULT CHARSET 'latin1';
 
@@ -92,6 +105,7 @@ CREATE TABLE `savings`(
 `amount` DOUBLE NOT NULl DEFAULT 0.00 CHECK(`amount` >= 0.00),
 `next_interest_on`DATETIME NOT NULL,
 `created_on` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+`accoutn_type` VARCHAR(30) DEFAULT 'savings',
 CONSTRAINT `savings_pk` PRIMARY KEY (`s_account_number`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 102000001, DEFAULT CHARSET 'latin1';
 
@@ -103,6 +117,7 @@ CREATE TABLE `build_up`(
 `next_interest_on`DATETIME NOT NULL,
 `created_on` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 `can_withdraw` BOOLEAN NOT NULL DEFAULT 0,
+`accoutn_type` VARCHAR(30) DEFAULT 'build_up',
 CONSTRAINT `checking_pk` PRIMARY KEY (`b_account_number`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 103000001, DEFAULT CHARSET 'latin1';
 
@@ -120,6 +135,7 @@ CREATE TABLE `busniss_acount`(
 `min_amount` DOUBLE NOT NULl DEFAULT 0.00 CHECK(`min_amount` >= 0.00),
 `drw_limit` DOUBLE NOT NULl DEFAULT 0.00 CHECK(`drw_limit` >= 0.00),
 `busniss_name` VARCHAR(100) NOT NULL ,
+`accoutn_type` VARCHAR(30) DEFAULT 'busniss_acount',
 CONSTRAINT `busniss_acount_pk` PRIMARY KEY (`business_ac_no`),
 -- FOREIGN KEY SECTION 
 `joint_acount_id` INTEGER NOT NULL,
@@ -131,6 +147,7 @@ CREATE TABLE `spouse_acount`(
 `amount` DOUBLE NOT NULl DEFAULT 0.00 CHECK(`amount` >= 0.00),
 -- FOREIGN KEY SECTION 
 `joint_account_id` INTEGER NOT NULL,
+`accoutn_type` VARCHAR(30) DEFAULT 'spouse_acount',
 CONSTRAINT `spouse_acount_pk` PRIMARY KEY (`sa_ac_no`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 105000001, DEFAULT CHARSET 'latin1';
 
@@ -288,7 +305,8 @@ ALTER TABLE `user_roles` ADD CONSTRAINT `user_lones_U_fk_to_user` FOREIGN KEY(`u
 ALTER TABLE `user_roles` ADD CONSTRAINT `user_lones_R_fk_to_user` FOREIGN KEY(`role_id`) REFERENCES `roles`(`role_id`);
 DESC `user_roles`;
 
-
+ALTER TABLE `transactions` ADD CONSTRAINT `user_fk_transactions` FOREIGN KEY(`u_id`) REFERENCES `user`(`u_id`);
+DESC `transactions`;
 
 
 -- employee details alter 
