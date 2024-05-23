@@ -232,6 +232,7 @@ CREATE TABLE `time_space`(
 `days` SMALLINT NOT NULL DEFAULT 0 CHECK(`days` >=0),
 `months` SMALLINT NOT NULL DEFAULT 0 CHECK(`months` >=0),
 `years` SMALLINT NOT NULL DEFAULT 0 CHECK(`years` >=0 AND `years` < 100),
+`base_intrest_rate` FLOAT NOT NULL DEFAULT 0.00,
 CONSTRAINT `time_space_pk` PRIMARY KEY (`account_type`)
 )ENGINE = 'Innodb' , DEFAULT CHARSET 'latin1';
 
@@ -244,7 +245,7 @@ CREATE TABLE `branch`(
 `state` VARCHAR(30) NOT NULL,
 `country` VARCHAR(60) NOT NULL,
 `open` BOOLEAN DEFAULT 0 NOT NULL,
-`brantch_manager` INTEGER,
+`branch_manager` INTEGER,
 CONSTRAINT `branch_pk` PRIMARY KEY (`branch_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
@@ -335,7 +336,7 @@ ALTER TABLE `emp_roles` ADD CONSTRAINT `emp_roles_fk_to_employee` FOREIGN KEY(`e
 ALTER TABLE `emp_roles` ADD CONSTRAINT `emp_roles_fk_to_roles` FOREIGN KEY(`role_id`) REFERENCES `roles`(`role_id`);
 DESC `emp_roles` ;
 
-ALTER TABLE `branch` ADD CONSTRAINT `branch_to_employee` FOREIGN KEY(`brantch_manager`) REFERENCES `employee`(`emp_id`); 
+ALTER TABLE `branch` ADD CONSTRAINT `branch_to_employee` FOREIGN KEY(`branch_manager`) REFERENCES `employee`(`emp_id`); 
 DESC `branch`;
 
 ALTER TABLE `user_application` ADD CONSTRAINT `user_application_fk_to_employee` FOREIGN KEY(`approved_by`) REFERENCES `employee`(`emp_id`);
@@ -358,3 +359,5 @@ DESC `spouse_account`;
 
 
 DESC `time_space`;
+
+SELECT * FROM `employee`;

@@ -4956,6 +4956,22 @@
 											"top": 1054,
 											"width": 238,
 											"height": 13
+										},
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAGPpQtVfWeXCeg=",
+											"_parent": {
+												"$ref": "AAAAAAGPgS5p6kOrDaE="
+											},
+											"model": {
+												"$ref": "AAAAAAGPpQtVR2eURM4="
+											},
+											"fillColor": "#d8f2ff",
+											"font": "Arial;13;0",
+											"left": 1957,
+											"top": 1069,
+											"width": 238,
+											"height": 13
 										}
 									],
 									"fillColor": "#d8f2ff",
@@ -4963,7 +4979,7 @@
 									"left": 1952,
 									"top": 959,
 									"width": 248,
-									"height": 113
+									"height": 128
 								}
 							],
 							"fillColor": "#d8f2ff",
@@ -4971,7 +4987,7 @@
 							"left": 1952,
 							"top": 936,
 							"width": 248,
-							"height": 137,
+							"height": 151,
 							"nameLabel": {
 								"$ref": "AAAAAAGPgS5p6kOqnRk="
 							},
@@ -5006,7 +5022,7 @@
 								"$ref": "AAAAAAGPgS5p6kOpgfo="
 							},
 							"lineStyle": 1,
-							"points": "2200:1026;2271:1038"
+							"points": "2200:1029;2271:1039"
 						},
 						{
 							"_type": "UMLNoteView",
@@ -9107,6 +9123,16 @@
 							"name": "years",
 							"type": "SMALLINT",
 							"length": 0
+						},
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAGPpQtVR2eURM4=",
+							"_parent": {
+								"$ref": "AAAAAAGPgS5p6kOnmbE="
+							},
+							"name": "base_intrest_rate",
+							"type": "INTEGER",
+							"length": 0
 						}
 					]
 				},
@@ -9355,7 +9381,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGPlb7sEnxHfRk="
 							},
-							"name": "brantch_manager",
+							"name": "branch_manager",
 							"type": "INTEGER",
 							"length": 0,
 							"foreignKey": true
