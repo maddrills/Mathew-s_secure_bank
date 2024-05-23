@@ -3,6 +3,7 @@ package com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees;
 import jakarta.persistence.*;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "employee")
@@ -59,5 +60,41 @@ final public class Employee {
         this.password = password;
         this.manager = manager;
         this.bankBranch = bankBranch;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Employee getManager() {
+        return manager;
+    }
+
+    public void setManager(Employee manager) {
+        this.manager = manager;
+    }
+
+    public Branch getBankBranch() {
+        return bankBranch;
+    }
+
+    public void setBankBranch(Branch bankBranch) {
+        this.bankBranch = bankBranch;
+    }
+
+    public Collection<Employee> getEmployeeUnderManager() {
+        return employeeUnderManager;
+    }
+
+    //convenience method
+    public void addInEmployeeUnderManager(Employee employee){
+        if(this.employeeUnderManager == null){
+            employeeUnderManager = new HashSet<>();
+        }
+        employeeUnderManager.add(employee);
     }
 }
