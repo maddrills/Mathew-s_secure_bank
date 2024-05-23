@@ -95,6 +95,7 @@ CREATE TABLE `checking`(
 `next_interest_on`DATETIME NOT NULL,
 `created_on` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 `account_type` VARCHAR(30) DEFAULT 'checking',
+`frozen` BOOLEAN NOT NULL DEFAULT 0,
 CONSTRAINT `checking_pk` PRIMARY KEY (`chk_account_number`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 101000001, DEFAULT CHARSET 'latin1';
 
@@ -106,6 +107,7 @@ CREATE TABLE `savings`(
 `next_interest_on`DATETIME NOT NULL,
 `created_on` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 `account_type` VARCHAR(30) DEFAULT 'savings',
+`frozen` BOOLEAN NOT NULL DEFAULT 0,
 CONSTRAINT `savings_pk` PRIMARY KEY (`s_account_number`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 102000001, DEFAULT CHARSET 'latin1';
 
@@ -118,6 +120,7 @@ CREATE TABLE `build_up`(
 `created_on` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 `can_withdraw` BOOLEAN NOT NULL DEFAULT 0,
 `account_type` VARCHAR(30) DEFAULT 'build_up',
+`frozen` BOOLEAN NOT NULL DEFAULT 0,
 CONSTRAINT `checking_pk` PRIMARY KEY (`b_account_number`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 103000001, DEFAULT CHARSET 'latin1';
 
@@ -136,6 +139,7 @@ CREATE TABLE `business_account`(
 `drw_limit` DOUBLE NOT NULl DEFAULT 0.00 CHECK(`drw_limit` >= 0.00),
 `busniss_name` VARCHAR(100) NOT NULL ,
 `account_type` VARCHAR(30) DEFAULT 'busniss_acount',
+`frozen` BOOLEAN NOT NULL DEFAULT 0,
 CONSTRAINT `busniss_acount_pk` PRIMARY KEY (`business_ac_no`),
 -- FOREIGN KEY SECTION 
 `joint_acount_id` INTEGER NOT NULL,
@@ -145,6 +149,7 @@ CONSTRAINT `busniss_acount_pk` PRIMARY KEY (`business_ac_no`),
 CREATE TABLE `spouse_account`(
 `sa_ac_no` INTEGER NOT NULL AUTO_INCREMENT, 
 `amount` DOUBLE NOT NULl DEFAULT 0.00 CHECK(`amount` >= 0.00),
+`frozen` BOOLEAN NOT NULL DEFAULT 0,
 -- FOREIGN KEY SECTION 
 `joint_account_id` INTEGER NOT NULL,
 `account_type` VARCHAR(30) DEFAULT 'spouse_acount',
