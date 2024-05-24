@@ -191,6 +191,7 @@ CREATE TABLE `employee`(
 -- self refer
 `reports_to` INTEGER,
 `branch_id` INTEGER,
+`salary_account` INTEGER,
 CONSTRAINT `employee_pk` PRIMARY KEY (`emp_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1000001, DEFAULT CHARSET 'latin1';
 
@@ -323,10 +324,11 @@ DESC `transactions`;
 
 
 ALTER TABLE `emp_details` ADD CONSTRAINT `emp_details_fk_to_employee` FOREIGN KEY(`emp_id`) REFERENCES `employee`(`emp_id`);
+ALTER TABLE `emp_details` ADD CONSTRAINT `emp_details_fk_to_savings` FOREIGN KEY(`emp_id`) REFERENCES `employee`(`emp_id`);
 DESC `emp_details`;
 
 ALTER TABLE `employee` ADD CONSTRAINT `employee_fk_to_employee` FOREIGN KEY(`reports_to`) REFERENCES `employee`(`emp_id`);
-ALTER TABLE `employee` ADD CONSTRAINT `employee_fk_to_branch` FOREIGN KEY(`branch_id`) REFERENCES `branch`(`branch_id`);
+ALTER TABLE `employee` ADD CONSTRAINT `employee_fk_to_savings` FOREIGN KEY(`salary_account`) REFERENCES `savings`(`s_account_number`);
 DESC `employee`;
 
 ALTER TABLE `lone_type` ADD CONSTRAINT `lone_type_fk_to_employee` FOREIGN KEY(`created_by`) REFERENCES `employee`(`emp_id`);
