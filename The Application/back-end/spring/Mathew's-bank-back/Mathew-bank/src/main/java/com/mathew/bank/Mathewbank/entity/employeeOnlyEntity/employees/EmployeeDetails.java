@@ -36,13 +36,12 @@ final public class EmployeeDetails {
 
     //TODO add salary account
 
-    public EmployeeDetails(String phone_number, String full_name, String email, Date dateOfBirth, double salary, Employee emp_id) {
+    public EmployeeDetails(String phone_number, String full_name, String email, Date dateOfBirth, double salary) {
         this.phone_number = phone_number;
         this.full_name = full_name;
         this.email = email;
         this.dateOfBirth = dateOfBirth;
         this.salary = salary;
-        this.emp_id = emp_id;
     }
 
     public int getId() {

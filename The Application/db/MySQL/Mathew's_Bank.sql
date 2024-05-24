@@ -365,3 +365,7 @@ USE `mathew_bank_db`;
 DESC `time_space`;
 
 SELECT * FROM `employee`;
+
+INSERT `roles`(`role_name`) VALUES ('ROLE_admin');
+SELECT * FROM `roles`;
+

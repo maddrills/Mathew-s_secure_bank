@@ -1,5 +1,7 @@
 package com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees;
 
+import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
+import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import jakarta.persistence.*;
 
 import java.util.Collection;
@@ -56,10 +58,40 @@ final public class Employee {
 //    private int branchId;
 
 
+    //ROLE
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            cascade = {
+                    //The detach operation removes the entity from the persistent context. When we use CascadeType.DETACH, the child entity will also get removed from the persistent context.
+                    CascadeType.DETACH,
+                    CascadeType.MERGE,
+                    CascadeType.PERSIST,
+                    CascadeType.REFRESH,
+            }
+            //cascade = CascadeType.ALL
+    )
+    @JoinTable(
+            name = "emp_roles",
+            joinColumns = @JoinColumn(name = "emp_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Collection<Role> roles;
+
+
+
+
     public Employee(String password, Employee manager, Branch bankBranch) {
         this.password = password;
         this.manager = manager;
         this.bankBranch = bankBranch;
+    }
+
+    public Employee(String password, Employee manager, Collection<Employee> employeeUnderManager, Branch bankBranch, Collection<Role> roles) {
+        this.password = password;
+        this.manager = manager;
+        this.employeeUnderManager = employeeUnderManager;
+        this.bankBranch = bankBranch;
+        this.roles = roles;
     }
 
     public String getPassword() {

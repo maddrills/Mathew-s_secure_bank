@@ -1,5 +1,6 @@
-package com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees;
+package com.mathew.bank.Mathewbank.entity.employeeOnlyEntity;
 
+import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import jakarta.persistence.*;
 
 @Entity

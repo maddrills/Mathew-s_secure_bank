@@ -1,4 +1,4 @@
-package com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees;
+package com.mathew.bank.Mathewbank.entity.employeeOnlyEntity;
 
 
 import jakarta.persistence.Column;
