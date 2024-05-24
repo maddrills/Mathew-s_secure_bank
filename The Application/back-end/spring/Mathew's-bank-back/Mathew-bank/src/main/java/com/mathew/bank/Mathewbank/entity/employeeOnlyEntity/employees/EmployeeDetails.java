@@ -1,23 +1,37 @@
 package com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees;
 
+import jakarta.persistence.*;
+
 import java.sql.Date;
 
-// TODO make this an entity
+@Entity
+@Table(name = "emp_details")
 final public class EmployeeDetails {
 
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ed_id")
     private int id;
 
+    @Column(name = "phone_number")
     private String phone_number;
 
+    @Column(name = "full_name")
     private String full_name;
 
+    @Column(name = "email")
     private String email;
 
+    @Column(name = "dob")
     private Date dateOfBirth;
 
+    @Column(name = "salary")
     private double salary;
 
+
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "emp_id")
     private Employee emp_id;
 
 

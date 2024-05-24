@@ -358,6 +358,8 @@ ALTER TABLE `spouse_account` ADD CONSTRAINT `spouse_account_fk_to_time_space` FO
 DESC `spouse_account`;
 
 
+USE `mathew_bank_db`;
+
 DESC `time_space`;
 
 SELECT * FROM `employee`;
