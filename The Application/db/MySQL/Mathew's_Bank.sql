@@ -233,7 +233,7 @@ CREATE TABLE `time_space`(
 `days` SMALLINT NOT NULL DEFAULT 0 CHECK(`days` >=0),
 `months` SMALLINT NOT NULL DEFAULT 0 CHECK(`months` >=0),
 `years` SMALLINT NOT NULL DEFAULT 0 CHECK(`years` >=0 AND `years` < 100),
-`base_intrest_rate` FLOAT NOT NULL DEFAULT 0.00,
+`base_interest_rate` FLOAT NOT NULL DEFAULT 0.00,
 CONSTRAINT `time_space_pk` PRIMARY KEY (`account_type`)
 )ENGINE = 'Innodb' , DEFAULT CHARSET 'latin1';
 

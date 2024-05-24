@@ -9270,7 +9270,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGPgS5p6kOnmbE="
 							},
-							"name": "base_intrest_rate",
+							"name": "base_interest_rate",
 							"type": "INTEGER",
 							"length": 0
 						}
