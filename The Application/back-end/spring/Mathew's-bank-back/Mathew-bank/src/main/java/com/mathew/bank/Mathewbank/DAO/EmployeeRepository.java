@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Repository
 public class EmployeeRepository implements EmpRepo {
@@ -35,7 +37,7 @@ public class EmployeeRepository implements EmpRepo {
     @Transactional
     public void  addAnEmployeeAndThereDetails(EmployeeDetails employeeDetails, Collection<String> roleNames) {
 
-        roleNames.forEach(this::findRoleByRoleName);
+        roleNames.forEach(role -> employeeDetails.getEmployee().setARole(this.findRoleByRoleName(role)));
 
         entityManager.persist(employeeDetails);
     }

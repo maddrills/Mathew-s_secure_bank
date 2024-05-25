@@ -134,7 +134,7 @@ final public class Employee {
     }
 
     //TODO i want to get the role from the db then assign it to the employee
-    public void setARangeOfRoles(Role role){
+    public void setARole(Role role){
         if(this.roles == null){
             this.roles = new HashSet<>();
         }

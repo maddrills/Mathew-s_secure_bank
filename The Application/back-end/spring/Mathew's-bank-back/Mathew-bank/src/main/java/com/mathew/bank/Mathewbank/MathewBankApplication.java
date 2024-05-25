@@ -28,23 +28,26 @@ public class MathewBankApplication {
 
 
 //			adminService.addAnyEmployee(new Employee(
-//					"Bla Bla Bla",
+//					"BlaBlaBla",
 //					null,
 //					null
 //			));
 
-//			adminService.addEmployeeAndDetails(
-//					"9449050762",
-//					"mathew francis",
-//					"mat@admin",
-//					LocalDate.of(1998, 7, 21),
-//					543234.50,
-//					"12345",
-//					new HashSet<>(Set.of("admin"))
-//			);
-			Role role = adminService.findARoleInDb("admin");
+			adminService.addEmployeeAndDetails(
+					"9449050762",
+					"mathew francis",
+					"mat@admin",
+					LocalDate.of(1998, 7, 21),
+					543234.50,
+					"12345",
+					new HashSet<>(Set.of("admin"))
+			);
 
-			System.out.println(role.getRole());
+//			Role role = adminService.findARoleInDb("admin");
+//
+//			if(role != null){
+//				System.out.println(role.getRole());
+//			}
 
 		};
 	}

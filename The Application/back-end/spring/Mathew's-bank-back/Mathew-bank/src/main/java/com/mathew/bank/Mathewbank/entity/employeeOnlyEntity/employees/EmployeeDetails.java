@@ -2,7 +2,6 @@ package com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees;
 
 import jakarta.persistence.*;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 @Entity
@@ -19,7 +18,7 @@ final public class EmployeeDetails {
     private String phone_number;
 
     @Column(name = "full_name")
-    private String full_name;
+    private String fullName;
 
     @Column(name = "email")
     private String email;
@@ -33,13 +32,13 @@ final public class EmployeeDetails {
 
     @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "emp_id")
-    private Employee emp_id;
+    private Employee employee;
 
     //TODO add salary account
 
-    public EmployeeDetails(String phone_number, String full_name, String email, LocalDate dateOfBirth, double salary) {
+    public EmployeeDetails(String phone_number, String fullName, String email, LocalDate dateOfBirth, double salary) {
         this.phone_number = phone_number;
-        this.full_name = full_name;
+        this.fullName = fullName;
         this.email = email;
         this.dateOfBirth = dateOfBirth;
         this.salary = salary;
@@ -57,12 +56,12 @@ final public class EmployeeDetails {
         this.phone_number = phone_number;
     }
 
-    public String getFull_name() {
-        return full_name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFull_name(String full_name) {
-        this.full_name = full_name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {
@@ -89,12 +88,12 @@ final public class EmployeeDetails {
         this.salary = salary;
     }
 
-    public Employee getEmp_id() {
-        return emp_id;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setEmpId(Employee emp_id) {
-        this.emp_id = emp_id;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
 

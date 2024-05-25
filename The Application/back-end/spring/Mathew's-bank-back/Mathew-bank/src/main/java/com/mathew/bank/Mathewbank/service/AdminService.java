@@ -7,7 +7,6 @@ import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDe
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Collection;
 
@@ -28,7 +27,7 @@ public class AdminService {
 
     public void addEmployeeAndDetails(
             String phone_number, String full_name, String email, LocalDate dateOfBirth, double salary,
-            String password, Collection<String> rolesId
+            String password, Collection<String> rolesName
     ){
         //TODO a sanity check to make sure that user enters intended credentials
 
@@ -47,12 +46,25 @@ public class AdminService {
                 salary
         );
 
-        employeeDetails.setEmpId(employee);
+        employeeDetails.setEmployee(employee);
 
-        empRepo.addAnEmployeeAndThereDetails(employeeDetails, rolesId);
+        try{
+            empRepo.addAnEmployeeAndThereDetails(employeeDetails, rolesName);
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
     }
 
     public Role findARoleInDb(String role){
+
+        try{
+            this.empRepo.findRoleByRoleName(role);
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
+
         return this.empRepo.findRoleByRoleName(role);
     }
 }
