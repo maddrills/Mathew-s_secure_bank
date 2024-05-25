@@ -197,15 +197,15 @@ CONSTRAINT `employee_pk` PRIMARY KEY (`emp_id`)
 
 CREATE TABLE `emp_details`(
 `ed_id` INTEGER NOT NULL AUTO_INCREMENT,
-`phone_number` CHAR(10) CHECK (length(`phone_number`) = 10),
+`phone_number` CHAR(10) UNIQUE CHECK (length(`phone_number`) = 10),
 `full_name` VARCHAR(62) NOT NULL,
-`email` VARCHAR(70) NOT NULL UNIQUE,
+`email` VARCHAR(70) UNIQUE NOT NULL UNIQUE,
 `dob` DATE NOT NULL,
 `salary` DOUBLE NOT NULL CHECK (`salary` >= 0.00),
 -- FK goes here
 `emp_id` INTEGER,
 CONSTRAINT `emp_details_pk` PRIMARY KEY (`ed_id`)
-)ENGINE = 'Innodb' AUTO_INCREMENT = 1000001, DEFAULT CHARSET 'latin1';
+)ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
 -- composit primary key 
 CREATE TABLE `emp_roles`(
@@ -366,6 +366,7 @@ DESC `time_space`;
 
 SELECT * FROM `employee`;
 SELECT * FROM `emp_details`;
+DESCRIBE `emp_details`;
 SELECT * FROM `emp_roles`;
 
 INSERT `roles`(`role_name`) VALUES ('ROLE_admin');
