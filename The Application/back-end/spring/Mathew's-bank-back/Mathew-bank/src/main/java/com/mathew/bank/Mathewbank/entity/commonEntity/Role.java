@@ -38,6 +38,9 @@ final public class Role {
     )
     private Collection<Employee> employees;
 
+    public Role() {
+    }
+
     public Role(String role) {
         this.role = role;
     }

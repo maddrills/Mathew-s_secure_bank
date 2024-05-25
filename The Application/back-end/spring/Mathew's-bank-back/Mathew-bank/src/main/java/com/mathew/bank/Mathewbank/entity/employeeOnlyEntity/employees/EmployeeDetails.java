@@ -93,7 +93,7 @@ final public class EmployeeDetails {
         return emp_id;
     }
 
-    public void setEmp_id(Employee emp_id) {
+    public void setEmpId(Employee emp_id) {
         this.emp_id = emp_id;
     }
 

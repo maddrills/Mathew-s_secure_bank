@@ -3,9 +3,12 @@ import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDetails;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.Collection;
 
 @Repository
 public class EmployeeRepository implements EmpRepo {
@@ -26,9 +29,14 @@ public class EmployeeRepository implements EmpRepo {
         return true;
     }
 
+
+
     @Override
     @Transactional
-    public void  addAnEmployeeAndThereDetails(EmployeeDetails employeeDetails) {
+    public void  addAnEmployeeAndThereDetails(EmployeeDetails employeeDetails, Collection<String> roleNames) {
+
+        roleNames.forEach(this::findRoleByRoleName);
+
         entityManager.persist(employeeDetails);
     }
 
@@ -37,5 +45,15 @@ public class EmployeeRepository implements EmpRepo {
     @Override
     public void addARole(Role role) {
         this.entityManager.persist(role);
+    }
+
+    @Override
+    public Role findRoleByRoleName(String name) {
+
+        TypedQuery<Role> query = this.entityManager.createQuery("SELECT R FROM Role as R WHERE R.role = :theId",Role.class);
+
+        query.setParameter("theId","ROLE_"+name);
+
+        return query.getSingleResult();
     }
 }

@@ -86,12 +86,11 @@ final public class Employee {
         this.bankBranch = bankBranch;
     }
 
-    public Employee(String password, Employee manager, Collection<Employee> employeeUnderManager, Branch bankBranch, Collection<Role> roles) {
+    public Employee(String password, Employee manager, Collection<Employee> employeeUnderManager, Branch bankBranch) {
         this.password = password;
         this.manager = manager;
         this.employeeUnderManager = employeeUnderManager;
         this.bankBranch = bankBranch;
-        this.roles = roles;
     }
 
     public String getPassword() {
@@ -128,5 +127,18 @@ final public class Employee {
             employeeUnderManager = new HashSet<>();
         }
         employeeUnderManager.add(employee);
+    }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    //TODO i want to get the role from the db then assign it to the employee
+    public void setARangeOfRoles(Role role){
+        if(this.roles == null){
+            this.roles = new HashSet<>();
+        }
+
+        this.roles.add(role);
     }
 }
