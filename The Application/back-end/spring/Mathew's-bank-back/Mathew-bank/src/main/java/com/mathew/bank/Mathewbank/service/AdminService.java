@@ -25,7 +25,7 @@ public class AdminService {
         return this.empRepo.addedAnyEmployee(employee);
     }
 
-    public void addEmployeeAndDetails(
+    public String addEmployeeAndDetails(
             String phone_number, String full_name, String email, LocalDate dateOfBirth, double salary,
             String password, Collection<String> rolesName
     ){
@@ -48,13 +48,18 @@ public class AdminService {
 
         employeeDetails.setEmployee(employee);
 
+        // TODO catch individual exceptions
         try{
             empRepo.addAnEmployeeAndThereDetails(employeeDetails, rolesName);
         }catch (Exception e){
             System.out.println(e);
+            return "error";
         }
-
+        return "Added User";
     }
+
+    
+
 
     public Role findARoleInDb(String role){
 

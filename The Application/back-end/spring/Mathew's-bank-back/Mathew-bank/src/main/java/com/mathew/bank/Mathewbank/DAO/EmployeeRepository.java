@@ -37,6 +37,7 @@ public class EmployeeRepository implements EmpRepo {
     @Transactional
     public void  addAnEmployeeAndThereDetails(EmployeeDetails employeeDetails, Collection<String> roleNames) {
 
+        //first checks if role is available only then does it persist else it will throw an exception and not persist
         roleNames.forEach(role -> employeeDetails.getEmployee().setARole(this.findRoleByRoleName(role)));
 
         entityManager.persist(employeeDetails);

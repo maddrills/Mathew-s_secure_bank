@@ -34,7 +34,6 @@ final public class EmployeeDetails {
     @JoinColumn(name = "emp_id")
     private Employee employee;
 
-    //TODO add salary account
 
     public EmployeeDetails(String phone_number, String fullName, String email, LocalDate dateOfBirth, double salary) {
         this.phone_number = phone_number;
