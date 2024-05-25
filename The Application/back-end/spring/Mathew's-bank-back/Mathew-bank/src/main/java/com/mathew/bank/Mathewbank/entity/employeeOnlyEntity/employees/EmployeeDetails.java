@@ -3,6 +3,7 @@ package com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "emp_details")
@@ -24,7 +25,7 @@ final public class EmployeeDetails {
     private String email;
 
     @Column(name = "dob")
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @Column(name = "salary")
     private double salary;
@@ -36,7 +37,7 @@ final public class EmployeeDetails {
 
     //TODO add salary account
 
-    public EmployeeDetails(String phone_number, String full_name, String email, Date dateOfBirth, double salary) {
+    public EmployeeDetails(String phone_number, String full_name, String email, LocalDate dateOfBirth, double salary) {
         this.phone_number = phone_number;
         this.full_name = full_name;
         this.email = email;
@@ -72,11 +73,11 @@ final public class EmployeeDetails {
         this.email = email;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -95,4 +96,6 @@ final public class EmployeeDetails {
     public void setEmp_id(Employee emp_id) {
         this.emp_id = emp_id;
     }
+
+
 }

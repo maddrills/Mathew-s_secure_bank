@@ -8,13 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Collection;
 
 @Service
 public class AdminService {
 
     @Autowired
-    EmpRepo empRepo;
+    private EmpRepo empRepo;
 
 
     public boolean addAnyEmployee(Employee employee){
@@ -26,7 +27,7 @@ public class AdminService {
     }
 
     public void addEmployeeAndDetails(
-            String phone_number, String full_name, String email, Date dateOfBirth, double salary,
+            String phone_number, String full_name, String email, LocalDate dateOfBirth, double salary,
             String password, Collection<Role> roles
     ){
         //TODO a sanity check to make sure that user enters intended credentials
@@ -47,6 +48,8 @@ public class AdminService {
                 salary
         );
 
-        empRepo.addAnEmployeeAndThereDetails(employee,employeeDetails);
+        employeeDetails.setEmp_id(employee);
+
+        empRepo.addAnEmployeeAndThereDetails(employeeDetails);
     }
 }

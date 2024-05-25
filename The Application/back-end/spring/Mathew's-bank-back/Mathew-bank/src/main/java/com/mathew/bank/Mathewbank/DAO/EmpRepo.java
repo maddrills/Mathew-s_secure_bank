@@ -8,7 +8,7 @@ public interface EmpRepo extends User_emp_commonRepo {
 
     public boolean addedAnyEmployee(Employee employee);
 
-    public void addAnEmployeeAndThereDetails(Employee employee, EmployeeDetails employeeDetails);
+    public void addAnEmployeeAndThereDetails(EmployeeDetails employeeDetails);
 
     public void addARole(Role role);
 }

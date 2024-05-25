@@ -28,8 +28,7 @@ public class EmployeeRepository implements EmpRepo {
 
     @Override
     @Transactional
-    public void  addAnEmployeeAndThereDetails(Employee employee, EmployeeDetails employeeDetails) {
-        entityManager.persist(employee);
+    public void  addAnEmployeeAndThereDetails(EmployeeDetails employeeDetails) {
         entityManager.persist(employeeDetails);
     }
 

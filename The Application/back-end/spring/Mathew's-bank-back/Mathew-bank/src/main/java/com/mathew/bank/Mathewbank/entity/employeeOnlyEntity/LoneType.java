@@ -7,8 +7,8 @@ import jakarta.persistence.Table;
 import java.sql.Date;
 
 
-@Entity
-@Table(name = "lone_type")
+//@Entity
+//@Table(name = "lone_type")
 public class LoneType {
 
     private int loneTypeId;

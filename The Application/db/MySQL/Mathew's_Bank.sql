@@ -365,6 +365,8 @@ USE `mathew_bank_db`;
 DESC `time_space`;
 
 SELECT * FROM `employee`;
+SELECT * FROM `emp_details`;
+SELECT * FROM `emp_roles`;
 
 INSERT `roles`(`role_name`) VALUES ('ROLE_admin');
 SELECT * FROM `roles`;

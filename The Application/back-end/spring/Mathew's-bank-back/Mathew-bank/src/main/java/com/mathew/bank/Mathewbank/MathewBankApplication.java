@@ -8,6 +8,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 @SpringBootApplication
 public class MathewBankApplication {
 
@@ -21,11 +24,22 @@ public class MathewBankApplication {
 		return (args) -> {
 
 
-			adminService.addAnyEmployee(new Employee(
-					"Bla Bla Bla",
-					null,
+//			adminService.addAnyEmployee(new Employee(
+//					"Bla Bla Bla",
+//					null,
+//					null
+//			));
+
+			adminService.addEmployeeAndDetails(
+					"9449050762",
+					"mathew francis",
+					"mat@admin",
+					LocalDate.of(1998, 7, 21),
+					543234.50,
+					"12345",
 					null
-			));
+			);
+
 		};
 	}
 
