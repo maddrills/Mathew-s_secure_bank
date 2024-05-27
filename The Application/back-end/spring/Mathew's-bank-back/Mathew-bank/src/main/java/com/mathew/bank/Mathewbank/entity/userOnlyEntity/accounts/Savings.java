@@ -1,4 +1,4 @@
-package com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.accounts;
+package com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts;
 
 import java.sql.Date;
 

@@ -5312,7 +5312,7 @@
 									"font": "Arial;13;1",
 									"left": 2152,
 									"top": 373,
-									"width": 237.2890625,
+									"width": 249.55908203125,
 									"height": 13,
 									"text": "user_application"
 								},
@@ -5339,7 +5339,7 @@
 											"font": "Arial;13;0",
 											"left": 2157,
 											"top": 396,
-											"width": 227.2890625,
+											"width": 239.55908203125,
 											"height": 13
 										},
 										{
@@ -5355,7 +5355,7 @@
 											"font": "Arial;13;0",
 											"left": 2157,
 											"top": 411,
-											"width": 227.2890625,
+											"width": 239.55908203125,
 											"height": 13
 										},
 										{
@@ -5371,7 +5371,7 @@
 											"font": "Arial;13;0",
 											"left": 2157,
 											"top": 426,
-											"width": 227.2890625,
+											"width": 239.55908203125,
 											"height": 13
 										},
 										{
@@ -5387,7 +5387,7 @@
 											"font": "Arial;13;0",
 											"left": 2157,
 											"top": 441,
-											"width": 227.2890625,
+											"width": 239.55908203125,
 											"height": 13
 										},
 										{
@@ -5403,7 +5403,7 @@
 											"font": "Arial;13;0",
 											"left": 2157,
 											"top": 456,
-											"width": 227.2890625,
+											"width": 239.55908203125,
 											"height": 13
 										},
 										{
@@ -5419,7 +5419,7 @@
 											"font": "Arial;13;0",
 											"left": 2157,
 											"top": 471,
-											"width": 227.2890625,
+											"width": 239.55908203125,
 											"height": 13
 										},
 										{
@@ -5435,7 +5435,7 @@
 											"font": "Arial;13;0",
 											"left": 2157,
 											"top": 486,
-											"width": 227.2890625,
+											"width": 239.55908203125,
 											"height": 13
 										},
 										{
@@ -5451,7 +5451,7 @@
 											"font": "Arial;13;0",
 											"left": 2157,
 											"top": 501,
-											"width": 227.2890625,
+											"width": 239.55908203125,
 											"height": 13
 										},
 										{
@@ -5467,7 +5467,7 @@
 											"font": "Arial;13;0",
 											"left": 2157,
 											"top": 516,
-											"width": 227.2890625,
+											"width": 239.55908203125,
 											"height": 13
 										},
 										{
@@ -5483,7 +5483,7 @@
 											"font": "Arial;13;0",
 											"left": 2157,
 											"top": 531,
-											"width": 227.2890625,
+											"width": 239.55908203125,
 											"height": 13
 										},
 										{
@@ -5499,7 +5499,7 @@
 											"font": "Arial;13;0",
 											"left": 2157,
 											"top": 546,
-											"width": 227.2890625,
+											"width": 239.55908203125,
 											"height": 13
 										}
 									],
@@ -5507,7 +5507,7 @@
 									"font": "Arial;13;0",
 									"left": 2152,
 									"top": 391,
-									"width": 237.2890625,
+									"width": 249.55908203125,
 									"height": 173
 								}
 							],
@@ -5515,7 +5515,7 @@
 							"font": "Arial;13;0",
 							"left": 2152,
 							"top": 368,
-							"width": 237.2890625,
+							"width": 249.55908203125,
 							"height": 196,
 							"nameLabel": {
 								"$ref": "AAAAAAGPlbW7VnulZzE="
@@ -6052,7 +6052,7 @@
 										"$ref": "AAAAAAGPlcfHbHzqQKw="
 									},
 									"font": "Arial;13;0",
-									"left": 2413,
+									"left": 2426,
 									"top": 472,
 									"height": 13,
 									"alpha": -0.5235987755982988,
@@ -6070,7 +6070,7 @@
 								"$ref": "AAAAAAGPlb7sE3xJBqM="
 							},
 							"lineStyle": 2,
-							"points": "2333:656;2432:656;2432:464;2388:464",
+							"points": "2333:656;2432:656;2432:464;2401:464",
 							"nameLabel": {
 								"$ref": "AAAAAAGPlcfHbHzrTVg="
 							},
@@ -9044,7 +9044,8 @@
 							"name": "branch_id",
 							"type": "INTEGER",
 							"length": 0,
-							"foreignKey": true
+							"foreignKey": true,
+							"nullable": true
 						}
 					]
 				},
@@ -9428,7 +9429,8 @@
 							"name": "approved_by",
 							"type": "INTEGER",
 							"length": 0,
-							"foreignKey": true
+							"foreignKey": true,
+							"nullable": true
 						},
 						{
 							"_type": "ERDColumn",
@@ -9439,7 +9441,8 @@
 							"name": "created_user_id",
 							"type": "INTEGER",
 							"length": 0,
-							"foreignKey": true
+							"foreignKey": true,
+							"nullable": true
 						},
 						{
 							"_type": "ERDColumn",
