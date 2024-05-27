@@ -1,4 +1,4 @@
-package com.mathew.bank.Mathewbank.entity.userOnlyEntity;
+package com.mathew.bank.Mathewbank.entity.userOnlyEntity.users;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
