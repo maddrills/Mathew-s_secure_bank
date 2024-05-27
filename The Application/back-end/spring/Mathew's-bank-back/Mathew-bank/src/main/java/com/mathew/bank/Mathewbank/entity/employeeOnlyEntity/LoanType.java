@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "lone_type")
-public class LoneType {
+public class LoanType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

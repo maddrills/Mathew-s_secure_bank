@@ -56,14 +56,14 @@ CONSTRAINT `Notification_table_pk` PRIMARY KEY (`not_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
 
-CREATE TABLE `user_lones`(
+CREATE TABLE `user_loan`(
 `user_lones_id` INTEGER NOT NULL AUTO_INCREMENT,
 `issue_date` DATETIME NOT NULL,
 `aoorovel_date` DATETIME,
 `return_date` DATETIME,
 -- foreign key  
 `u_id` INTEGER NOT NULL,
-`lone_type_id` INTEGER NOT NULL,
+`loan_type_id` INTEGER NOT NULL,
 -- 
 CONSTRAINT `user_lones_table_pk` PRIMARY KEY (`user_lones_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
@@ -215,13 +215,13 @@ CONSTRAINT `emp_roles_roles_pk` PRIMARY KEY(`emp_id`,`role_id`)
 )ENGINE = 'Innodb', DEFAULT CHARSET 'latin1';
 
 
-CREATE TABLE `lone_type`(
-`lone_type_id` INTEGER NOT NULL AUTO_INCREMENT,
+CREATE TABLE `loan_type`(
+`loan_type_id` INTEGER NOT NULL AUTO_INCREMENT,
 `amount` DOUBLE NOT NULl DEFAULT 0.00 CHECK(`amount` >= 0.00),
 `return_date` DATETIME NOT NULL,
 `created_by` INTEGER NOT NULL,
 `active` BOOLEAN DEFAULT 0 NOT NULL,
-CONSTRAINT `lone_type_pk` PRIMARY KEY (`lone_type_id`)
+CONSTRAINT `lone_type_pk` PRIMARY KEY (`loan_type_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
 
@@ -307,9 +307,9 @@ DESC `user_details`;
 ALTER TABLE `notification` ADD CONSTRAINT `notification_fk_to_user` FOREIGN KEY(`u_id`) REFERENCES `user`(`u_id`);
 DESC `notification`;
 
-ALTER TABLE `user_lones` ADD CONSTRAINT `user_lones_fk_to_user` FOREIGN KEY(`u_id`) REFERENCES `user`(`u_id`);
-ALTER TABLE `user_lones` ADD CONSTRAINT `user_lones_loneType_fk_to_user` FOREIGN KEY(`lone_type_id`) REFERENCES `lone_type`(`lone_type_id`);
-DESC `user_lones`;
+ALTER TABLE `user_loan` ADD CONSTRAINT `user_loan_fk_to_user` FOREIGN KEY(`u_id`) REFERENCES `user`(`u_id`);
+ALTER TABLE `user_loan` ADD CONSTRAINT `user_loan_loneType_fk_to_user` FOREIGN KEY(`loan_type_id`) REFERENCES `loan_type`(`loan_type_id`);
+DESC `user_loan`;
 
 ALTER TABLE `user_roles` ADD CONSTRAINT `user_lones_U_fk_to_user` FOREIGN KEY(`u_id`) REFERENCES `user`(`u_id`);
 ALTER TABLE `user_roles` ADD CONSTRAINT `user_lones_R_fk_to_user` FOREIGN KEY(`role_id`) REFERENCES `roles`(`role_id`);
@@ -331,8 +331,8 @@ ALTER TABLE `employee` ADD CONSTRAINT `employee_fk_to_employee` FOREIGN KEY(`rep
 ALTER TABLE `employee` ADD CONSTRAINT `employee_fk_to_savings` FOREIGN KEY(`salary_account`) REFERENCES `savings`(`s_account_number`);
 DESC `employee`;
 
-ALTER TABLE `lone_type` ADD CONSTRAINT `lone_type_fk_to_employee` FOREIGN KEY(`created_by`) REFERENCES `employee`(`emp_id`);
-DESC `lone_type`;
+ALTER TABLE `loan_type` ADD CONSTRAINT `loan_type_fk_to_employee` FOREIGN KEY(`created_by`) REFERENCES `employee`(`emp_id`);
+DESC `loan_type`;
 
 ALTER TABLE `emp_roles` ADD CONSTRAINT `emp_roles_fk_to_employee` FOREIGN KEY(`emp_id`) REFERENCES `employee`(`emp_id`);
 ALTER TABLE `emp_roles` ADD CONSTRAINT `emp_roles_fk_to_roles` FOREIGN KEY(`role_id`) REFERENCES `roles`(`role_id`);

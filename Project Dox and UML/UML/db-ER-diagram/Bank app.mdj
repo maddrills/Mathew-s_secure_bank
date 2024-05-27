@@ -3065,7 +3065,7 @@
 									"top": 525,
 									"width": 248,
 									"height": 13,
-									"text": "user_lones"
+									"text": "user_loan"
 								},
 								{
 									"_type": "ERDColumnCompartmentView",
@@ -3217,7 +3217,7 @@
 									"top": 525,
 									"width": 264,
 									"height": 13,
-									"text": "lone_type"
+									"text": "loan_type"
 								},
 								{
 									"_type": "ERDColumnCompartmentView",
@@ -8614,7 +8614,7 @@
 					"_parent": {
 						"$ref": "AAAAAAGPZ4XK0A8o7Js="
 					},
-					"name": "user_lones",
+					"name": "user_loan",
 					"columns": [
 						{
 							"_type": "ERDColumn",
@@ -8676,7 +8676,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGPa6JxpbtC154="
 							},
-							"name": "lone_type_id",
+							"name": "loan_type_id",
 							"type": "INTEGER",
 							"length": 0,
 							"foreignKey": true
@@ -8689,7 +8689,7 @@
 					"_parent": {
 						"$ref": "AAAAAAGPZ4XK0A8o7Js="
 					},
-					"name": "lone_type",
+					"name": "loan_type",
 					"ownedElements": [
 						{
 							"_type": "ERDRelationship",
