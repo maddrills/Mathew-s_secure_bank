@@ -24,7 +24,7 @@ CREATE TABLE `transactions`(
 `from_account_number` INTEGER NOT NULL,
 `transaction_date` DATETIME DEFAULT now(),
 `deposited` BOOLEAN NOT NULL DEFAULT 0,
-`ammount` DOUBLE NOT NULL,
+`amount` DOUBLE NOT NULL,
 `u_id` INTEGER NOT NULL,
 CONSTRAINT `transactions_pk` PRIMARY KEY(`id`)
 )ENGINE = 'Innodb', AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
