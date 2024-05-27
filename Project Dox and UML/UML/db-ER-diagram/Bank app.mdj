@@ -2609,7 +2609,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 792,
-									"top": 939,
+									"top": 915,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -2643,7 +2643,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 822,
-									"top": 939,
+									"top": 915,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 30,
@@ -2660,7 +2660,7 @@
 								"$ref": "AAAAAAGPZ5B6Yw9/iGc="
 							},
 							"lineStyle": 2,
-							"points": "792:736;792:960;848:960",
+							"points": "792:736;792:936;848:936",
 							"nameLabel": {
 								"$ref": "AAAAAAGPaPrjL950Ys4="
 							},
@@ -9760,7 +9760,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGPoBrmdSI2QZM="
 							},
-							"name": "ammount",
+							"name": "amount",
 							"type": "DOUBLE",
 							"length": 0
 						},
