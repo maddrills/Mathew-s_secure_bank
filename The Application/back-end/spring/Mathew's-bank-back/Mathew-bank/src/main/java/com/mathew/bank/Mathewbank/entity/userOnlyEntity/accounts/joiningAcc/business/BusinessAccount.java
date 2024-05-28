@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "business_account")
@@ -162,5 +163,15 @@ final public class BusinessAccount {
 
     public int getId() {
         return id;
+    }
+
+    //mapBy convenience
+    @Deprecated(since = "It is a map by use with caution")
+    private void addBusinessPeople(BusinessPeople businessPeople){
+
+        if(this.businessPeople == null){
+            this.businessPeople = new HashSet<>();
+        }
+        this.businessPeople.add(businessPeople);
     }
 }

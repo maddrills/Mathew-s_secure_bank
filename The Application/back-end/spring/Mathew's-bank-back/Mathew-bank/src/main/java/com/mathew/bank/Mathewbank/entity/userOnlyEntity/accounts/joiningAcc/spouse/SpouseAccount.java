@@ -21,7 +21,9 @@ final public class SpouseAccount {
     @Column(name = "frozen")
     private boolean frozen;
 
-    @Column(name = "joint_account_id")
+    @OneToOne(fetch = FetchType.EAGER,
+            cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "joint_account_id")
     private JointAccounts jointAccountId;
 
     @Column(name = "next_interest_on")
