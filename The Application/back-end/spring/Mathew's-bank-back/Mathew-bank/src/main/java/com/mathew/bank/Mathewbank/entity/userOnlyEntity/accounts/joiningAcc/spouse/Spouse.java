@@ -21,7 +21,8 @@ final public class Spouse {
     @JoinColumn(name = "wife_joint_account")
     private JointAccounts wifeJointAccount;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER,
+            cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "sa_ac_no")
     private SpouseAccount spouseAccount;
 

@@ -25,7 +25,7 @@ final public class Branch {
     boolean open;
 
 
-    @OneToOne(fetch = FetchType.LAZY,
+    @OneToOne(fetch = FetchType.EAGER,
             cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "branch_manager")
     Employee branchManager;

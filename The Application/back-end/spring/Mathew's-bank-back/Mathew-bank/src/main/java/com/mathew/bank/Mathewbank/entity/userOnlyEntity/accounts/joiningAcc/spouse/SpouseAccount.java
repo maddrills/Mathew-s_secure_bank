@@ -27,7 +27,8 @@ final public class SpouseAccount {
     @Column(name = "next_interest_on")
     private LocalDateTime nextInterestOn;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER,
+            cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "account_type")
     private TimeSpace accountType;
 

@@ -9713,7 +9713,8 @@
 								},
 								"reference": {
 									"$ref": "AAAAAAGPoBrmdSI2QZM="
-								}
+								},
+								"cardinality": "0..*"
 							},
 							"end2": {
 								"_type": "ERDRelationshipEnd",

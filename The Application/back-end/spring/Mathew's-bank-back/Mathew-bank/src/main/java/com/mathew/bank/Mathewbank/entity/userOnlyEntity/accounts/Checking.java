@@ -33,7 +33,8 @@ final public class Checking {
     @Column(name = "frozen")
     private boolean frozen;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER,
+            cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "account_type")
     private TimeSpace accountType;
 
