@@ -27,7 +27,7 @@ public class BusinessPeople {
     @JoinColumn(name = "user_joint_account")
     private Collection<JointAccounts> userJointAccount;
 
-    @ManyToOne(
+    @OneToOne(
             fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.MERGE,
@@ -37,14 +37,18 @@ public class BusinessPeople {
             }
     )
     @JoinColumn(name = "business_ac_no")
-    private Collection<BusinessAccount> businessAccountNumbers;
+    private BusinessAccount businessAccountNumbers;
 
     public int getId() {
         return id;
     }
 
-    public Collection<BusinessAccount> getBusinessAccountNumbers() {
+    public BusinessAccount getBusinessAccountNumbers() {
         return businessAccountNumbers;
+    }
+
+    public void setBusinessAccountNumbers(BusinessAccount businessAccountNumbers) {
+        this.businessAccountNumbers = businessAccountNumbers;
     }
 
     public Collection<JointAccounts> getUserJointAccount() {
@@ -59,14 +63,5 @@ public class BusinessPeople {
             this.userJointAccount = new HashSet<>();
         }
         this.userJointAccount.add(jointAccounts);
-    }
-
-    //convenience method to add many business accounts
-    public void addBusinessAccounts(BusinessAccount businessAccount){
-
-        if(this.businessAccountNumbers == null){
-            this.businessAccountNumbers = new HashSet<>();
-        }
-        this.businessAccountNumbers.add(businessAccount);
     }
 }

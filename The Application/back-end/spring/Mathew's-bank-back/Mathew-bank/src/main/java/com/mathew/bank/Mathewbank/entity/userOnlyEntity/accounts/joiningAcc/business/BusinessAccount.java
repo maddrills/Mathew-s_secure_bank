@@ -6,6 +6,7 @@ import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Entity
 @Table(name = "business_account")
@@ -60,7 +61,7 @@ public class BusinessAccount {
             fetch = FetchType.EAGER,
             cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH}
     )
-    private BusinessPeople businessPeople;
+    private Collection<BusinessPeople> businessPeople;
 
     public BusinessAccount(double amount, int peopleCountLimit, double minAmount, double drawLimit, String businessName, boolean frozen, LocalDateTime nextInterestOn, JointAccounts jointAccounts, User creator, TimeSpace accountType) {
         this.amount = amount;
@@ -155,12 +156,8 @@ public class BusinessAccount {
         this.accountType = accountType;
     }
 
-    public BusinessPeople getBusinessPeople() {
+    public Collection<BusinessPeople> getBusinessPeople() {
         return businessPeople;
-    }
-
-    public void setBusinessPeople(BusinessPeople businessPeople) {
-        this.businessPeople = businessPeople;
     }
 
     public int getId() {
