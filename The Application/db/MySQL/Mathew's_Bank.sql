@@ -60,7 +60,6 @@ CREATE TABLE `user_loan`(
 `user_loans_id` INTEGER NOT NULL AUTO_INCREMENT,
 `issue_date` DATETIME NOT NULL,
 `aoorovel_date` DATETIME,
-`return_date` DATETIME,
 -- foreign key  
 `u_id` INTEGER NOT NULL,
 `loan_type_id` INTEGER NOT NULL,

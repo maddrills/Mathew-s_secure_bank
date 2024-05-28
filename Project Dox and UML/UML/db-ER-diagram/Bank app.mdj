@@ -3168,6 +3168,7 @@
 											"model": {
 												"$ref": "AAAAAAGPa6QXNLtmUmE="
 											},
+											"visible": false,
 											"fillColor": "#fcffaf",
 											"font": "Arial;13;0",
 											"left": 1085,
@@ -3187,7 +3188,7 @@
 											"fillColor": "#fcffaf",
 											"font": "Arial;13;0",
 											"left": 1085,
-											"top": 608,
+											"top": 593,
 											"width": 238,
 											"height": 13
 										},
@@ -3203,7 +3204,7 @@
 											"fillColor": "#fcffaf",
 											"font": "Arial;13;0",
 											"left": 1085,
-											"top": 623,
+											"top": 608,
 											"width": 238,
 											"height": 13
 										}
@@ -3213,7 +3214,7 @@
 									"left": 1080,
 									"top": 543,
 									"width": 248,
-									"height": 98
+									"height": 83
 								}
 							],
 							"fillColor": "#fcffaf",

@@ -8,21 +8,84 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "user_loan")
-public class UserLoan {
+final public class UserLoan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_loans_id")
     private int id;
 
+    @Column(name = "issue_date")
     private LocalDate issueDate;
 
+    @Column(name = "approved_date")
     private LocalDate approvedDate;
 
-    private LocalDate returnDate;
-
+    @ManyToOne(
+            fetch = FetchType.EAGER,
+            cascade = {
+                    CascadeType.MERGE,
+                    CascadeType.DETACH,
+                    CascadeType.PERSIST,
+                    CascadeType.DETACH,
+                    CascadeType.REFRESH
+            }
+    )
+    @JoinTable(name = "u_id")
     private User userId;
 
+    @ManyToOne(
+            fetch = FetchType.EAGER,
+            cascade = {
+                    CascadeType.MERGE,
+                    CascadeType.DETACH,
+                    CascadeType.PERSIST,
+                    CascadeType.DETACH,
+                    CascadeType.REFRESH
+            }
+    )
+    @JoinTable(name = "loan_type_id: INTEGER")
     private LoanType loanType;
+
+    public UserLoan(User userId, LoanType loanType) {
+        this.userId = userId;
+        this.loanType = loanType;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public LocalDate getIssueDate() {
+        return issueDate;
+    }
+
+    public void setIssueDate(LocalDate issueDate) {
+        this.issueDate = issueDate;
+    }
+
+    public LocalDate getApprovedDate() {
+        return approvedDate;
+    }
+
+    public void setApprovedDate(LocalDate approvedDate) {
+        this.approvedDate = approvedDate;
+    }
+
+    public User getUserId() {
+        return userId;
+    }
+
+    public void setUserId(User userId) {
+        this.userId = userId;
+    }
+
+    public LoanType getLoanType() {
+        return loanType;
+    }
+
+    public void setLoanType(LoanType loanType) {
+        this.loanType = loanType;
+    }
 }
 

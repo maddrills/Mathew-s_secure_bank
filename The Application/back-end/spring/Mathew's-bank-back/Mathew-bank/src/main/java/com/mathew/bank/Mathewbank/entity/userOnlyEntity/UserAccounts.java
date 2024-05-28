@@ -15,15 +15,18 @@ final public class UserAccounts {
     @Column(name = "u_acc_id")
     private int id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER,
+            cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "s_ac_no")
     private Savings savings;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER,
+            cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "ack_ac_no")
     private Checking checking;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER,
+            cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "b_ac_no")
     private BuildUp buildUp;
 
