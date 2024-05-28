@@ -1,21 +1,24 @@
 package com.mathew.bank.Mathewbank.entity.userOnlyEntity.users;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
+import jakarta.persistence.*;
 
-//@Entity
-//@Table(name = "user")
+@Entity
+@Table(name = "user")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "u_id")
     private int id;
 
     private String userName;
 
     private String password;
 
-    // TODO the two bellow are foreign keys and much be changed to match there entity
-    private int userAccountId;
+    private UserAccounts userAccountId;
 
-    private int branchId;
+    private Branch branchId;
 
 }

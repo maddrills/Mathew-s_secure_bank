@@ -57,7 +57,7 @@ CONSTRAINT `Notification_table_pk` PRIMARY KEY (`not_id`)
 
 
 CREATE TABLE `user_loan`(
-`user_lones_id` INTEGER NOT NULL AUTO_INCREMENT,
+`user_loans_id` INTEGER NOT NULL AUTO_INCREMENT,
 `issue_date` DATETIME NOT NULL,
 `aoorovel_date` DATETIME,
 `return_date` DATETIME,
@@ -65,7 +65,7 @@ CREATE TABLE `user_loan`(
 `u_id` INTEGER NOT NULL,
 `loan_type_id` INTEGER NOT NULL,
 -- 
-CONSTRAINT `user_lones_table_pk` PRIMARY KEY (`user_lones_id`)
+CONSTRAINT `user_lones_table_pk` PRIMARY KEY (`user_loans_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
 
@@ -104,10 +104,10 @@ CREATE TABLE `savings`(
 `hold` BOOLEAN NOT NULL DEFAULT 0,
 `active` BOOLEAN NOT NULL DEFAULT 0,
 `amount` DOUBLE NOT NULl DEFAULT 0.00 CHECK(`amount` >= 0.00),
-`next_interest_on`DATETIME NOT NULL,
+`next_interest_on` DATETIME NOT NULL,
 `created_on` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-`account_type` VARCHAR(30) DEFAULT 'savings',
 `frozen` BOOLEAN NOT NULL DEFAULT 0,
+`account_type` VARCHAR(30) DEFAULT 'savings',
 CONSTRAINT `savings_pk` PRIMARY KEY (`s_account_number`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 102000001, DEFAULT CHARSET 'latin1';
 
@@ -138,12 +138,13 @@ CREATE TABLE `business_account`(
 `min_amount` DOUBLE NOT NULl DEFAULT 0.00 CHECK(`min_amount` >= 0.00),
 `drw_limit` DOUBLE NOT NULl DEFAULT 0.00 CHECK(`drw_limit` >= 0.00),
 `business_name` VARCHAR(100) NOT NULL ,
-`account_type` VARCHAR(30) DEFAULT 'busniss_acount',
 `frozen` BOOLEAN NOT NULL DEFAULT 0,
+`next_interest_on`DATETIME NOT NULL,
 CONSTRAINT `busniss_acount_pk` PRIMARY KEY (`business_ac_no`),
 -- FOREIGN KEY SECTION 
 `joint_acount_id` INTEGER NOT NULL,
-`creator` INTEGER NOT NULL
+`creator` INTEGER NOT NULL,
+`account_type` VARCHAR(30) DEFAULT 'busniss_acount'
 )ENGINE = 'Innodb' AUTO_INCREMENT = 104000001, DEFAULT CHARSET 'latin1';
 
 CREATE TABLE `spouse_account`(
@@ -152,6 +153,7 @@ CREATE TABLE `spouse_account`(
 `frozen` BOOLEAN NOT NULL DEFAULT 0,
 -- FOREIGN KEY SECTION 
 `joint_account_id` INTEGER NOT NULL,
+`next_interest_on`DATETIME NOT NULL,
 `account_type` VARCHAR(30) DEFAULT 'spouse_acount',
 CONSTRAINT `spouse_acount_pk` PRIMARY KEY (`sa_ac_no`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 105000001, DEFAULT CHARSET 'latin1';
@@ -219,8 +221,8 @@ CREATE TABLE `loan_type`(
 `loan_type_id` INTEGER NOT NULL AUTO_INCREMENT,
 `amount` DOUBLE NOT NULl DEFAULT 0.00 CHECK(`amount` >= 0.00),
 `return_date` DATETIME NOT NULL,
-`created_by` INTEGER NOT NULL,
 `active` BOOLEAN DEFAULT 0 NOT NULL,
+`created_by` INTEGER NOT NULL,
 CONSTRAINT `lone_type_pk` PRIMARY KEY (`loan_type_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
@@ -260,7 +262,7 @@ CREATE TABLE `user_application`(
 `dob` DATE NOT NULL,
 `age` TINYINT NOT NULL CHECK(`age` >= 5),
 `email` VARCHAR(100) NOT NULL,
-`applyed_date` DATETIME DEFAULT now(),
+`applied_date` DATETIME DEFAULT now(),
 `status` BOOLEAN DEFAULT 0 NOT NULL,
 `approved_by` INTEGER,
 `created_user_id` INTEGER,

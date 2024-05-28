@@ -31,6 +31,8 @@ final public class TimeSpace {
     @Column(name = "base_interest_rate")
     private int baseInterestRate;
 
+    //TODO may need to add a relationship back to the accounts
+
     public TimeSpace(String accountType, int second, int min, int hour, int days, int months, int years, int baseInterestRate) {
         this.accountType = accountType;
         this.second = second;

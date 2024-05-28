@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "lone_type")
-public class LoanType {
+final public class LoanType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,5 +23,49 @@ public class LoanType {
 
     //only one employee can create a lone
     @OneToMany
+    @JoinColumn(name = "created_by")
     private Employee createdByEmployee;
+
+    public LoanType(double amount, LocalDate returnDate, boolean active, Employee createdByEmployee) {
+        this.amount = amount;
+        this.returnDate = returnDate;
+        this.active = active;
+        this.createdByEmployee = createdByEmployee;
+    }
+
+    public void setLoneTypeId(int loneTypeId) {
+        this.loneTypeId = loneTypeId;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public LocalDate getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(LocalDate returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public Employee getCreatedByEmployee() {
+        return createdByEmployee;
+    }
+
+    public void setCreatedByEmployee(Employee createdByEmployee) {
+        this.createdByEmployee = createdByEmployee;
+    }
 }

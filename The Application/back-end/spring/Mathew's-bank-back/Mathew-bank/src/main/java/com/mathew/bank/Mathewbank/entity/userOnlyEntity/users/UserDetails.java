@@ -1,8 +1,16 @@
 package com.mathew.bank.Mathewbank.entity.userOnlyEntity.users;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "user_details")
 public class UserDetails {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ud_id")
     private int id;
 
     private String fullName;
@@ -15,6 +23,5 @@ public class UserDetails {
 
     private String email;
 
-    // TODO change for relationship
-    private int userId;
+    private User userId;
 }
