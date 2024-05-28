@@ -142,7 +142,7 @@ CREATE TABLE `business_account`(
 `next_interest_on`DATETIME NOT NULL,
 CONSTRAINT `busniss_acount_pk` PRIMARY KEY (`business_ac_no`),
 -- FOREIGN KEY SECTION 
-`joint_acount_id` INTEGER NOT NULL,
+`joint_account_id` INTEGER NOT NULL,
 `creator` INTEGER NOT NULL,
 `account_type` VARCHAR(30) DEFAULT 'busniss_acount'
 )ENGINE = 'Innodb' AUTO_INCREMENT = 104000001, DEFAULT CHARSET 'latin1';
@@ -161,7 +161,7 @@ CONSTRAINT `spouse_acount_pk` PRIMARY KEY (`sa_ac_no`)
 CREATE TABLE `business_people`(
 `b_id` INTEGER NOT NULL AUTO_INCREMENT,
 -- FOREIGN KEY SECTION 
-`user_joint_acount` INTEGER,
+`user_joint_account` INTEGER,
 `business_ac_no` INTEGER,
 CONSTRAINT `busniss_people_pk` PRIMARY KEY (`b_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
@@ -283,14 +283,14 @@ ALTER TABLE `user_account` ADD CONSTRAINT `user_acount_fk_to_build_up` FOREIGN K
 ALTER TABLE `user_account` ADD CONSTRAINT `user_acount_fk_to_joint_accounts` FOREIGN KEY(`joint_ac_id`) REFERENCES `joint_accounts`(`joint_account_id`);
 DESC `user_account`;
 
-ALTER TABLE `business_account` ADD CONSTRAINT `business_acount_fk_to_joint_accounts` FOREIGN KEY(`joint_acount_id`) REFERENCES `joint_accounts`(`joint_account_id`);
+ALTER TABLE `business_account` ADD CONSTRAINT `business_account_fk_to_joint_accounts` FOREIGN KEY(`joint_account_id`) REFERENCES `joint_accounts`(`joint_account_id`);
 DESC `business_account`;
 
 ALTER TABLE `spouse_account` ADD CONSTRAINT `spouse_acount_fk_to_joint_accounts` FOREIGN KEY(`joint_account_id`) REFERENCES `joint_accounts`(`joint_account_id`);
 DESC `spouse_account`;
 
 
-ALTER TABLE `business_people` ADD CONSTRAINT `business_people_fk_to_joint_accounts` FOREIGN KEY(`user_joint_acount`) REFERENCES `joint_accounts`(`joint_account_id`);
+ALTER TABLE `business_people` ADD CONSTRAINT `business_people_fk_to_joint_accounts` FOREIGN KEY(`user_joint_account`) REFERENCES `joint_accounts`(`joint_account_id`);
 ALTER TABLE `business_people` ADD CONSTRAINT `business_people_fk_to_busniss_account` FOREIGN KEY(`business_ac_no`) REFERENCES `business_account`(`business_ac_no`);
 DESC `business_people`;
 
