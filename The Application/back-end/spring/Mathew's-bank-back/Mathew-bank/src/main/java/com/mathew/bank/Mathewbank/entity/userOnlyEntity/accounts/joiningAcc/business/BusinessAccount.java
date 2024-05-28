@@ -10,7 +10,7 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "business_account")
-public class BusinessAccount {
+final public class BusinessAccount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

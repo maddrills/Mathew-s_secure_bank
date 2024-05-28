@@ -8,7 +8,7 @@ import java.util.HashSet;
 
 @Entity
 @Table(name = "business_people")
-public class BusinessPeople {
+final public class BusinessPeople {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
