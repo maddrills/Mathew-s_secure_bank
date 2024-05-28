@@ -32,6 +32,21 @@ final public class SpouseAccount {
     @JoinColumn(name = "account_type")
     private TimeSpace accountType;
 
+    //map by
+    @OneToOne(
+            mappedBy = "husbandJointAccount",
+            fetch = FetchType.EAGER,
+            cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH}
+    )
+    private Spouse husbandJointAccount;
+
+    @OneToOne(
+            mappedBy = "wife_joint_account",
+            fetch = FetchType.EAGER,
+            cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH}
+    )
+    private Spouse wifeJointAccount;
+
     public SpouseAccount(double amount, boolean frozen, JointAccounts jointAccountId, LocalDateTime nextInterestOn, TimeSpace accountType) {
         this.amount = amount;
         this.frozen = frozen;
