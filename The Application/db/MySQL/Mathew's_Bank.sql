@@ -192,7 +192,6 @@ CREATE TABLE `employee`(
 -- self refer
 `reports_to` INTEGER,
 `branch_id` INTEGER,
-`salary_account` INTEGER,
 CONSTRAINT `employee_pk` PRIMARY KEY (`emp_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1000001, DEFAULT CHARSET 'latin1';
 
@@ -205,7 +204,7 @@ CREATE TABLE `emp_details`(
 `salary` DOUBLE NOT NULL CHECK (`salary` >= 0.00),
 -- FK goes here
 `emp_id` INTEGER,
-`salary_accoun` INTEGER UNIQUE,
+`salary_account` INTEGER UNIQUE,
 CONSTRAINT `emp_details_pk` PRIMARY KEY (`ed_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
@@ -327,11 +326,11 @@ DESC `transactions`;
 
 
 ALTER TABLE `emp_details` ADD CONSTRAINT `emp_details_fk_to_employee` FOREIGN KEY(`emp_id`) REFERENCES `employee`(`emp_id`);
-ALTER TABLE `emp_details` ADD CONSTRAINT `emp_details_fk_to_savings` FOREIGN KEY(`emp_id`) REFERENCES `employee`(`emp_id`);
+ALTER TABLE `emp_details` ADD CONSTRAINT `salary_account_fk_to_savings` FOREIGN KEY(`salary_account`) REFERENCES `savings`(`s_account_number`);
 DESC `emp_details`;
 
 ALTER TABLE `employee` ADD CONSTRAINT `employee_fk_to_employee` FOREIGN KEY(`reports_to`) REFERENCES `employee`(`emp_id`);
-ALTER TABLE `employee` ADD CONSTRAINT `employee_fk_to_savings` FOREIGN KEY(`salary_account`) REFERENCES `savings`(`s_account_number`);
+-- ALTER TABLE `employee` ADD CONSTRAINT `employee_fk_to_savings` FOREIGN KEY(`salary_account`) REFERENCES `savings`(`s_account_number`);
 DESC `employee`;
 
 ALTER TABLE `loan_type` ADD CONSTRAINT `loan_type_fk_to_employee` FOREIGN KEY(`created_by`) REFERENCES `employee`(`emp_id`);
@@ -366,7 +365,7 @@ DESC `spouse_account`;
 USE `mathew_bank_db`;
 
 DESC `time_space`;
-
+SELECT * FROM `time_space`;
 SELECT * FROM `employee`;
 SELECT * FROM `emp_details`;
 DESCRIBE `emp_details`;

@@ -156,7 +156,7 @@ public class AdminService {
                 1000000000.11,
                 LocalDateTime.now().plusMonths(1),
                 false,
-                new TimeSpace("checking",0,0,0,0,1,0,0.07),
+                new TimeSpace("savings",0,0,0,0,1,0,0.07),
                 LocalDateTime.now()
         );
 
