@@ -38,6 +38,10 @@ final public class UserAccounts {
     @Column(name = "frozen")
     private boolean frozen;
 
+
+    public UserAccounts() {
+    }
+
     public UserAccounts(Savings savings, Checking checking, BuildUp buildUp, JointAccounts jointAccounts, boolean frozen) {
         this.savings = savings;
         this.checking = checking;

@@ -243,7 +243,7 @@ CONSTRAINT `time_space_pk` PRIMARY KEY (`account_type`)
 
 CREATE TABLE `branch`(
 `branch_id` INTEGER NOT NULL AUTO_INCREMENT,
-`branch_name` VARCHAR(70) NOT NULL,
+`branch_name` VARCHAR(70) UNIQUE NOT NULL,
 `state` VARCHAR(30) NOT NULL,
 `country` VARCHAR(60) NOT NULL,
 `open` BOOLEAN DEFAULT 0 NOT NULL,

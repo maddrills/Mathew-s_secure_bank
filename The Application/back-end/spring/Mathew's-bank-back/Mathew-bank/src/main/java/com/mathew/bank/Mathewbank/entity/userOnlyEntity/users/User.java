@@ -29,6 +29,9 @@ final public class User {
     @JoinColumn(name = "branch_id")
     private Branch branchId;
 
+    public User() {
+    }
+
     public User(String userName, String password, UserAccounts userAccountId, Branch branchId) {
         this.userName = userName;
         this.password = password;

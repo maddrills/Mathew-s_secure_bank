@@ -78,7 +78,8 @@ final public class Employee {
     private Collection<Role> roles;
 
 
-
+    public Employee() {
+    }
 
     public Employee(String password, Employee manager, Branch bankBranch) {
         this.password = password;

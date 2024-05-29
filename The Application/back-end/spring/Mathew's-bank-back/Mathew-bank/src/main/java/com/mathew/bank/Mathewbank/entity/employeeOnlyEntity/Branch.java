@@ -30,6 +30,10 @@ final public class Branch {
     @JoinColumn(name = "branch_manager")
     Employee branchManager;
 
+
+    public Branch() {
+    }
+
     public Branch(String branchName, String state, String country, boolean open, Employee branchManager) {
         this.branchName = branchName;
         this.state = state;
@@ -37,6 +41,8 @@ final public class Branch {
         this.open = open;
         this.branchManager = branchManager;
     }
+
+
 
     public String getBranchName() {
         return branchName;

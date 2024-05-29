@@ -1,4 +1,8 @@
 package com.mathew.bank.Mathewbank.DAO;
 
-public interface UserRepo {
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
+
+public interface UserRepo extends User_emp_commonRepo{
+
+    public void createAUserInBank(User user, String branch);
 }

@@ -1,5 +1,6 @@
 package com.mathew.bank.Mathewbank.DAO;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
+import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDetails;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
@@ -51,6 +52,7 @@ public class EmployeeRepository implements EmpRepo {
         this.entityManager.persist(role);
     }
 
+
     @Override
     public Role findRoleByRoleName(String name) {
 
@@ -61,10 +63,19 @@ public class EmployeeRepository implements EmpRepo {
         return query.getSingleResult();
     }
 
+    // TODO use this to find branch for admin
+    @Override
+    public Branch findBranchByName(String name) {
+        return null;
+    }
+
+
     @Override
     @Transactional
-    public void createAUserInBank(User user) {
+    public void updateBankManager(Branch branch) {
 
-        this.entityManager.persist(user);
+        this.entityManager.merge(branch);
+
     }
+
 }
