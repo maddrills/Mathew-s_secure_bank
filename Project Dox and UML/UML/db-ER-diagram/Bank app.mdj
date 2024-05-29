@@ -5728,7 +5728,7 @@
 									"font": "Arial;13;1",
 									"left": 2112,
 									"top": 613,
-									"width": 222.14990234375,
+									"width": 230.0908203125,
 									"height": 13,
 									"text": "branch"
 								},
@@ -5755,7 +5755,7 @@
 											"font": "Arial;13;0",
 											"left": 2117,
 											"top": 636,
-											"width": 212.14990234375,
+											"width": 220.0908203125,
 											"height": 13
 										},
 										{
@@ -5771,7 +5771,7 @@
 											"font": "Arial;13;0",
 											"left": 2117,
 											"top": 651,
-											"width": 212.14990234375,
+											"width": 220.0908203125,
 											"height": 13
 										},
 										{
@@ -5787,7 +5787,7 @@
 											"font": "Arial;13;0",
 											"left": 2117,
 											"top": 666,
-											"width": 212.14990234375,
+											"width": 220.0908203125,
 											"height": 13
 										},
 										{
@@ -5803,7 +5803,7 @@
 											"font": "Arial;13;0",
 											"left": 2117,
 											"top": 681,
-											"width": 212.14990234375,
+											"width": 220.0908203125,
 											"height": 13
 										},
 										{
@@ -5819,7 +5819,7 @@
 											"font": "Arial;13;0",
 											"left": 2117,
 											"top": 696,
-											"width": 212.14990234375,
+											"width": 220.0908203125,
 											"height": 13
 										},
 										{
@@ -5835,7 +5835,7 @@
 											"font": "Arial;13;0",
 											"left": 2117,
 											"top": 711,
-											"width": 212.14990234375,
+											"width": 220.0908203125,
 											"height": 13
 										}
 									],
@@ -5843,7 +5843,7 @@
 									"font": "Arial;13;0",
 									"left": 2112,
 									"top": 631,
-									"width": 222.14990234375,
+									"width": 230.0908203125,
 									"height": 98
 								}
 							],
@@ -5851,7 +5851,7 @@
 							"font": "Arial;13;0",
 							"left": 2112,
 							"top": 608,
-							"width": 222.14990234375,
+							"width": 230.0908203125,
 							"height": 176,
 							"nameLabel": {
 								"$ref": "AAAAAAGPlb7sE3xKSpo="
@@ -6057,7 +6057,7 @@
 										"$ref": "AAAAAAGPlcfHbHzqQKw="
 									},
 									"font": "Arial;13;0",
-									"left": 2358,
+									"left": 2366,
 									"top": 635,
 									"height": 13,
 									"alpha": 0.5235987755982988,
@@ -6092,7 +6092,7 @@
 								"$ref": "AAAAAAGPlb7sE3xJBqM="
 							},
 							"lineStyle": 2,
-							"points": "2333:656;2432:656;2432:464;2401:464",
+							"points": "2341:656;2432:656;2432:464;2401:464",
 							"nameLabel": {
 								"$ref": "AAAAAAGPlcfHbHzrTVg="
 							},
@@ -6130,7 +6130,7 @@
 								"$ref": "AAAAAAGPlb7sE3xJBqM="
 							},
 							"lineStyle": 1,
-							"points": "2334:728;2375:740"
+							"points": "2342:730;2375:740"
 						},
 						{
 							"_type": "ERDEntityView",
@@ -7996,7 +7996,8 @@
 								},
 								"reference": {
 									"$ref": "AAAAAAGPaLqQ8dzTOdQ="
-								}
+								},
+								"cardinality": "0..*"
 							},
 							"end2": {
 								"_type": "ERDRelationshipEnd",
@@ -9633,7 +9634,8 @@
 							"name": "branch_manager",
 							"type": "INTEGER",
 							"length": 0,
-							"foreignKey": true
+							"foreignKey": true,
+							"nullable": true
 						}
 					]
 				},

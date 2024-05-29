@@ -2,6 +2,7 @@ package com.mathew.bank.Mathewbank.DAO;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDetails;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
@@ -58,5 +59,12 @@ public class EmployeeRepository implements EmpRepo {
         query.setParameter("theId","ROLE_"+name);
 
         return query.getSingleResult();
+    }
+
+    @Override
+    @Transactional
+    public void createAUserInBank(User user) {
+
+        this.entityManager.persist(user);
     }
 }

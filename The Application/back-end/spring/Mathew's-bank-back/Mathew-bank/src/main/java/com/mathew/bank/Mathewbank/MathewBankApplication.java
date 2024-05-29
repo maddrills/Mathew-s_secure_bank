@@ -49,6 +49,7 @@ public class MathewBankApplication {
 //				System.out.println(role.getRole());
 //			}
 
+			adminService.createTheAdminAccount();
 		};
 	}
 

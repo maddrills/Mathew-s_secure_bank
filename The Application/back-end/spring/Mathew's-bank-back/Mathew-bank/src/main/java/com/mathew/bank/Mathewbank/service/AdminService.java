@@ -2,8 +2,11 @@ package com.mathew.bank.Mathewbank.service;
 
 import com.mathew.bank.Mathewbank.DAO.EmpRepo;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
+import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDetails;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -71,5 +74,46 @@ public class AdminService {
         }
 
         return this.empRepo.findRoleByRoleName(role);
+    }
+
+
+    public void makeAnAdminBankAccount(User user){
+
+        //TODO sanity check on user
+
+        this.empRepo.createAUserInBank(user);
+    }
+
+    public void createTheAdminAccount(){
+
+        UserAccounts AdminAccount = new UserAccounts(
+                null,
+                null,
+                null,
+                null,
+                false
+        );
+
+        Branch defaultBranch = new Branch(
+                "Grand Central",
+                "Karnataka",
+                "India",
+                true,
+                null
+        );
+
+        User admin = new User(
+                "Mathew Francis",
+                "12345",
+                AdminAccount,
+                defaultBranch
+        );
+
+        try{
+            this.makeAnAdminBankAccount(admin);
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
     }
 }

@@ -176,7 +176,7 @@ CONSTRAINT `spouse_pk` PRIMARY KEY (`s_id`)
 CREATE TABLE `user_account`(
 `u_acc_id` INTEGER NOT NULL AUTO_INCREMENT,
 -- all fks go here
-`s_ac_no` INTEGER UNIQUE NOT NULL ,
+`s_ac_no` INTEGER UNIQUE,
 `ack_ac_no` INTEGER UNIQUE,
 `b_ac_no` INTEGER UNIQUE,
 `joint_ac_id` INTEGER UNIQUE,
@@ -373,4 +373,9 @@ SELECT * FROM `emp_roles`;
 
 INSERT `roles`(`role_name`) VALUES ('ROLE_admin');
 SELECT * FROM `roles`;
+
+
+SELECT * FROM `user`;
+SELECT * FROM `branch`;
+SELECT * FROM `user_account`;
 
