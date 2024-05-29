@@ -2,6 +2,7 @@ package com.mathew.bank.Mathewbank.DAO;
 
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Savings;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -39,4 +40,10 @@ public class UserRepository implements UserRepo{
         user.setBranchId(branch);
         this.entityManager.merge(user);
     }
+
+    @Override
+    public Savings getSavingsAccountByNumber(int accountNumber) {
+        return null;
+    }
+
 }

@@ -9213,6 +9213,7 @@
 							"type": "INTEGER",
 							"length": 0,
 							"foreignKey": true,
+							"nullable": true,
 							"unique": true
 						}
 					]

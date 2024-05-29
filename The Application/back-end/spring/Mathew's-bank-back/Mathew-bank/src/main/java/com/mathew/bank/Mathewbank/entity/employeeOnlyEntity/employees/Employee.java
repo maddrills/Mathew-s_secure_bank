@@ -94,6 +94,10 @@ final public class Employee {
         this.bankBranch = bankBranch;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getPassword() {
         return password;
     }

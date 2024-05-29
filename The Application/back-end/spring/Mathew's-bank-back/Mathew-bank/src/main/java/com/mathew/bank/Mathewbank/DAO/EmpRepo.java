@@ -15,6 +15,7 @@ public interface EmpRepo extends User_emp_commonRepo {
 
     public void addARole(Role role);
 
-
     public void updateBankManager(Branch branch);
+
+    public void addOeUpdateEmployeeBankAccount(int EmployeeId, int BankAccountNumber);
 }

@@ -205,6 +205,7 @@ CREATE TABLE `emp_details`(
 `salary` DOUBLE NOT NULL CHECK (`salary` >= 0.00),
 -- FK goes here
 `emp_id` INTEGER,
+`salary_accoun` INTEGER UNIQUE,
 CONSTRAINT `emp_details_pk` PRIMARY KEY (`ed_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
@@ -378,4 +379,4 @@ SELECT * FROM `roles`;
 SELECT * FROM `user`;
 SELECT * FROM `branch`;
 SELECT * FROM `user_account`;
-
+SELECT * FROM `savings`;

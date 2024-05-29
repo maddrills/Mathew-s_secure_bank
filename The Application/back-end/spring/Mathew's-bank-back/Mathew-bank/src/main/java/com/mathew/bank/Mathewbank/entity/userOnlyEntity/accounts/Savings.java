@@ -3,8 +3,6 @@ package com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.TimeSpace;
 import jakarta.persistence.*;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -28,8 +26,8 @@ final public class Savings {
     @Column(name = "next_interest_on")
     private LocalDateTime nextInterestOn;
 
-    @Column(name = "created")
-    private LocalDate createdOn;
+    @Column(name = "created_on")
+    private LocalDateTime createdOn;
 
     @Column(name = "frozen")
     private boolean frozen;
@@ -39,16 +37,20 @@ final public class Savings {
     @JoinColumn(name = "account_type")
     private TimeSpace accountType;
 
-    public Savings(boolean hold, boolean active, double amount, LocalDateTime nextInterestOn, boolean frozen, TimeSpace accountType) {
+    public Savings() {
+    }
+
+    public Savings(boolean hold, boolean active, double amount, LocalDateTime nextInterestOn, boolean frozen, TimeSpace accountType,LocalDateTime createdOn) {
         this.hold = hold;
         this.active = active;
         this.amount = amount;
         this.nextInterestOn = nextInterestOn;
         this.frozen = frozen;
         this.accountType = accountType;
+        this.createdOn = createdOn;
     }
 
-    public LocalDate getCreatedOn() {
+    public LocalDateTime getCreatedOn() {
         return createdOn;
     }
 

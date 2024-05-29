@@ -4,14 +4,17 @@ import com.mathew.bank.Mathewbank.DAO.EmpRepo;
 import com.mathew.bank.Mathewbank.DAO.UserRepo;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
+import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.TimeSpace;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDetails;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Savings;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -51,7 +54,8 @@ public class AdminService {
                 full_name,
                 email,
                 dateOfBirth,
-                salary
+                salary,
+                null
         );
 
         employeeDetails.setEmployee(employee);
@@ -89,6 +93,26 @@ public class AdminService {
         this.userRepo.createAUserInBank(user,branch);
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * BELLOW is admin setup*/
     public void createTheAdminAccount(){
 
         Branch defaultBranch = new Branch(
@@ -112,7 +136,8 @@ public class AdminService {
                 "mathew francis",
                 "mat@admin",
                 LocalDate.of(1998, 7, 21),
-                543234.50
+                543234.50,
+                null
         );
 
         defaultBranch.setBranchManager(employee);
@@ -125,8 +150,19 @@ public class AdminService {
             System.out.println(e);
         }
 
+        Savings savings = new Savings(
+                false,
+                true,
+                1000000000.11,
+                LocalDateTime.now().plusMonths(1),
+                false,
+                new TimeSpace("checking",0,0,0,0,1,0,0.07),
+                LocalDateTime.now()
+        );
+
+
         UserAccounts AdminAccount = new UserAccounts(
-                null,
+                savings,
                 null,
                 null,
                 null,
@@ -147,15 +183,12 @@ public class AdminService {
             System.out.println(e);
         }
 
-        //update central bank as admin
-//        defaultBranch.setBranchManager(employee);
-//        try{
-//            this.empRepo.updateBankManager(defaultBranch);
-//        }catch (Exception e){
-//            System.out.println(e);
-//        }
-
-        // update user to have central bank in user
-
+        //add back account to first employee ADMIN
+        try{
+            this.empRepo.addOeUpdateEmployeeBankAccount(1000001,102000001);
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
+    /*ABOVE is admin setup*/
 }

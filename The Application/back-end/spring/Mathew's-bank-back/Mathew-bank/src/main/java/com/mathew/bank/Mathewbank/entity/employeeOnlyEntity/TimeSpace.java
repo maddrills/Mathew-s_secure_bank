@@ -33,11 +33,15 @@ final public class TimeSpace {
     private int years;
 
     @Column(name = "base_interest_rate")
-    private int baseInterestRate;
+    private double baseInterestRate;
 
     //TODO may need to add a relationship back to the accounts
 
-    public TimeSpace(String accountType, int second, int min, int hour, int days, int months, int years, int baseInterestRate) {
+
+    public TimeSpace() {
+    }
+
+    public TimeSpace(String accountType, int second, int min, int hour, int days, int months, int years, double baseInterestRate) {
         this.accountType = accountType;
         this.second = second;
         this.min = min;
@@ -105,11 +109,11 @@ final public class TimeSpace {
         this.years = years;
     }
 
-    public int getBaseInterestRate() {
+    public double getBaseInterestRate() {
         return baseInterestRate;
     }
 
-    public void setBaseInterestRate(int baseInterestRate) {
+    public void setBaseInterestRate(double baseInterestRate) {
         this.baseInterestRate = baseInterestRate;
     }
 }
