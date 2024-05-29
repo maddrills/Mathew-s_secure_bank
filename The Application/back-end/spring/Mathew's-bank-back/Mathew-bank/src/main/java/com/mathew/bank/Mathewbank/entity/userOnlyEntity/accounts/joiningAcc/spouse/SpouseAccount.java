@@ -36,18 +36,12 @@ final public class SpouseAccount {
 
     //map by
     @OneToOne(
-            mappedBy = "husbandJointAccount",
+            mappedBy = "spouseAccount",
             fetch = FetchType.EAGER,
             cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH}
     )
-    private Spouse husbandJointAccount;
+    private Spouse spouse;
 
-    @OneToOne(
-            mappedBy = "wife_joint_account",
-            fetch = FetchType.EAGER,
-            cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH}
-    )
-    private Spouse wifeJointAccount;
 
     public SpouseAccount(double amount, boolean frozen, JointAccounts jointAccountId, LocalDateTime nextInterestOn, TimeSpace accountType) {
         this.amount = amount;

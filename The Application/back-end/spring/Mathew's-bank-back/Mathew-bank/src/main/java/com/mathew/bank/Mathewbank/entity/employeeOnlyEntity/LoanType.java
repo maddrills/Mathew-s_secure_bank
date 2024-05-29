@@ -22,7 +22,8 @@ final public class LoanType {
     private boolean active;
 
     //only one employee can create a lone
-    @OneToMany
+    @ManyToOne(fetch = FetchType.EAGER,
+            cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "created_by")
     private Employee createdByEmployee;
 

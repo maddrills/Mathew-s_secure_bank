@@ -57,12 +57,12 @@ final public class BusinessAccount {
 
 
     //map by join
-    @OneToMany(
-            mappedBy = "businessAccountNumber",
+    @OneToOne(
+            mappedBy = "businessAccountNumbers",
             fetch = FetchType.EAGER,
             cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH}
     )
-    private Collection<BusinessPeople> businessPeople;
+    private BusinessPeople businessPeople;
 
     public BusinessAccount(double amount, int peopleCountLimit, double minAmount, double drawLimit, String businessName, boolean frozen, LocalDateTime nextInterestOn, JointAccounts jointAccounts, User creator, TimeSpace accountType) {
         this.amount = amount;
@@ -157,21 +157,16 @@ final public class BusinessAccount {
         this.accountType = accountType;
     }
 
-    public Collection<BusinessPeople> getBusinessPeople() {
-        return businessPeople;
-    }
 
     public int getId() {
         return id;
     }
 
-    //mapBy convenience
-    @Deprecated(since = "It is a map by use with caution")
-    private void addBusinessPeople(BusinessPeople businessPeople){
+    public BusinessPeople getBusinessPeople() {
+        return businessPeople;
+    }
 
-        if(this.businessPeople == null){
-            this.businessPeople = new HashSet<>();
-        }
-        this.businessPeople.add(businessPeople);
+    public void setBusinessPeople(BusinessPeople businessPeople) {
+        this.businessPeople = businessPeople;
     }
 }

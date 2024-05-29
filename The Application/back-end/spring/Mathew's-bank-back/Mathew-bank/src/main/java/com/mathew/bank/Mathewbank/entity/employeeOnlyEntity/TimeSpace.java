@@ -2,8 +2,12 @@ package com.mathew.bank.Mathewbank.entity.employeeOnlyEntity;
 
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "time_space")
 final public class TimeSpace {
 
     @Id

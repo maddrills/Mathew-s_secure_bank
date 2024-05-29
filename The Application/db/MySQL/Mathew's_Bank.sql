@@ -270,6 +270,7 @@ CONSTRAINT `user_application_pk` PRIMARY KEY (`application_number`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 101, DEFAULT CHARSET 'latin1';
 
 CREATE TABLE `website_visited`(
+`id` INTEGER PRIMARY KEY AUTO_INCREMENT,
 `visited_date` DATETIME
 )ENGINE = 'Innodb' , DEFAULT CHARSET 'latin1';
 

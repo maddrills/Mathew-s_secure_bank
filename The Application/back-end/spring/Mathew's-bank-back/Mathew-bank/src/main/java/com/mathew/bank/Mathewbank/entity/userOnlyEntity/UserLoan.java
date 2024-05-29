@@ -44,7 +44,7 @@ final public class UserLoan {
                     CascadeType.REFRESH
             }
     )
-    @JoinTable(name = "loan_type_id: INTEGER")
+    @JoinTable(name = "loan_type_id")
     private LoanType loanType;
 
     public UserLoan(User userId, LoanType loanType) {

@@ -15,7 +15,7 @@ final public class BusinessPeople {
     @Column(name = "b_id")
     private int id;
 
-    @ManyToOne(
+    @OneToMany(
             fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.MERGE,

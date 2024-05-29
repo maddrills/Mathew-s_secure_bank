@@ -50,8 +50,6 @@ final public class JointAccounts {
     private Spouse spouseWife;
 
 
-
-
     public JointAccounts(boolean active) {
         this.active = active;
     }
