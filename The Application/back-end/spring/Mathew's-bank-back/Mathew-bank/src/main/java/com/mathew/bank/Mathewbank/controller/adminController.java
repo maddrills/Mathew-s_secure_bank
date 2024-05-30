@@ -1,5 +1,6 @@
 package com.mathew.bank.Mathewbank.controller;
 
+import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
 import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.service.AdminService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,12 +19,21 @@ public class adminController {
     @Autowired
     AdminService adminService;
 
+    //add a role to the role table
     @PostMapping("/add_a_role")
     public void addARole(@RequestBody RolesDto rolesDto, HttpServletResponse response){
 
         System.out.println(Arrays.toString(rolesDto.getRoleNames()));
 
         response.setStatus(adminService.AddARoleToDb(rolesDto));
+
+    }
+
+    //adds an employee to db with or without authorization
+    @PostMapping("/add_an_employee")
+    public void addAnEmployee(@RequestBody EmployeeDTO employeeDTO){
+
+        System.out.println(employeeDTO);
 
     }
 }

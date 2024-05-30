@@ -1,42 +1,58 @@
 {
-	"info": {
-		"_postman_id": "ccc5d22b-38d5-43c7-b601-6ff28205c38c",
-		"name": "MathewBankAPI",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29967989"
-	},
-	"item": [
-		{
-			"name": "New Request",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"roleName\":\"manager\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/admin/add_a_role",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"admin",
-						"add_a_role"
-					]
-				}
-			},
-			"response": []
-		}
-	]
+  "info": {
+    "_postman_id": "ccc5d22b-38d5-43c7-b601-6ff28205c38c",
+    "name": "MathewBankAPI",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "29967989"
+  },
+  "item": [
+    {
+      "name": "admin- add a role",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"roleName\": [\"manager\", \"employee\"]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/admin/add_a_role",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["admin", "add_a_role"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "admin- add an employee",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"phone_number\" : \"1234567891\",\r\n    \"full_name\" : \"Test Tester\",\r\n    \"email\" : \"test@gmail.com\",\r\n    \"dateOfBirth\" : \"1668-10-16\",\r\n    \"salary\" : 537625,\r\n    \"password\" : \"12345\",\r\n    \"rolesName\" : [\"employee\",\"manager\"]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/admin/add_an_employee",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["admin", "add_an_employee"]
+        }
+      },
+      "response": []
+    }
+  ]
 }
