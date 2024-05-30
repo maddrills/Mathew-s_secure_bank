@@ -49,6 +49,7 @@ public class EmployeeRepository implements EmpRepo {
 
     //add a role by admin only
     @Override
+    @Transactional
     public void addARole(Role role) {
         this.entityManager.persist(role);
     }

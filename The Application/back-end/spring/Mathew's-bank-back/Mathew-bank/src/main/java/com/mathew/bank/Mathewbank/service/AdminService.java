@@ -2,6 +2,7 @@ package com.mathew.bank.Mathewbank.service;
 
 import com.mathew.bank.Mathewbank.DAO.EmpRepo;
 import com.mathew.bank.Mathewbank.DAO.UserRepo;
+import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.TimeSpace;
@@ -10,7 +11,9 @@ import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDe
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Savings;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -93,6 +96,35 @@ public class AdminService {
         this.userRepo.createAUserInBank(user,branch);
     }
 
+
+    public int AddARoleToDb(RolesDto rolesDto){
+
+        //sanity check
+        if(rolesDto == null || rolesDto.getRoleNames().length < 1)  return HttpServletResponse.SC_BAD_REQUEST;
+
+        try{
+            for(String role : rolesDto.getRoleNames()){
+                System.out.println(role);
+
+                if(role.equals("")){
+                    return HttpServletResponse.SC_BAD_REQUEST;
+                }
+
+                //add each rome to db
+                this.empRepo.addARole(new Role("ROLE_"+role));
+            }
+            return HttpServletResponse.SC_NO_CONTENT;
+        }
+        catch (DataIntegrityViolationException b){
+            System.out.println(b);
+            return HttpServletResponse.SC_BAD_REQUEST;
+        }
+        catch (Exception e){
+            System.out.println(e);
+            return HttpServletResponse.SC_BAD_REQUEST;
+        }
+
+    }
 
 
 

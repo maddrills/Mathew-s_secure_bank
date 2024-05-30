@@ -71,7 +71,7 @@ CONSTRAINT `user_lones_table_pk` PRIMARY KEY (`user_loans_id`)
 -- USER ROLES ROLE GOES HERE 
 CREATE TABLE `roles`(
 `role_id` INTEGER NOT NULL AUTO_INCREMENT,
-`role_name` VARCHAR(20) NOT NULL,
+`role_name` VARCHAR(20) UNIQUE NOT NULL,
 CONSTRAINT `roles_pk` PRIMARY KEY (`role_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
