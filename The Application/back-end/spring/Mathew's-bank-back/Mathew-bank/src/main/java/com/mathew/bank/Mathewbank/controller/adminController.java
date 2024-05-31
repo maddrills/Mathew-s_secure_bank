@@ -5,10 +5,7 @@ import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.service.AdminService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,5 +34,21 @@ public class adminController {
 
         System.out.println(employeeDTO);
 
+    }
+
+    //update an employees role
+    @PutMapping("/add_employee_permission")
+    public void changeEmployeeRole(@RequestParam  int employeeId, @RequestBody List<RolesDto> rolesDto){
+
+        System.out.println(employeeId);
+        System.out.println(rolesDto);
+    }
+
+    //remove a permission
+    @PutMapping("/remove_employee_permission")
+    public void removeEmployeeRole(@RequestParam  int employeeId, @RequestBody List<RolesDto> rolesDto){
+
+        System.out.println(employeeId);
+        System.out.println(rolesDto);
     }
 }
