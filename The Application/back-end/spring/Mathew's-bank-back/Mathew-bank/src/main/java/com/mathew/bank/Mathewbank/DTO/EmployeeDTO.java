@@ -19,7 +19,7 @@ public class EmployeeDTO {
 
     private String password;
 
-    private Collection<String> rolesName;
+    private Collection<RolesDto> rolesName;
 
 
     public String getPhone_number() {
@@ -70,11 +70,11 @@ public class EmployeeDTO {
         this.password = password;
     }
 
-    public Collection<String> getRolesName() {
+    public Collection<RolesDto> getRolesName() {
         return rolesName;
     }
 
-    public void setRolesName(Collection<String> rolesName) {
+    public void setRolesName(Collection<RolesDto> rolesName) {
         this.rolesName = rolesName;
     }
 

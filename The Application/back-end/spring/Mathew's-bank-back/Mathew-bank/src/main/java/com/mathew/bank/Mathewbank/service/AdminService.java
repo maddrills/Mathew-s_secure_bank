@@ -18,9 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class AdminService {
@@ -97,33 +95,45 @@ public class AdminService {
     }
 
 
-    public int AddARoleToDb(RolesDto rolesDto){
+    public List<RolesDto> AddARoleToDb(List<RolesDto> rolesDto, HttpServletResponse response){
+
+        //holds the response depending on the Success of the persistence
+        List<RolesDto> respRoles = new LinkedList<>();
 
         //sanity check
-        if(rolesDto == null || rolesDto.getRoleNames().length < 1)  return HttpServletResponse.SC_BAD_REQUEST;
+        if(rolesDto == null || rolesDto.isEmpty()){
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            //an empty response
+            respRoles.add(new RolesDto());
+            return respRoles;
+        }
 
-        try{
-            for(String role : rolesDto.getRoleNames()){
-                System.out.println(role);
+        for(RolesDto role : rolesDto){
+            System.out.println(role);
 
-                if(role.equals("")){
-                    return HttpServletResponse.SC_BAD_REQUEST;
-                }
-
-                //add each rome to db
-                this.empRepo.addARole(new Role("ROLE_"+role));
+            // return here because of illegal data in List
+            if(role.getRoleName().isEmpty()){
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                //send back the empty role
+                respRoles.add(role);
+                return respRoles;
             }
-            return HttpServletResponse.SC_NO_CONTENT;
-        }
-        catch (DataIntegrityViolationException b){
-            System.out.println(b);
-            return HttpServletResponse.SC_BAD_REQUEST;
-        }
-        catch (Exception e){
-            System.out.println(e);
-            return HttpServletResponse.SC_BAD_REQUEST;
-        }
 
+            //add each role to db
+            try{
+                this.empRepo.addARole(new Role("ROLE_"+role.getRoleName()));
+                role.setAdded(true);
+                respRoles.add(role);
+            }
+            catch (DataIntegrityViolationException b){
+                System.out.println(b);
+                role.setAdded(false);
+                respRoles.add(role);
+                }
+        }
+        //return a success list and response
+        response.setStatus(HttpServletResponse.SC_ACCEPTED);
+        return respRoles;
     }
 
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
@@ -21,17 +22,18 @@ public class adminController {
 
     //add a role to the role table
     @PostMapping("/add_a_role")
-    public void addARole(@RequestBody RolesDto rolesDto, HttpServletResponse response){
+    public List<RolesDto> addARole(@RequestBody List<RolesDto> rolesDto, HttpServletResponse response){
 
-        System.out.println(Arrays.toString(rolesDto.getRoleNames()));
-
-        response.setStatus(adminService.AddARoleToDb(rolesDto));
+        return adminService.AddARoleToDb(rolesDto, response);
 
     }
 
     //adds an employee to db with or without authorization
     @PostMapping("/add_an_employee")
     public void addAnEmployee(@RequestBody EmployeeDTO employeeDTO){
+
+        //TODO in sanity check make sure
+        // Admin permission is blocked
 
         System.out.println(employeeDTO);
 
