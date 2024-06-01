@@ -1,5 +1,6 @@
 package com.mathew.bank.Mathewbank.entity.userOnlyEntity.users;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
 import jakarta.persistence.*;
@@ -16,6 +17,7 @@ final public class User {
     @Column(name = "user_name")
     private String userName;
 
+    @JsonIgnore
     @Column(name = "password")
     private String password;
 

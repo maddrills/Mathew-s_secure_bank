@@ -2,6 +2,7 @@ package com.mathew.bank.Mathewbank.service;
 
 import com.mathew.bank.Mathewbank.DAO.EmpRepo;
 import com.mathew.bank.Mathewbank.DAO.UserRepo;
+import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
 import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
@@ -28,13 +29,40 @@ public class AdminService {
     @Autowired
     private UserRepo userRepo;
 
+    public String addAnyEmployee(EmployeeDTO employeeDTO, HttpServletResponse response){
 
-    public boolean addAnyEmployee(Employee employee){
+        //a collection of unique roles
+        Set<String> allowedRoles = new LinkedHashSet<>();
 
         // sanity check
-        if(employee == null) return false;
+        if(employeeDTO == null) {
+            response.setStatus(HttpServletResponse.SC_CONFLICT);
+            return "error null entry";
+        }
 
-        return this.empRepo.addedAnyEmployee(employee);
+        for(var role : employeeDTO.getRolesName()){
+            if(!role.getRoleName().equals("admin")){
+                allowedRoles.add(role.getRoleName());
+            }else{
+                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                return "ROLE Admin not allowed";
+            }
+        }
+
+        if( this.addEmployeeAndDetails(
+                employeeDTO.getPhone_number(),
+                employeeDTO.getFull_name(),
+                employeeDTO.getEmail(),
+                employeeDTO.getDateOfBirth(),
+                employeeDTO.getSalary(),
+                employeeDTO.getPassword(),
+                allowedRoles
+        ).equals("error")){
+            response.setStatus(HttpServletResponse.SC_CONFLICT);
+            return "Error";
+        }
+        response.setStatus(HttpServletResponse.SC_CREATED);
+        return "Success";
     }
 
     public String addEmployeeAndDetails(
