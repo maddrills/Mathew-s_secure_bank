@@ -18,6 +18,7 @@ public class adminController {
     @Autowired
     AdminService adminService;
 
+    //TODO
     //returns a list of all branches
     @GetMapping("/list_all_branches")
     public List<BranchDTO> getAllBranchesAndThereManagers(){
@@ -25,6 +26,7 @@ public class adminController {
         return null;
     }
 
+    //TODO
     //returns all users in the whole bank
     @GetMapping("/get_all_users")
     public List<UserAndDetailsDTO> getAllUsersAndCorrespondingBranch(){
@@ -32,6 +34,7 @@ public class adminController {
         return null;
     }
 
+    //TODO
     //returns all employees in all the bank branches
     @GetMapping("/get_all_employees")
     public List<EmployeeDTO> getAllEmployees(){
@@ -39,6 +42,7 @@ public class adminController {
         return null;
     }
 
+    //TODO
     //returns all managers in all the bank branches
     @GetMapping("/get_all_managers")
     public List<EmployeeDTO> getAllManager(){
@@ -46,6 +50,7 @@ public class adminController {
         return null;
     }
 
+    //TODO
     //returns all employees in all the bank branches
     @GetMapping("/get_all_clerk")
     public List<EmployeeDTO> getAllClerk(){
@@ -61,6 +66,7 @@ public class adminController {
 
     }
 
+    //TODO
     //add a branch with an optional manager
     @PostMapping("/create_a_bank")
     public void createABranch(@RequestBody BranchDTO branchDTO){
@@ -68,6 +74,7 @@ public class adminController {
         System.out.println(branchDTO);
     }
 
+    //TODO
     @PutMapping("/manager_to_branch")
     public void addAManagerToBranch(@RequestParam int employeeAKAManager){
 
@@ -82,19 +89,23 @@ public class adminController {
 
     }
 
+    // TODO
     //update an employees role
-    @PutMapping("/add_employee_permission")
-    public void changeEmployeeRole(@RequestParam  int employeeId, @RequestBody List<RolesDto> rolesDto){
+    @PatchMapping("/add_employee_permission")
+    public void changeEmployeeRole(@RequestParam  int employeeId, @RequestBody List<RolesDto> rolesDto,HttpServletResponse response){
 
         System.out.println(employeeId);
         System.out.println(rolesDto);
     }
 
+    //TODO
     //remove a permission
-    @DeleteMapping("/remove_employee_permission")
-    public void removeEmployeeRole(@RequestParam  int employeeId, @RequestBody List<RolesDto> rolesDto){
+    @PatchMapping("/remove_employee_permission")
+    public void removeEmployeeRole(@RequestParam  int employeeId, @RequestBody List<RolesDto> rolesDto, HttpServletResponse response){
 
         System.out.println(employeeId);
         System.out.println(rolesDto);
+
+        this.adminService.changeEmployeePermission(employeeId,rolesDto,response);
     }
 }

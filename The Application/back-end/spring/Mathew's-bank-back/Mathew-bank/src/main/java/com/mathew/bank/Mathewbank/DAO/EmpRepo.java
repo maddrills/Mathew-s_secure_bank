@@ -18,4 +18,6 @@ public interface EmpRepo extends User_emp_commonRepo {
     public void updateBankManager(Branch branch);
 
     public void addOeUpdateEmployeeBankAccount(int EmployeeId, int BankAccountNumber);
+
+    public void removeRoleFromEmployee(int empId, String role);
 }

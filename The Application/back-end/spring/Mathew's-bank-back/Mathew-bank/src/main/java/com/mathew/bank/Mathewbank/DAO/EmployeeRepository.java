@@ -11,6 +11,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Queue;
@@ -117,6 +118,24 @@ public class EmployeeRepository implements EmpRepo {
         employeeDetails.setSavings(savings);
         //finally update it
         this.entityManager.merge(employeeDetails);
+    }
+
+    @Override
+    @Transactional
+    public void removeRoleFromEmployee(int empId, String role) {
+
+        System.out.println("removeRoleFromEmployee "+ empId);
+
+        this.entityManager.createQuery("SELECT E FROM Employee E WHERE " +
+                "E.id = :employeeId",Employee.class);
+
+
+        TypedQuery<Employee> emp = this.entityManager.createQuery("SELECT E FROM Employee E WHERE " +
+                "E.id = :employeeId",Employee.class);
+
+        emp.setParameter("employeeId", empId);
+
+        System.out.println("The id is" + emp.getSingleResult().getId());
     }
 
 }

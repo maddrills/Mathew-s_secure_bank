@@ -40,6 +40,7 @@ public class AdminService {
             return "error null entry";
         }
 
+        //check if someone put admin in the request
         for(var role : employeeDTO.getRolesName()){
             if(!role.getRoleName().equals("admin")){
                 allowedRoles.add(role.getRoleName());
@@ -64,6 +65,8 @@ public class AdminService {
         response.setStatus(HttpServletResponse.SC_CREATED);
         return "Success";
     }
+
+
 
     public String addEmployeeAndDetails(
             String phone_number, String full_name, String email, LocalDate dateOfBirth, double salary,
@@ -164,6 +167,20 @@ public class AdminService {
         return respRoles;
     }
 
+
+    //change employee role
+    public boolean changeEmployeePermission(int empId, List<RolesDto> roles,HttpServletResponse response){
+
+        for(var role : roles){
+            try{
+                this.empRepo.removeRoleFromEmployee(empId, role.getRoleName());
+
+            }catch (Exception e){
+                return false;
+            }
+        }
+        return true;
+    }
 
 
 
