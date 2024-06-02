@@ -68,7 +68,7 @@ public class adminController {
 
     //TODO
     //add a branch with an optional manager
-    @PostMapping("/create_a_bank")
+    @PostMapping("/create_a_branch")
     public void createABranch(@RequestBody BranchDTO branchDTO){
 
         System.out.println(branchDTO);
@@ -76,9 +76,11 @@ public class adminController {
 
     //TODO
     @PutMapping("/manager_to_branch")
-    public void addAManagerToBranch(@RequestParam int employeeAKAManager){
+    public boolean addAManagerToBranch(@RequestParam int employeeAKAManager,HttpServletResponse response){
 
         System.out.println(employeeAKAManager);
+
+        return this.adminService.addAManagerToBranch(employeeAKAManager, response);
     }
 
     //adds an employee to db with or without a ROLE

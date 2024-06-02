@@ -170,8 +170,10 @@ public class AdminService {
     //sanity check
     private boolean SanityCheckForEmpPermission(int empId, List<RolesDto> roles){
 
-        if (empId <= 0) return false;
         if(roles == null) return false;
+
+        //if there are 7 or more digits and its a positive number
+        if(empId <= 0 || !this.employeeIdValidator(empId)) return false;
 
         for(var role : roles){
             //deny the addition of admin role
@@ -235,8 +237,29 @@ public class AdminService {
     }
 
 
+    private boolean employeeIdValidator(int employeeId){
+        int count = 0;
+        //counts the decimal value
+        while (employeeId != 0){
+            employeeId = employeeId / 10;
+            count+=1;
+        }
+        //not a valid emp id range
+        if(count < 7) return false;
+        return  true;
+    }
 
 
+    //adds a manager to a bank can only be done by admin
+    public boolean addAManagerToBranch(final int managerID, HttpServletResponse response){
+
+        if(!this.employeeIdValidator(managerID) || managerID <= 0){
+            return false;
+        }
+
+        return true;
+
+    }
 
 
 

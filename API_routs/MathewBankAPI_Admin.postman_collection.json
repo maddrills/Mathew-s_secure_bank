@@ -118,6 +118,32 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "managerToBank",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/manager_to_branch?employeeAKAManager=1000002",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"manager_to_branch"
+					],
+					"query": [
+						{
+							"key": "employeeAKAManager",
+							"value": "1000002"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
