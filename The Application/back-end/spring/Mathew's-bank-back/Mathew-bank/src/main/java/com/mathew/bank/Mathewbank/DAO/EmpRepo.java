@@ -22,4 +22,11 @@ public interface EmpRepo extends User_emp_commonRepo {
     public void removeRoleFromEmployee(int empId, String role);
 
     public void addARoleToAnEmployee(int empId, String role);
+
+    public void addManagerToBranch(int managerId, int bankId);
+
+    public void createBranch(Branch branch);
+    public void createBranch(Branch branch, int manager);
+
+
 }

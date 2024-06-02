@@ -66,21 +66,20 @@ public class adminController {
 
     }
 
-    //TODO
-    //add a branch with an optional manager
+
+    //add a branch with an optional manager TODO manager part need to be completed
     @PostMapping("/create_a_branch")
-    public void createABranch(@RequestBody BranchDTO branchDTO){
+    public boolean createABranch(@RequestBody BranchDTO branchDTO){
 
         System.out.println(branchDTO);
+        return this.adminService.createABranchWithOrWithoutManager(branchDTO);
     }
 
-    //TODO
+
     @PutMapping("/manager_to_branch")
-    public boolean addAManagerToBranch(@RequestParam int employeeAKAManager,HttpServletResponse response){
+    public boolean addAManagerToBranch(@RequestParam int employeeAKAManager, @RequestParam int branchId ,HttpServletResponse response){
 
-        System.out.println(employeeAKAManager);
-
-        return this.adminService.addAManagerToBranch(employeeAKAManager, response);
+        return this.adminService.addAManagerToBranch(employeeAKAManager,branchId, response);
     }
 
     //adds an employee to db with or without a ROLE

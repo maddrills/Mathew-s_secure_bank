@@ -2,6 +2,7 @@ package com.mathew.bank.Mathewbank.service;
 
 import com.mathew.bank.Mathewbank.DAO.EmpRepo;
 import com.mathew.bank.Mathewbank.DAO.UserRepo;
+import com.mathew.bank.Mathewbank.DTO.BranchDTO;
 import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
 import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
@@ -248,15 +249,70 @@ public class AdminService {
         if(count < 7) return false;
         return  true;
     }
+    private boolean branchIdValidator(int branchId){
+        return branchId > 0;
+    }
 
 
     //adds a manager to a bank can only be done by admin
-    public boolean addAManagerToBranch(final int managerID, HttpServletResponse response){
+    public boolean addAManagerToBranch(final int managerID, final int branchId, HttpServletResponse response){
 
+        //sanity check
         if(!this.employeeIdValidator(managerID) || managerID <= 0){
             return false;
         }
+        if(!this.branchIdValidator(branchId)) return false;
 
+        //proceed with persisting
+        try{
+            this.empRepo.addManagerToBranch(managerID, branchId);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+
+    }
+
+
+    private boolean branchFieldsCheck(BranchDTO branchDTO){
+        return branchDTO.getBranchName() == null || branchDTO.getCountry() == null || branchDTO.getState() == null
+                || branchDTO.getBranchName().isEmpty() || branchDTO.getCountry().isEmpty() || branchDTO.getState().isEmpty() || branchDTO.getBranchManagerId() < 0;
+    }
+    public boolean createABranchWithOrWithoutManager(BranchDTO branchDTO){
+
+        if(branchDTO == null || branchFieldsCheck(branchDTO)){
+            return false;
+        }
+
+        if(branchDTO.getBranchManagerId() == 0){
+            //create a branch without a manager
+            try{
+            this.empRepo.createBranch(new Branch(
+                    branchDTO.getBranchName(),
+                    branchDTO.getState(),
+                    branchDTO.getCountry(),
+                    branchDTO.isOpen(),
+                    null
+            ));}
+            catch (Exception e){
+                return false;
+            }
+            return true;
+        }else {
+            if(!this.employeeIdValidator(branchDTO.getBranchManagerId())) return false;
+            //create a branch with a manager included
+            try{
+                this.empRepo.createBranch(new Branch(
+                        branchDTO.getBranchName(),
+                        branchDTO.getState(),
+                        branchDTO.getCountry(),
+                        branchDTO.isOpen(),
+                        null
+                ), branchDTO.getBranchManagerId());
+            }catch (Exception e){
+                return false;
+            }
+        }
         return true;
 
     }

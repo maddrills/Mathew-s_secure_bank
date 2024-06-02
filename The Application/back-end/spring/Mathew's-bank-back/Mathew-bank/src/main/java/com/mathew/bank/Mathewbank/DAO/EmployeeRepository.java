@@ -128,6 +128,14 @@ public class EmployeeRepository implements EmpRepo {
 
         return emp.getSingleResult();
     }
+    private Branch getBranchById(final int branchId){
+        //find the branch by the id
+        TypedQuery<Branch> emp = this.entityManager.createQuery("SELECT B FROM Branch B WHERE " +
+                "B.id = :branch",Branch.class);
+        emp.setParameter("branch", branchId);
+
+        return emp.getSingleResult();
+    }
 
     @Override
     @Transactional
@@ -151,6 +159,32 @@ public class EmployeeRepository implements EmpRepo {
         employee.getRoles().add(dbRole);
         //persist the change
         this.entityManager.merge(employee);
+    }
+
+    @Override
+    @Transactional
+    public void addManagerToBranch(int managerId, int bankId) {
+
+        Branch branch = getBranchById(bankId);
+        Employee employee = getEmployeeById(managerId);
+
+        System.out.println(branch.getBranchName());
+        System.out.println(employee.getId());
+
+        employee.setBankBranch(branch);
+        branch.setBranchManager(employee);
+        this.entityManager.merge(employee);
+    }
+
+    @Override
+    @Transactional
+    public void createBranch(Branch branch) {
+        this.entityManager.persist(branch);
+    }
+
+    @Override
+    public void createBranch(Branch branch, int manager) {
+        System.out.println(branch.getBranchName()+" "+manager);
     }
 
 }

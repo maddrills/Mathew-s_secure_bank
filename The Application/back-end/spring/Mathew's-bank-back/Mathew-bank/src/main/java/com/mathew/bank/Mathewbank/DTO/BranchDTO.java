@@ -1,8 +1,6 @@
 package com.mathew.bank.Mathewbank.DTO;
 
 
-import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
-
 public class BranchDTO {
 
     String branchName;
@@ -13,7 +11,7 @@ public class BranchDTO {
 
     boolean open;
 
-    Employee branchManagerId;
+    int branchManagerId;
 
     public String getBranchName() {
         return branchName;
@@ -47,11 +45,11 @@ public class BranchDTO {
         this.open = open;
     }
 
-    public Employee getBranchManagerId() {
+    public int getBranchManagerId() {
         return branchManagerId;
     }
 
-    public void setBranchManagerId(Employee branchManagerId) {
+    public void setBranchManagerId(int branchManagerId) {
         this.branchManagerId = branchManagerId;
     }
 
