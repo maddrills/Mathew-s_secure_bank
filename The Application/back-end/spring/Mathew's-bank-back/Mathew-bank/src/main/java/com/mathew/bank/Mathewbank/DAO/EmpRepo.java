@@ -20,4 +20,6 @@ public interface EmpRepo extends User_emp_commonRepo {
     public void addOeUpdateEmployeeBankAccount(int EmployeeId, int BankAccountNumber);
 
     public void removeRoleFromEmployee(int empId, String role);
+
+    public void addARoleToAnEmployee(int empId, String role);
 }

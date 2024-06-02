@@ -125,7 +125,6 @@ public class AdminService {
         this.userRepo.createAUserInBank(user,branch);
     }
 
-
     public List<RolesDto> AddARoleToDb(List<RolesDto> rolesDto, HttpServletResponse response){
 
         //holds the response depending on the Success of the persistence
@@ -168,18 +167,71 @@ public class AdminService {
     }
 
 
+    //sanity check
+    private boolean SanityCheckForEmpPermission(int empId, List<RolesDto> roles){
+
+        if (empId <= 0) return false;
+        if(roles == null) return false;
+
+        for(var role : roles){
+            //deny the addition of admin role
+            if(role.getRoleName().equals("admin") || role.getRoleName().isEmpty()) return false;
+        }
+        return true;
+    }
+
     //change employee role
-    public boolean changeEmployeePermission(int empId, List<RolesDto> roles,HttpServletResponse response){
+    public List<RolesDto> changeEmployeePermission(int empId, List<RolesDto> roles,HttpServletResponse response){
+
+        // forbid any illegal
+        if(!this.SanityCheckForEmpPermission(empId, roles)) {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            return null;
+        }
+
+        //holds the response depending on the Success of the persistence
+        List<RolesDto> respRoles = new LinkedList<>();
 
         for(var role : roles){
             try{
                 this.empRepo.removeRoleFromEmployee(empId, role.getRoleName());
+                role.setAdded(true);
+                respRoles.add(role);
 
             }catch (Exception e){
-                return false;
+                role.setAdded(false);
+                respRoles.add(role);
             }
         }
-        return true;
+        return respRoles;
+    }
+
+    public List<RolesDto> addAnEmployeeRole(int empId, List<RolesDto> roles,HttpServletResponse response){
+
+        // forbid any illegal
+        if(!this.SanityCheckForEmpPermission(empId, roles)) {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            return null;
+        }
+
+        //holds the response depending on the Success of the persistence
+        List<RolesDto> respRoles = new LinkedList<>();
+
+        for(var role : roles){
+            try{
+                this.empRepo.addARoleToAnEmployee(empId, role.getRoleName());
+                role.setAdded(true);
+                respRoles.add(role);
+
+            }catch (Exception e){
+                //if permission already exists
+                response.setStatus(HttpServletResponse.SC_ACCEPTED);
+                role.setAdded(false);
+                respRoles.add(role);
+            }
+        }
+        response.setStatus(HttpServletResponse.SC_ACCEPTED);
+        return respRoles;
     }
 
 

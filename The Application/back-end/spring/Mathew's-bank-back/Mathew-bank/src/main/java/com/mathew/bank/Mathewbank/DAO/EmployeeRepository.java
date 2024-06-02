@@ -120,18 +120,35 @@ public class EmployeeRepository implements EmpRepo {
         this.entityManager.merge(employeeDetails);
     }
 
-    @Override
-    @Transactional
-    public void removeRoleFromEmployee(int empId, String role) {
-
+    private Employee getEmployeeById(final int empId){
         //find the employee by the id
         TypedQuery<Employee> emp = this.entityManager.createQuery("SELECT E FROM Employee E WHERE " +
                 "E.id = :employeeId",Employee.class);
         emp.setParameter("employeeId", empId);
 
-        Employee employee = emp.getSingleResult();
+        return emp.getSingleResult();
+    }
+
+    @Override
+    @Transactional
+    public void removeRoleFromEmployee(int empId, String role) {
+        //get the employee
+        Employee employee = getEmployeeById(empId);
         //remove the object (Role) from the list of romes
         employee.getRoles().removeIf(a -> a.getRole().equals("ROLE_"+role));
+        //persist the change
+        this.entityManager.merge(employee);
+    }
+
+    @Override
+    @Transactional
+    public void addARoleToAnEmployee(int empId, String role) {
+        //get the employee
+        Employee employee = getEmployeeById(empId);
+        //find role in db
+        Role dbRole = findRoleByRoleName(role);
+        //remove the object (Role) from the list of romes
+        employee.getRoles().add(dbRole);
         //persist the change
         this.entityManager.merge(employee);
     }

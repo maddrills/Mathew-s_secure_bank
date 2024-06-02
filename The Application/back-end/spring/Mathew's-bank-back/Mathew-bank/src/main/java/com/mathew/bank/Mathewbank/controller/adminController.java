@@ -89,23 +89,17 @@ public class adminController {
 
     }
 
-    // TODO
     //update an employees role
     @PatchMapping("/add_employee_permission")
-    public void changeEmployeeRole(@RequestParam  int employeeId, @RequestBody List<RolesDto> rolesDto,HttpServletResponse response){
+    public List<RolesDto> changeEmployeeRole(@RequestParam  int employeeId, @RequestBody List<RolesDto> rolesDto,HttpServletResponse response){
 
-        System.out.println(employeeId);
-        System.out.println(rolesDto);
+        return this.adminService.addAnEmployeeRole(employeeId, rolesDto, response);
     }
 
-    //TODO
     //remove a permission
     @PatchMapping("/remove_employee_permission")
-    public void removeEmployeeRole(@RequestParam  int employeeId, @RequestBody List<RolesDto> rolesDto, HttpServletResponse response){
+    public List<RolesDto> removeEmployeeRole(@RequestParam  int employeeId, @RequestBody List<RolesDto> rolesDto, HttpServletResponse response){
 
-        System.out.println(employeeId);
-        System.out.println(rolesDto);
-
-        this.adminService.changeEmployeePermission(employeeId,rolesDto,response);
+        return this.adminService.changeEmployeePermission(employeeId,rolesDto,response);
     }
 }
