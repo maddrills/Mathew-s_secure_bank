@@ -124,18 +124,16 @@ public class EmployeeRepository implements EmpRepo {
     @Transactional
     public void removeRoleFromEmployee(int empId, String role) {
 
-        System.out.println("removeRoleFromEmployee "+ empId);
-
-        this.entityManager.createQuery("SELECT E FROM Employee E WHERE " +
-                "E.id = :employeeId",Employee.class);
-
-
+        //find the employee by the id
         TypedQuery<Employee> emp = this.entityManager.createQuery("SELECT E FROM Employee E WHERE " +
                 "E.id = :employeeId",Employee.class);
-
         emp.setParameter("employeeId", empId);
 
-        System.out.println("The id is" + emp.getSingleResult().getId());
+        Employee employee = emp.getSingleResult();
+        //remove the object (Role) from the list of romes
+        employee.getRoles().removeIf(a -> a.getRole().equals("ROLE_"+role));
+        //persist the change
+        this.entityManager.merge(employee);
     }
 
 }
