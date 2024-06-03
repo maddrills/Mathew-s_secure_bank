@@ -192,4 +192,27 @@ public class EmployeeRepository implements EmpRepo {
         return query.getResultList();
     }
 
+    @Override
+    public List<Employee> getAllUsersFromDB(String roleName) {
+
+        Role role = this.findRoleByRoleName(roleName);
+
+        /*
+         * IN tests is value of single valued path expression (persistent attribute of your entity)
+         * in values you provided to query (or fetched via subquery).
+         *
+         * MEMBER OF tests is value you provided to query (or defined with expression) member of
+         * values in some collection in your entity.*/
+
+        TypedQuery<Employee> query = this.entityManager.createQuery(
+                "SELECT E FROM Employee AS E JOIN FETCH E.details " +
+                        "WHERE :roleEntity MEMBER OF E.roles",
+                Employee.class);
+
+        query.setParameter("roleEntity",role);
+
+        return query.getResultList();
+    }
+
+
 }

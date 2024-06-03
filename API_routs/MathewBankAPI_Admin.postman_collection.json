@@ -212,6 +212,32 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "getAllManagers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/get_all_managers_by_role?roleName=manager",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"get_all_managers_by_role"
+					],
+					"query": [
+						{
+							"key": "roleName",
+							"value": "manager"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

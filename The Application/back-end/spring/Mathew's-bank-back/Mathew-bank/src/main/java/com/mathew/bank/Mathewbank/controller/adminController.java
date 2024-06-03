@@ -35,7 +35,6 @@ public class adminController {
         return null;
     }
 
-    //TODO
     //returns all employees in all the bank branches
     @GetMapping("/get_all_employees")
     public List<EmployeeDTO> getAllEmployees(){
@@ -45,19 +44,14 @@ public class adminController {
 
     //TODO
     //returns all managers in all the bank branches
-    @GetMapping("/get_all_managers")
-    public List<EmployeeDTO> getAllManager(){
+    @GetMapping("/get_all_managers_by_role")
+    public List<EmployeeDTO> getEmployeeByRole(@RequestParam final String roleName){
 
-        return null;
+        System.out.println(roleName);
+
+        return this.adminService.allEmployeesOrByThereRole(roleName);
     }
 
-    //TODO
-    //returns all employees in all the bank branches
-    @GetMapping("/get_all_clerk")
-    public List<EmployeeDTO> getAllClerk(){
-
-        return null;
-    }
 
     //add a role to the role table
     @PostMapping("/add_a_role")
