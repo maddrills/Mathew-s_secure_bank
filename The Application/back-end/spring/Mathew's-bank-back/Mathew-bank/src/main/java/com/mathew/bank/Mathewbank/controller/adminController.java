@@ -4,6 +4,7 @@ import com.mathew.bank.Mathewbank.DTO.BranchDTO;
 import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
 import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.DTO.UserAndDetailsDTO;
+import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.service.AdminService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class adminController {
     @GetMapping("/get_all_employees")
     public List<EmployeeDTO> getAllEmployees(){
 
-        return null;
+        return this.adminService.allEmployeesOrByThereRole(null);
     }
 
     //TODO

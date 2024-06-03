@@ -1,5 +1,6 @@
 package com.mathew.bank.Mathewbank.DAO;
 
+import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Savings;

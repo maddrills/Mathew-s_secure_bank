@@ -7,6 +7,8 @@ import java.util.Collection;
 public class EmployeeDTO {
 
 
+    private int empId;
+
     private String phone_number;
 
     private String full_name;
@@ -21,6 +23,27 @@ public class EmployeeDTO {
 
     private Collection<RolesDto> rolesName;
 
+    public EmployeeDTO() {
+    }
+
+    public EmployeeDTO(int empId, String phone_number, String full_name, String email, LocalDate dateOfBirth, double salary, String password, Collection<RolesDto> rolesName) {
+        this.empId = empId;
+        this.phone_number = phone_number;
+        this.full_name = full_name;
+        this.email = email;
+        this.dateOfBirth = dateOfBirth;
+        this.salary = salary;
+        this.password = password;
+        this.rolesName = rolesName;
+    }
+
+    public int getEmpId() {
+        return empId;
+    }
+
+    public void setEmpId(int empId) {
+        this.empId = empId;
+    }
 
     public String getPhone_number() {
         return phone_number;
@@ -81,7 +104,8 @@ public class EmployeeDTO {
     @Override
     public String toString() {
         return "EmployeeDTO{" +
-                "phone_number='" + phone_number + '\'' +
+                "empId=" + empId +
+                ", phone_number='" + phone_number + '\'' +
                 ", full_name='" + full_name + '\'' +
                 ", email='" + email + '\'' +
                 ", dateOfBirth=" + dateOfBirth +

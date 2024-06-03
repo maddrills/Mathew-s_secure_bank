@@ -1,5 +1,6 @@
 package com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees;
 
+import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import jakarta.persistence.*;
@@ -78,6 +79,10 @@ final public class Employee {
     private Collection<Role> roles;
 
 
+    @OneToOne(mappedBy = "employee",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private EmployeeDetails details;
+
+
     public Employee() {
     }
 
@@ -92,6 +97,14 @@ final public class Employee {
         this.manager = manager;
         this.employeeUnderManager = employeeUnderManager;
         this.bankBranch = bankBranch;
+    }
+
+    public EmployeeDetails getDetails() {
+        return details;
+    }
+
+    public void setDetails(EmployeeDetails details) {
+        this.details = details;
     }
 
     public int getId() {
@@ -141,7 +154,7 @@ final public class Employee {
     //TODO i want to get the role from the db then assign it to the employee
     public void setARole(Role role){
         if(this.roles == null){
-            this.roles = new HashSet<>();
+            this.roles = new HashSet<com.mathew.bank.Mathewbank.entity.commonEntity.Role>();
         }
 
         this.roles.add(role);

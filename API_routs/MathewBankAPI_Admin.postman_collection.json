@@ -42,7 +42,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"phone_number\": \"1234567891\",\r\n    \"full_name\": \"Test Tester\",\r\n    \"email\": \"test@gmail.com\",\r\n    \"dateOfBirth\": \"1668-10-16\",\r\n    \"salary\": 537625,\r\n    \"password\": \"12345\",\r\n    \"rolesName\": [\r\n        {\r\n            \"roleName\": \"manager\"\r\n        },\r\n        {\r\n            \"roleName\": \"employee\"\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"phone_number\": \"1234567893\",\r\n    \"full_name\": \"Test two\",\r\n    \"email\": \"twoEeee@gmail.com\",\r\n    \"dateOfBirth\": \"1668-10-16\",\r\n    \"salary\": 537625,\r\n    \"password\": \"12345\",\r\n    \"rolesName\": [\r\n        {\r\n            \"roleName\": \"manager\"\r\n        },\r\n        {\r\n            \"roleName\": \"employee\"\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -69,8 +69,17 @@
 			"request": {
 				"method": "PATCH",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"roleName\": \"manager\"\r\n    }\r\n    // ,\r\n    // {\r\n    //     \"roleName\": \"employee\"\r\n    // }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:8080/admin/remove_employee_permission",
+					"raw": "http://localhost:8080/admin/remove_employee_permission?employeeId=1000002",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -79,6 +88,12 @@
 					"path": [
 						"admin",
 						"remove_employee_permission"
+					],
+					"query": [
+						{
+							"key": "employeeId",
+							"value": "1000002"
+						}
 					]
 				}
 			},
@@ -173,6 +188,26 @@
 					"path": [
 						"admin",
 						"create_a_branch"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllEmployeesIdAndDetails",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/get_all_employees",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"get_all_employees"
 					]
 				}
 			},

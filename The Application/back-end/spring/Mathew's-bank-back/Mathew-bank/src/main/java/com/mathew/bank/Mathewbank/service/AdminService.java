@@ -42,7 +42,7 @@ public class AdminService {
         }
 
         //check if someone put admin in the request
-        for(var role : employeeDTO.getRolesName()){
+        for(RolesDto role : employeeDTO.getRolesName()){
             if(!role.getRoleName().equals("admin")){
                 allowedRoles.add(role.getRoleName());
             }else{
@@ -314,7 +314,40 @@ public class AdminService {
             }
         }
         return true;
+    }
 
+    //get all employees from db with an option of sending back a user
+    // with roles should return a list of employees
+    public List<EmployeeDTO> allEmployeesOrByThereRole(List<Role> roles){
+        //check if roles are given
+        if(roles != null){
+            //return a specific employee
+            return  null;
+        }
+        //return all  employees
+
+        //create an DTO instance (necessary for lazy load)
+        final List<EmployeeDTO> employeeDTOS = new LinkedList<>();
+        empRepo.getAllUsersFromDB().forEach(
+                employee -> {
+
+                    final Set<RolesDto> rolesDtos = new LinkedHashSet<>();
+
+                    employee.getRoles().forEach(a -> rolesDtos.add(new RolesDto(a.getRole(), true)));
+
+                    employeeDTOS.add(new EmployeeDTO(
+                            employee.getId(),
+                            employee.getDetails().getPhone_number(),
+                            employee.getDetails().getFullName(),
+                            employee.getDetails().getEmail(),
+                            employee.getDetails().getDateOfBirth(),
+                            employee.getDetails().getSalary(),
+                            null,
+                            rolesDtos));
+                }
+                );
+
+        return employeeDTOS;
     }
 
 

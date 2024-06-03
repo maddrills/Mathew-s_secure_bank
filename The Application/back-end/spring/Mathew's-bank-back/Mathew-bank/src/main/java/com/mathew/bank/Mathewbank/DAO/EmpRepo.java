@@ -6,6 +6,7 @@ import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDetails;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface EmpRepo extends User_emp_commonRepo {
 
@@ -28,5 +29,5 @@ public interface EmpRepo extends User_emp_commonRepo {
     public void createBranch(Branch branch);
     public void createBranch(Branch branch, int manager);
 
-
+    public List<Employee> getAllUsersFromDB();
 }

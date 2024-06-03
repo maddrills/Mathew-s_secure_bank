@@ -6,6 +6,14 @@ public class RolesDto {
 
     private boolean added;
 
+    public RolesDto() {
+    }
+
+    public RolesDto(String roleName, boolean added) {
+        this.roleName = roleName;
+        this.added = added;
+    }
+
     public String getRoleName() {
         return roleName;
     }

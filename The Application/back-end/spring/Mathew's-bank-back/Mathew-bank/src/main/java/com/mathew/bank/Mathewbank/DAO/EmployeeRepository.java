@@ -1,21 +1,17 @@
 package com.mathew.bank.Mathewbank.DAO;
+import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDetails;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Savings;
-import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.lang.reflect.Type;
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 
 @Repository
 public class EmployeeRepository implements EmpRepo {
@@ -165,14 +161,15 @@ public class EmployeeRepository implements EmpRepo {
     @Transactional
     public void addManagerToBranch(int managerId, int bankId) {
 
+        //get the employee and branch entity's
         Branch branch = getBranchById(bankId);
         Employee employee = getEmployeeById(managerId);
 
-        System.out.println(branch.getBranchName());
-        System.out.println(employee.getId());
-
+        //add branch to manager and manager to branch
         employee.setBankBranch(branch);
         branch.setBranchManager(employee);
+
+        //finally persist
         this.entityManager.merge(employee);
     }
 
@@ -185,6 +182,14 @@ public class EmployeeRepository implements EmpRepo {
     @Override
     public void createBranch(Branch branch, int manager) {
         System.out.println(branch.getBranchName()+" "+manager);
+    }
+
+    @Override
+    public List<Employee> getAllUsersFromDB() {
+
+        TypedQuery<Employee> query = this.entityManager.createQuery("SELECT E FROM Employee AS E JOIN FETCH E.details", Employee.class);
+
+        return query.getResultList();
     }
 
 }
