@@ -215,4 +215,16 @@ public class EmployeeRepository implements EmpRepo {
     }
 
 
+//returns all the bank branches with their branch managers
+    @Override
+    public List<Branch> getAllBranchFromDB() {
+
+        TypedQuery<Branch> query = this.entityManager.createQuery(
+                "SELECT B FROM Branch AS B"
+                , Branch.class);
+
+        return query.getResultList();
+    }
+
+
 }

@@ -31,4 +31,6 @@ public interface EmpRepo extends User_emp_commonRepo {
 
     public List<Employee> getAllUsersFromDB();
     public List<Employee> getAllUsersFromDB(String roleName);
+
+    public List<Branch> getAllBranchFromDB();
 }

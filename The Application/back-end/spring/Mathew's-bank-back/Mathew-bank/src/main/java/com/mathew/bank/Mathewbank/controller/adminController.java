@@ -21,10 +21,10 @@ public class adminController {
 
     //TODO
     //returns a list of all branches
-    @GetMapping("/list_all_branches")
+    @GetMapping("/list_all_branches_with_manager")
     public List<BranchDTO> getAllBranchesAndThereManagers(){
 
-        return null;
+        return this.adminService.getAllBranches();
     }
 
     //TODO
@@ -42,9 +42,9 @@ public class adminController {
         return this.adminService.allEmployeesOrByThereRole(null);
     }
 
-    //TODO
-    //returns all managers in all the bank branches
-    @GetMapping("/get_all_managers_by_role")
+
+    //returns all the employees according to their role
+    @GetMapping("/get_all_employees_by_a_role_name")
     public List<EmployeeDTO> getEmployeeByRole(@RequestParam final String roleName){
 
         System.out.println(roleName);

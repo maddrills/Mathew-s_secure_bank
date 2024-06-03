@@ -219,7 +219,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/admin/get_all_managers_by_role?roleName=manager",
+					"raw": "http://localhost:8080/admin/get_all_employees_by_a_role_name?roleName=manager",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -227,13 +227,33 @@
 					"port": "8080",
 					"path": [
 						"admin",
-						"get_all_managers_by_role"
+						"get_all_employees_by_a_role_name"
 					],
 					"query": [
 						{
 							"key": "roleName",
 							"value": "manager"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllBranchesAndThereManagers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/list_all_branches_with_manager",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"list_all_branches_with_manager"
 					]
 				}
 			},

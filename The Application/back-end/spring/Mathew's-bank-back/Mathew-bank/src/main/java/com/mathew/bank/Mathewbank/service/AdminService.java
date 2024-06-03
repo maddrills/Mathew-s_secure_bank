@@ -372,6 +372,31 @@ public class AdminService {
     }
 
 
+    public List<BranchDTO> getAllBranches(){
+
+        List<BranchDTO> branchDTOS = new LinkedList<>();
+
+        try{
+            final List<Branch> branches = this.empRepo.getAllBranchFromDB();
+
+            branches.forEach(branch -> branchDTOS.add(
+                    new BranchDTO(
+                            branch.getBranchName(),
+                            branch.getState(),
+                            branch.getCountry(),
+                            branch.isOpen(),
+                            branch.getBranchManager().getId()
+                    )
+            ));
+
+        }catch (Exception e){
+            return null;
+        }
+        return branchDTOS;
+
+    }
+
+
 
 
 
