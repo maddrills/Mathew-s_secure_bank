@@ -278,9 +278,11 @@ public class AdminService {
         return branchDTO.getBranchName() == null || branchDTO.getCountry() == null || branchDTO.getState() == null
                 || branchDTO.getBranchName().isEmpty() || branchDTO.getCountry().isEmpty() || branchDTO.getState().isEmpty() || branchDTO.getBranchManagerId() < 0;
     }
-    public boolean createABranchWithOrWithoutManager(BranchDTO branchDTO){
+    public boolean createABranchWithOrWithoutManager(BranchDTO branchDTO, HttpServletResponse response){
 
+        //standard sanity check
         if(branchDTO == null || branchFieldsCheck(branchDTO)){
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return false;
         }
 
@@ -295,6 +297,8 @@ public class AdminService {
                     null
             ));}
             catch (Exception e){
+                //if conflict occurs in db
+                response.setStatus(HttpServletResponse.SC_CONFLICT);
                 return false;
             }
             return true;
@@ -310,6 +314,9 @@ public class AdminService {
                         null
                 ), branchDTO.getBranchManagerId());
             }catch (Exception e){
+                //if conflict occurs in db
+                response.setStatus(HttpServletResponse.SC_CONFLICT);
+                System.out.println(e);
                 return false;
             }
         }

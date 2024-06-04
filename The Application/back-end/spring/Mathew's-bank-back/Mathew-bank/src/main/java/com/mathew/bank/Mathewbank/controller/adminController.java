@@ -62,12 +62,12 @@ public class adminController {
     }
 
 
-    //add a branch with an optional manager TODO manager part need to be completed
+    //add a branch with an optional manager
     @PostMapping("/create_a_branch")
-    public boolean createABranch(@RequestBody BranchDTO branchDTO){
+    public boolean createABranch(@RequestBody BranchDTO branchDTO,HttpServletResponse response){
 
         System.out.println(branchDTO);
-        return this.adminService.createABranchWithOrWithoutManager(branchDTO);
+        return this.adminService.createABranchWithOrWithoutManager(branchDTO, response);
     }
 
 

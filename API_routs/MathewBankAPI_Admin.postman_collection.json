@@ -42,7 +42,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"phone_number\": \"1234567893\",\r\n    \"full_name\": \"Test two\",\r\n    \"email\": \"twoEeee@gmail.com\",\r\n    \"dateOfBirth\": \"1668-10-16\",\r\n    \"salary\": 537625,\r\n    \"password\": \"12345\",\r\n    \"rolesName\": [\r\n        {\r\n            \"roleName\": \"manager\"\r\n        },\r\n        {\r\n            \"roleName\": \"employee\"\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"phone_number\": \"2234567893\",\r\n    \"full_name\": \"King Ron\",\r\n    \"email\": \"King@gmail.com\",\r\n    \"dateOfBirth\": \"1668-10-16\",\r\n    \"salary\": 537625,\r\n    \"password\": \"12345\",\r\n    \"rolesName\": [\r\n        {\r\n            \"roleName\": \"manager\"\r\n        },\r\n        {\r\n            \"roleName\": \"employee\"\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -172,6 +172,35 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"branchName\":\"Branch_One\",\r\n    \"state\":\"Karnataka\",\r\n    \"country\":\"India\",\r\n    \"open\":1,\r\n    \"branchManagerId\":null\r\n}\r\n\r\n// {\r\n//     \"branchName\":\"Branch_One\",\r\n//     \"state\":\"Karnataka\",\r\n//     \"country\":\"null\",\r\n//     \"open\":1,\r\n//     \"branchManagerId\":null\r\n// }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/admin/create_a_branch",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"create_a_branch"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addBranchWithPManaaager",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"branchName\":\"Branch_Two\",\r\n    \"state\":\"Delhi\",\r\n    \"country\":\"India\",\r\n    \"open\":1,\r\n    \"branchManagerId\":1000003\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

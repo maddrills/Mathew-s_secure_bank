@@ -180,8 +180,14 @@ public class EmployeeRepository implements EmpRepo {
     }
 
     @Override
+    @Transactional
     public void createBranch(Branch branch, int manager) {
-        System.out.println(branch.getBranchName()+" "+manager);
+        //find the employee In DB
+        Employee employeeManager = this.getEmployeeById(manager);
+        //update the branch field to have the respective manager
+        branch.setBranchManager(employeeManager);
+        //add the new branch to db
+        this.entityManager.persist(branch);
     }
 
     @Override
