@@ -31,6 +31,11 @@ final public class User {
     @JoinColumn(name = "branch_id")
     private Branch branchId;
 
+    @OneToOne(mappedBy = "userId",
+            fetch = FetchType.EAGER,
+            cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
+    private UserDetails userDetails;
+
     public User() {
     }
 
@@ -39,6 +44,14 @@ final public class User {
         this.password = password;
         this.userAccountId = userAccountId;
         this.branchId = branchId;
+    }
+
+    public UserDetails getUserDetails() {
+        return userDetails;
+    }
+
+    public void setUserDetails(UserDetails userDetails) {
+        this.userDetails = userDetails;
     }
 
     public int getId() {

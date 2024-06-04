@@ -33,6 +33,9 @@ final public class UserDetails {
     @JoinColumn(name = "u_id")
     private User userId;
 
+    public UserDetails() {
+    }
+
     public UserDetails(String fullName, String phoneNumber, LocalDate dateOfBerth, int age, String email, User userId) {
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;

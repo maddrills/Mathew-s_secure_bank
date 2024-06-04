@@ -14,6 +14,7 @@ import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDe
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Savings;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.UserDetails;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -507,6 +508,23 @@ public class AdminService {
                 AdminAccount,
                 null
         );
+
+        UserDetails adminUserDetails = new UserDetails(
+                "mathew francis",
+                "3343350332",
+                LocalDate.of(1998, 7, 21),
+                30,
+                "mat@admin",
+                adminBankAccount
+        );
+
+        adminBankAccount.setUserDetails(adminUserDetails);
+
+//        try{
+//            this.userRepo.createAUserInBank();
+//        }catch (Exception e){
+//            System.out.println(e);
+//        }
 
         try{
             this.makeAnAdminBankAccount(adminBankAccount, "Admin_Central");

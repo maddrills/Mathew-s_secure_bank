@@ -27,7 +27,7 @@ final public class BuildUp {
     @Column(name = "next_interest_on")
     private LocalDateTime nextInterestOn;
 
-    @Column(name = "created")
+    @Column(name = "created_on")
     private LocalDate createdOn;
 
     @Column(name = "can_withdraw_on")

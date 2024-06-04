@@ -27,7 +27,7 @@ final public class Checking {
     @Column(name = "next_interest_on")
     private LocalDateTime nextInterestOn;
 
-    @Column(name = "created")
+    @Column(name = "created_on")
     private LocalDate createdOn;
 
     @Column(name = "frozen")
