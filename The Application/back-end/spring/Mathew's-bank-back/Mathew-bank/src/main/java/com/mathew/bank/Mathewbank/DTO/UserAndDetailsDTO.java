@@ -26,6 +26,21 @@ public class UserAndDetailsDTO {
 
     private String email;
 
+    public UserAndDetailsDTO() {
+    }
+
+    public UserAndDetailsDTO(int userId, String userName, UserAccounts userAccountId, Branch branchId,
+                             String fullName, String phoneNumber, LocalDate dateOfBerth, int age, String email) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userAccountId = userAccountId;
+        this.branchId = branchId;
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBerth = dateOfBerth;
+        this.age = age;
+        this.email = email;
+    }
 
     public int getUserId() {
         return userId;

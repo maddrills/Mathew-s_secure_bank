@@ -5,6 +5,7 @@ import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDetails;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Savings;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.UserDetails;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
@@ -230,6 +231,16 @@ public class EmployeeRepository implements EmpRepo {
                 , Branch.class);
 
         return query.getResultList();
+    }
+
+    @Override
+    public List<UserDetails> getAllUserAndThereInfo() {
+
+        TypedQuery<UserDetails> userDetailsTypedQuery = this.entityManager.createQuery(
+                "SELECT ud FROM UserDetails AS ud JOIN FETCH ud.userId",
+                UserDetails.class);
+
+        return userDetailsTypedQuery.getResultList();
     }
 
 

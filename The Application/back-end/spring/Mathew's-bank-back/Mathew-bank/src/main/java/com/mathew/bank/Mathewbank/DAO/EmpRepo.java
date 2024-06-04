@@ -4,6 +4,7 @@ import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDetails;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
@@ -33,4 +34,6 @@ public interface EmpRepo extends User_emp_commonRepo {
     public List<Employee> getAllUsersFromDB(String roleName);
 
     public List<Branch> getAllBranchFromDB();
+
+    public List<UserDetails> getAllUserAndThereInfo();
 }

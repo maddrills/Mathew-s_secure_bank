@@ -5,6 +5,7 @@ import com.mathew.bank.Mathewbank.DAO.UserRepo;
 import com.mathew.bank.Mathewbank.DTO.BranchDTO;
 import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
 import com.mathew.bank.Mathewbank.DTO.RolesDto;
+import com.mathew.bank.Mathewbank.DTO.UserAndDetailsDTO;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.TimeSpace;
@@ -401,6 +402,32 @@ public class AdminService {
         }
         return branchDTOS;
 
+    }
+
+    public List<UserAndDetailsDTO> getAllUsersAndThereDetails(){
+
+        //using linked list because the number of elements returned is unpredictable
+        final List<UserAndDetailsDTO> userAndDetailsDTOS = new LinkedList<>();
+
+        //get a list of all employee details from db
+        this.empRepo. getAllUserAndThereInfo().forEach(
+                //for each employee detail add them to the DTO
+                userDetails -> userAndDetailsDTOS.add(
+                        new UserAndDetailsDTO(
+                                userDetails.getId(),
+                                userDetails.getFullName(),
+                                userDetails.getUserId().getUserAccountId(),
+                                userDetails.getUserId().getBranchId(),
+                                userDetails.getFullName(),
+                                userDetails.getPhoneNumber(),
+                                userDetails.getDateOfBerth(),
+                                userDetails.getAge(),
+                                userDetails.getEmail()
+                        )
+                )
+        );
+
+        return userAndDetailsDTOS;
     }
 
 

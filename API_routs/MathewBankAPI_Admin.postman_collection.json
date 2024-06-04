@@ -287,6 +287,26 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "getAllUsersAndDetails",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/get_all_users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"get_all_users"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

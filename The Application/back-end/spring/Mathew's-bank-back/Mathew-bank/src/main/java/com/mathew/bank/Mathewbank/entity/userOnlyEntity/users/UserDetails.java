@@ -30,7 +30,7 @@ final public class UserDetails {
 
     @OneToOne(fetch = FetchType.EAGER,
             cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "lone_type_id")
+    @JoinColumn(name = "u_id")
     private User userId;
 
     public UserDetails(String fullName, String phoneNumber, LocalDate dateOfBerth, int age, String email, User userId) {

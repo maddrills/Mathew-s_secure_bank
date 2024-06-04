@@ -19,20 +19,18 @@ public class adminController {
     @Autowired
     AdminService adminService;
 
-    //TODO
     //returns a list of all branches
     @GetMapping("/list_all_branches_with_manager")
     public List<BranchDTO> getAllBranchesAndThereManagers(){
 
         return this.adminService.getAllBranches();
     }
-
-    //TODO
+    
     //returns all users in the whole bank
     @GetMapping("/get_all_users")
     public List<UserAndDetailsDTO> getAllUsersAndCorrespondingBranch(){
 
-        return null;
+        return this.adminService.getAllUsersAndThereDetails();
     }
 
     //returns all employees in all the bank branches
