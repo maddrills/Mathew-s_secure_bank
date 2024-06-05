@@ -69,13 +69,18 @@ public class UserRepository implements UserRepo{
      * <h4>user application </h4>
      * checks if the branch is in the db else I will throw an exception<br>
      * no two applications can be the same when it comme to phone numbers <br>
-     * <span style = "color : #D7E438">WARNING :</span><span style = "color : #97a027"> this method does not have sanity checks use service</span>
+     * <span style = "color : #D7E438">WARNING :</span><span style = "color : #97a027"> this method only has one check and it checks if branch is open</span>
      * */
     @Override
     @Transactional
     public void applyForBankAccount(final int BranchId, UserApplication userApplication) {
 
         Branch branch = getABranchById(BranchId);
+
+        //check if branch is open before persisting
+        if(!branch.isOpen()){
+            throw new RuntimeException("Branch is closed");
+        }
 
         System.out.println("Entering application persistence");
 
@@ -86,6 +91,20 @@ public class UserRepository implements UserRepo{
 
         this.entityManager.persist(userApplication);
 
+    }
+
+    @Override
+    public List<Branch> getBranchesByCountryAndName(String country, String state) {
+
+        //query checks for branches that have a county and state match
+        TypedQuery<Branch> query = this.entityManager.createQuery(
+                "SELECT b FROM Branch b WHERE b.country = :con AND b.state = :sta",
+                Branch.class);
+
+        query.setParameter("con", country);
+        query.setParameter("sta", state);
+
+        return query.getResultList();
     }
 
     @Override

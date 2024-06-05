@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "eb3c6583-6774-4220-95b1-8d7d4255533e",
+		"_postman_id": "7bfb47ac-1853-4bc6-81e7-77e044c93be2",
 		"name": "unRegisteredUser",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29498098"
+		"_exporter_id": "29967989"
 	},
 	"item": [
 		{
@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"fullName\": \"John Logan\",\r\n    \"phoneNumber\": \"John Dow\",\r\n    \"dateOfBirth\": \"1999-09-12\",\r\n    \"age\": \"25\",\r\n    \"email\": \"john@gmail.com\"\r\n}",
+					"raw": "{\r\n    \"fullName\": \"John Logan\",\r\n    \"phoneNumber\": \"1234567890\",\r\n    \"dateOfBirth\": \"1999-09-12\",\r\n    \"age\": \"25\",\r\n    \"email\": \"john@gmail.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -35,6 +35,36 @@
 						{
 							"key": "branchId",
 							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBranchesByCountryAndState",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/exposed/getBranchByCountryAndState?country=india&state=karnataka",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"exposed",
+						"getBranchByCountryAndState"
+					],
+					"query": [
+						{
+							"key": "country",
+							"value": "india"
+						},
+						{
+							"key": "state",
+							"value": "karnataka"
 						}
 					]
 				}

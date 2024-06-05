@@ -4,6 +4,7 @@ package com.mathew.bank.Mathewbank.DTO;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 
 public class BranchDTO {
+    int branchId;
 
     String branchName;
 
@@ -24,6 +25,23 @@ public class BranchDTO {
         this.country = country;
         this.open = open;
         this.branchManagerId = branchManagerId;
+    }
+
+    public BranchDTO(int branchId, String branchName, String state, String country, boolean open, int branchManagerId) {
+        this.branchId = branchId;
+        this.branchName = branchName;
+        this.state = state;
+        this.country = country;
+        this.open = open;
+        this.branchManagerId = branchManagerId;
+    }
+
+    public int getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(int branchId) {
+        this.branchId = branchId;
     }
 
     public String getBranchName() {

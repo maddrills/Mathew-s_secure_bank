@@ -43,6 +43,9 @@ final public class Branch {
     }
 
 
+    public int getId() {
+        return id;
+    }
 
     public String getBranchName() {
         return branchName;

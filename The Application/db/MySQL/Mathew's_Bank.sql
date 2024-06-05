@@ -377,5 +377,8 @@ SELECT * FROM `roles`;
 
 SELECT * FROM `user`;
 SELECT * FROM `branch`;
+DESC `branch`;
 SELECT * FROM `user_account`;
 SELECT * FROM `savings`;
+SELECT * FROM `user_application`;
+DESCRIBE `user_application`;
