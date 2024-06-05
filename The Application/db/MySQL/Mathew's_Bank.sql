@@ -257,10 +257,10 @@ CONSTRAINT `branch_pk` PRIMARY KEY (`branch_id`)
 CREATE TABLE `user_application`(
 `application_number` INTEGER NOT NULL AUTO_INCREMENT,
 `full_name` VARCHAR(70) NOT NULL,
-`phone_number` CHAR(10) CHECK (length(`phone_number`) = 10),
+`phone_number` CHAR(10) UNIQUE CHECK (length(`phone_number`) = 10),
 `dob` DATE NOT NULL,
 `age` TINYINT NOT NULL CHECK(`age` >= 5),
-`email` VARCHAR(100) NOT NULL,
+`email` VARCHAR(100) UNIQUE NOT NULL,
 `applied_date` DATETIME DEFAULT now(),
 `status` BOOLEAN DEFAULT 0 NOT NULL,
 `approved_by` INTEGER,

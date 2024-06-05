@@ -9422,7 +9422,8 @@
 							},
 							"name": "phone_number",
 							"type": "CHAR",
-							"length": 0
+							"length": 0,
+							"unique": true
 						},
 						{
 							"_type": "ERDColumn",
@@ -9452,7 +9453,8 @@
 							},
 							"name": "email",
 							"type": "VARCHAR",
-							"length": 0
+							"length": 0,
+							"unique": true
 						},
 						{
 							"_type": "ERDColumn",
