@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "e76ec6ce-96a5-43c5-8efb-520a50b14007",
-		"name": "New Collection",
+		"_postman_id": "eb3c6583-6774-4220-95b1-8d7d4255533e",
+		"name": "unRegisteredUser",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29967989"
+		"_exporter_id": "29498098"
 	},
 	"item": [
 		{
@@ -21,7 +21,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/exposed/applyForAccount",
+					"raw": "http://localhost:8080/exposed/applyForAccount?branchId=1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -30,6 +30,12 @@
 					"path": [
 						"exposed",
 						"applyForAccount"
+					],
+					"query": [
+						{
+							"key": "branchId",
+							"value": "1"
+						}
 					]
 				}
 			},

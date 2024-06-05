@@ -2,6 +2,7 @@ package com.mathew.bank.Mathewbank.DAO;
 
 import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
+import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Savings;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
@@ -40,6 +41,16 @@ public class UserRepository implements UserRepo{
         Branch branch = this.findBranchByName(branchName);
         user.setBranchId(branch);
         this.entityManager.merge(user);
+    }
+
+    @Override
+    public Branch getABranchById(int BranchId) {
+        return null;
+    }
+
+    @Override
+    public void applyForBankAccount(int BranchId, UserApplication userApplication) {
+
     }
 
     @Override

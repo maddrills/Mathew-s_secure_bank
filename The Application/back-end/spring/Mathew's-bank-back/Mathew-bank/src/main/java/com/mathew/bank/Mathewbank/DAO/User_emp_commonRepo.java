@@ -13,4 +13,6 @@ public interface User_emp_commonRepo {
 
     public Savings getSavingsAccountByNumber(int accountNumber);
 
+    public Branch getABranchById(final int BranchId);
+
 }

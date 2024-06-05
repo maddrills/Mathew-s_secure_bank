@@ -83,6 +83,12 @@ public class EmployeeRepository implements EmpRepo {
         return savings;
     }
 
+    //TODO IF ever required
+    @Override
+    public Branch getABranchById(int BranchId) {
+        return null;
+    }
+
 
     @Override
     @Transactional
