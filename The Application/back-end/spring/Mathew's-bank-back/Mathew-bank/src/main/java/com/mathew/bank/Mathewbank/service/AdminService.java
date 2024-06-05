@@ -410,6 +410,24 @@ public class AdminService {
         //using linked list because the number of elements returned is unpredictable
         final List<UserAndDetailsDTO> userAndDetailsDTOS = new LinkedList<>();
 
+//        //get a list of all employee details from db
+//        this.empRepo. getAllUserAndThereInfo().forEach(
+//                //for each employee detail add them to the DTO
+//                userDetails -> userAndDetailsDTOS.add(
+//                        new UserAndDetailsDTO(
+//                                userDetails.getId(),
+//                                userDetails.getFullName(),
+//                                userDetails.getUserId().getUserAccountId(),
+//                                null,
+//                                userDetails.getFullName(),
+//                                userDetails.getPhoneNumber(),
+//                                userDetails.getDateOfBerth(),
+//                                userDetails.getAge(),
+//                                userDetails.getEmail()
+//                        )
+//                )
+//        );
+
         //get a list of all employee details from db
         this.empRepo. getAllUserAndThereInfo().forEach(
                 //for each employee detail add them to the DTO
@@ -417,8 +435,8 @@ public class AdminService {
                         new UserAndDetailsDTO(
                                 userDetails.getId(),
                                 userDetails.getFullName(),
-                                userDetails.getUserId().getUserAccountId(),
-                                userDetails.getUserId().getBranchId(),
+                                null,
+                                null,
                                 userDetails.getFullName(),
                                 userDetails.getPhoneNumber(),
                                 userDetails.getDateOfBerth(),

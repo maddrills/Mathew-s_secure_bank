@@ -237,7 +237,7 @@ public class EmployeeRepository implements EmpRepo {
     public List<UserDetails> getAllUserAndThereInfo() {
 
         TypedQuery<UserDetails> userDetailsTypedQuery = this.entityManager.createQuery(
-                "SELECT ud FROM UserDetails AS ud JOIN FETCH ud.userId",
+                "SELECT ud FROM UserDetails AS ud",
                 UserDetails.class);
 
         return userDetailsTypedQuery.getResultList();
