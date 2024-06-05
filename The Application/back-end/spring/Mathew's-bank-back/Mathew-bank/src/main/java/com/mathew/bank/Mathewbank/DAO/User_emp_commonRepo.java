@@ -4,6 +4,8 @@ import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Savings;
 
+import java.util.List;
+
 //extended by empRepo and userRepo
 public interface User_emp_commonRepo {
 
@@ -13,6 +15,8 @@ public interface User_emp_commonRepo {
 
     public Savings getSavingsAccountByNumber(int accountNumber);
 
-    public Branch getABranchById(final int BranchId);
+    public Branch getABranchById(final int branchId);
+
+    public List<Branch> getAllBranchFromDB();
 
 }

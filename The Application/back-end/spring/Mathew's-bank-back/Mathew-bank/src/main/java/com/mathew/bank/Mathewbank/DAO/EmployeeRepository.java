@@ -85,7 +85,7 @@ public class EmployeeRepository implements EmpRepo {
 
     //TODO IF ever required
     @Override
-    public Branch getABranchById(int BranchId) {
+    public Branch getABranchById(int branchId) {
         return null;
     }
 

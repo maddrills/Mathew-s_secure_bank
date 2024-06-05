@@ -12,6 +12,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class UserRepository implements UserRepo{
 
@@ -44,12 +46,45 @@ public class UserRepository implements UserRepo{
     }
 
     @Override
-    public Branch getABranchById(int BranchId) {
-        return null;
+    public Branch getABranchById(int branchId) {
+
+        TypedQuery<Branch> query = this.entityManager.createQuery("SELECT B FROM Branch B WHERE B.id = :theId",Branch.class);
+
+        query.setParameter("theId",branchId);
+
+        return query.getSingleResult();
     }
 
     @Override
-    public void applyForBankAccount(int BranchId, UserApplication userApplication) {
+    public List<Branch> getAllBranchFromDB() {
+        TypedQuery<Branch> query = this.entityManager.createQuery(
+                "SELECT B FROM Branch AS B"
+                , Branch.class);
+
+        return query.getResultList();
+    }
+
+
+    /**
+     * <h4>user application </h4>
+     * checks if the branch is in the db else I will throw an exception<br>
+     * no two applications can be the same when it comme to phone numbers <br>
+     * <span style = "color : #D7E438">WARNING :</span><span style = "color : #97a027"> this method does not have sanity checks use service</span>
+     * */
+    @Override
+    @Transactional
+    public void applyForBankAccount(final int BranchId, UserApplication userApplication) {
+
+        Branch branch = getABranchById(BranchId);
+
+        System.out.println("Entering application persistence");
+
+        System.out.println(getABranchById(BranchId).getBranchName());
+
+        //add branch to application
+        userApplication.setBranch(branch);
+
+        this.entityManager.persist(userApplication);
 
     }
 

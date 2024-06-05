@@ -32,6 +32,7 @@ public class AdminService {
     @Autowired
     private UserRepo userRepo;
 
+    //adds an employee with his or her credentials and at least one role
     public String addAnyEmployee(EmployeeDTO employeeDTO, HttpServletResponse response){
 
         //a collection of unique roles
@@ -69,13 +70,14 @@ public class AdminService {
         return "Success";
     }
 
-
-
-    public String addEmployeeAndDetails(
+    private String addEmployeeAndDetails(
             String phone_number, String full_name, String email, LocalDate dateOfBirth, double salary,
             String password, Collection<String> rolesName
     ){
-        //TODO a sanity check to make sure that user enters intended credentials
+
+        if(phone_number.isEmpty() || full_name.isEmpty() || email.isEmpty() || dateOfBirth == null || salary < 0 || password.isEmpty() || rolesName.isEmpty()) return "Credentials error";
+
+        if(phone_number.matches("[0-9]+")) return "Phone number error";
 
         Employee employee = new Employee(
                 password,
@@ -105,7 +107,6 @@ public class AdminService {
         return "Added User";
     }
 
-    
 
 
     public Role findARoleInDb(String role){
@@ -409,24 +410,6 @@ public class AdminService {
 
         //using linked list because the number of elements returned is unpredictable
         final List<UserAndDetailsDTO> userAndDetailsDTOS = new LinkedList<>();
-
-//        //get a list of all employee details from db
-//        this.empRepo. getAllUserAndThereInfo().forEach(
-//                //for each employee detail add them to the DTO
-//                userDetails -> userAndDetailsDTOS.add(
-//                        new UserAndDetailsDTO(
-//                                userDetails.getId(),
-//                                userDetails.getFullName(),
-//                                userDetails.getUserId().getUserAccountId(),
-//                                null,
-//                                userDetails.getFullName(),
-//                                userDetails.getPhoneNumber(),
-//                                userDetails.getDateOfBerth(),
-//                                userDetails.getAge(),
-//                                userDetails.getEmail()
-//                        )
-//                )
-//        );
 
         //get a list of all employee details from db
         this.empRepo. getAllUserAndThereInfo().forEach(
