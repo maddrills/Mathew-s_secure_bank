@@ -33,8 +33,8 @@ public class MathewBankApplication {
 			countryCache.addACountryAndStateToCache("India","Andra");
 			countryCache.addACountryAndStateToCache("India","TamilNadu");*/
 
+			//adding countries and state to cache
 			List<BranchDTO> branchDTOList = adminService.getAllBranches();
-			System.out.println(branchDTOList);
 			branchDTOList.forEach(branchDTO -> countryCache.addACountryAndStateToCache(
                     branchDTO.getCountry(),
                     branchDTO.getState()
