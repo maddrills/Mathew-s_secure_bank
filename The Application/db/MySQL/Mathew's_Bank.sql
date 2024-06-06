@@ -263,6 +263,7 @@ CREATE TABLE `user_application`(
 `email` VARCHAR(100) UNIQUE NOT NULL,
 `applied_date` DATETIME DEFAULT now(),
 `status` BOOLEAN DEFAULT 0 NOT NULL,
+`rejected` BOOLEAN DEFAULT 0 NOT NULL,
 `approved_by` INTEGER,
 `created_user_id` INTEGER,
 `branch_id` INTEGER NOT NULL,
@@ -378,6 +379,7 @@ SELECT * FROM `roles`;
 SELECT * FROM `user`;
 SELECT * FROM `branch`;
 DESC `branch`;
+SELECT * FROM `user_details`;
 SELECT * FROM `user_account`;
 SELECT * FROM `savings`;
 SELECT * FROM `user_application`;

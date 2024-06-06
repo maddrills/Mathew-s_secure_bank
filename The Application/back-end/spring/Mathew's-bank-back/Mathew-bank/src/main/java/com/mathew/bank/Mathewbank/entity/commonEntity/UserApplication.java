@@ -39,6 +39,9 @@ final public class UserApplication {
     @Column(name = "status")
     private boolean status;
 
+    @Column(name = "rejected")
+    private boolean rejected;
+
     @OneToOne
     @JoinColumn(name = "approved_by")
     private Employee approvedBy;
@@ -51,6 +54,21 @@ final public class UserApplication {
     @JoinColumn(name = "branch_id")
     private Branch branch;
 
+    public UserApplication() {
+    }
+
+    public UserApplication(String fullName, String phoneNumber, LocalDate dateOfBirth, int age, String email, LocalDateTime appliedOn, boolean status, boolean rejected, Branch branch) {
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.age = age;
+        this.email = email;
+        this.appliedOn = appliedOn;
+        this.status = status;
+        this.rejected = rejected;
+        this.branch = branch;
+    }
+
     public UserApplication(String fullName, String phoneNumber, LocalDate dateOfBirth, int age, String email, LocalDateTime appliedOn, boolean status, Branch branch) {
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
@@ -60,6 +78,16 @@ final public class UserApplication {
         this.appliedOn = appliedOn;
         this.status = status;
         this.branch = branch;
+    }
+
+
+
+    public boolean isRejected() {
+        return rejected;
+    }
+
+    public void setRejected(boolean rejected) {
+        this.rejected = rejected;
     }
 
     public void setApplication_number(int application_number) {

@@ -5478,6 +5478,22 @@
 										},
 										{
 											"_type": "ERDColumnView",
+											"_id": "AAAAAAGP7q3sflbZY8c=",
+											"_parent": {
+												"$ref": "AAAAAAGPlbW7V3umTgE="
+											},
+											"model": {
+												"$ref": "AAAAAAGP7q3sRFbW3xU="
+											},
+											"fillColor": "#eaf8d7",
+											"font": "Arial;13;0",
+											"left": 2157,
+											"top": 516,
+											"width": 239.55908203125,
+											"height": 13
+										},
+										{
+											"_type": "ERDColumnView",
 											"_id": "AAAAAAGPlbeawXvdTUk=",
 											"_parent": {
 												"$ref": "AAAAAAGPlbW7V3umTgE="
@@ -5488,7 +5504,7 @@
 											"fillColor": "#eaf8d7",
 											"font": "Arial;13;0",
 											"left": 2157,
-											"top": 516,
+											"top": 531,
 											"width": 239.55908203125,
 											"height": 13
 										},
@@ -5504,7 +5520,7 @@
 											"fillColor": "#eaf8d7",
 											"font": "Arial;13;0",
 											"left": 2157,
-											"top": 531,
+											"top": 546,
 											"width": 239.55908203125,
 											"height": 13
 										},
@@ -5520,7 +5536,7 @@
 											"fillColor": "#eaf8d7",
 											"font": "Arial;13;0",
 											"left": 2157,
-											"top": 546,
+											"top": 561,
 											"width": 239.55908203125,
 											"height": 13
 										}
@@ -5530,7 +5546,7 @@
 									"left": 2152,
 									"top": 391,
 									"width": 249.55908203125,
-									"height": 173
+									"height": 188
 								}
 							],
 							"fillColor": "#eaf8d7",
@@ -5538,7 +5554,7 @@
 							"left": 2152,
 							"top": 368,
 							"width": 249.55908203125,
-							"height": 196,
+							"height": 211,
 							"nameLabel": {
 								"$ref": "AAAAAAGPlbW7VnulZzE="
 							},
@@ -9473,6 +9489,16 @@
 								"$ref": "AAAAAAGPlbW7VnuiPdk="
 							},
 							"name": "status",
+							"type": "BOOLEAN",
+							"length": 0
+						},
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAGP7q3sRFbW3xU=",
+							"_parent": {
+								"$ref": "AAAAAAGPlbW7VnuiPdk="
+							},
+							"name": "rejected",
 							"type": "BOOLEAN",
 							"length": 0
 						},

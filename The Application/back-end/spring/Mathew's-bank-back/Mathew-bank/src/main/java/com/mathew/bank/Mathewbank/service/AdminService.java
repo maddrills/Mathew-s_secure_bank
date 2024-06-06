@@ -398,6 +398,7 @@ public class AdminService {
 
             branches.forEach(branch -> branchDTOS.add(
                     new BranchDTO(
+                            branch.getId(),
                             branch.getBranchName(),
                             branch.getState(),
                             branch.getCountry(),

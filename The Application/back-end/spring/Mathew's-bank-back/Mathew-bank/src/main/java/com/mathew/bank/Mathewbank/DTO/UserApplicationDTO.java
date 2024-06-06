@@ -17,7 +17,57 @@ public class UserApplicationDTO {
 
     private LocalDateTime appliedOn;
 
+    private boolean status;
+
+    private boolean rejected;
+
     public UserApplicationDTO() {
+    }
+
+    public UserApplicationDTO(String fullName, String phoneNumber, LocalDate dateOfBirth, int age, String email, LocalDateTime appliedOn) {
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.age = age;
+        this.email = email;
+        this.appliedOn = appliedOn;
+    }
+
+    public UserApplicationDTO(String fullName, String phoneNumber, LocalDate dateOfBirth, int age, String email, LocalDateTime appliedOn, boolean status) {
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.age = age;
+        this.email = email;
+        this.appliedOn = appliedOn;
+        this.status = status;
+    }
+
+    public UserApplicationDTO(String fullName, String phoneNumber, LocalDate dateOfBirth, int age, String email, LocalDateTime appliedOn, boolean status, boolean rejected) {
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.age = age;
+        this.email = email;
+        this.appliedOn = appliedOn;
+        this.status = status;
+        this.rejected = rejected;
+    }
+
+    public boolean isRejected() {
+        return rejected;
+    }
+
+    public void setRejected(boolean rejected) {
+        this.rejected = rejected;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public LocalDateTime getAppliedOn() {

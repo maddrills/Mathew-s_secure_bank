@@ -116,6 +116,36 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "check user application",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/exposed/getUserApplicationByPhoneOrEmail?phoneNumber=1234567891&email=john@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"exposed",
+						"getUserApplicationByPhoneOrEmail"
+					],
+					"query": [
+						{
+							"key": "phoneNumber",
+							"value": "1234567891"
+						},
+						{
+							"key": "email",
+							"value": "john@gmail.com"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

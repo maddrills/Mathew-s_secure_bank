@@ -33,7 +33,7 @@ public class UserUnregistered {
     }
 
     @GetMapping("/getBranchByCountryAndState")
-    public List<BranchDTO> getAllBranchesByRegion(@RequestParam String country, String state,HttpServletResponse response){
+    public List<BranchDTO> getAllBranchesByRegion(@RequestParam String country,@RequestParam String state,HttpServletResponse response){
 
         System.out.println(country+" "+state);
 
@@ -48,5 +48,15 @@ public class UserUnregistered {
     @GetMapping("/getAllStateBranchesInCountry")
     public LinkedHashSet<String> getAllBranchesInCountry(@RequestParam String country){
         return this.countryCache.getStatesByCountry(country);
+    }
+
+    @GetMapping("/getUserApplicationByPhoneOrEmail")
+    public UserApplicationDTO getUserApplicationByPhoneNumberOrEmail(String phoneNumber, String email, HttpServletResponse response){
+        //if both are null then return error
+        if(phoneNumber == null && email == null) {response.setStatus(HttpServletResponse.SC_BAD_REQUEST); return null;}
+
+        System.out.println(phoneNumber+ " " + email);
+
+        return this.unRegUserService.getUserApplication(phoneNumber, email, response);
     }
 }

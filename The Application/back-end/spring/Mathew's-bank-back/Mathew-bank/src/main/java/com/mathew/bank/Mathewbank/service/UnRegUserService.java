@@ -53,9 +53,12 @@ public class UnRegUserService {
                     LocalDateTime.now(),
                     //Zero so that it will indicate it is an unresolved application
                     false,
+                    false,
                     null
             ));
-        }catch (Exception e){
+        }
+        catch (Exception e){
+            System.out.println(e);
             response.setStatus(HttpServletResponse.SC_CONFLICT);
             return false;
         }
@@ -110,5 +113,73 @@ public class UnRegUserService {
 
         System.out.println(country+" "+state);
         return branchDTOS;
+    }
+
+    public UserApplicationDTO getUserApplication(String phoneNumber, String email, HttpServletResponse response){
+
+        //check if phone number is provided PRIORITY
+        if(phoneNumber != null){
+            // if phone number is empty
+            if(phoneNumber.isEmpty()) {
+                //try calling the method again to try an email  SECONDARY
+                return getUserApplication(null,email,response);
+            }
+            //check if phone number has digits
+            if(!phoneNumber.matches("[0-9]+")){
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                return null;
+            }
+            response.setStatus(HttpServletResponse.SC_OK);
+
+            UserApplication userApplication;
+            try{
+                userApplication = this.userRepo.getUserApplicationDetailsByPhoneNumber(phoneNumber);
+            }catch (Exception e){
+                response.setStatus(HttpServletResponse.SC_EXPECTATION_FAILED);
+                System.out.println(e);
+                //try calling the method again this time check with email  SECONDARY
+                return getUserApplication(null,email,response);
+            }
+
+            return new UserApplicationDTO(
+                    userApplication.getFullName(),
+                    userApplication.getPhoneNumber(),
+                    userApplication.getDateOfBirth(),
+                    userApplication.getAge(),
+                    userApplication.getEmail(),
+                    userApplication.getAppliedOn(),
+                    userApplication.isStatus()
+            );
+        }
+
+        //if phone is not provided
+        if(email != null){
+            if(email.isEmpty()) {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                return null;
+            }
+            response.setStatus(HttpServletResponse.SC_OK);
+            UserApplication userApplication;
+            try{
+                userApplication = this.userRepo.getUserApplicationDetailsByEmail(email);
+            }catch (Exception e){
+                System.out.println(e);
+                response.setStatus(HttpServletResponse.SC_EXPECTATION_FAILED);
+                return null;
+            }
+
+            return new UserApplicationDTO(
+                    userApplication.getFullName(),
+                    userApplication.getPhoneNumber(),
+                    userApplication.getDateOfBirth(),
+                    userApplication.getAge(),
+                    userApplication.getEmail(),
+                    userApplication.getAppliedOn(),
+                    userApplication.isStatus()
+            );
+        }
+        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        return null;
+
     }
 }
