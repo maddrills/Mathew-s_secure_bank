@@ -24,7 +24,7 @@ public class MathewBankApplication {
 	@Bean
 	CommandLineRunner runner(@Autowired AdminService adminService, CountryCache countryCache){
 		return (args) -> {
-			//adminService.createTheAdminAccount();
+			adminService.createTheAdminAccount();
 
 /*			countryCache.addACountryAndStateToCache("India","Karnataka");
 			countryCache.addACountryAndStateToCache("India","Delhi");
