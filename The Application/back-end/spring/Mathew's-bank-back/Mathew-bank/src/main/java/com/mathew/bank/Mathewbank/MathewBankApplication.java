@@ -1,6 +1,7 @@
 package com.mathew.bank.Mathewbank;
 
 
+import com.mathew.bank.Mathewbank.DTO.BranchDTO;
 import com.mathew.bank.Mathewbank.cachCountryState.CountryCache;
 import com.mathew.bank.Mathewbank.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import javax.swing.*;
+import java.util.List;
 
 @SpringBootApplication
 public class MathewBankApplication {
@@ -24,22 +26,27 @@ public class MathewBankApplication {
 		return (args) -> {
 			//adminService.createTheAdminAccount();
 
-			countryCache.printThis();
-			countryCache.addACountryAndStateToCache("India","Karnataka");
+/*			countryCache.addACountryAndStateToCache("India","Karnataka");
 			countryCache.addACountryAndStateToCache("India","Delhi");
 			countryCache.addACountryAndStateToCache("America","NewYork");
 			countryCache.addACountryAndStateToCache("America","California");
 			countryCache.addACountryAndStateToCache("India","Andra");
-			countryCache.addACountryAndStateToCache("India","TamilNadu");
+			countryCache.addACountryAndStateToCache("India","TamilNadu");*/
 
+			List<BranchDTO> branchDTOList = adminService.getAllBranches();
+			System.out.println(branchDTOList);
+			branchDTOList.forEach(branchDTO -> countryCache.addACountryAndStateToCache(
+                    branchDTO.getCountry(),
+                    branchDTO.getState()
+            ));
 
-			System.out.println("---states---");
-			countryCache.getStatesByCountry("India").forEach(System.out::println);
-			System.out.println("-");
-			countryCache.getStatesByCountry("America").forEach(System.out::println);
+			countryCache.getAllCountries().forEach( country -> {
 
-			System.out.println("----Countries----");
-			countryCache.getAllCountries().forEach(System.out::println);
+				System.out.print("|Country| : "+country);
+				System.out.print(" (State) : -> ");
+				countryCache.getStatesByCountry(country).forEach(state -> System.out.print(state + ", "));
+				}
+			);
 		};
 	}
 

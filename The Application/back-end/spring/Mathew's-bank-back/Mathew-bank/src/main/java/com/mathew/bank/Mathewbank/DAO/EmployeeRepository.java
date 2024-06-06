@@ -7,6 +7,7 @@ import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDe
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Savings;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.UserDetails;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Subgraph;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -228,7 +229,7 @@ public class EmployeeRepository implements EmpRepo {
     }
 
 
-//returns all the bank branches with their branch managers
+//returns all the bank branches with their branch managers regardless if they exist or not
     @Override
     public List<Branch> getAllBranchFromDB() {
 

@@ -6,6 +6,7 @@ import com.mathew.bank.Mathewbank.DTO.BranchDTO;
 import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
 import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.DTO.UserAndDetailsDTO;
+import com.mathew.bank.Mathewbank.cachCountryState.CountryCache;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.TimeSpace;
@@ -31,6 +32,8 @@ public class AdminService {
     private EmpRepo empRepo;
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private CountryCache countryCache;
 
     //adds an employee with his or her credentials and at least one role
     public String addAnyEmployee(EmployeeDTO employeeDTO, HttpServletResponse response){
@@ -304,6 +307,8 @@ public class AdminService {
                 response.setStatus(HttpServletResponse.SC_CONFLICT);
                 return false;
             }
+            //add country and state the cache
+            this.countryCache.addACountryAndStateToCache(branchDTO.getCountry(),branchDTO.getState());
             return true;
         }else {
             if(!this.employeeIdValidator(branchDTO.getBranchManagerId())) return false;
@@ -323,6 +328,8 @@ public class AdminService {
                 return false;
             }
         }
+        //add country and state the cache
+        this.countryCache.addACountryAndStateToCache(branchDTO.getCountry(),branchDTO.getState());
         return true;
     }
 
@@ -395,7 +402,7 @@ public class AdminService {
                             branch.getState(),
                             branch.getCountry(),
                             branch.isOpen(),
-                            branch.getBranchManager().getId()
+                            branch.getBranchManager() == null ? 0 : branch.getBranchManager().getId()
                     )
             ));
 

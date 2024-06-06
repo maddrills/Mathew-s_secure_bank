@@ -7,16 +7,12 @@ import java.util.*;
  * this cache holds all the country names as keys in a hash set and state as values<br>
  * the cache is created on initialization <br>
  * the cache can be updated everytime an admin adds a bank branch successfully<br>
- * <span style = "color : yellow" >WARNING :</span> <span span style = "color : #97a027"> using LinkedHashMap with a default bucket size of 16 </span>
+ * <span style = "color : yellow" >WARNING :</span> <span span style = "color : #97a027"> using LinkedHashMap with a default bucket size of 16 if countries scale up change cache size to 193 max number of countries</span>
  * */
 public class CountryCache {
 
     //country name as key -> and a linked list of states corresponding to it
     private final Map<String, LinkedHashSet<String>> countriesAndStates = new LinkedHashMap<>();
-
-    public void printThis(){
-        System.out.println("Singleton is working");
-    }
 
     //add a country and a state
     public boolean addACountryAndStateToCache(String country, String state){
