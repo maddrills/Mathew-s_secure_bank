@@ -78,9 +78,9 @@ public class AdminService {
             String password, Collection<String> rolesName
     ){
 
-        if(phone_number.isEmpty() || full_name.isEmpty() || email.isEmpty() || dateOfBirth == null || salary < 0 || password.isEmpty() || rolesName.isEmpty()) return "Credentials error";
+        if(phone_number.isEmpty() || full_name.isEmpty() || email.isEmpty() || dateOfBirth == null || salary < 0 || password.isEmpty() || rolesName.isEmpty()) return "error";
 
-        if(phone_number.matches("[0-9]+")) return "Phone number error";
+        if(!phone_number.matches("[0-9]+")) return "error";
 
         Employee employee = new Employee(
                 password,

@@ -70,6 +70,52 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "getCountryFromCache",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/exposed/getAllCountriesThatHaveBranches",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"exposed",
+						"getAllCountriesThatHaveBranches"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getStatesFromCache",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/exposed/getAllStateBranchesInCountry?country=India",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"exposed",
+						"getAllStateBranchesInCountry"
+					],
+					"query": [
+						{
+							"key": "country",
+							"value": "India"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
