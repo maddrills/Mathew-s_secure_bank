@@ -5,6 +5,7 @@ import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDetails;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.UserDetails;
 
 import java.util.Collection;
@@ -38,5 +39,10 @@ public interface EmpRepo extends User_emp_commonRepo {
 
     public List<UserApplication> getAllUserApplications();
     UserApplication getApplicationByIdNumber(int number);
+
+    public void createAUserInBank(User user, String branch);
+
+    public void acceptUserApplication(int applicationNumber);
+    public void rejectUserApplication(int applicationNumber);
 
 }

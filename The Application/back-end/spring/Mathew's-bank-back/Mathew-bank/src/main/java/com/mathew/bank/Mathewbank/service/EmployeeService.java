@@ -83,4 +83,26 @@ public class EmployeeService {
         );
     }
 
+
+
+    //turns the status field to true and after that relays the application data to user table
+    public boolean acceptAnApplicationNyId(int applicationNumber, HttpServletResponse servletResponse) {
+
+        if(applicationNumber <= 0){
+
+            servletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return false;
+        }
+
+        try{
+            this.employeeRepository.acceptUserApplication(applicationNumber);
+
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
+
+        return false;
+    }
+
 }

@@ -38,16 +38,6 @@ public class UserRepository implements UserRepo{
     }
 
     @Override
-    @Transactional
-    public void createAUserInBank(User user, String branchName) {
-
-        //gets the branch the user will be added to
-        Branch branch = this.findBranchByName(branchName);
-        user.setBranchId(branch);
-        this.entityManager.merge(user);
-    }
-
-    @Override
     public Branch getABranchById(int branchId) {
 
         TypedQuery<Branch> query = this.entityManager.createQuery("SELECT B FROM Branch B WHERE B.id = :theId",Branch.class);

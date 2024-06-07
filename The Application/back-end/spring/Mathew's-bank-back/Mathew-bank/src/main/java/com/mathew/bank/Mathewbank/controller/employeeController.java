@@ -5,10 +5,7 @@ import com.mathew.bank.Mathewbank.service.EmployeeService;
 import com.mathew.bank.Mathewbank.service.UnRegUserService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,6 +40,21 @@ public class employeeController {
         if(phoneNumber == null && email == null) {response.setStatus(HttpServletResponse.SC_BAD_REQUEST); return null;}
 
         return this.unRegUserService.getUserApplication(phoneNumber, email, response);
+    }
+
+    @PatchMapping("/acceptApplication")
+    public boolean acceptApplication(@RequestParam int applicationNumber, HttpServletResponse servletResponse){
+
+        System.out.println(applicationNumber);
+
+        return this.employeeService.acceptAnApplicationNyId(applicationNumber, servletResponse);
+    }
+
+    @PatchMapping("/rejectApplication")
+    public boolean rejectApplication(@RequestParam int applicationNumber, HttpServletResponse servletResponse){
+
+        System.out.println(applicationNumber);
+        return false;
     }
 
 }

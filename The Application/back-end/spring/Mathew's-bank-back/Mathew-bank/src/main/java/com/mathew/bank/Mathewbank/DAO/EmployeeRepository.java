@@ -6,6 +6,7 @@ import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDetails;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Savings;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.UserDetails;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Subgraph;
@@ -14,6 +15,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Repository
@@ -265,17 +267,59 @@ public class EmployeeRepository implements EmpRepo {
     }
 
     @Override
+    @Transactional
+    public void createAUserInBank(User user, String branchName) {
+
+        //gets the branch the user will be added to
+        Branch branch = this.findBranchByName(branchName);
+        user.setBranchId(branch);
+        this.entityManager.merge(user);
+    }
+
+
+    @Override
     public UserApplication getApplicationByIdNumber(int number) {
 
-        System.out.println("-------------------");
+        return this.entityManager.find(UserApplication.class,number);
+    }
 
-        TypedQuery<UserApplication> query = this.entityManager.createQuery(
-                "SELECT ua FROM UserApplication AS ua WHERE ua.application_number = :idNumber"
-                , UserApplication.class);
+    @Override
+    @Transactional
+    public void acceptUserApplication(int applicationNumber) {
 
-        query.setParameter("idNumber",number);
+        UserApplication userApplication = this.entityManager.find(UserApplication.class,applicationNumber);
 
-        return query.getSingleResult();
+        System.out.println(userApplication.getFullName());
+
+        //create an employee and employee details
+
+/*
+        User user = new User(
+                "Mathew Francis",
+                "12345",
+                AdminAccount,
+                null
+        );
+
+        UserDetails userDetails = new UserDetails(
+                "mathew francis",
+                "3343350332",
+                LocalDate.of(1998, 7, 21),
+                30,
+                "mat@admin",
+                adminBankAccount
+        );
+
+        this.createAUserInBank(user,userDetails);
+*/
+
+        userApplication.setStatus(true);
+
+
+    }
+
+    @Override
+    public void rejectUserApplication(int applicationNumber) {
 
     }
 

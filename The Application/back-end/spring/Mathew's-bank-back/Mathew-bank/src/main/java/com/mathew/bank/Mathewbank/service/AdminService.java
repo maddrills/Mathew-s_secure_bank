@@ -129,7 +129,7 @@ public class AdminService {
 
         //TODO sanity check on user
 
-        this.userRepo.createAUserInBank(user,branch);
+        this.empRepo.createAUserInBank(user,branch);
     }
 
     public List<RolesDto> AddARoleToDb(List<RolesDto> rolesDto, HttpServletResponse response){
