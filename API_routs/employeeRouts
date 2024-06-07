@@ -80,6 +80,111 @@
 					]
 				}
 			},
+			"response": [
+				{
+					"name": "get User Application By id number",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/employee/getApplicationById?applicationNumber=101",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employee",
+								"getApplicationById"
+							],
+							"query": [
+								{
+									"key": "applicationNumber",
+									"value": "101"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 07 Jun 2024 11:08:41 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"applicationId\": 101,\n    \"fullName\": \"John Logan\",\n    \"phoneNumber\": \"1234567890\",\n    \"dateOfBirth\": \"1999-09-12\",\n    \"age\": 25,\n    \"email\": \"john@gmail.com\",\n    \"appliedOn\": \"2024-06-07T00:03:59\",\n    \"status\": false,\n    \"rejected\": false\n}"
+				}
+			]
+		},
+		{
+			"name": "acceptApplication",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/employee/acceptApplication?applicationnNumber=101",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee",
+						"acceptApplication"
+					],
+					"query": [
+						{
+							"key": "applicationnNumber",
+							"value": "101"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rejectApplication",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/employee/rejectApplication?applicationnNumber=101",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee",
+						"rejectApplication"
+					],
+					"query": [
+						{
+							"key": "applicationnNumber",
+							"value": "101"
+						}
+					]
+				}
+			},
 			"response": []
 		}
 	]

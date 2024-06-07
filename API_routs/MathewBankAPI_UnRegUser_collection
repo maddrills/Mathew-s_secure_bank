@@ -39,7 +39,130 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "application1",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullName\": \"John Logan\",\r\n    \"phoneNumber\": \"1234567890\",\r\n    \"dateOfBirth\": \"1999-09-12\",\r\n    \"age\": \"25\",\r\n    \"email\": \"john@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/exposed/applyForAccount?branchId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"exposed",
+								"applyForAccount"
+							],
+							"query": [
+								{
+									"key": "branchId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "Conflict",
+					"code": 409,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 07 Jun 2024 11:29:14 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "false"
+				},
+				{
+					"name": "application2",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullName\": \"revolta norman\",\r\n    \"phoneNumber\": \"1233367890\",\r\n    \"dateOfBirth\": \"1999-09-12\",\r\n    \"age\": \"25\",\r\n    \"email\": \"norm@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/exposed/applyForAccount?branchId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"exposed",
+								"applyForAccount"
+							],
+							"query": [
+								{
+									"key": "branchId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 07 Jun 2024 11:30:24 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "true"
+				}
+			]
 		},
 		{
 			"name": "getBranchesByCountryAndState",
