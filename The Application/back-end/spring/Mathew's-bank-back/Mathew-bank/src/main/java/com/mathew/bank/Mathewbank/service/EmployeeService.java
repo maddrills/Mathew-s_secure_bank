@@ -27,8 +27,8 @@ public class EmployeeService {
 
         try{
             userApplications = this.employeeRepository.getAllUserApplications();
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         }catch (Exception e){
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return null;
         }
 
@@ -62,7 +62,6 @@ public class EmployeeService {
 
         try {
             userApplication = this.employeeRepository.getApplicationByIdNumber(idNumber);
-
         }catch (Exception e){
             System.out.println(e);
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
