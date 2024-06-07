@@ -1,6 +1,7 @@
 package com.mathew.bank.Mathewbank.DAO;
 import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
+import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDetails;
@@ -248,6 +249,34 @@ public class EmployeeRepository implements EmpRepo {
                 UserDetails.class);
 
         return userDetailsTypedQuery.getResultList();
+    }
+
+
+    //get all user application
+    @Override
+    public List<UserApplication> getAllUserApplications() {
+
+        TypedQuery<UserApplication> query = this.entityManager.createQuery(
+                "SELECT ua FROM UserApplication AS ua"
+                , UserApplication.class);
+
+        return query.getResultList();
+
+    }
+
+    @Override
+    public UserApplication getApplicationByIdNumber(int number) {
+
+        System.out.println("-------------------");
+
+        TypedQuery<UserApplication> query = this.entityManager.createQuery(
+                "SELECT ua FROM UserApplication AS ua WHERE ua.application_number = :idNumber"
+                , UserApplication.class);
+
+        query.setParameter("idNumber",number);
+
+        return query.getSingleResult();
+
     }
 
 

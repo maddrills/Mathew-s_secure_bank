@@ -7,7 +7,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/employee")
@@ -19,12 +22,18 @@ public class employeeController {
     @Autowired
     private UnRegUserService unRegUserService;
 
-    public UserApplicationDTO getAllUserApplications(){
-        return null;
+    //get all applications
+    @GetMapping("/getAllApplications")
+    public List<UserApplicationDTO> getAllUserApplications(HttpServletResponse response){
+
+        return this.employeeService.getAllUserApplications(response);
+
     }
 
-    public UserApplicationDTO getUserApplicationById(int applicationNumber){
-        return null;
+    @GetMapping("/getApplicationById")
+    public UserApplicationDTO getUserApplicationById(@RequestParam int applicationNumber, HttpServletResponse response){
+
+        return this.employeeService.getApplicationByIdNumber(applicationNumber, response);
     }
 
     @GetMapping("/getUserApplicationByPhoneOrEmail")

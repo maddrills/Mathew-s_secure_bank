@@ -35,6 +35,52 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "list out all un-reg user applications",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/employee/getAllApplications",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee",
+						"getAllApplications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get User Application By id number",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/employee/getApplicationById?applicationNumber=101",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee",
+						"getApplicationById"
+					],
+					"query": [
+						{
+							"key": "applicationNumber",
+							"value": "101"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
