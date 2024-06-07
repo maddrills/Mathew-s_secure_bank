@@ -42,7 +42,7 @@ public interface EmpRepo extends User_emp_commonRepo {
 
     public void createAUserInBank(User user, String branch);
 
-    public void acceptUserApplication(int applicationNumber);
+    public boolean acceptUserApplication(int applicationNumber);
     public void rejectUserApplication(int applicationNumber);
 
 }

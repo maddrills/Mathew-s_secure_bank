@@ -3,8 +3,10 @@ import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
+import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.TimeSpace;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDetails;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Savings;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.UserDetails;
@@ -16,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Repository
@@ -90,7 +93,8 @@ public class EmployeeRepository implements EmpRepo {
     //TODO IF ever required
     @Override
     public Branch getABranchById(int branchId) {
-        return null;
+
+        return this.entityManager.find(Branch.class, branchId);
     }
 
 
@@ -283,39 +287,61 @@ public class EmployeeRepository implements EmpRepo {
         return this.entityManager.find(UserApplication.class,number);
     }
 
+
+    //@Transactional
+    private void persistUserDetails(UserDetails userDetails, int branchId){
+
+        System.out.println(branchId);
+        Branch branch = this.getABranchById(branchId);
+
+        System.out.println(branch.getBranchName());
+        //set the branch for user
+        userDetails.getUserId().setBranchId(branch);
+        this.entityManager.persist(userDetails);
+    }
     @Override
     @Transactional
-    public void acceptUserApplication(int applicationNumber) {
+    public boolean acceptUserApplication(int applicationNumber) {
 
         UserApplication userApplication = this.entityManager.find(UserApplication.class,applicationNumber);
 
         System.out.println(userApplication.getFullName());
 
-        //create an employee and employee details
+        //create a basic account
+        UserAccounts basicAccount = new UserAccounts(
+                null,
+                null,
+                null,
+                null,
+                false
+        );
 
-/*
+        //create an employee and employee details a default username of full nname and password oof 12345 will be made
         User user = new User(
-                "Mathew Francis",
+                userApplication.getFullName(),
                 "12345",
-                AdminAccount,
+                basicAccount,
                 null
         );
-
+        //add user to user details
         UserDetails userDetails = new UserDetails(
-                "mathew francis",
-                "3343350332",
-                LocalDate.of(1998, 7, 21),
-                30,
-                "mat@admin",
-                adminBankAccount
+                userApplication.getFullName(),
+                userApplication.getPhoneNumber(),
+                userApplication.getDateOfBirth(),
+                userApplication.getAge(),
+                userApplication.getEmail(),
+                user
         );
 
-        this.createAUserInBank(user,userDetails);
-*/
-
+        try{
+            this.persistUserDetails(userDetails,userApplication.getBranch().getId());
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
         userApplication.setStatus(true);
-
-
+        this.entityManager.merge(userApplication);
+        return true;
     }
 
     @Override

@@ -57,7 +57,6 @@ public class EmployeeService {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return null;
         }
-        System.out.println("-------------------");
 
         UserApplication userApplication;
 
@@ -89,20 +88,17 @@ public class EmployeeService {
     public boolean acceptAnApplicationNyId(int applicationNumber, HttpServletResponse servletResponse) {
 
         if(applicationNumber <= 0){
-
             servletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return false;
         }
 
         try{
-            this.employeeRepository.acceptUserApplication(applicationNumber);
-
+            return this.employeeRepository.acceptUserApplication(applicationNumber);
         }catch (Exception e){
             System.out.println(e);
+            servletResponse.setStatus(HttpServletResponse.SC_CONFLICT);
             return false;
         }
-
-        return false;
     }
 
 }

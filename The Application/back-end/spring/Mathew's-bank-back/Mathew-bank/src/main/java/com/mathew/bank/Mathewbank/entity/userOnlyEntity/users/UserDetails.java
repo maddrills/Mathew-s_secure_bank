@@ -2,6 +2,7 @@ package com.mathew.bank.Mathewbank.entity.userOnlyEntity.users;
 
 import jakarta.persistence.*;
 
+import java.lang.annotation.Target;
 import java.time.LocalDate;
 
 @Entity
@@ -96,4 +97,5 @@ final public class UserDetails {
     public void setUserId(User userId) {
         this.userId = userId;
     }
+
 }
