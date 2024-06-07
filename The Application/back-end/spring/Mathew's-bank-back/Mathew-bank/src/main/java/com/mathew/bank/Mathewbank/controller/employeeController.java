@@ -53,8 +53,7 @@ public class employeeController {
     @PatchMapping("/rejectApplication")
     public boolean rejectApplication(@RequestParam int applicationNumber, HttpServletResponse servletResponse){
 
-        System.out.println(applicationNumber);
-        return false;
+        return this.employeeService.rejectApplication(applicationNumber, servletResponse);
     }
 
 }

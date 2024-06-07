@@ -345,7 +345,13 @@ public class EmployeeRepository implements EmpRepo {
     }
 
     @Override
+    @Transactional
     public void rejectUserApplication(int applicationNumber) {
+        UserApplication userApplication = this.entityManager.find(UserApplication.class,applicationNumber);
+
+        userApplication.setRejected(true);
+
+        this.entityManager.merge(userApplication);
 
     }
 

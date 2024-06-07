@@ -101,4 +101,21 @@ public class EmployeeService {
         }
     }
 
+    public boolean rejectApplication(int applicationNumber, HttpServletResponse servletResponse){
+
+        if(applicationNumber <= 0){
+            servletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return false;
+        }
+
+        try{
+            this.employeeRepository.rejectUserApplication(applicationNumber);
+        }catch (Exception e){
+            System.out.println(e);
+            servletResponse.setStatus(HttpServletResponse.SC_CONFLICT);
+            return false;
+        }
+        return true;
+    }
+
 }
