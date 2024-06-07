@@ -26,36 +26,32 @@ public class UserUnregistered {
     @PostMapping("/applyForAccount")
     public boolean registerUser(@RequestParam int branchId, @RequestBody UserApplicationDTO userApplicationDTO, HttpServletResponse response){
 
-        System.out.println(userApplicationDTO.toString()+" "+ branchId);
-
         return unRegUserService.applyForABankAccount(branchId, userApplicationDTO,response);
-
     }
 
     @GetMapping("/getBranchByCountryAndState")
     public List<BranchDTO> getAllBranchesByRegion(@RequestParam String country,@RequestParam String state,HttpServletResponse response){
-
-        System.out.println(country+" "+state);
 
         return this.unRegUserService.branchDTOList(country, state, response);
     }
 
     @GetMapping("/getAllCountriesThatHaveBranches")
     public Set<String> getAllCountries(){
+
         return countryCache.getAllCountries();
     }
 
     @GetMapping("/getAllStateBranchesInCountry")
     public LinkedHashSet<String> getAllBranchesInCountry(@RequestParam String country){
+
         return this.countryCache.getStatesByCountry(country);
     }
 
     @GetMapping("/getUserApplicationByPhoneOrEmail")
     public UserApplicationDTO getUserApplicationByPhoneNumberOrEmail(String phoneNumber, String email, HttpServletResponse response){
+
         //if both are null then return error
         if(phoneNumber == null && email == null) {response.setStatus(HttpServletResponse.SC_BAD_REQUEST); return null;}
-
-        System.out.println(phoneNumber+ " " + email);
 
         return this.unRegUserService.getUserApplication(phoneNumber, email, response);
     }

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class UserApplicationDTO {
+    private int applicationId;
 
     private String fullName;
 
@@ -43,7 +44,9 @@ public class UserApplicationDTO {
         this.status = status;
     }
 
-    public UserApplicationDTO(String fullName, String phoneNumber, LocalDate dateOfBirth, int age, String email, LocalDateTime appliedOn, boolean status, boolean rejected) {
+
+    public UserApplicationDTO(int applicationId, String fullName, String phoneNumber, LocalDate dateOfBirth, int age, String email, LocalDateTime appliedOn, boolean status, boolean rejected) {
+        this.applicationId = applicationId;
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
         this.dateOfBirth = dateOfBirth;
@@ -52,6 +55,14 @@ public class UserApplicationDTO {
         this.appliedOn = appliedOn;
         this.status = status;
         this.rejected = rejected;
+    }
+
+    public int getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(int applicationId) {
+        this.applicationId = applicationId;
     }
 
     public boolean isRejected() {

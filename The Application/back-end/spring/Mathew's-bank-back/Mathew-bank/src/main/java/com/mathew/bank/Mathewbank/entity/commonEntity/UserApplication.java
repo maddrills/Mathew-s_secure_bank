@@ -81,6 +81,9 @@ final public class UserApplication {
     }
 
 
+    public int getApplication_number() {
+        return application_number;
+    }
 
     public boolean isRejected() {
         return rejected;

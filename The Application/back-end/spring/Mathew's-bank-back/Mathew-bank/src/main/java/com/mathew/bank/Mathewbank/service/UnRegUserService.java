@@ -142,13 +142,15 @@ public class UnRegUserService {
             }
 
             return new UserApplicationDTO(
+                    userApplication.getApplication_number(),
                     userApplication.getFullName(),
                     userApplication.getPhoneNumber(),
                     userApplication.getDateOfBirth(),
                     userApplication.getAge(),
                     userApplication.getEmail(),
                     userApplication.getAppliedOn(),
-                    userApplication.isStatus()
+                    userApplication.isStatus(),
+                    userApplication.isRejected()
             );
         }
 
@@ -169,13 +171,15 @@ public class UnRegUserService {
             }
 
             return new UserApplicationDTO(
+                    userApplication.getApplication_number(),
                     userApplication.getFullName(),
                     userApplication.getPhoneNumber(),
                     userApplication.getDateOfBirth(),
                     userApplication.getAge(),
                     userApplication.getEmail(),
                     userApplication.getAppliedOn(),
-                    userApplication.isStatus()
+                    userApplication.isStatus(),
+                    userApplication.isRejected()
             );
         }
         response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

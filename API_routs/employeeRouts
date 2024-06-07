@@ -1,0 +1,40 @@
+{
+	"info": {
+		"_postman_id": "33d9e113-e818-460f-9c63-1ca0c87dfb99",
+		"name": "employeeRouts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29967989"
+	},
+	"item": [
+		{
+			"name": "check Application by phone or email",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/employee/getUserApplicationByPhoneOrEmail?phoneNumber=1234567891&email=john@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee",
+						"getUserApplicationByPhoneOrEmail"
+					],
+					"query": [
+						{
+							"key": "phoneNumber",
+							"value": "1234567891"
+						},
+						{
+							"key": "email",
+							"value": "john@gmail.com"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
