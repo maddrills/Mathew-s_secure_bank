@@ -51,6 +51,10 @@ final public class BuildUp {
         this.accountType = accountType;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public boolean isHold() {
         return hold;
     }

@@ -26,8 +26,7 @@ public class UserAndDetailsDTO {
 
     private String email;
 
-    public UserAndDetailsDTO() {
-    }
+    private UserAccountDTO userAccountDTO;
 
     public UserAndDetailsDTO(int userId, String userName, UserAccounts userAccountId, Branch branchId,
                              String fullName, String phoneNumber, LocalDate dateOfBerth, int age, String email) {
@@ -40,6 +39,28 @@ public class UserAndDetailsDTO {
         this.dateOfBerth = dateOfBerth;
         this.age = age;
         this.email = email;
+    }
+
+    public UserAndDetailsDTO(int userId, String userName, UserAccounts userAccountId, Branch branchId,
+                             String fullName, String phoneNumber, LocalDate dateOfBerth, int age, String email, UserAccountDTO userAccountDTO) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userAccountId = userAccountId;
+        this.branchId = branchId;
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBerth = dateOfBerth;
+        this.age = age;
+        this.email = email;
+        this.userAccountDTO = userAccountDTO;
+    }
+
+    public UserAccountDTO getUserAccountDTO() {
+        return userAccountDTO;
+    }
+
+    public void setUserAccountDTO(UserAccountDTO userAccountDTO) {
+        this.userAccountDTO = userAccountDTO;
     }
 
     public int getUserId() {

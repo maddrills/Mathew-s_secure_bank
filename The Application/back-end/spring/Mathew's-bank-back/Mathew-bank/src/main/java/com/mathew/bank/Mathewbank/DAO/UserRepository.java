@@ -174,6 +174,12 @@ public class UserRepository implements UserRepo{
         return query.getSingleResult();
     }
 
+    //gets user information that hold users account
+    @Override
+    public User getUserFromDb(int usedId) {
+        return this.entityManager.find(User.class, usedId);
+    }
+
     @Override
     public Savings getSavingsAccountByNumber(int accountNumber) {
         return null;

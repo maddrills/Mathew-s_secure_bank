@@ -15,4 +15,6 @@ public interface UserRepo extends User_emp_commonRepo{
 
     public UserApplication getUserApplicationDetailsByPhoneNumber(String phoneNumber);
     public UserApplication getUserApplicationDetailsByEmail(String email);
+
+    public User getUserFromDb(int usedId);
 }

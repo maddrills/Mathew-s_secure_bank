@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "25edda9b-7f5a-45b3-be92-cdfcb56821a7",
+		"name": "User In Bank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29967989"
+	},
+	"item": [
+		{
+			"name": "user getting details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/bankUser/user-details?userId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bankUser",
+						"user-details"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Admin account",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/bankUser/user-details?userId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bankUser",
+								"user-details"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 08 Jun 2024 09:37:24 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"userId\": 1,\n    \"userName\": \"John Logan\",\n    \"userAccountId\": null,\n    \"branchId\": null,\n    \"fullName\": \"John Logan\",\n    \"phoneNumber\": \"1234567890\",\n    \"dateOfBerth\": \"1999-09-12\",\n    \"age\": 25,\n    \"email\": \"john@gmail.com\"\n}"
+				}
+			]
+		},
+		{
+			"name": "user getting Account details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/bankUser/user-details?userId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bankUser",
+						"user-details"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "user getting account information",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/bankUser/user-details?userId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bankUser",
+								"user-details"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 08 Jun 2024 11:04:32 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"userId\": 1,\n    \"userName\": \"John Logan\",\n    \"userAccountId\": null,\n    \"branchId\": null,\n    \"fullName\": \"John Logan\",\n    \"phoneNumber\": \"1234567890\",\n    \"dateOfBerth\": \"1999-09-12\",\n    \"age\": 25,\n    \"email\": \"john@gmail.com\",\n    \"userAccountDTO\": {\n        \"userAccountID\": 2,\n        \"savingsID\": 0,\n        \"checkingID\": 0,\n        \"buildUpID\": 0,\n        \"jointAccountsID\": 0,\n        \"frozen\": false\n    }\n}"
+				}
+			]
+		}
+	]
+}

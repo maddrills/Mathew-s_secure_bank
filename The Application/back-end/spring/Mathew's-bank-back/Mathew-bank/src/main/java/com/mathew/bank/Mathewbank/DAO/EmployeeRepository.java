@@ -307,7 +307,8 @@ public class EmployeeRepository implements EmpRepo {
 
         //create an employee and employee details a default username of full nname and password oof 12345 will be made
         User user = new User(
-                userApplication.getFullName(),
+                //the default username is the first name + last name with no uppercases
+                userApplication.getFullName().replaceAll("\\s", "").toLowerCase(),
                 "12345",
                 basicAccount,
                 null
