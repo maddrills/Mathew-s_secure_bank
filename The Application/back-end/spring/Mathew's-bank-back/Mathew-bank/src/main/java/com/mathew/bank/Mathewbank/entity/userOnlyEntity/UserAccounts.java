@@ -50,6 +50,11 @@ final public class UserAccounts {
         this.frozen = frozen;
     }
 
+    //basic account constructor
+    public UserAccounts(boolean frozen) {
+        this(null,null,null,null, frozen);
+    }
+
     public int getId() {
         return id;
     }

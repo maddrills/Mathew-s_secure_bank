@@ -302,10 +302,6 @@ public class EmployeeRepository implements EmpRepo {
 
         //create a basic account
         UserAccounts basicAccount = new UserAccounts(
-                null,
-                null,
-                null,
-                null,
                 false
         );
 
@@ -337,8 +333,9 @@ public class EmployeeRepository implements EmpRepo {
             //return false;
         }
         userApplication.setStatus(true);
-        //TODO when JWT implemented then add the user who approved this
-        //userApplication.setApprovedBy();
+        //TODO when JWT is implemented then add the user who approved this
+        // get employee entity to make who rejected the employee
+        //userApplication.setApprovedBy(getEmployeeById(employeeId));
 
         //corresponding
         this.entityManager.merge(userApplication);
