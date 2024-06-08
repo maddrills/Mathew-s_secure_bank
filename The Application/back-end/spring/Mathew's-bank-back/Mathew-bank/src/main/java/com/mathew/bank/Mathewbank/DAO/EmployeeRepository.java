@@ -131,21 +131,14 @@ public class EmployeeRepository implements EmpRepo {
         this.entityManager.merge(employeeDetails);
     }
 
-    private Employee getEmployeeById(final int empId){
-        //find the employee by the id
-        TypedQuery<Employee> emp = this.entityManager.createQuery("SELECT E FROM Employee E WHERE " +
-                "E.id = :employeeId",Employee.class);
-        emp.setParameter("employeeId", empId);
+    @Override
+    public Employee getEmployeeById(final int empId){
 
-        return emp.getSingleResult();
+        return this.entityManager.find(Employee.class, empId);
     }
     private Branch getBranchById(final int branchId){
-        //find the branch by the id
-        TypedQuery<Branch> emp = this.entityManager.createQuery("SELECT B FROM Branch B WHERE " +
-                "B.id = :branch",Branch.class);
-        emp.setParameter("branch", branchId);
 
-        return emp.getSingleResult();
+        return this.entityManager.find(Branch.class, branchId);
     }
 
     @Override
@@ -301,7 +294,7 @@ public class EmployeeRepository implements EmpRepo {
     }
     @Override
     @Transactional
-    public boolean acceptUserApplication(int applicationNumber) {
+    public boolean acceptUserApplication(int applicationNumber,int employeeId) {
 
         UserApplication userApplication = this.entityManager.find(UserApplication.class,applicationNumber);
 
@@ -323,6 +316,10 @@ public class EmployeeRepository implements EmpRepo {
                 basicAccount,
                 null
         );
+
+        //set user application -> user correlation
+        userApplication.setCreatedUser(user);
+
         //add user to user details
         UserDetails userDetails = new UserDetails(
                 userApplication.getFullName(),
@@ -337,17 +334,25 @@ public class EmployeeRepository implements EmpRepo {
             this.persistUserDetails(userDetails,userApplication.getBranch().getId());
         }catch (Exception e){
             System.out.println(e);
-            return false;
+            //return false;
         }
         userApplication.setStatus(true);
+        //TODO when JWT implemented then add the user who approved this
+        //userApplication.setApprovedBy();
+
+        //corresponding
         this.entityManager.merge(userApplication);
         return true;
     }
 
     @Override
     @Transactional
-    public void rejectUserApplication(int applicationNumber) {
+    public void rejectUserApplication(int applicationNumber, int employeeId) {
         UserApplication userApplication = this.entityManager.find(UserApplication.class,applicationNumber);
+
+        //TODO set approved by employee when JWT id added
+        // get employee entity to make who rejected the employee
+        //userApplication.setApprovedBy(getEmployeeById(employeeId));
 
         userApplication.setRejected(true);
 

@@ -1,6 +1,7 @@
 package com.mathew.bank.Mathewbank.entity.userOnlyEntity.users;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
 import jakarta.persistence.*;
@@ -36,6 +37,9 @@ final public class User {
             cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     private UserDetails userDetails;
 
+    @OneToOne(mappedBy = "createdUser")
+    private UserApplication usersUserApplication;
+
     public User() {
     }
 
@@ -44,6 +48,14 @@ final public class User {
         this.password = password;
         this.userAccountId = userAccountId;
         this.branchId = branchId;
+    }
+
+    public UserApplication getUsersUserApplication() {
+        return usersUserApplication;
+    }
+
+    public void setUsersUserApplication(UserApplication usersUserApplication) {
+        this.usersUserApplication = usersUserApplication;
     }
 
     public UserDetails getUserDetails() {
