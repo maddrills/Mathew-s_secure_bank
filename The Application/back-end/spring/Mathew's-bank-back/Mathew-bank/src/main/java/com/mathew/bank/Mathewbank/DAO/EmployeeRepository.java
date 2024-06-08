@@ -73,7 +73,12 @@ public class EmployeeRepository implements EmpRepo {
     // TODO use this to find branch for admin
     @Override
     public Branch findBranchByName(String name) {
-        return null;
+
+        TypedQuery<Branch> query = this.entityManager.createQuery("SELECT b FROM Branch AS b WHERE b.branchName = :branch", Branch.class);
+
+        query.setParameter("branch", name);
+
+        return query.getSingleResult();
     }
 
     @Override
