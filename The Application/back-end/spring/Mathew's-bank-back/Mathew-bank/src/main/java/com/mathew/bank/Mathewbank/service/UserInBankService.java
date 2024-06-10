@@ -59,4 +59,22 @@ public class UserInBankService {
                 )
         );
     }
+
+    public boolean createASavingsAccount(int userId, int accountId, HttpServletResponse response) {
+
+        //sanity check
+        if (userId <= 0 || accountId <= 0) {
+
+            response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+            return false;
+        }
+
+        //create a users bank account
+        try{
+            return this.userRepository.createASavingsAccountForUser(userId, accountId, response);
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
+    }
 }

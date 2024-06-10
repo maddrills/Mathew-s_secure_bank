@@ -27,8 +27,9 @@ public class BankUser {
 
     //create savings account
     @PutMapping("/user-add-savings-account")
-    public boolean createASavingAccount(@RequestParam int userId, HttpServletResponse response){
-        return false;
+    public boolean createASavingAccount(@RequestParam int userId, @RequestParam int accountId, HttpServletResponse response){
+
+        return this.userInBankService.createASavingsAccount(userId, accountId, response);
     }
 
     //create checking account

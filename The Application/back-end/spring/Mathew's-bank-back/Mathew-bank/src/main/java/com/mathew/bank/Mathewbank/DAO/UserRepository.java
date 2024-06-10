@@ -4,6 +4,8 @@ import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
+import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.TimeSpace;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Savings;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.UserDetails;
@@ -14,6 +16,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -54,6 +57,40 @@ public class UserRepository implements UserRepo{
                 , Branch.class);
 
         return query.getResultList();
+    }
+
+    //crete a savings account in user
+    @Override
+    @Transactional
+    public boolean createASavingsAccountForUser(int userId, int accountId, HttpServletResponse response) {
+        //first check if user already has a savings account using there accountId
+        UserAccounts userAccounts = this.entityManager.find(UserAccounts.class, accountId);
+        if(userAccounts.getSavings() != null){
+            //if yes then return false
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            return  false;
+        }
+
+        //by default you will have 2000 rs
+        //else create a new savings account for user and update the users account to have the savings account
+
+        //get the time function from db
+        TimeSpace timeSpace = this.entityManager.find(TimeSpace.class, "savings");
+        LocalDateTime interestOn = LocalDateTime.now()
+                .plusYears(timeSpace.getYears())
+                .plusMonths(timeSpace.getMonths())
+                .plusDays(timeSpace.getDays())
+                .plusHours(timeSpace.getHour())
+                .plusSeconds(timeSpace.getSecond());
+
+        //create the account
+        Savings savings = new Savings(false, true, 2000.00,interestOn,false, timeSpace,LocalDateTime.now());
+
+        userAccounts.setSavings(savings);
+
+        this.entityManager.persist(userAccounts);
+
+        return true;
     }
 
 

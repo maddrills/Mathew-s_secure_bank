@@ -3,6 +3,7 @@ package com.mathew.bank.Mathewbank.DAO;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Savings;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.List;
 
@@ -18,5 +19,7 @@ public interface User_emp_commonRepo {
     public Branch getABranchById(final int branchId);
 
     public List<Branch> getAllBranchFromDB();
+
+    boolean createASavingsAccountForUser(int userId, int accountId, HttpServletResponse response);
 
 }

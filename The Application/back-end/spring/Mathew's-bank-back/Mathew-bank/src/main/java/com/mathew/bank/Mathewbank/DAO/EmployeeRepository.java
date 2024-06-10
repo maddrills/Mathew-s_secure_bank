@@ -13,6 +13,7 @@ import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.UserDetails;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Subgraph;
 import jakarta.persistence.TypedQuery;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -243,6 +244,12 @@ public class EmployeeRepository implements EmpRepo {
                 , Branch.class);
 
         return query.getResultList();
+    }
+
+    //admin can create a savings account for a user
+    @Override
+    public boolean createASavingsAccountForUser(int userId, int accountId, HttpServletResponse response) {
+        return false;
     }
 
     @Override
