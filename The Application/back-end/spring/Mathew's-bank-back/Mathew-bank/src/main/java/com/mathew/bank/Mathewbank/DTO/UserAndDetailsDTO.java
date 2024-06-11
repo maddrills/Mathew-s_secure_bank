@@ -6,7 +6,7 @@ import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 
 import java.time.LocalDate;
 
-public class UserAndDetailsDTO {
+public class UserAndDetailsDTO implements AllowedLoginOutputGeneric{
 
     private int userId;
 

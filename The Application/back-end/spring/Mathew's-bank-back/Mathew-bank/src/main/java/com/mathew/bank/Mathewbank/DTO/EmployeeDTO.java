@@ -4,7 +4,7 @@ package com.mathew.bank.Mathewbank.DTO;
 import java.time.LocalDate;
 import java.util.Collection;
 
-public class EmployeeDTO {
+public class EmployeeDTO implements AllowedLoginOutputGeneric{
 
 
     private int empId;

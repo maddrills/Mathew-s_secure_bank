@@ -1,6 +1,7 @@
 package com.mathew.bank.Mathewbank.controller;
 
 import com.mathew.bank.Mathewbank.DAO.UserRepository;
+import com.mathew.bank.Mathewbank.DTO.AllowedLoginOutputGeneric;
 import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
 import com.mathew.bank.Mathewbank.DTO.UserAndDetailsDTO;
 import com.mathew.bank.Mathewbank.service.EmployeeService;
@@ -49,9 +50,11 @@ public class BankUser {
     }
 
 
+    //returns two types of outputs either of type UserAndDetailsDTO or EmployeeDTO
+    // the generic <T extends AllowedLoginOutputGeneric> is used to enforce the above condition
     @SuppressWarnings("unchecked")
     @GetMapping("/login")
-    public <T> T loginUser(HttpServletResponse response){
+    public <T extends AllowedLoginOutputGeneric> T loginUser(HttpServletResponse response){
         System.out.println("Default login rout");
 
         //find user by username
