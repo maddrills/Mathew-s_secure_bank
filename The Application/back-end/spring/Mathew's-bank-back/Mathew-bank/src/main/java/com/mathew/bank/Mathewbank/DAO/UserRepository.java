@@ -1,6 +1,7 @@
 package com.mathew.bank.Mathewbank.DAO;
 
 import com.mathew.bank.Mathewbank.DTO.RolesDto;
+import com.mathew.bank.Mathewbank.DTO.UserAndDetailsDTO;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
@@ -91,6 +92,23 @@ public class UserRepository implements UserRepo{
         this.entityManager.persist(userAccounts);
 
         return true;
+    }
+
+
+
+    @Override
+    public User getUserDetailsByUserName(String userName) {
+
+        // find user by user name
+        TypedQuery<User> query = this.entityManager.createQuery(
+                "SELECT u FROM User AS u JOIN FETCH " +
+                        " u.userDetails JOIN FETCH u.userAccountId " +
+                        "WHERE u.userName = :name",
+                User.class);
+
+        query.setParameter("name",userName);
+
+        return query.getSingleResult();
     }
 
 

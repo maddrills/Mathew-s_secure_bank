@@ -1,8 +1,10 @@
 package com.mathew.bank.Mathewbank.DAO;
 
+import com.mathew.bank.Mathewbank.DTO.UserAndDetailsDTO;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Savings;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.List;
@@ -22,4 +24,5 @@ public interface User_emp_commonRepo {
 
     boolean createASavingsAccountForUser(int userId, int accountId, HttpServletResponse response);
 
+    User getUserDetailsByUserName(String userName);
 }

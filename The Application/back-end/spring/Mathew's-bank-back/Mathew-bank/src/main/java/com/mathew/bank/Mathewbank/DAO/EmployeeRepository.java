@@ -1,5 +1,6 @@
 package com.mathew.bank.Mathewbank.DAO;
 import com.mathew.bank.Mathewbank.DTO.RolesDto;
+import com.mathew.bank.Mathewbank.DTO.UserAndDetailsDTO;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
@@ -250,6 +251,11 @@ public class EmployeeRepository implements EmpRepo {
     @Override
     public boolean createASavingsAccountForUser(int userId, int accountId, HttpServletResponse response) {
         return false;
+    }
+
+    @Override
+    public User getUserDetailsByUserName(String userName) {
+        return null;
     }
 
     @Override

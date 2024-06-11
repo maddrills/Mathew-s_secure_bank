@@ -245,6 +245,26 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/bankUser/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bankUser",
+						"login"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

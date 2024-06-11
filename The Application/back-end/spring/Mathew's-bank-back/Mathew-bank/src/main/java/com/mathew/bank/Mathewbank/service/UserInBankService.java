@@ -16,6 +16,43 @@ public class UserInBankService {
     @Autowired
     private UserRepository userRepository;
 
+    public UserAndDetailsDTO getUserAndUserDetailsFromService(String userName, HttpServletResponse response){
+
+        try{
+            User user = this.userRepository.getUserDetailsByUserName(userName);
+
+            UserDetails userDetails = user.getUserDetails();
+
+            UserAccounts userAccounts = user.getUserAccountId();
+
+            return new UserAndDetailsDTO(
+                    userDetails.getId(),
+                    userDetails.getFullName(),
+                    null,
+                    null,
+                    userDetails.getFullName(),
+                    userDetails.getPhoneNumber(),
+                    userDetails.getDateOfBerth(),
+                    userDetails.getAge(),
+                    userDetails.getEmail(),
+                    new UserAccountDTO(
+                            userAccounts.getId(),
+                            userAccounts.getSavings() == null ? 0 : userAccounts.getSavings().getId() ,
+                            userAccounts.getChecking() == null ? 0 : userAccounts.getChecking().getId(),
+                            userAccounts.getBuildUp() == null ? 0 : userAccounts.getBuildUp().getId(),
+                            userAccounts.getJointAccounts() == null ? 0 : userAccounts.getJointAccounts().getId(),
+                            userAccounts.isFrozen()
+            )
+            );
+
+        }catch (Exception e){
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            System.out.println(e);
+            return null;
+        }
+    }
+
+
     public UserAndDetailsDTO getUserAndUserDetailsFromService(int userID, HttpServletResponse response){
 
         User user;

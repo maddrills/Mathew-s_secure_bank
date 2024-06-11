@@ -32,6 +32,7 @@ public class BankUser {
         return this.userInBankService.createASavingsAccount(userId, accountId, response);
     }
 
+    //TODO will be implemented after UI
     //create checking account
     public boolean createACheckingAccount(@RequestParam int userId, HttpServletResponse response){
         return false;
@@ -40,5 +41,16 @@ public class BankUser {
     //create buildup account
     public boolean createABuildUpAccount(@RequestParam int userId, HttpServletResponse response){
         return false;
+    }
+
+    @GetMapping("/login")
+    public UserAndDetailsDTO loginUser(HttpServletResponse response){
+        System.out.println("Default login rout");
+
+        //find user by username
+        // TODO get user details and account details by username
+        // change the default username in production
+
+        return this.userInBankService.getUserAndUserDetailsFromService("Mathew Francis",response);
     }
 }
