@@ -1,7 +1,9 @@
 package com.mathew.bank.Mathewbank.controller;
 
 import com.mathew.bank.Mathewbank.DAO.UserRepository;
+import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
 import com.mathew.bank.Mathewbank.DTO.UserAndDetailsDTO;
+import com.mathew.bank.Mathewbank.service.EmployeeService;
 import com.mathew.bank.Mathewbank.service.UserInBankService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,9 @@ public class BankUser {
 
     @Autowired
     private UserInBankService userInBankService;
+
+    @Autowired
+    private EmployeeService employeeService;
 
     //view profile details
     // get them by user_id from JWT
@@ -43,14 +48,30 @@ public class BankUser {
         return false;
     }
 
+
+    @SuppressWarnings("unchecked")
     @GetMapping("/login")
-    public UserAndDetailsDTO loginUser(HttpServletResponse response){
+    public <T> T loginUser(HttpServletResponse response){
         System.out.println("Default login rout");
 
         //find user by username
         // TODO get user details and account details by username
         // change the default username in production
+        //String nameOrID = "Mathew Francis";
+        String nameOrID = "1000001";
 
-        return this.userInBankService.getUserAndUserDetailsFromService("Mathew Francis",response);
+        boolean proceedWithUser = true;
+        int employeeId = 0;
+        try{
+            employeeId = Integer.parseInt(nameOrID);
+            proceedWithUser = false;
+        }catch (Exception e){
+            System.out.println(e.toString());
+        }
+
+        if(proceedWithUser){
+            return (T) this.userInBankService.getUserAndUserDetailsFromService(nameOrID,response);
+        }
+        return (T) this.employeeService.getEmployeeDetailsById(employeeId,response);
     }
 }

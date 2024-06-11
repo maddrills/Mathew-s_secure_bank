@@ -2,8 +2,11 @@ package com.mathew.bank.Mathewbank.service;
 
 import com.mathew.bank.Mathewbank.DAO.EmployeeRepository;
 import com.mathew.bank.Mathewbank.DAO.UserRepository;
+import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
+import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.DTO.UserApplicationDTO;
 import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
+import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -117,4 +120,29 @@ public class EmployeeService {
         return true;
     }
 
+    public EmployeeDTO getEmployeeDetailsById(int nameOrID, HttpServletResponse response) {
+
+        try{
+            Employee employee = this.employeeRepository.getEmployeeById(nameOrID);
+
+            // get the roles from employee
+            final List<RolesDto> rolesDtos = new LinkedList<>();
+
+            employee.getRoles().forEach( role -> rolesDtos.add(new RolesDto(role.getRole(),true)));
+
+            return new EmployeeDTO(
+                    employee.getId(),
+                    employee.getDetails().getPhone_number(),
+                    employee.getDetails().getFullName(),
+                    employee.getDetails().getEmail(),
+                    employee.getDetails().getDateOfBirth(),
+                    employee.getDetails().getSalary(),
+                    null,
+                    rolesDtos);
+
+        }catch (Exception e){
+            System.out.println(e.toString());
+            return null;
+        }
+    }
 }
