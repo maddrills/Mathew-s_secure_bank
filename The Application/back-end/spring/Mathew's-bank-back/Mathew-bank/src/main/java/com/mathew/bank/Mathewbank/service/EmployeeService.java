@@ -1,7 +1,6 @@
 package com.mathew.bank.Mathewbank.service;
 
 import com.mathew.bank.Mathewbank.DAO.EmployeeRepository;
-import com.mathew.bank.Mathewbank.DAO.UserRepository;
 import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
 import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.DTO.UserApplicationDTO;
@@ -141,6 +140,7 @@ public class EmployeeService {
                     rolesDtos);
 
         }catch (Exception e){
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             System.out.println(e.toString());
             return null;
         }

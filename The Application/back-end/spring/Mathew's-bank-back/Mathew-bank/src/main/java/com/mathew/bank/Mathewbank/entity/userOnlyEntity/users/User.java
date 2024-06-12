@@ -1,10 +1,14 @@
 package com.mathew.bank.Mathewbank.entity.userOnlyEntity.users;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
 import jakarta.persistence.*;
+
+import java.util.Collection;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "user")
@@ -39,6 +43,25 @@ final public class User {
 
     @OneToOne(mappedBy = "createdUser")
     private UserApplication usersUserApplication;
+
+    //ROLE
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            cascade = {
+                    //The detach operation removes the entity from the persistent context. When we use CascadeType.DETACH, the child entity will also get removed from the persistent context.
+                    CascadeType.DETACH,
+                    CascadeType.MERGE,
+                    CascadeType.PERSIST,
+                    CascadeType.REFRESH,
+            }
+            //cascade = CascadeType.ALL
+    )
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "u_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Collection<Role> roles;
 
     public User() {
     }
@@ -100,6 +123,18 @@ final public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setARole(Role role){
+        if(this.roles == null){
+            this.roles = new HashSet<Role>();
+        }
+
+        this.roles.add(role);
     }
 }
 

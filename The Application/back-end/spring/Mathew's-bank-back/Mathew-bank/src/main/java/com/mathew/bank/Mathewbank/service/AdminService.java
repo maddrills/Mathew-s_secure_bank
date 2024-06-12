@@ -471,6 +471,9 @@ public class AdminService {
                 defaultBranch
         );
 
+        employee.setARole(new Role("ROLE_manager"));
+        employee.setARole(new Role("ROLE_employee"));
+
 
         EmployeeDetails employeeDetails = new EmployeeDetails(
                 "3343350332",
@@ -517,6 +520,8 @@ public class AdminService {
                 AdminAccount,
                 null
         );
+
+        adminBankAccount.setARole(new Role("ROLE_user"));
 
         UserDetails adminUserDetails = new UserDetails(
                 "mathew francis",

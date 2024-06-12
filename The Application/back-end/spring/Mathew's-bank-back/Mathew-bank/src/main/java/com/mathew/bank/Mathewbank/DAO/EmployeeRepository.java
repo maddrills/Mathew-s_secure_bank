@@ -332,6 +332,10 @@ public class EmployeeRepository implements EmpRepo {
                 null
         );
 
+        //get user role
+        Role roles = this.findRoleByRoleName("user");
+        user.setARole(roles);
+
         //set user application -> user correlation
         userApplication.setCreatedUser(user);
 
