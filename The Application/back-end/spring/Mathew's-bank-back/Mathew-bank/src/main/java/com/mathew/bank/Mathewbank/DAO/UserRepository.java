@@ -103,6 +103,7 @@ public class UserRepository implements UserRepo{
         TypedQuery<User> query = this.entityManager.createQuery(
                 "SELECT u FROM User AS u JOIN FETCH " +
                         " u.userDetails JOIN FETCH u.userAccountId " +
+                        "JOIN FETCH u.roles " +
                         "WHERE u.userName = :name",
                 User.class);
 

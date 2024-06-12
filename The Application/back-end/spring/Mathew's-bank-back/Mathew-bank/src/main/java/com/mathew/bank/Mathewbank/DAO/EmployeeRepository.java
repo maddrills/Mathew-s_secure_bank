@@ -17,6 +17,7 @@ import jakarta.persistence.TypedQuery;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -28,6 +29,9 @@ public class EmployeeRepository implements EmpRepo {
 
     @Autowired
     private EntityManager entityManager;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional
@@ -327,7 +331,7 @@ public class EmployeeRepository implements EmpRepo {
         User user = new User(
                 //the default username is the first name + last name with no uppercases
                 userApplication.getFullName().replaceAll("\\s", "").toLowerCase(),
-                "12345",
+                this.passwordEncoder.encode("12345"),
                 basicAccount,
                 null
         );

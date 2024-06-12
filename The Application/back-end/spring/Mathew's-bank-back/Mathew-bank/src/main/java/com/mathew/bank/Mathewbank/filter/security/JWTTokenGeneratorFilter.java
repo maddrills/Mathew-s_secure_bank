@@ -1,4 +1,3 @@
-/*
 package com.mathew.bank.Mathewbank.filter.security;
 
 import com.mathew.bank.Mathewbank.constents.security.SecurityConstants;
@@ -28,7 +27,7 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
 
         //at this point the user is authenticated we just have to send the token back
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (null != authentication) {
+        if (null != authentication && authentication.getAuthorities() != null) {
 
             //get the JWT key from the contents we defined
             // Keys, Jwts  class comes from pom.xml
@@ -65,7 +64,7 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
     //other words this method will return false for /login
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        return !request.getServletPath().equals("/login/LoginUser");
+        return !request.getServletPath().equals("/bankUser/login");
     }
 
     //    gets the authority's from granted authority which we set in the configuration CustomAuthenticationProvider class
@@ -78,4 +77,3 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
         return String.join(",", authoritiesSet);
     }
 }
-*/

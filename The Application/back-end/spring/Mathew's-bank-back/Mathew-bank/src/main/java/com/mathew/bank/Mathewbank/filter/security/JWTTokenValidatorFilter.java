@@ -1,4 +1,3 @@
-/*
 package com.mathew.bank.Mathewbank.filter.security;
 
 import com.mathew.bank.Mathewbank.constents.security.SecurityConstants;
@@ -73,7 +72,6 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
     //should be executed for all the api except the login api
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        return request.getServletPath().equals("/login/LoginUser") || request.getServletPath().equals("/Sign-up/signup-user");
+        return request.getServletPath().equals("/bankUser/login") || request.getServletPath().equals("/Sign-up/signup-user");
     }
 }
-*/

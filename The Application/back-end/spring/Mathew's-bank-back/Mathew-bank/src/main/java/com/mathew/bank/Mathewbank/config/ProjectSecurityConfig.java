@@ -1,4 +1,3 @@
-/*
 package com.mathew.bank.Mathewbank.config;
 
 import com.mathew.bank.Mathewbank.filter.security.JWTTokenGeneratorFilter;
@@ -8,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -62,10 +62,11 @@ public class ProjectSecurityConfig {
 
                 //temporarily disabling cross sight resource forgery
                 //.csrf(AbstractHttpConfigurer::disable)
-                .csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/Sign-up/signup-user","/register","/user/getXSRfToken")
-                        //.csrfTokenRepository(new CookieCsrfTokenRepository())
-                        .csrfTokenRepository(cookieCsrfTokenRepo)
-                )
+//                .csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/Sign-up/signup-user","/register","/user/getXSRfToken")
+//                        //.csrfTokenRepository(new CookieCsrfTokenRepository())
+//                        .csrfTokenRepository(cookieCsrfTokenRepo)
+//                )
+                .csrf(AbstractHttpConfigurer::disable)
                 //.addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
 
                 //token generation after BasicAuthenticationFilter.class
@@ -75,10 +76,10 @@ public class ProjectSecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         //only admin can use this rout
                         .requestMatchers( "/user/addUser","/user/remove-user","/user/get-all-users","/user/get-all-users-post").hasAnyRole("Admin")
-                        .requestMatchers("/user/getAllUserData").hasAnyRole("User")
+                        .requestMatchers("/user/getAllUserData").hasAnyRole("user")
                         //.requestMatchers("/user/**").hasAnyRole("Admin","User")
                         //any one who is authenticated can access /users
-                        .requestMatchers("/login/LoginUser","/user","/user/getXSRfToken","/logout").authenticated()
+                        .requestMatchers("/bankUser/login","/user","/user/getXSRfToken","/logout").authenticated()
                         //all the rest are open to public
                         .requestMatchers("/Sign-up/signup-user").permitAll()
                 )
@@ -96,4 +97,3 @@ public class ProjectSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
-*/

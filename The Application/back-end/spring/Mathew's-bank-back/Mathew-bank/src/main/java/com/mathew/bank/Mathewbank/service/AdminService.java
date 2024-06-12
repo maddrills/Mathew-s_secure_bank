@@ -19,6 +19,7 @@ import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.UserDetails;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -34,6 +35,9 @@ public class AdminService {
     private UserRepo userRepo;
     @Autowired
     private CountryCache countryCache;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     //adds an employee with his or her credentials and at least one role
     public String addAnyEmployee(EmployeeDTO employeeDTO, HttpServletResponse response){
@@ -83,7 +87,7 @@ public class AdminService {
         if(!phone_number.matches("[0-9]+")) return "error";
 
         Employee employee = new Employee(
-                password,
+                this.passwordEncoder.encode(password),
                 null,
                 null,
                 null
@@ -464,8 +468,9 @@ public class AdminService {
                 null
         );
 
+        //password is 12345
         Employee employee = new Employee(
-                "12345",
+                this.passwordEncoder.encode("12345"),
                 null,
                 null,
                 defaultBranch
@@ -516,7 +521,7 @@ public class AdminService {
 
         User adminBankAccount = new User(
                 "Mathew Francis",
-                "12345",
+                this.passwordEncoder.encode("12345"),
                 AdminAccount,
                 null
         );

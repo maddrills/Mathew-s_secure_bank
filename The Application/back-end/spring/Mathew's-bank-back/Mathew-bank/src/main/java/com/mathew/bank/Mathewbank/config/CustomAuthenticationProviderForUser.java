@@ -1,4 +1,3 @@
-/*
 package com.mathew.bank.Mathewbank.config;
 
 import com.mathew.bank.Mathewbank.DAO.UserRepository;
@@ -13,10 +12,12 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class CustomAuthenticationProviderForUser implements AuthenticationProvider {
 
 
@@ -52,8 +53,13 @@ public class CustomAuthenticationProviderForUser implements AuthenticationProvid
                 List<GrantedAuthority> authorities = new ArrayList<>();
 
                 //loop through the users authorities and add each of them to simple granted authority
-                customer.getRoles().forEach(a -> authorities.add(new SimpleGrantedAuthority(a.getRole())));
-
+                try{
+                    customer.getRoles().forEach(a -> authorities.add(new SimpleGrantedAuthority(a.getRole())));
+                }catch (Exception e){
+                    //user doesn't have permissions or roles = null
+                    System.out.println(e.toString());
+                    return null;
+                }
                 //final send the username password and auth as a token which will call the authenticate method in the ProviderManager
                 // in this edit i wont store the password but a use id
 
@@ -77,4 +83,3 @@ public class CustomAuthenticationProviderForUser implements AuthenticationProvid
         return (UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication));
     }
 }
-*/
