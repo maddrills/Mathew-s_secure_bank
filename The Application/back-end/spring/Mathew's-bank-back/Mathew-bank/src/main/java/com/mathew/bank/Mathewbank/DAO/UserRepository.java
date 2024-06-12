@@ -6,6 +6,7 @@ import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.TimeSpace;
+import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Savings;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
@@ -110,6 +111,12 @@ public class UserRepository implements UserRepo{
         query.setParameter("name",userName);
 
         return query.getSingleResult();
+    }
+
+    @Override
+    public Employee getEmployeeById(int empId) {
+
+        return this.entityManager.find(Employee.class, empId);
     }
 
 

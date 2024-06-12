@@ -25,7 +25,7 @@ import java.util.List;
 public class ProjectSecurityConfig {
 
     @Bean
-    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception{
+    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 
         //the token is generated here
         CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
@@ -38,7 +38,7 @@ public class ProjectSecurityConfig {
 
         // bellow line is used when you are using JWT tokens instead of jSession session keys but i put always because i guess CSRF token needs it
         http.
-                logout((logout) -> logout.deleteCookies("Authorization","JSESSIONID","XSRF-TOKEN"))
+                logout((logout) -> logout.deleteCookies("Authorization", "JSESSIONID", "XSRF-TOKEN"))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
                 //now because we aare sending the JWT token to The UI Application in a Header
@@ -53,7 +53,7 @@ public class ProjectSecurityConfig {
                         config.setAllowCredentials(true);
                         config.setAllowedHeaders(Collections.singletonList("*"));
                         //the JWT will be sent to UI under Authorization header and XSR under X-XSRF-TOKEN
-                        config.setExposedHeaders(List.of("Authorization","X-XSRF-TOKEN"));
+                        config.setExposedHeaders(List.of("Authorization", "X-XSRF-TOKEN"));
                         config.setMaxAge(3600L);
                         return config;
                     }
@@ -75,11 +75,11 @@ public class ProjectSecurityConfig {
                 .addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests((requests) -> requests
                         //only admin can use this rout
-                        .requestMatchers( "/user/addUser","/user/remove-user","/user/get-all-users","/user/get-all-users-post").hasAnyRole("Admin")
+                        .requestMatchers("/user/addUser", "/user/remove-user", "/user/get-all-users", "/user/get-all-users-post").hasAnyRole("Admin")
                         .requestMatchers("/user/getAllUserData").hasAnyRole("user")
                         //.requestMatchers("/user/**").hasAnyRole("Admin","User")
                         //any one who is authenticated can access /users
-                        .requestMatchers("/bankUser/login","/user","/user/getXSRfToken","/logout").authenticated()
+                        .requestMatchers("/bankUser/login", "/user", "/user/getXSRfToken", "/logout").authenticated()
                         //all the rest are open to public
                         .requestMatchers("/Sign-up/signup-user").permitAll()
                 )

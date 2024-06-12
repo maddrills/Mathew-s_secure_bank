@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "b8c87894-487e-4767-94da-83ee7aa2c20a",
+		"_postman_id": "6b553d35-0473-40b7-8324-956525dfd08c",
 		"name": "User In Bank",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29498098"
+		"_exporter_id": "29967989"
 	},
 	"item": [
 		{
@@ -249,6 +249,21 @@
 		{
 			"name": "login",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "1000001",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "12345",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -264,7 +279,180 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "UserLogin",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/bankUser/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bankUser",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "Authorization=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJNYXRoZXcgRnJhbmNpcyIsInN1YiI6IkpXVF9Ub2tlbiIsInVzZXJuYW1lIjoiTWF0aGV3IEZyYW5jaXMsMSIsImF1dGhvcml0aWVzIjoiUk9MRV91c2VyIiwiaWF0IjoxNzE4MTk3NzEwLCJleHAiOjE3MTgyMjc3MTB9.YT2wupZzDGsrKcDtOdqArtx2BxS8gVc1g6Uqx26zU6o; Path=/; Secure; HttpOnly"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 12 Jun 2024 13:08:31 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"userId\": 1,\n    \"userName\": \"mathew francis\",\n    \"userAccountId\": null,\n    \"branchId\": null,\n    \"fullName\": \"mathew francis\",\n    \"phoneNumber\": \"3343350332\",\n    \"dateOfBerth\": \"1998-07-21\",\n    \"age\": 30,\n    \"email\": \"mat@admin\",\n    \"userAccountDTO\": {\n        \"userAccountID\": 1,\n        \"savingsID\": 102000001,\n        \"checkingID\": 0,\n        \"buildUpID\": 0,\n        \"jointAccountsID\": 0,\n        \"frozen\": false\n    }\n}"
+				},
+				{
+					"name": "loginEmployee",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/bankUser/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bankUser",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "Authorization=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJNYXRoZXcgRnJhbmNpcyIsInN1YiI6IkpXVF9Ub2tlbiIsInVzZXJuYW1lIjoiMTAwMDAwMSwxMDAwMDAxIiwiYXV0aG9yaXRpZXMiOiJST0xFX2VtcGxveWVlLFJPTEVfbWFuYWdlcixST0xFX2FkbWluIiwiaWF0IjoxNzE4MjEwMTY4LCJleHAiOjE3MTgyNDAxNjh9.EqajUAp52XiCknvgTpcakhJKtk7JtJb5jxYs33-UbUo; Path=/; Secure; HttpOnly"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 12 Jun 2024 16:36:08 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"empId\": 1000001,\n    \"phone_number\": \"3343350332\",\n    \"full_name\": \"mathew francis\",\n    \"email\": \"mat@admin\",\n    \"dateOfBirth\": \"1998-07-21\",\n    \"salary\": 543234.5,\n    \"password\": null,\n    \"rolesName\": [\n        {\n            \"roleName\": \"ROLE_admin\",\n            \"added\": true\n        },\n        {\n            \"roleName\": \"ROLE_employee\",\n            \"added\": true\n        },\n        {\n            \"roleName\": \"ROLE_manager\",\n            \"added\": true\n        }\n    ]\n}"
+				}
+			]
 		}
 	]
 }

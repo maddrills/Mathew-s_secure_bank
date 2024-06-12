@@ -27,7 +27,7 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
 
         //at this point the user is authenticated we just have to send the token back
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (null != authentication && authentication.getAuthorities() != null) {
+        if (null != authentication) {
 
             //get the JWT key from the contents we defined
             // Keys, Jwts  class comes from pom.xml

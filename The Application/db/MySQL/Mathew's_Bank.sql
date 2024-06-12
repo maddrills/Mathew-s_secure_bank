@@ -377,6 +377,7 @@ SELECT * FROM `roles`;
 
 
 SELECT * FROM `user`;
+SELECT * FROM `user_roles`;
 SELECT * FROM `branch`;
 DESC `branch`;
 DESC `user`;

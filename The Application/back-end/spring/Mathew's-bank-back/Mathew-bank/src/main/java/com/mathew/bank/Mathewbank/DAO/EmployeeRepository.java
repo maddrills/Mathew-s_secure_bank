@@ -147,6 +147,16 @@ public class EmployeeRepository implements EmpRepo {
 
         return this.entityManager.find(Employee.class, empId);
     }
+
+    public Employee getEmployeeAndRolesById(final int empId){
+
+        TypedQuery<Employee> employeeTypedQuery =  this.entityManager.createQuery("SELECT e FROM Employee AS e JOIN FETCH e.roles WHERE e.id = :employeeId",Employee.class);
+
+        employeeTypedQuery.setParameter("employeeId", empId);
+
+        return employeeTypedQuery.getSingleResult();
+    }
+
     private Branch getBranchById(final int branchId){
 
         return this.entityManager.find(Branch.class, branchId);
