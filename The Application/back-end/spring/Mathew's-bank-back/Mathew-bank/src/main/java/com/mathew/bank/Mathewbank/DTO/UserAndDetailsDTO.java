@@ -5,6 +5,8 @@ import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Set;
 
 public class UserAndDetailsDTO implements AllowedLoginOutputGeneric{
 
@@ -27,6 +29,8 @@ public class UserAndDetailsDTO implements AllowedLoginOutputGeneric{
     private String email;
 
     private UserAccountDTO userAccountDTO;
+
+    private Collection<RolesDto> rolesDto;
 
     public UserAndDetailsDTO(int userId, String userName, UserAccounts userAccountId, Branch branchId,
                              String fullName, String phoneNumber, LocalDate dateOfBerth, int age, String email) {
@@ -53,6 +57,30 @@ public class UserAndDetailsDTO implements AllowedLoginOutputGeneric{
         this.age = age;
         this.email = email;
         this.userAccountDTO = userAccountDTO;
+    }
+
+    public UserAndDetailsDTO(int userId, String userName, UserAccounts userAccountId, Branch branchId,
+                             String fullName, String phoneNumber, LocalDate dateOfBerth,
+                             int age, String email, UserAccountDTO userAccountDTO, Collection<RolesDto> rolesDto) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userAccountId = userAccountId;
+        this.branchId = branchId;
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBerth = dateOfBerth;
+        this.age = age;
+        this.email = email;
+        this.userAccountDTO = userAccountDTO;
+        this.rolesDto = rolesDto;
+    }
+
+    public Collection<RolesDto> getRolesDto() {
+        return rolesDto;
+    }
+
+    public void setRolesDto(Collection<RolesDto> rolesDto) {
+        this.rolesDto = rolesDto;
     }
 
     public UserAccountDTO getUserAccountDTO() {

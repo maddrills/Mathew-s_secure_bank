@@ -79,7 +79,7 @@ public class ProjectSecurityConfig {
                         .requestMatchers("/user/getAllUserData").hasAnyRole("user")
                         //.requestMatchers("/user/**").hasAnyRole("Admin","User")
                         //any one who is authenticated can access /users
-                        .requestMatchers("/bankUser/login", "/user", "/user/getXSRfToken", "/logout").authenticated()
+                        .requestMatchers("/bankUser/login","/employee/employee-login", "/user", "/user/getXSRfToken", "/logout").authenticated()
                         //all the rest are open to public
                         .requestMatchers("/Sign-up/signup-user").permitAll()
                 )

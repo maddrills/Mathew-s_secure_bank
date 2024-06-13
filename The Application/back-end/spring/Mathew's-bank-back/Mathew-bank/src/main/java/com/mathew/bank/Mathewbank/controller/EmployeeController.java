@@ -1,10 +1,13 @@
 package com.mathew.bank.Mathewbank.controller;
 
+import com.mathew.bank.Mathewbank.DTO.AllowedLoginOutputGeneric;
+import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
 import com.mathew.bank.Mathewbank.DTO.UserApplicationDTO;
 import com.mathew.bank.Mathewbank.service.EmployeeService;
 import com.mathew.bank.Mathewbank.service.UnRegUserService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -59,6 +62,28 @@ public class EmployeeController {
     public boolean rejectApplication(@RequestParam int applicationNumber, HttpServletResponse servletResponse) {
 
         return this.employeeService.rejectApplication(applicationNumber, 0, servletResponse);
+    }
+
+    @GetMapping("/employee-login")
+    public EmployeeDTO loginUser(HttpServletResponse response, Authentication authentication) {
+
+        String nameOrID = authentication.getName().split(",")[0];
+
+        int uId = 0;
+        try {
+            uId = Integer.parseInt(authentication.getName().split(",")[1]);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        System.out.println(authentication.getName());
+        int employeeId = 0;
+        try {
+            employeeId = Integer.parseInt(nameOrID);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        return this.employeeService.getEmployeeDetailsById(employeeId, response);
     }
 
 }
