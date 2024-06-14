@@ -57,6 +57,10 @@ body {
   grid-template-columns: repeat(2, 1fr);
 }
 
+.grid--2-cols-two-one-division {
+  grid-template-columns: 2fr 1fr;
+}
+
 .grid--3-cols {
   grid-template-columns: repeat(3, 1fr);
 }
