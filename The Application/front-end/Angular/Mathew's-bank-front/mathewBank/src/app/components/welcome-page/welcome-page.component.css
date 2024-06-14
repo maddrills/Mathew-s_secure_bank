@@ -1,0 +1,56 @@
+.blueish-background {
+  background-color: #1864ab;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  color: #e7f5ff;
+}
+
+nav div {
+  margin: 1.2rem;
+  font-size: 2.2rem;
+  padding: 1rem;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+nav div:last-child {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: #ffd700;
+}
+
+nav div:active,
+nav div:hover {
+  cursor: pointer;
+  background-color: #1971c2;
+  color: white;
+}
+
+section {
+  margin-top: 4.2rem;
+}
+
+section img {
+  width: 55rem;
+}
+
+section .bank-title {
+  align-self: center;
+}
+
+section .bank-title h4 {
+  font-size: 7rem;
+}
+
+/* section .bank-title h4 span {
+  color: #ffd700;
+} */
+
+section .bank-title p {
+  margin-top: 2.2rem;
+  font-size: 2.6rem;
+}
