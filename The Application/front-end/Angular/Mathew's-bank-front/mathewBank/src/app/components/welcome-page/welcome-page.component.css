@@ -129,10 +129,11 @@ section.offerings h3 {
   text-align: center;
   font-weight: 600;
   font-size: 4.7rem;
+  margin-top: 8rem;
   margin-bottom: 4.8rem;
 }
 
-section.offerings > h6 {
+/* section.offerings > h6 {
   text-align: center;
   color: #1864ab;
   font-weight: 100;
@@ -140,7 +141,7 @@ section.offerings > h6 {
   margin-top: 6.7rem;
   margin-bottom: 1.2rem;
   text-transform: capitalize;
-}
+} */
 
 .description-card {
   min-width: 30rem;
