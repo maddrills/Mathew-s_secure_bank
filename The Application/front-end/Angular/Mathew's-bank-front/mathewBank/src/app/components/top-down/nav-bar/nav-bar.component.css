@@ -27,7 +27,7 @@ nav > div {
   display: flex;
   gap: 2rem;
   align-items: center;
-  padding: 1rem;
+  padding: 0.9rem;
 }
 
 .mathews-bank-logo .bank-logo {
