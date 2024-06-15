@@ -80,6 +80,10 @@ div :has(.plant) {
   grid-row: 2;
 }
 
+.plant {
+  margin-left: 12rem;
+}
+
 .z-pattern .support-text {
   /* background-color: #ffd700; */
   grid-column: 1/3;
@@ -181,4 +185,75 @@ section.offerings h3 {
 .clock-icon {
   height: 3rem;
   width: 3rem;
+}
+
+.head-ref {
+  margin-top: 6rem;
+  display: flex;
+  margin-left: 3rem;
+  gap: 3rem;
+  align-content: center;
+  align-items: center;
+}
+
+.six-people-quot {
+  display: flex;
+}
+
+.six-people-quot img {
+  border-radius: 50%;
+  margin-left: -3rem;
+  border: solid 5px white;
+  max-width: 8rem;
+}
+.head-ref .quot {
+  font-size: 2.5rem;
+}
+.head-ref .quot span {
+  font-size: 2.5rem;
+  color: #1864ab;
+  text-shadow: 2rem 2rem 2rem 2rem black;
+}
+
+.quot-heading-label {
+  margin-top: 8rem;
+  font-size: 4rem;
+  color: #1864ab;
+}
+
+.four-ref {
+  margin-top: 8rem;
+  margin-bottom: 5.6rem;
+}
+
+.four-ref .four-ref-inner {
+  margin-top: 4rem;
+}
+
+.four-ref h5 {
+  margin-top: 4rem;
+  font-size: 2rem;
+}
+
+.four-ref .four-ref-inner div {
+  display: flex;
+  flex-direction: column;
+}
+
+.four-ref .four-ref-inner img {
+  width: 10rem;
+  border-radius: 50%;
+}
+.four-ref .four-ref-inner p {
+  max-width: 50rem;
+  font-size: 1.6rem;
+  line-height: 3rem;
+  padding: 2rem 0rem;
+}
+
+.people .by {
+  margin-top: 1rem;
+  font-weight: 700;
+  font-size: 1.19rem;
+  color: #1864ab;
 }
