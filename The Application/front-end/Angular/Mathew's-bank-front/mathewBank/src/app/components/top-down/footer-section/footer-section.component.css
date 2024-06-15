@@ -1,0 +1,40 @@
+.blueish-background {
+  background-color: #1864ab;
+}
+
+.footer-elements {
+  display: flex;
+  gap: 35rem;
+  justify-content: center;
+  color: #e7f5ff;
+  padding-top: 8rem;
+}
+
+.left h6,
+.mid h6,
+.right h6 {
+  font-size: 1.4rem;
+}
+
+.left ul,
+.mid ul,
+.right ul {
+  list-style: none;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+}
+
+.left ul li,
+.mid ul li,
+.right ul li {
+  font-size: 1.2rem;
+  margin-bottom: 2.2rem;
+}
+
+.mid ul {
+  text-align: center;
+}
+
+.line hr {
+  color: #ffd700;
+}
