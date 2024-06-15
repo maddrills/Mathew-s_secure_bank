@@ -125,11 +125,11 @@ div :has(.support) {
   gap: 10rem;
 }
 
-section.offerings h5 {
+section.offerings h3 {
   text-align: center;
-  font-size: 3.6rem;
-  margin-top: 4.7rem;
-  margin-bottom: 3.8rem;
+  font-size: 4.7rem;
+  margin-top: 6.7rem;
+  margin-bottom: 4.8rem;
 }
 
 .description-card {
@@ -139,8 +139,8 @@ section.offerings h5 {
 }
 
 .description-card h6 {
-  font-size: 2.6rem;
-  font-weight: 200;
+  font-size: 2.8rem;
+  font-weight: 600;
   margin-top: 3.7rem;
   margin-bottom: 3rem;
   text-align: center;
