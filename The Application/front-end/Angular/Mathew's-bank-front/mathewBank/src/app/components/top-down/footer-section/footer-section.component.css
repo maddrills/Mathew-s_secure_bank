@@ -4,10 +4,9 @@
 
 .footer-elements {
   display: flex;
-  gap: 35rem;
-  justify-content: center;
   color: #e7f5ff;
   padding-top: 8rem;
+  justify-content: space-between;
 }
 
 .left h6,
@@ -22,6 +21,7 @@
   list-style: none;
   margin-top: 2rem;
   margin-bottom: 4rem;
+  min-width: 20rem;
 }
 
 .left ul li,
@@ -31,10 +31,29 @@
   margin-bottom: 2.2rem;
 }
 
-.mid ul {
+.left ul li a {
+  color: greenyellow;
+}
+
+.mid {
   text-align: center;
 }
 
+.mid ul li {
+  display: inline;
+  padding: 1rem;
+}
+
+.mid ul li a svg {
+  fill: #e7f5ff;
+}
 .line hr {
   color: #ffd700;
+}
+
+footer > p {
+  color: #e7f5ff;
+  text-align: center;
+  padding-bottom: 2rem;
+  font-size: 1.2rem;
 }

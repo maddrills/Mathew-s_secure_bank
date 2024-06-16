@@ -18,6 +18,32 @@ section .bank-title h4 {
   font-size: 7rem;
 }
 
+.bank-title button {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  margin-top: 6.2rem;
+  padding: 1.6rem 2.8rem;
+  background-color: white;
+  color: #555;
+  border: 1px solid #555;
+  font-size: 1.6rem;
+  transition: all 0.33s;
+}
+
+.bank-title button svg {
+  fill: #555;
+  width: 2.5rem;
+}
+
+.bank-title button:active,
+.bank-title button:hover {
+  background-color: #ffd700;
+  color: #555;
+  border: 1px solid #555;
+  cursor: pointer;
+}
+
 /* section .bank-title h4 span {
   color: #ffd700;
 } */
