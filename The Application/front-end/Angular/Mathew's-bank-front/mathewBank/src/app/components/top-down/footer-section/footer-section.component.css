@@ -1,6 +1,9 @@
 .blueish-background {
   background-color: #1864ab;
 }
+footer {
+  padding-top: 2rem;
+}
 
 .footer-elements {
   display: flex;

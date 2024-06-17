@@ -1,0 +1,101 @@
+.heading-and-logo {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.heading-and-logo svg {
+  width: 8rem;
+  height: 8rem;
+  fill: #1864ab;
+}
+
+.heading-and-logo h5 {
+  margin-top: 3rem;
+  margin-bottom: 4rem;
+  font-size: 3.5rem;
+  color: #1864ab;
+}
+
+.containment-border {
+  margin-top: 3rem;
+  padding: 1rem;
+  border: 1px solid #1864ab;
+  margin-bottom: 3rem;
+}
+
+.form-containment form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 4rem;
+}
+
+.form-containment form div {
+  display: flex;
+  gap: 2.4rem;
+}
+
+.form-containment form div > label {
+  align-self: center;
+  text-align: end;
+  font-size: 1.8rem;
+  min-width: 10rem;
+}
+
+.form-containment form .inputs {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1864ab;
+  border-radius: 2px;
+  width: 30rem;
+  padding: 1rem 1.2rem;
+  border: 1px solid #1864ab;
+}
+
+.location div {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #1864ab;
+}
+
+.location div > input {
+  padding: 1rem 1.2rem;
+  margin: 1rem;
+  border: 1px solid #1864ab;
+  /* background-color: aqua; */
+}
+
+.location div :first-child {
+  padding: 2rem;
+  font-size: 10rem;
+  align-self: center;
+  justify-self: center;
+}
+
+.submit-button input {
+  text-transform: capitalize;
+  padding: 1.2rem 4rem;
+  font-size: 2rem;
+  background-color: #1864ab;
+  color: #e7f5ff;
+  margin-bottom: 1rem;
+  border: 6px solid #ffffff;
+  transition: all 0.33s;
+  /* #1971c2 */
+}
+
+.submit-button input:active,
+.submit-button input:hover {
+  background-color: #1971c2;
+  color: #e7f5ff;
+  margin-bottom: 1rem;
+  border: 6px solid #e7f5ff;
+  transition: all 1s;
+  /* #1971c2 */
+}
+
+p {
+  margin-left: 2rem;
+  align-self: flex-start;
+}
