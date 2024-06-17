@@ -27,7 +27,8 @@ form {
 
 form div {
   display: flex;
-  gap: 6rem;
+  gap: 3rem;
+  text-align: end;
   align-items: center;
 }
 
