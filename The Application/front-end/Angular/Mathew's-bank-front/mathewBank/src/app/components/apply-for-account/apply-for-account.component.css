@@ -87,15 +87,21 @@
 
 .submit-button input:active,
 .submit-button input:hover {
+  cursor: pointer;
   background-color: #1971c2;
   color: #e7f5ff;
   margin-bottom: 1rem;
   border: 6px solid #e7f5ff;
-  transition: all 1s;
+  transition: all 0.33s;
   /* #1971c2 */
 }
 
 p {
   margin-left: 2rem;
   align-self: flex-start;
+}
+
+.small {
+  max-width: 15rem;
+  margin-right: 15rem;
 }
