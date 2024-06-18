@@ -430,7 +430,10 @@
         <span class="by">- Mathew Francis | Founder and CEO of Delta E</span>
       </div>
       <div class="people p4">
-        <img src="../../../assets/images/faces/uifaces-popular-image.jpg" />
+        <img
+          src="../../../assets/images/faces/uifaces-popular-image.jpg"
+          #target
+        />
         <p>
           "Financial safety check, Quick Loans check, Big interest with all by
           business accounts CHECK. I don't know how i would have become rich
@@ -446,12 +449,7 @@
     <div class="join-us">
       <h6>You are only a click away from becoming rich ! so why wait ?</h6>
     </div>
-    <div
-      #target
-      id="apply-down"
-      class="apply-button"
-      (click)="applicationForm()"
-    >
+    <div id="apply-down" class="apply-button" (click)="applicationForm()">
       <p>Apply now</p>
     </div>
   </div>
