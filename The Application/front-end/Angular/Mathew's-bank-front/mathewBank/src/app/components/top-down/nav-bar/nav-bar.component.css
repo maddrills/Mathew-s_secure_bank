@@ -8,6 +8,12 @@ nav {
   color: #e7f5ff;
 }
 
+.logo-container {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
 nav > div {
   font-size: 2.2rem;
   margin: 1rem;

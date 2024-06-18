@@ -1,8 +1,8 @@
-<div class="blueish-background">
+<div class="blueish-background logo-container">
   <div class="container">
     <nav>
       <div class="bank-logo">
-        <div class="mathews-bank-logo">
+        <div class="mathews-bank-logo" (click)="homePageRedirect()">
           <div>Mathew's bank</div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +18,7 @@
           </svg>
         </div>
       </div>
-      <div class="login">
+      <div class="login" (click)="loginPage()">
         <div>login</div>
       </div>
     </nav>

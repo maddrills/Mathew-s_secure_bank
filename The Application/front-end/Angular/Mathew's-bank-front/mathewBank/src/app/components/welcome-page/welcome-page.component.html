@@ -1,12 +1,13 @@
 <div>
-  <app-nav-bar></app-nav-bar>
+  <!-- class="logo-container" has no properties attached to it i have mad nav sticky in nav-bar component -->
+  <app-nav-bar class="logo-container"></app-nav-bar>
 </div>
 <div class="container">
   <section class="grid grid--2-cols">
     <div class="bank-title">
       <h4>Welcome to Mathew<span>'</span>s bank</h4>
       <p>Where your money gets a new and secure life</p>
-      <button>
+      <button (click)="scrollToElement(target)">
         <div>Click Here To Get started</div>
         <span>
           <svg
@@ -445,7 +446,14 @@
     <div class="join-us">
       <h6>You are only a click away from becoming rich ! so why wait ?</h6>
     </div>
-    <div id="apply-down" class="apply-button"><p>Apply now</p></div>
+    <div
+      #target
+      id="apply-down"
+      class="apply-button"
+      (click)="applicationForm()"
+    >
+      <p>Apply now</p>
+    </div>
   </div>
 </section>
 <app-footer-section></app-footer-section>
