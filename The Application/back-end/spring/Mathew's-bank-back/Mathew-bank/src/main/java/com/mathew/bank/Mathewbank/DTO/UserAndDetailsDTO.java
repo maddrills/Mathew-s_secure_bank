@@ -1,12 +1,9 @@
 package com.mathew.bank.Mathewbank.DTO;
 
-import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
-import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Set;
 
 public class UserAndDetailsDTO implements AllowedLoginOutputGeneric{
 
@@ -16,7 +13,7 @@ public class UserAndDetailsDTO implements AllowedLoginOutputGeneric{
 
     private UserAccounts userAccountId;
 
-    private Branch branchId;
+    private int branchId;
 
     private String fullName;
 
@@ -32,7 +29,7 @@ public class UserAndDetailsDTO implements AllowedLoginOutputGeneric{
 
     private Collection<RolesDto> rolesDto;
 
-    public UserAndDetailsDTO(int userId, String userName, UserAccounts userAccountId, Branch branchId,
+    public UserAndDetailsDTO(int userId, String userName, UserAccounts userAccountId, int branchId,
                              String fullName, String phoneNumber, LocalDate dateOfBerth, int age, String email) {
         this.userId = userId;
         this.userName = userName;
@@ -45,7 +42,7 @@ public class UserAndDetailsDTO implements AllowedLoginOutputGeneric{
         this.email = email;
     }
 
-    public UserAndDetailsDTO(int userId, String userName, UserAccounts userAccountId, Branch branchId,
+    public UserAndDetailsDTO(int userId, String userName, UserAccounts userAccountId, int branchId,
                              String fullName, String phoneNumber, LocalDate dateOfBerth, int age, String email, UserAccountDTO userAccountDTO) {
         this.userId = userId;
         this.userName = userName;
@@ -59,7 +56,7 @@ public class UserAndDetailsDTO implements AllowedLoginOutputGeneric{
         this.userAccountDTO = userAccountDTO;
     }
 
-    public UserAndDetailsDTO(int userId, String userName, UserAccounts userAccountId, Branch branchId,
+    public UserAndDetailsDTO(int userId, String userName, UserAccounts userAccountId, int branchId,
                              String fullName, String phoneNumber, LocalDate dateOfBerth,
                              int age, String email, UserAccountDTO userAccountDTO, Collection<RolesDto> rolesDto) {
         this.userId = userId;
@@ -115,11 +112,11 @@ public class UserAndDetailsDTO implements AllowedLoginOutputGeneric{
         this.userAccountId = userAccountId;
     }
 
-    public Branch getBranchId() {
+    public int getBranchId() {
         return branchId;
     }
 
-    public void setBranchId(Branch branchId) {
+    public void setBranchId(int branchId) {
         this.branchId = branchId;
     }
 

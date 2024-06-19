@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ApplicationHttpRoutes } from '../constants/http-routes';
 
 @Injectable({ providedIn: 'root' })
 export class UnRegService {
@@ -25,12 +26,27 @@ export class UnRegService {
       return;
     }
     //then its a user
+    this.userLogin(username, password).subscribe({
+      next: (a) => console.log(a),
+      error: (e) => console.log(e),
+    });
+  }
+
+  //user login data
+  private userLogin(employeeId: string, password: string) {
+    //make an http get request for userLogin login
+    return this.http.get<any>(ApplicationHttpRoutes.LOGIN_ROUTE_USER, {
+      headers: this.basicAuthCredentialsBuilder(employeeId, password),
+      observe: 'response',
+      //send all relevant cookeys
+      withCredentials: true,
+    });
   }
 
   //employee login data
   private employeeLogin(employeeId: number, password: string) {
     //make an http get request for employee login
-    return this.http.get<any>('http://localhost:8080/employee/employee-login', {
+    return this.http.get<any>(ApplicationHttpRoutes.LOGIN_ROUTE_EMPLOYEE, {
       headers: this.basicAuthCredentialsBuilder(employeeId, password),
       observe: 'response',
       //send all relevant cookeys

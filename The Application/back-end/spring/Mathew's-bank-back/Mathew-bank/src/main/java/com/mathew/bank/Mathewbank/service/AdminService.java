@@ -431,7 +431,7 @@ public class AdminService {
                                 userDetails.getId(),
                                 userDetails.getFullName(),
                                 null,
-                                null,
+                                0,
                                 userDetails.getFullName(),
                                 userDetails.getPhoneNumber(),
                                 userDetails.getDateOfBerth(),

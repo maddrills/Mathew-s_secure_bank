@@ -3,7 +3,7 @@ import { FooterSectionComponent } from '../top-down/footer-section/footer-sectio
 import { NavBarComponent } from '../top-down/nav-bar/nav-bar.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
-import { UnRegService } from '../service/unRegService';
+import { UnRegService } from '../../service/unRegService';
 
 @Component({
   selector: 'app-log-in-page',
