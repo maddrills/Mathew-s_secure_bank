@@ -64,7 +64,10 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
     //other words this method will return false for /login
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        return !request.getServletPath().equals("/bankUser/login");
+
+        System.out.println( request.getServletPath());
+
+        return !(request.getServletPath().equals("/bankUser/login") || request.getServletPath().equals("/employee/employee-login"));
     }
 
     //    gets the authority's from granted authority which we set in the configuration CustomAuthenticationProvider class

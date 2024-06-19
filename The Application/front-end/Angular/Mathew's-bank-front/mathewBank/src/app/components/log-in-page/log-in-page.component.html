@@ -14,7 +14,7 @@
         ></path>
       </svg>
     </div>
-    <form action="">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
       <div>
         <label for="user-name-or-emp">User Name / emp_number</label>
         <input
@@ -22,11 +22,18 @@
           id="user-name-or-emp"
           type="text"
           name="UserNameOrEmp"
+          ngModel
         />
       </div>
       <div>
         <label for="password">Password</label>
-        <input class="inputs" id="password" type="text" name="UserPassword" />
+        <input
+          class="inputs"
+          id="password"
+          type="password"
+          name="UserPassword"
+          ngModel
+        />
       </div>
       <div class="submit-button">
         <input class="submit-button" type="submit" value="Sign in" />

@@ -67,14 +67,11 @@ public class EmployeeController {
     @GetMapping("/employee-login")
     public EmployeeDTO loginUser(HttpServletResponse response, Authentication authentication) {
 
-        String nameOrID = authentication.getName().split(",")[0];
 
-        int uId = 0;
-        try {
-            uId = Integer.parseInt(authentication.getName().split(",")[1]);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        System.out.println(authentication);
+        System.out.println("--------------------------------------------");
+
+        String nameOrID = authentication.getName().split(",")[0];
 
         System.out.println(authentication.getName());
         int employeeId = 0;

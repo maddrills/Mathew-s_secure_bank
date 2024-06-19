@@ -21,4 +21,8 @@ export const routes: Routes = [
     path: 'application',
     component: ApplyForAccountComponent,
   },
+  {
+    path: '**',
+    component: WelcomePageComponent,
+  },
 ];
