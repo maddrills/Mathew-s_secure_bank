@@ -1,11 +1,16 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApplicationHttpRoutes } from '../constants/http-routes';
+import { UserModel } from '../model/user-model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class UnRegService {
   //initiate Http service
   constructor(private http: HttpClient) {}
+
+  userDetails = new BehaviorSubject<UserModel | null>(null);
+  userIsLoggedIn = new BehaviorSubject<boolean>(false);
 
   public commonUserLogin(username: string, password: string): void {
     console.log(username, password);
@@ -27,15 +32,47 @@ export class UnRegService {
     }
     //then its a user
     this.userLogin(username, password).subscribe({
-      next: (a) => console.log(a),
+      next: (userDetailsBackEnd) => {
+        const resultBody = userDetailsBackEnd.body;
+        //update the behaviorSubject of type user
+        this.userDetails.next(
+          new UserModel(
+            resultBody?.userId,
+            resultBody?.userName,
+            resultBody?.branchId,
+            resultBody?.fullName,
+            resultBody?.phoneNumber,
+            resultBody?.dateOfBerth,
+            resultBody?.age,
+            resultBody?.email,
+            resultBody?.userAccountDTO,
+            resultBody?.rolesDto
+          )
+        );
+      },
       error: (e) => console.log(e),
     });
+
+    this.userDetails.subscribe(
+      //if the details has user as permission
+      (userDetails) => {
+        console.log('User Service here');
+        console.log(userDetails);
+
+        userDetails?.rolesDto?.forEach((roles) => {
+          this.userIsLoggedIn.next(roles.roleName == 'ROLE_user');
+        });
+
+        console.log('the Role name is');
+        userDetails?.rolesDto?.forEach((a) => console.log(a.roleName));
+      }
+    );
   }
 
   //user login data
   private userLogin(employeeId: string, password: string) {
     //make an http get request for userLogin login
-    return this.http.get<any>(ApplicationHttpRoutes.LOGIN_ROUTE_USER, {
+    return this.http.get<UserModel>(ApplicationHttpRoutes.LOGIN_ROUTE_USER, {
       headers: this.basicAuthCredentialsBuilder(employeeId, password),
       observe: 'response',
       //send all relevant cookeys

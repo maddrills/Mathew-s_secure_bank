@@ -26,9 +26,17 @@ export class LogInPageComponent {
       return;
     }
 
+    //send details to backend
     this.unRegService.commonUserLogin(
       formDataFields.UserNameOrEmp,
       formDataFields.UserPassword
     );
+
+    // this.unRegService.userDetails.subscribe((userDetails) => {
+    //   console.log('From User');
+    //   console.log(userDetails);
+    // });
+
+    //this.unRegService.userIsLoggedIn.subscribe((isUser) => console.log(isUser));
   }
 }
