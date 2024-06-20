@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 import { ApplyForAccountComponent } from './components/apply-for-account/apply-for-account.component';
 import { LogInPageComponent } from './components/log-in-page/log-in-page.component';
-
+import { UserWelcomeComponent } from './components/user-logged-in/user-welcome/user-welcome.component';
 export const routes: Routes = [
   {
     path: '',
@@ -20,6 +20,10 @@ export const routes: Routes = [
   {
     path: 'application',
     component: ApplyForAccountComponent,
+  },
+  {
+    path: 'user-welcome',
+    component: UserWelcomeComponent,
   },
   {
     path: '**',

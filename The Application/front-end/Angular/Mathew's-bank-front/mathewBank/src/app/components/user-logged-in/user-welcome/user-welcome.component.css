@@ -1,0 +1,42 @@
+.welcome-message {
+  display: flex;
+  gap: 2rem;
+  font-size: 3rem;
+  margin-top: 10rem;
+  margin-left: 10rem;
+  align-items: baseline;
+}
+.welcome-message p {
+  color: #1864ab;
+}
+
+.accounts {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  margin: 3rem 10rem;
+  border: 1px solid #1864ab;
+}
+
+.accounts h4 {
+  text-align: center;
+  font-size: 1.8rem;
+  padding: 1rem;
+  background-color: #1864ab;
+  color: #e7f5ff;
+}
+
+.account-type {
+  margin: 2rem;
+  background-color: #a5d8ff;
+  color: #1864ab;
+  text-transform: capitalize;
+  box-shadow: 0px 0px 4px #1864ab;
+}
+
+.account-type h5 {
+  display: flex;
+  column-gap: 4rem;
+  font-size: 1.6rem;
+  padding: 1rem 2rem;
+}
