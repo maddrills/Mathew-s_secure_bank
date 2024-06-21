@@ -55,7 +55,7 @@
   justify-items: center;
   align-items: center;
   column-gap: 1rem;
-  font-size: 1.8rem;
+  font-size: 2rem;
   padding: 1rem 2rem;
 }
 
@@ -69,7 +69,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 }
 
 .account-info div:first-child {
@@ -90,27 +90,25 @@
 }
 
 .account-info div:last-child button {
-  background-color: #1864ab;
-  color: #e7f5ff;
+  background-image: linear-gradient(#e7f5ff, #d0ebff);
+  color: #1864ab;
   font-size: 1.2rem;
   font-weight: 600;
   padding: 1rem;
-  border: 1px solid #e7f5ff;
+  border: 1px solid #74c0fc;
   transition: all 0.33s;
-  margin-bottom: 2rem;
 }
-
-.account-info div:last-child button:active,
 .account-info div:last-child button:hover {
   cursor: pointer;
-  background-color: #1971c2;
-  color: #e7f5ff;
-  padding: 1rem;
-  border: 1px solid #1864ab;
+  background-image: linear-gradient(#e7f5ff, #d0ebff);
+}
+.account-info div:last-child button:active {
+  cursor: pointer;
+  background-image: linear-gradient(#d0ebff, #e7f5ff);
 }
 
 .account-type svg {
-  width: 1.6rem;
+  width: 2rem;
   transform: rotate(-180deg);
   fill: #1864ab;
   stroke: #1864ab;
@@ -120,4 +118,13 @@
 
 .account-type svg.toggle-down {
   transform: rotate(0deg);
+}
+
+.options-button {
+  display: flex;
+  gap: 1rem;
+}
+
+.options-button button {
+  min-width: 15rem;
 }
