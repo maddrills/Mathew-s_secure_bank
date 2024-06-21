@@ -49,21 +49,27 @@
 }
 
 .account-type h5 {
+  background-image: linear-gradient(#e7f5ff, #d0ebff);
   display: flex;
   justify-items: center;
   align-items: center;
   column-gap: 1rem;
   font-size: 1.73rem;
   padding: 1rem 2rem;
+  transition: all 1s;
 }
 
-.account-type h5:hover,
+.account-type h5:hover {
+  cursor: pointer;
+  background-image: linear-gradient(#e7f5ff, #baddf8);
+}
 .account-type h5:active {
   cursor: pointer;
+  background-image: linear-gradient(#baddf8, #e7f5ff);
 }
 
 .account-info {
-  margin: 1rem 0rem;
+  margin: 2rem 0rem;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
@@ -98,7 +104,7 @@
 }
 .account-info div:last-child button:hover {
   cursor: pointer;
-  background-image: linear-gradient(#e7f5ff, #d0ebff);
+  background-image: linear-gradient(#e7f5ff, #baddf8);
 }
 .account-info div:last-child button:active {
   cursor: pointer;
