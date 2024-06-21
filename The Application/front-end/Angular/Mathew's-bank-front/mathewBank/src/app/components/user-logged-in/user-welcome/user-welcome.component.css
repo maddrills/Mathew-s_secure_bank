@@ -1,13 +1,17 @@
 .welcome-message {
   display: flex;
-  gap: 2rem;
-  font-size: 3rem;
+  gap: 1.2rem;
+  font-size: 3.4rem;
   margin-top: 10rem;
   margin-left: 10rem;
   align-items: baseline;
 }
 .welcome-message p {
+  font-weight: 600;
   color: #1864ab;
+}
+.welcome-message h3 {
+  font-weight: 100;
 }
 
 .accounts {
@@ -20,23 +24,100 @@
 
 .accounts h4 {
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   padding: 1rem;
   background-color: #1864ab;
   color: #e7f5ff;
+  transition: all 0.33s;
 }
 
 .account-type {
-  margin: 2rem;
-  background-color: #a5d8ff;
+  margin: 2.4rem 2rem 0rem 2rem;
+  background-color: #d0ebff;
   color: #1864ab;
   text-transform: capitalize;
-  box-shadow: 0px 0px 4px #1864ab;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.308);
+  transition: all 0.33s;
+}
+
+.account-type:hover,
+.account-type:active {
+  background-color: #e7f5ff;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.305);
+}
+
+.build-up {
+  margin-bottom: 2.4rem;
 }
 
 .account-type h5 {
   display: flex;
-  column-gap: 4rem;
-  font-size: 1.6rem;
+  justify-items: center;
+  align-items: center;
+  column-gap: 1rem;
+  font-size: 1.8rem;
   padding: 1rem 2rem;
+}
+
+.account-type h5:hover,
+.account-type h5:active {
+  cursor: pointer;
+}
+
+.account-info {
+  margin: 1rem 0rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  font-size: 1.4rem;
+}
+
+.account-info div:first-child {
+  color: #555;
+}
+.account-info div:first-child span:last-child {
+  margin-left: 1rem;
+  font-weight: 600;
+}
+.account-number span:last-child {
+  margin-left: 1rem;
+  font-weight: 600;
+}
+.account-info div:last-child {
+  align-self: end;
+  margin-left: 1rem;
+  font-weight: 600;
+}
+
+.account-info div:last-child button {
+  background-color: #1864ab;
+  color: #e7f5ff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 1rem;
+  border: 1px solid #e7f5ff;
+  transition: all 0.33s;
+  margin-bottom: 2rem;
+}
+
+.account-info div:last-child button:active,
+.account-info div:last-child button:hover {
+  cursor: pointer;
+  background-color: #1971c2;
+  color: #e7f5ff;
+  padding: 1rem;
+  border: 1px solid #1864ab;
+}
+
+.account-type svg {
+  width: 3rem;
+  transform: rotate(-180deg);
+  fill: #1864ab;
+  stroke: #1864ab;
+  /*   transition: all 0.05s 0.33s; */
+  transition: all 0.33s;
+}
+
+.account-type svg.toggle-down {
+  transform: rotate(0deg);
 }

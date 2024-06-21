@@ -6,24 +6,90 @@
   </div>
 
   <div class="accounts">
-    <h4>User Accounts</h4>
+    <h4>User's Bank Accounts</h4>
     <div class="account-type savings">
-      <h5>
+      <h5 (click)="savingsVisible = !savingsVisible">
         Savings
-        <p>></p>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          fill="#000000"
+          viewBox="0 0 256 256"
+          [ngClass]="{ 'toggle-down': savingsVisible }"
+        >
+          <path
+            d="M216.49,104.49l-80,80a12,12,0,0,1-17,0l-80-80a12,12,0,0,1,17-17L128,159l71.51-71.52a12,12,0,0,1,17,17Z"
+          ></path>
+        </svg>
       </h5>
+      @if (savingsVisible){
+      <div class="container account-info">
+        <div><span>balance :</span><span>100,000</span></div>
+        <div class="account-number">
+          <span>Account number :</span><span>112 - 323 - 423</span>
+        </div>
+        <div>
+          <button>Get / Edit details</button>
+        </div>
+      </div>
+      }
     </div>
-    <div class="account-type savings">
-      <h5>
+    <div class="account-type checking">
+      <h5 (click)="checkingVisible = !checkingVisible">
         Checking
-        <p>></p>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          fill="#000000"
+          viewBox="0 0 256 256"
+          [ngClass]="{ 'toggle-down': checkingVisible }"
+        >
+          <path
+            d="M216.49,104.49l-80,80a12,12,0,0,1-17,0l-80-80a12,12,0,0,1,17-17L128,159l71.51-71.52a12,12,0,0,1,17,17Z"
+          ></path>
+        </svg>
       </h5>
+      @if (checkingVisible){
+      <div class="container account-info">
+        <div><span>balance :</span><span>100,000</span></div>
+        <div class="account-number">
+          <span>Account number :</span><span>112 - 323 - 423</span>
+        </div>
+        <div>
+          <button>Get / Edit details</button>
+        </div>
+      </div>
+      }
     </div>
-    <div class="account-type savings">
-      <h5>
+    <div class="account-type build-up">
+      <h5 (click)="buildUpVisible = !buildUpVisible">
         Build Up
-        <p>></p>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          fill="#000000"
+          viewBox="0 0 256 256"
+          [ngClass]="{ 'toggle-down': buildUpVisible }"
+        >
+          <path
+            d="M216.49,104.49l-80,80a12,12,0,0,1-17,0l-80-80a12,12,0,0,1,17-17L128,159l71.51-71.52a12,12,0,0,1,17,17Z"
+          ></path>
+        </svg>
       </h5>
+      @if (buildUpVisible){
+      <div class="container account-info">
+        <div><span>balance :</span><span>100,000</span></div>
+        <div class="account-number">
+          <span>Account number :</span><span>112 - 323 - 423</span>
+        </div>
+        <div>
+          <button>Get / Edit details</button>
+        </div>
+      </div>
+      }
     </div>
   </div>
 </section>
