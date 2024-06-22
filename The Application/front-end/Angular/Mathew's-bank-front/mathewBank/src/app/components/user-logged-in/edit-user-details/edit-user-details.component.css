@@ -1,0 +1,180 @@
+.containment-toping {
+  margin-top: 10rem;
+}
+
+.grid {
+  row-gap: 3rem;
+  column-gap: 0rem;
+}
+
+.savings-account {
+  background-color: #1864ab;
+  grid-column: 1/3;
+  display: flex;
+  gap: 4rem;
+  padding: 4rem;
+}
+
+.savings-account div {
+  font-weight: 600;
+  color: #e7f5ff;
+  font-size: 2.4rem;
+}
+
+.savings-account .LHS {
+  width: 22rem;
+}
+
+.savings-account span {
+  display: flex;
+  font-size: 1.8rem;
+  font-weight: 100;
+  color: #e7f5ff;
+  align-items: center;
+  margin-top: 1rem;
+}
+.savings-account span svg {
+  fill: #e7f5ff;
+  width: 2.2rem;
+}
+.savings-account span span {
+  display: inline;
+  margin-top: 0rem;
+  margin-left: 1rem;
+}
+
+.savings-account div:last-child span {
+  display: block;
+  font-weight: 100;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+.savings-account div:last-child p {
+  font-weight: 100;
+  font-size: 1.2rem;
+}
+
+.account-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  border: 1px solid #1864ab;
+  padding: 2rem 4rem;
+  font-size: 2.4rem;
+}
+
+.account-details h6 {
+  margin-bottom: 0.7rem;
+}
+
+.account-details label {
+  margin-bottom: 0.7rem;
+  color: #1864ab;
+}
+
+.edit-mode {
+  border: 1px solid #1864ab;
+
+  padding: 2rem;
+  grid-column: 1 /4;
+}
+
+.edit-text-icon.head-text {
+  background-image: linear-gradient(#f8f9fa, #dee2e6);
+  padding: 1rem 2rem;
+}
+
+.edit-text-icon.head-text:hover {
+  background-image: linear-gradient(#f8f9fa, #ced4da);
+  padding: 1rem 2rem;
+}
+.edit-text-icon.head-text:active {
+  background-image: linear-gradient(#ced4da, #f8f9fa);
+  padding: 1rem 2rem;
+}
+
+.edit-text-icon {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.edit-mode h5 {
+  font-size: 2.4rem;
+}
+.edit-mode .options {
+  margin-top: 2.2rem;
+  display: flex;
+  gap: 8rem;
+}
+
+.edit-mode .options h6 {
+  font-size: 1.6rem;
+}
+
+.edit-text-icon {
+  margin-bottom: 1rem;
+}
+
+.edit-mode .options p {
+  font-size: 1.2rem;
+  margin-bottom: 4rem;
+}
+
+.caution {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  background-color: #fff9db;
+}
+
+.edit-mode .options button {
+  font-size: 1.4rem;
+  color: #e7f5ff;
+  padding: 1rem 2rem;
+  align-self: center;
+}
+
+.edit-mode .options :first-child h6 {
+  color: #e67700;
+}
+
+.edit-mode .options :first-child .inactive {
+  border: 1px solid #ff922b;
+  background-color: #e67700;
+}
+.edit-mode .options :first-child .active {
+  border: 1px solid #51cf66;
+  background-color: #2b8a3e;
+}
+
+.edit-mode .options :last-child h6 {
+  color: #c92a2a;
+}
+.edit-mode .options :last-child button {
+  border: 1px solid #ff6b6b;
+  background-color: #c92a2a;
+}
+
+.caution.close-account {
+  background-color: #fff5f5;
+}
+
+/* Rotation logic here */
+
+.caution .edit-text-icon {
+  align-items: center;
+}
+.caution .edit-text-icon svg {
+  align-self: baseline;
+  justify-self: baseline;
+  width: 2.2rem;
+}
+/* orange rotator*/
+.caution .edit-text-icon svg {
+  fill: #e67700;
+}
+/* red rotator*/
+.caution.close-account {
+  fill: #c92a2a;
+}

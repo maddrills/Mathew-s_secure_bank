@@ -23,7 +23,11 @@ export const routes: Routes = [
   },
   {
     path: 'user-welcome',
-    component: UserWelcomeComponent,
+    //user logged in ... lazy load everything else that follows
+    loadChildren: () =>
+      import('./components/user-logged-in/user-welcome/login-user.routes').then(
+        (mode) => mode.LOGIN_ROUTER
+      ),
   },
   {
     path: '**',
