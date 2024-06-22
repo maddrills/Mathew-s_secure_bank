@@ -82,22 +82,25 @@
 
 .edit-mode {
   border: 1px solid #1864ab;
-
   padding: 2rem;
   grid-column: 1 /4;
 }
 
 .edit-text-icon.head-text {
-  background-image: linear-gradient(#f8f9fa, #dee2e6);
+  /* background-image: linear-gradient(#ffffff, #d0ebff); */
+  background-color: #e7f5ff;
   padding: 1rem 2rem;
+  transition: all 0.33s;
 }
 
 .edit-text-icon.head-text:hover {
-  background-image: linear-gradient(#f8f9fa, #ced4da);
+  /* background-image: linear-gradient(#ffffff, #a5d8ff); */
+  cursor: pointer;
+  background-color: #d0ebff;
   padding: 1rem 2rem;
 }
 .edit-text-icon.head-text:active {
-  background-image: linear-gradient(#ced4da, #f8f9fa);
+  /* background-image: linear-gradient(#a5d8ff, #ffffff); */
   padding: 1rem 2rem;
 }
 
@@ -109,7 +112,13 @@
 
 .edit-mode h5 {
   font-size: 2.4rem;
+  color: #1864ab;
 }
+
+.edit-mode svg {
+  fill: #1864ab;
+}
+
 .edit-mode .options {
   margin-top: 2.2rem;
   display: flex;
@@ -121,6 +130,8 @@
 }
 
 .edit-text-icon {
+  cursor: pointer;
+  padding: 1.4rem 0rem;
   margin-bottom: 1rem;
 }
 
@@ -132,7 +143,7 @@
 .caution {
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 0rem 2rem 2rem 2rem;
   background-color: #fff9db;
 }
 
@@ -150,10 +161,26 @@
 .edit-mode .options :first-child .inactive {
   border: 1px solid #ff922b;
   background-color: #e67700;
+  transition: all 0.33s;
 }
+
+.edit-mode .options :first-child .inactive:hover,
+.edit-mode .options :first-child .inactive:active {
+  cursor: pointer;
+  border: 1px solid #f08c00;
+  background-color: #f08c00;
+}
+
 .edit-mode .options :first-child .active {
   border: 1px solid #51cf66;
   background-color: #2b8a3e;
+  transition: all 0.33s;
+}
+.edit-mode .options :first-child .active:hover,
+.edit-mode .options :first-child .active:active {
+  cursor: pointer;
+  border: 1px solid #2f9e44;
+  background-color: #2f9e44;
 }
 
 .edit-mode .options :last-child h6 {
@@ -162,6 +189,14 @@
 .edit-mode .options :last-child button {
   border: 1px solid #ff6b6b;
   background-color: #c92a2a;
+  transition: all 0.33s;
+}
+
+.edit-mode .options :last-child button:hover,
+.edit-mode .options :last-child button:active {
+  cursor: pointer;
+  border: 1px solid #e03131;
+  background-color: #e03131;
 }
 
 .caution.close-account {
