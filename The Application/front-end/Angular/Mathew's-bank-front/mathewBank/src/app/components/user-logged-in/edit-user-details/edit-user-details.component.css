@@ -25,6 +25,14 @@
   width: 22rem;
 }
 
+.savings-account .LHS .back {
+  transition: all 0.33s;
+}
+.savings-account .LHS .back:hover,
+.savings-account .LHS .back:active {
+  cursor: pointer;
+}
+
 .savings-account span {
   display: flex;
   font-size: 1.8rem;
