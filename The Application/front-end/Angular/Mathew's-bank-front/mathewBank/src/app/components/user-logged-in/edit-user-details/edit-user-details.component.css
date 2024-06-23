@@ -184,22 +184,75 @@
 
 .transaction-table {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-bottom: 2rem;
 }
 .transaction-table table {
   border-collapse: collapse;
+  margin-bottom: 1rem;
 }
 .transaction-table .head {
   /* this is to style the head table */
-  background-color: #1864ab;
   color: #e7f5ff;
 }
+
 .transaction-table .head th {
-  font-size: 1.2rem;
+  font-size: 1.44rem;
   max-width: 25rem;
   min-width: 25rem;
   padding: 1rem;
+  background-color: #1864ab;
+  border-right: 1px solid #d0ebff;
+}
+
+.transaction-table tr:nth-child(odd) {
+  padding: 1rem;
+  background-color: #e7f5ff;
+}
+.transaction-table tr td {
+  font-size: 1.2rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* left right button */
+.next-bubble {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.next-bubble span {
+  font-size: 1.2rem;
+  border-radius: 50%;
+  color: #1864ab;
+  padding: 1rem;
+  transition: all 0.33s;
+}
+.next-bubble span:hover,
+.next-bubble span:active {
+  cursor: pointer;
+  color: #1864ab;
+  background-color: #a5d8ff;
+  font-size: 1.2rem;
+}
+
+.next-bubble svg {
+  width: 3.4rem;
+  border-radius: 50%;
+  fill: #1864ab;
+  transition: all 0.33s;
+}
+
+.next-bubble svg:hover,
+.next-bubble svg:active {
+  cursor: pointer;
+  fill: #ffffff;
+  border-radius: 50%;
+  background-color: #1864ab;
 }
 
 .edit-mode .options {
