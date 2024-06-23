@@ -40,9 +40,61 @@
         <label>1,231,234 $</label>
       </div>
     </div>
+
+    <section class="transactions">
+      <div class="transactions-heading">
+        <h4>transactions</h4>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          fill="#000000"
+          viewBox="0 0 256 256"
+        >
+          <path
+            d="M216.49,104.49l-80,80a12,12,0,0,1-17,0l-80-80a12,12,0,0,1,17-17L128,159l71.51-71.52a12,12,0,0,1,17,17Z"
+          ></path>
+        </svg>
+      </div>
+      <div class="range">
+        <h6>Date filter</h6>
+        <form action="">
+          <span class="form-field">
+            <label for="from">From :</label>
+            <input id="from" type="date" />
+          </span>
+          <span class="form-field">
+            <label for="to">To :</label>
+            <input id="to" type="date" />
+          </span>
+        </form>
+      </div>
+      <div class="container transaction-table">
+        <table>
+          <tr class="head">
+            <th>From</th>
+            <th>To</th>
+            <th>Date Time</th>
+            <th>Amount</th>
+          </tr>
+          <tr>
+            <td>Alfreds Futterkiste</td>
+            <td>Maria Anders</td>
+            <td>Germany</td>
+            <td>Germany</td>
+          </tr>
+          <tr>
+            <td>Centro comercial Moctezuma</td>
+            <td>Francisco Chang</td>
+            <td>Mexico</td>
+            <td>Germany</td>
+          </tr>
+        </table>
+      </div>
+    </section>
     <section class="edit-mode">
       <div class="edit-text-icon head-text">
-        <h5>Edit savings account</h5>
+        <h4>Edit savings account</h4>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="32"
@@ -101,7 +153,6 @@
         </div>
       </div>
     </section>
-    <section class="transactions"></section>
   </section>
 </div>
 <app-footer-section></app-footer-section>

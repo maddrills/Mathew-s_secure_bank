@@ -84,6 +84,7 @@
   border: 1px solid #1864ab;
   padding: 2rem;
   grid-column: 1 /4;
+  margin-bottom: 4rem;
 }
 
 .edit-text-icon.head-text {
@@ -104,19 +105,101 @@
   padding: 1rem 2rem;
 }
 
-.edit-text-icon {
+.edit-text-icon,
+.transactions-heading {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.edit-mode h5 {
-  font-size: 2.4rem;
+.transactions {
+  grid-column: 1 /4;
+  border: 1px solid #1864ab;
+}
+
+.transactions-heading {
+  padding: 1rem 4rem;
+  background-color: #1864ab;
+  text-transform: capitalize;
+  transition: all 0.33s;
+}
+
+.transactions-heading:hover,
+.transactions-heading:active {
+  cursor: pointer;
+  background-color: #1971c2;
+}
+
+.edit-mode h4,
+.transactions-heading h4 {
+  font-size: 2.2rem;
   color: #1864ab;
+}
+
+.range {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.range h6 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  color: #1864ab;
+}
+
+.range form {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.range form label {
+  margin-right: 1rem;
+}
+.range form input {
+  padding: 0.4rem;
+  border-radius: 10px;
+  border: 1px solid #1864ab;
+}
+
+.form-field {
+  display: inline-block;
+  padding: 1rem 2rem;
+  margin-bottom: 2.2rem;
 }
 
 .edit-mode svg {
   fill: #1864ab;
+}
+
+.transactions-heading h4 {
+  color: #e7f5ff;
+}
+
+.transactions-heading svg {
+  fill: #e7f5ff;
+}
+
+.transaction-table {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.transaction-table table {
+  border-collapse: collapse;
+}
+.transaction-table .head {
+  /* this is to style the head table */
+  background-color: #1864ab;
+  color: #e7f5ff;
+}
+.transaction-table .head th {
+  font-size: 1.2rem;
+  max-width: 25rem;
+  min-width: 25rem;
+  padding: 1rem;
 }
 
 .edit-mode .options {
