@@ -1,7 +1,10 @@
 <div class="blueish-background logo-container">
   <div class="container">
     <nav>
-      <div class="bank-logo">
+      <div
+        class="bank-logo"
+        [ngClass]="mathewBackHome ? 'golden-inlay' : 'inviableInlay'"
+      >
         <div class="mathews-bank-logo" (click)="homePageRedirect()">
           <div>Mathew's bank</div>
           <svg
@@ -18,9 +21,21 @@
           </svg>
         </div>
       </div>
-      <div class="login" (click)="loginPage()">
-        <div>login</div>
-      </div>
+      <section class="RHS">
+        @if(!loginActive){
+        <div
+          class="login RHS-common"
+          (click)="loginPage()"
+          [ngClass]="loginSelected ? 'golden-inlay' : 'inviableInlay'"
+        >
+          <div>Log-in</div>
+        </div>
+        }@else {
+        <div class="log-out RHS-common inviableInlay" (click)="logOutPage()">
+          <div>Log-out</div>
+        </div>
+        }
+      </section>
     </nav>
   </div>
 </div>

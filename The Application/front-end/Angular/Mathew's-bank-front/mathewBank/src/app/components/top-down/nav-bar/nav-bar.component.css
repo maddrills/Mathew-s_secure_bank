@@ -22,12 +22,29 @@ nav > div {
   transition: all 0.3s;
 }
 
-.login {
-  border-width: 1px;
-  border-style: solid;
+.RHS {
+  display: flex;
+  gap: 2rem;
+  margin: 1rem;
+  font-size: 2rem;
+}
+
+.golden-inlay {
   border-radius: 5px;
-  border-color: #ffd700;
-  padding: 1rem;
+  border: 1px solid #ffd700;
+}
+.inviableInlay {
+  border-radius: 5px;
+  border: 1px solid #1864ab;
+}
+
+.RHS-common {
+  padding: 1.4rem;
+}
+
+.log-out {
+}
+.login {
 }
 
 .mathews-bank-logo {
@@ -47,13 +64,9 @@ nav div:active,
 nav div:hover {
   cursor: pointer;
   background-color: #1971c2;
+  border-radius: 5px;
   color: white;
 }
-
-section {
-  margin-top: 4.2rem;
-}
-
 section img {
   width: 55rem;
 }
