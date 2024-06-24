@@ -357,3 +357,57 @@
 .caution.close-account {
   fill: #c92a2a;
 }
+
+.money-transfer-container {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.money-transfer-container h6 {
+  font-size: 1.8rem;
+  color: #1864ab;
+}
+
+.money-transfer-container form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4rem;
+  font-size: 1.2rem;
+}
+
+.money-transfer-container form label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.money-transfer-container form :nth-child(2) {
+  margin-bottom: 2rem;
+}
+
+.money-transfer-container form input {
+  padding: 0.6rem 1.4rem;
+  border: 1px solid #1864ab;
+}
+
+.money-transfer-container form button {
+  margin-top: 2.2rem;
+  background-color: #1864ab;
+  border: 1px solid #a5d8ff;
+  color: #d0ebff;
+  font-weight: 600;
+  font-size: 1.44rem;
+  align-self: center;
+  max-width: 8rem;
+  padding: 1rem 2rem;
+  transition: all 0.33s;
+}
+
+.money-transfer-container form button:hover,
+.money-transfer-container form button:active {
+  cursor: pointer;
+  background-color: #1971c2;
+  border: 1px solid #1971c2;
+}
