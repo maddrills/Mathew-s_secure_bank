@@ -56,6 +56,7 @@
           ></path>
         </svg>
       </div>
+      @if(moneyTransferActive){
       <div class="container money-transfer-container">
         <h6>IMPS mony transfer</h6>
         <form>
@@ -66,6 +67,7 @@
           <button>Pay</button>
         </form>
       </div>
+      }
     </section>
 
     <section class="transactions">
@@ -83,6 +85,7 @@
           ></path>
         </svg>
       </div>
+      @if(transactions){
       <div class="range">
         <h6>Date filter</h6>
         <form action="">
@@ -195,6 +198,7 @@
           </svg>
         </div>
       </div>
+      }
     </section>
     <section class="edit-mode">
       <div class="edit-text-icon head-text">
@@ -211,6 +215,7 @@
           ></path>
         </svg>
       </div>
+      @if(editSavingsAccount){
       <div class="options">
         <div class="caution">
           <div class="edit-text-icon">
@@ -227,12 +232,14 @@
               ></path>
             </svg>
           </div>
+          @if(false){
           <p>
             Inactivating the account will stop all monetary transactions from
             and to this account only
           </p>
           <button class="inactive">Inactivate</button>
           <button class="active">Activate</button>
+          }
         </div>
         <div class="caution close-account">
           <div class="edit-text-icon">
@@ -249,13 +256,16 @@
               ></path>
             </svg>
           </div>
+          @if(false){
           <p>
             closing the account will permanently delete the account... please be
             sure before proceeding
           </p>
           <button>Close Account</button>
+          }
         </div>
       </div>
+      }
     </section>
   </section>
 </div>

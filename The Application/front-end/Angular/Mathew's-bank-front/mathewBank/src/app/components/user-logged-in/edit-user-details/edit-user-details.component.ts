@@ -9,4 +9,12 @@ import { FooterSectionComponent } from '../../top-down/footer-section/footer-sec
   templateUrl: './edit-user-details.component.html',
   styleUrl: './edit-user-details.component.css',
 })
-export class EditUserDetailsComponent {}
+export class EditUserDetailsComponent {
+  private startPoint: boolean = true;
+
+  moneyTransferActive: boolean = this.startPoint;
+  transactions: boolean = this.startPoint;
+  editSavingsAccount: boolean = this.startPoint;
+  inactiveAccount: boolean = this.startPoint;
+  closeAccount: boolean = this.startPoint;
+}
