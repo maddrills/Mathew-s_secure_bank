@@ -171,7 +171,13 @@
 }
 
 .edit-mode svg {
+  transform: rotate(-180deg);
+  transition: all 0.33s;
   fill: #1864ab;
+}
+
+.edit-mode svg.toggle-down {
+  transform: rotate(0deg);
 }
 
 .transactions-heading h4 {
@@ -180,6 +186,12 @@
 
 .transactions-heading svg {
   fill: #e7f5ff;
+  transform: rotate(-180deg);
+  transition: all 0.33s;
+}
+
+.transactions-heading svg.toggle-down {
+  transform: rotate(0deg);
 }
 
 .transaction-table {
@@ -257,8 +269,7 @@
 
 .edit-mode .options {
   margin-top: 2.2rem;
-  display: flex;
-  gap: 8rem;
+  gap: 2rem;
 }
 
 .edit-mode .options h6 {
@@ -279,6 +290,7 @@
 .caution {
   display: flex;
   flex-direction: column;
+  align-self: baseline;
   padding: 0rem 2rem 2rem 2rem;
   background-color: #fff9db;
 }
@@ -337,6 +349,7 @@
 
 .caution.close-account {
   background-color: #fff5f5;
+  align-self: baseline;
 }
 
 /* Rotation logic here */
@@ -347,7 +360,13 @@
 .caution .edit-text-icon svg {
   align-self: baseline;
   justify-self: baseline;
+  transform: rotate(-180deg);
+  transition: all 0.33s;
   width: 2.2rem;
+}
+
+.caution .edit-text-icon svg.toggle-down {
+  transform: rotate(0deg);
 }
 /* orange rotator*/
 .caution .edit-text-icon svg {

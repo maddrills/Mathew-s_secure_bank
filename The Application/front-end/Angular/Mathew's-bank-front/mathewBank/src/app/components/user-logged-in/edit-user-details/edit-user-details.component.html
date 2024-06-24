@@ -4,7 +4,7 @@
     <div class="savings-account">
       <div class="LHS">
         <label>Savings Account</label>
-        <span class="back">
+        <span class="back" (click)="backToUserHome()">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="32"
@@ -42,7 +42,10 @@
     </div>
 
     <section class="transactions">
-      <div class="transactions-heading">
+      <div
+        class="transactions-heading"
+        (click)="moneyTransferActive = !moneyTransferActive"
+      >
         <h4>Money Transfer</h4>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -50,6 +53,7 @@
           height="32"
           fill="#000000"
           viewBox="0 0 256 256"
+          [ngClass]="{ 'toggle-down': moneyTransferActive }"
         >
           <path
             d="M216.49,104.49l-80,80a12,12,0,0,1-17,0l-80-80a12,12,0,0,1,17-17L128,159l71.51-71.52a12,12,0,0,1,17,17Z"
@@ -71,7 +75,7 @@
     </section>
 
     <section class="transactions">
-      <div class="transactions-heading">
+      <div class="transactions-heading" (click)="transactions = !transactions">
         <h4>transactions</h4>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -79,6 +83,7 @@
           height="32"
           fill="#000000"
           viewBox="0 0 256 256"
+          [ngClass]="{ 'toggle-down': transactions }"
         >
           <path
             d="M216.49,104.49l-80,80a12,12,0,0,1-17,0l-80-80a12,12,0,0,1,17-17L128,159l71.51-71.52a12,12,0,0,1,17,17Z"
@@ -201,7 +206,7 @@
       }
     </section>
     <section class="edit-mode">
-      <div class="edit-text-icon head-text">
+      <div class="edit-text-icon head-text" (click)="editSavingsAccountLogic()">
         <h4>Edit savings account</h4>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -209,6 +214,7 @@
           height="32"
           fill="#000000"
           viewBox="0 0 256 256"
+          [ngClass]="{ 'toggle-down': editSavingsAccount }"
         >
           <path
             d="M216.49,104.49l-80,80a12,12,0,0,1-17,0l-80-80a12,12,0,0,1,17-17L128,159l71.51-71.52a12,12,0,0,1,17,17Z"
@@ -216,9 +222,12 @@
         </svg>
       </div>
       @if(editSavingsAccount){
-      <div class="options">
+      <div class="options grid grid--2-cols">
         <div class="caution">
-          <div class="edit-text-icon">
+          <div
+            class="edit-text-icon"
+            (click)="inactiveAccount = !inactiveAccount"
+          >
             <h6>Inactivate account</h6>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -226,13 +235,14 @@
               height="32"
               fill="#000000"
               viewBox="0 0 256 256"
+              [ngClass]="{ 'toggle-down': inactiveAccount }"
             >
               <path
                 d="M216.49,104.49l-80,80a12,12,0,0,1-17,0l-80-80a12,12,0,0,1,17-17L128,159l71.51-71.52a12,12,0,0,1,17,17Z"
               ></path>
             </svg>
           </div>
-          @if(false){
+          @if(inactiveAccount){
           <p>
             Inactivating the account will stop all monetary transactions from
             and to this account only
@@ -242,7 +252,7 @@
           }
         </div>
         <div class="caution close-account">
-          <div class="edit-text-icon">
+          <div class="edit-text-icon" (click)="closeAccount = !closeAccount">
             <h6>Close Account</h6>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -250,13 +260,14 @@
               height="32"
               fill="#000000"
               viewBox="0 0 256 256"
+              [ngClass]="{ 'toggle-down': closeAccount }"
             >
               <path
                 d="M216.49,104.49l-80,80a12,12,0,0,1-17,0l-80-80a12,12,0,0,1,17-17L128,159l71.51-71.52a12,12,0,0,1,17,17Z"
               ></path>
             </svg>
           </div>
-          @if(false){
+          @if(closeAccount){
           <p>
             closing the account will permanently delete the account... please be
             sure before proceeding
