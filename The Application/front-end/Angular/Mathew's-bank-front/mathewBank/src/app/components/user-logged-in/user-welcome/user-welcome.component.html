@@ -30,9 +30,9 @@
           <span>Account number :</span><span>112 - 323 - 423</span>
         </div>
         <div class="options-button">
-          <button>Transfer Fund</button>
-          <button>Transactions</button>
-          <button>Edit details</button>
+          <button (click)="transferFund('accountNumber')">Transfer Fund</button>
+          <button (click)="transactions('accountNumber')">Transactions</button>
+          <button (click)="editDetails('accountNumber')">Edit details</button>
         </div>
       </div>
       }
@@ -56,13 +56,13 @@
       @if (checkingVisible){
       <div class="container account-info">
         <div><span>balance :</span><span>100,000</span></div>
-        <div class="account-number">
+        <div class="account-number" #checking>
           <span>Account number :</span><span>112 - 323 - 423</span>
         </div>
         <div class="options-button">
-          <button>Transfer Fund</button>
-          <button>Transactions</button>
-          <button>Edit details</button>
+          <button (click)="transferFund('accountNumber')">Transfer Fund</button>
+          <button (click)="transactions('accountNumber')">Transactions</button>
+          <button (click)="editDetails('accountNumber')">Edit details</button>
         </div>
       </div>
       }
@@ -86,13 +86,13 @@
       @if (buildUpVisible){
       <div class="container account-info">
         <div><span>balance :</span><span>100,000</span></div>
-        <div class="account-number">
+        <div class="account-number" #buildUp>
           <span>Account number :</span><span>112 - 323 - 423</span>
         </div>
         <div class="options-button">
-          <button>Transfer Fund</button>
-          <button>Transactions</button>
-          <button>Edit details</button>
+          <button (click)="transferFund('accountNumber')">Transfer Fund</button>
+          <button (click)="transactions('accountNumber')">Transactions</button>
+          <button (click)="editDetails('accountNumber')">Edit details</button>
         </div>
       </div>
       }

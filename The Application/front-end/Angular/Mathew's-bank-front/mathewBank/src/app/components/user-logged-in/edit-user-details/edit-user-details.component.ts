@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavBarComponent } from '../../top-down/nav-bar/nav-bar.component';
 import { FooterSectionComponent } from '../../top-down/footer-section/footer-section.component';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-user-details',
@@ -12,8 +12,6 @@ import { Router } from '@angular/router';
   styleUrl: './edit-user-details.component.css',
 })
 export class EditUserDetailsComponent {
-  constructor(private router: Router) {}
-
   private startPoint: boolean = false;
 
   moneyTransferActive: boolean = this.startPoint;
@@ -21,6 +19,37 @@ export class EditUserDetailsComponent {
   editSavingsAccount: boolean = this.startPoint;
   inactiveAccount: boolean = this.startPoint;
   closeAccount: boolean = this.startPoint;
+
+  constructor(private router: Router, private route: ActivatedRoute) {
+    //gets the router param number to reveal the Ui
+    // console.log(router.url);
+    // console.log(this.route.snapshot.queryParams['openDetailsUi']);
+
+    const paramNumber = Number(
+      this.route.snapshot.queryParams['openDetailsUi']
+    );
+
+    this.openPartOdUi(paramNumber);
+  }
+
+  // check the query param and opens up a ui element accordingly
+  private openPartOdUi(num: Number) {
+    console.log(Number(num));
+    switch (num) {
+      case 1:
+        this.moneyTransferActive = true;
+        break;
+      case 2:
+        this.transactions = true;
+        break;
+      case 3:
+        this.editSavingsAccount = true;
+        break;
+      default:
+        console.log('error');
+        break;
+    }
+  }
 
   editSavingsAccountLogic() {
     this.editSavingsAccount = !this.editSavingsAccount;

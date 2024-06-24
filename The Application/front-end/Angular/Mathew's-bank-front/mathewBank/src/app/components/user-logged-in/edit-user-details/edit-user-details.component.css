@@ -302,7 +302,7 @@
   align-self: center;
 }
 
-.edit-mode .options :first-child h6 {
+.edit-mode .edit-text-icon h6 {
   color: #e67700;
 }
 
@@ -331,9 +331,6 @@
   background-color: #2f9e44;
 }
 
-.edit-mode .options :last-child h6 {
-  color: #c92a2a;
-}
 .edit-mode .options :last-child button {
   border: 1px solid #ff6b6b;
   background-color: #c92a2a;
@@ -375,6 +372,13 @@
 /* red rotator*/
 .caution.close-account {
   fill: #c92a2a;
+}
+.close-account .edit-text-icon svg {
+  fill: #c92a2a;
+}
+
+.caution.close-account .edit-text-icon h6 {
+  color: #c92a2a;
 }
 
 .money-transfer-container {
