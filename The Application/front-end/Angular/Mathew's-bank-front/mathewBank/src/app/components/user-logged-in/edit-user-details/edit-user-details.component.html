@@ -75,7 +75,10 @@
     </section>
 
     <section class="transactions">
-      <div class="transactions-heading" (click)="transactions = !transactions">
+      <div
+        class="transactions-heading prevent-select"
+        (click)="transactions = !transactions"
+      >
         <h4>transactions</h4>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -173,7 +176,7 @@
             <td>sample</td>
           </tr>
         </table>
-        <div class="next-bubble">
+        <div class="next-bubble prevent-select">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="32"
@@ -205,7 +208,7 @@
       </div>
       }
     </section>
-    <section class="edit-mode">
+    <section class="edit-mode prevent-select">
       <div class="edit-text-icon head-text" (click)="editSavingsAccountLogic()">
         <h4>Edit savings account</h4>
         <svg

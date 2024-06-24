@@ -1,11 +1,13 @@
 <app-nav-bar></app-nav-bar>
 <section class="container">
   <div class="welcome-message">
-    <h3>Welcome :</h3>
-    <p>{{ userName }}</p>
+    <div class="single-line">
+      <h3>Welcome :</h3>
+      <p>{{ userName }}</p>
+    </div>
   </div>
 
-  <div class="accounts">
+  <div class="accounts prevent-select">
     <h4>User's Bank Accounts</h4>
     <div class="account-type savings">
       <h5 (click)="savingsVisible = !savingsVisible">

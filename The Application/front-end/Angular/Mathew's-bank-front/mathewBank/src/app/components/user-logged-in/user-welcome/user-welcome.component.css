@@ -5,6 +5,7 @@
   margin-top: 10rem;
   margin-left: 10rem;
   align-items: baseline;
+  border: 1px solid #1864ab;
 }
 .welcome-message p {
   font-weight: 600;
@@ -12,6 +13,12 @@
 }
 .welcome-message h3 {
   font-weight: 100;
+}
+
+.single-line {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
 }
 
 .accounts {

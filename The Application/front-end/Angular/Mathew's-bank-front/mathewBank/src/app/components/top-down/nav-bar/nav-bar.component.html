@@ -1,4 +1,4 @@
-<div class="blueish-background logo-container">
+<div class="blueish-background logo-container prevent-select">
   <div class="container">
     <nav>
       <div
@@ -22,7 +22,7 @@
         </div>
       </div>
       <section class="RHS">
-        @if(!loginActive){
+        @if(loginActive){
         <div
           class="login RHS-common"
           (click)="loginPage()"
@@ -31,6 +31,15 @@
           <div>Log-in</div>
         </div>
         }@else {
+        <div
+          class="login RHS-common"
+          (click)="userHomePage()"
+          [ngClass]="loginUserHome ? 'golden-inlay' : 'inviableInlay'"
+        >
+          <div>User-Home</div>
+        </div>
+
+        <hr />
         <div class="log-out RHS-common inviableInlay" (click)="logOutPage()">
           <div>Log-out</div>
         </div>
