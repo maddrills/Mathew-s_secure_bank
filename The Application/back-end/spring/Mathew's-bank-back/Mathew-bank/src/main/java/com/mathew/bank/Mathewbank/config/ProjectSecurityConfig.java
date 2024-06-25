@@ -79,23 +79,28 @@ public class ProjectSecurityConfig {
                         .requestMatchers(
                                 "/admin/get_all_users",
                                 "/admin/list_all_branches_with_manager",
-                                "/admin/get_all_employees_by_a_role_name?roleName=manager",
+                                "/admin/get_all_employees_by_a_role_name",
                                 "/admin/get_all_employees",
                                 "/admin/create_a_branch",
-                                "/admin/manager_to_branch").hasAnyRole("admin")
+                                "/admin/manager_to_branch",
+                                "/employee/getAllApplications").hasAnyRole("admin")
 
-                        .requestMatchers("/employee/getAllApplications",
-                                "/employee/getApplicationById",
-                                "/employee/getUserApplicationByPhoneOrEmail",
-                                "/employee/acceptApplication",
-                                "/employee/rejectApplication",
+                        .requestMatchers(
                                 //TODO if its a manager then prevent add employee with permission manager
                                 "/admin/add_an_employee",
                                 "/admin/remove_employee_permission",
                                 "/admin/add_employee_permission").hasAnyRole("manager")
 
+                        .requestMatchers(
+                                "/employee/getApplicationById",
+                                "/employee/getUserApplicationByPhoneOrEmail",
+                                "/employee/acceptApplication",
+                                "/employee/rejectApplication").hasAnyRole("clerk")
+
+                        // TODO employee can only view there details
+                        .requestMatchers("").hasAnyRole("employee")
+
                         .requestMatchers("/user/getAllUserData").hasAnyRole("user")
-                        //.requestMatchers("/user/**").hasAnyRole("Admin","User")
                         //any one who is authenticated can access /users
                         .requestMatchers("/bankUser/login","/employee/employee-login", "/user", "/user/getXSRfToken", "/logout").authenticated()
                         //all the rest are open to public
