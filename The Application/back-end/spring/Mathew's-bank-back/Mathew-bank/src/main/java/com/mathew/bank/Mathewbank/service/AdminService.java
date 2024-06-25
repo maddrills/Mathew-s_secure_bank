@@ -41,11 +41,10 @@ public class AdminService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    //adds an employee with his or her credentials and at least one role
-    public String addAnyEmployee(EmployeeDTO employeeDTO, HttpServletResponse response, Authentication authentication){
+    private int authCheck(Authentication authentication){
 
         int accessLevel = 0;
-        //check the auth object
+
         authentication.getAuthorities().forEach(System.out::println);
 
         // cycle through permissions and set an access level
@@ -57,6 +56,14 @@ public class AdminService {
                 accessLevel = 3;
             }
         }
+        return accessLevel;
+    }
+
+    //adds an employee with his or her credentials and at least one role
+    public String addAnyEmployee(EmployeeDTO employeeDTO, HttpServletResponse response, Authentication authentication){
+
+        int accessLevel = authCheck(authentication);
+        //check the auth object
         System.out.println(accessLevel);
         if(accessLevel == 3){
             // then only
@@ -222,8 +229,20 @@ public class AdminService {
     }
 
     //change employee role
-    public List<RolesDto> changeEmployeePermission(int empId, List<RolesDto> roles,HttpServletResponse response){
+    public List<RolesDto> changeEmployeePermission(int empId, List<RolesDto> roles, HttpServletResponse response, Authentication authentication){
 
+        int authLevel = authCheck(authentication);
+
+        if(authLevel == 3){
+            //then manager is adding a role
+            //make sure he cant add manager as a role
+            for( RolesDto rolesDto : roles){
+                if(rolesDto.getRoleName().equals("manager")){
+                    response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                    return null;
+                }
+            }
+        }
         // forbid any illegal
         if(!this.SanityCheckForEmpPermission(empId, roles)) {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
@@ -247,7 +266,20 @@ public class AdminService {
         return respRoles;
     }
 
-    public List<RolesDto> addAnEmployeeRole(int empId, List<RolesDto> roles,HttpServletResponse response){
+    public List<RolesDto> addAnEmployeeRole(int empId, List<RolesDto> roles,HttpServletResponse response,Authentication authentication){
+
+        int authLevel = authCheck(authentication);
+
+        if(authLevel == 3){
+            //then manager is adding a role
+            //make sure he cant add manager as a role
+            for( RolesDto rolesDto : roles){
+                if(rolesDto.getRoleName().equals("manager")){
+                    response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                    return null;
+                }
+            }
+        }
 
         // forbid any illegal
         if(!this.SanityCheckForEmpPermission(empId, roles)) {
