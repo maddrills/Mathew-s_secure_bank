@@ -7,6 +7,7 @@ import com.mathew.bank.Mathewbank.DTO.UserAndDetailsDTO;
 import com.mathew.bank.Mathewbank.service.AdminService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -76,9 +77,11 @@ public class AdminController {
 
     //adds an employee to db with or without a ROLE
     @PostMapping("/add_an_employee")
-    public String addAnEmployee(@RequestBody EmployeeDTO employeeDTO,  HttpServletResponse response){
+    public String addAnEmployee(@RequestBody EmployeeDTO employeeDTO,  HttpServletResponse response, Authentication authentication){
 
-        return this.adminService.addAnyEmployee(employeeDTO, response);
+        //check if auth
+
+        return this.adminService.addAnyEmployee(employeeDTO, response,authentication);
 
     }
 

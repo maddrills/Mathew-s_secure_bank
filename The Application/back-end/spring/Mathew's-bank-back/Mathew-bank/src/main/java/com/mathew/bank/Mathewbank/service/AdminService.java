@@ -19,6 +19,8 @@ import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.UserDetails;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +42,31 @@ public class AdminService {
     private PasswordEncoder passwordEncoder;
 
     //adds an employee with his or her credentials and at least one role
-    public String addAnyEmployee(EmployeeDTO employeeDTO, HttpServletResponse response){
+    public String addAnyEmployee(EmployeeDTO employeeDTO, HttpServletResponse response, Authentication authentication){
+
+        int accessLevel = 0;
+        //check the auth object
+        authentication.getAuthorities().forEach(System.out::println);
+
+        // cycle through permissions and set an access level
+        for(GrantedAuthority empRoles : authentication.getAuthorities()){
+
+            if(empRoles.toString().equals("ROLE_admin")){
+                accessLevel = 4;
+            } else if (empRoles.toString().equals("ROLE_manager") && accessLevel != 4) {
+                accessLevel = 3;
+            }
+        }
+        System.out.println(accessLevel);
+        if(accessLevel == 3){
+            // then only
+            for(RolesDto role : employeeDTO.getRolesName()){
+                if(role.getRoleName().equals("admin") || role.getRoleName().equals("manager")){
+                    response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                    return "manager cannot add role manager";
+                }
+            }
+        }
 
         //a collection of unique roles
         Set<String> allowedRoles = new LinkedHashSet<>();
