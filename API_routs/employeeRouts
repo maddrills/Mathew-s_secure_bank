@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "e15e175a-9a68-48fa-a295-32779eeaa2e8",
+		"_postman_id": "06945f1a-6675-4cf9-8732-76d7b06cc52d",
 		"name": "employeeRouts",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29498098"
+		"_exporter_id": "29967989"
 	},
 	"item": [
 		{
@@ -141,7 +141,7 @@
 				"method": "PATCH",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/employee/acceptApplication?applicationnNumber=101",
+					"raw": "http://localhost:8080/employee/acceptApplication?applicationNumber=101",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -153,7 +153,7 @@
 					],
 					"query": [
 						{
-							"key": "applicationnNumber",
+							"key": "applicationNumber",
 							"value": "101"
 						}
 					]
@@ -167,7 +167,7 @@
 				"method": "PATCH",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/employee/rejectApplication?applicationnNumber=101",
+					"raw": "http://localhost:8080/employee/rejectApplication?applicationNumber=101",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -179,7 +179,7 @@
 					],
 					"query": [
 						{
-							"key": "applicationnNumber",
+							"key": "applicationNumber",
 							"value": "101"
 						}
 					]

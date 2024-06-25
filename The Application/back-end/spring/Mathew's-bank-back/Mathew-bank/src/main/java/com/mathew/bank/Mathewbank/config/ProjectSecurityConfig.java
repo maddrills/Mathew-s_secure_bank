@@ -76,13 +76,30 @@ public class ProjectSecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         //only admin can use this rout
                         //user roles :- ROLE_admin ROLE_employee ROLE_manager ROLE_user
-                        .requestMatchers("/user/addUser", "/user/remove-user", "/user/get-all-users", "/user/get-all-users-post").hasAnyRole("admin")
+                        .requestMatchers(
+                                "/admin/get_all_users",
+                                "/admin/list_all_branches_with_manager",
+                                "/admin/get_all_employees_by_a_role_name?roleName=manager",
+                                "/admin/get_all_employees",
+                                "/admin/create_a_branch",
+                                "/admin/manager_to_branch").hasAnyRole("admin")
+
+                        .requestMatchers("/employee/getAllApplications",
+                                "/employee/getApplicationById",
+                                "/employee/getUserApplicationByPhoneOrEmail",
+                                "/employee/acceptApplication",
+                                "/employee/rejectApplication",
+                                //TODO if its a manager then prevent add employee with permission manager
+                                "/admin/add_an_employee",
+                                "/admin/remove_employee_permission",
+                                "/admin/add_employee_permission").hasAnyRole("manager")
+
                         .requestMatchers("/user/getAllUserData").hasAnyRole("user")
                         //.requestMatchers("/user/**").hasAnyRole("Admin","User")
                         //any one who is authenticated can access /users
                         .requestMatchers("/bankUser/login","/employee/employee-login", "/user", "/user/getXSRfToken", "/logout").authenticated()
                         //all the rest are open to public
-                        .requestMatchers("/Sign-up/signup-user").permitAll()
+                        .requestMatchers("/exposed/applyForAccount","/Sign-up/signup-user").permitAll()
                 )
                 // redirect to /login if the user is not authenticated  Customizer.withDefaults() enables a security feature using the defaults provided by Spring Security
                 .formLogin(Customizer.withDefaults())

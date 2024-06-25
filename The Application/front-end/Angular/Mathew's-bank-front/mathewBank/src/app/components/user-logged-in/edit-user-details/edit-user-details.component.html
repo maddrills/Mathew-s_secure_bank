@@ -2,7 +2,7 @@
 <div class="container containment-toping">
   <section class="grid grid--3-cols">
     <div class="savings-account">
-      <div class="LHS">
+      <div class="LHS prevent-select">
         <label>Savings Account</label>
         <span class="back" (click)="backToUserHome()">
           <svg
@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <section class="transactions">
+    <section class="transactions prevent-select">
       <div
         class="transactions-heading"
         (click)="moneyTransferActive = !moneyTransferActive"
@@ -94,7 +94,7 @@
         </svg>
       </div>
       @if(transactions){
-      <div class="range">
+      <div class="range prevent-select">
         <h6>Date filter</h6>
         <form action="">
           <span class="form-field">
@@ -109,7 +109,7 @@
       </div>
       <div class="container transaction-table">
         <table>
-          <tr class="head">
+          <tr class="head prevent-select">
             <th>From</th>
             <th>To</th>
             <th>Date Time</th>

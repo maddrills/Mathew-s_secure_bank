@@ -477,6 +477,7 @@ public class AdminService {
         );
 
         employee.setARole(new Role("ROLE_manager"));
+        employee.setARole(new Role("ROLE_clerk"));
         employee.setARole(new Role("ROLE_employee"));
 
 
