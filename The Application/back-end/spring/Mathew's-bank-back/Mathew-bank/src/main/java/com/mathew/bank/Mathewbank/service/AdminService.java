@@ -53,12 +53,14 @@ public class AdminService {
 
         //check if someone put admin in the request
         for(RolesDto role : employeeDTO.getRolesName()){
-            if(!role.getRoleName().equals("admin")){
-                allowedRoles.add(role.getRoleName());
-            }else{
+            if(role.getRoleName().equals("admin")){
                 response.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 return "ROLE Admin not allowed";
             }
+        }
+
+        for(RolesDto role : employeeDTO.getRolesName()){
+            allowedRoles.add(role.getRoleName());
         }
 
         if( this.addEmployeeAndDetails(

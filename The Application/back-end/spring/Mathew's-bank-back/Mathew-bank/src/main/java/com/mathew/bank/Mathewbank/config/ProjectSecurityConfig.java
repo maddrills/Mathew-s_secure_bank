@@ -98,7 +98,7 @@ public class ProjectSecurityConfig {
                                 "/employee/rejectApplication").hasAnyRole("clerk")
 
                         // TODO employee can only view there details
-                        .requestMatchers("").hasAnyRole("employee")
+                        //.requestMatchers("").hasAnyRole("employee")
 
                         .requestMatchers("/user/getAllUserData").hasAnyRole("user")
                         //any one who is authenticated can access /users
