@@ -1,31 +1,64 @@
 .welcome-message {
   display: flex;
-  gap: 1.2rem;
-  font-size: 3.4rem;
-  margin-top: 10rem;
-  margin-left: 10rem;
-  align-items: baseline;
+  font-size: 2.4rem;
+  margin: 10rem 10rem 0rem 10rem;
+  background-color: #1864ab;
   border: 1px solid #1864ab;
+  justify-content: space-between;
 }
+
+.common-container {
+  margin: 3rem 10rem;
+}
+
 .welcome-message p {
   font-weight: 600;
   color: #1864ab;
+  margin-right: 2rem;
 }
 .welcome-message h3 {
+  margin: 1rem 2rem;
   font-weight: 100;
+}
+
+.profile-view {
+  margin-right: 2rem;
+  padding: 0rem 1rem;
+  display: flex;
+  background-color: #1864ab;
+  color: #e7f5ff;
+  transition: all 0.33s;
+}
+
+.profile-view:hover,
+.profile-view:active {
+  cursor: pointer;
+  background-color: #1971c2;
+}
+
+/* edit profile */
+.profile-view h6 {
+  font-size: 1.4rem;
+  align-self: center;
+}
+
+.profile-view svg {
+  margin-left: 1.2rem;
+  fill: #e7f5ff;
+  align-self: center;
 }
 
 .single-line {
   display: flex;
   align-items: baseline;
-  gap: 1.2rem;
+  gap: 0rem;
+  background-color: #fff;
 }
 
 .accounts {
   display: flex;
   flex-direction: column;
   justify-items: center;
-  margin: 3rem 10rem;
   border: 1px solid #1864ab;
 }
 
