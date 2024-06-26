@@ -6,12 +6,12 @@ import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.DTO.UserApplicationDTO;
 import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
+import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDetails;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class EmployeeService {
@@ -125,7 +125,7 @@ public class EmployeeService {
             Employee employee = this.employeeRepository.getEmployeeById(nameOrID);
 
             // get the roles from employee
-            final List<RolesDto> rolesDtos = new LinkedList<>();
+            final Set<RolesDto> rolesDtos = new LinkedHashSet<>();
 
             employee.getRoles().forEach( role -> rolesDtos.add(new RolesDto(role.getRole(),true)));
 
@@ -137,11 +137,61 @@ public class EmployeeService {
                     employee.getDetails().getDateOfBirth(),
                     employee.getDetails().getSalary(),
                     null,
+                    employee.getBankBranch().getId(),
                     rolesDtos);
 
         }catch (Exception e){
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             System.out.println(e.toString());
+            return null;
+        }
+    }
+
+    public Collection<EmployeeDTO> getEmployeesUnderABranch(int branchNNumber, HttpServletResponse httpServletResponse){
+        //sanity check
+        if(branchNNumber <= 0){
+            httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return null;
+        }
+        
+        //create a dto list
+        final Collection<EmployeeDTO> employeesUnderBank = new LinkedList<>();
+        
+        try{
+            Collection<Employee> employees = this.employeeRepository.getEmployeeUnderBranch(branchNNumber);
+
+            //cycle through the employee list
+            employees.forEach(employee -> {
+                //assign each employee to the DTO list
+                //get the employee details from employee
+                EmployeeDetails employeeDetails = employee.getDetails();
+                
+                //get the roles from employee
+                Set<RolesDto> empRoles = new LinkedHashSet<>();
+
+                //translate employeeRoles to RolesDTO
+                employee.getRoles().forEach(role -> {
+                    empRoles.add(new RolesDto(role.getRole(), true));
+                });
+                
+                employeesUnderBank.add(
+                        new EmployeeDTO(
+                                employee.getId(),
+                                employeeDetails.getPhone_number(),
+                                employeeDetails.getFullName(),
+                                employeeDetails.getEmail(),
+                                employeeDetails.getDateOfBirth(),
+                                employeeDetails.getSalary(),
+                                null,
+                                employee.getBankBranch().getId(),
+                                empRoles
+                        )
+                );
+            });
+
+            return employeesUnderBank;
+
+        }catch (Exception e){
             return null;
         }
     }

@@ -395,4 +395,20 @@ public class EmployeeRepository implements EmpRepo {
     }
 
 
+    @Override
+    public Collection<Employee> getEmployeeUnderBranch(int branchId) {
+
+        TypedQuery<Employee> query = this.entityManager.createQuery(
+                "SELECT e FROM Employee e " +
+                        "JOIN FETCH e.details " +
+                        "JOIN FETCH e.bankBranch "+
+                        "JOIN FETCH e.bankBranch eb " +
+                        "WHERE eb.id = :branchId"
+       , Employee.class );
+
+        query.setParameter("branchId", branchId);
+
+        return query.getResultList();
+    }
+
 }

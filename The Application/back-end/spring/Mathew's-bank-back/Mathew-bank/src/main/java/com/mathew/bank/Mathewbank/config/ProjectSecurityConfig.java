@@ -82,14 +82,15 @@ public class ProjectSecurityConfig {
                                 "/admin/get_all_employees_by_a_role_name",
                                 "/admin/get_all_employees",
                                 "/admin/create_a_branch",
-                                "/admin/manager_to_branch",
-                                "/employee/getAllApplications").hasAnyRole("admin")
+                                "/admin/manager_to_branch").hasAnyRole("admin")
 
                         .requestMatchers(
                                 //TODO if its a manager then prevent add employee with permission manager
                                 "/admin/add_an_employee",
                                 "/admin/remove_employee_permission",
-                                "/admin/add_employee_permission").hasAnyRole("manager")
+                                "/admin/add_employee_permission",
+                                "/employee/getAllApplications",
+                                "/manager/**").hasAnyRole("manager")
 
                         .requestMatchers(
                                 "/employee/getApplicationById",
@@ -98,11 +99,11 @@ public class ProjectSecurityConfig {
                                 "/employee/rejectApplication").hasAnyRole("clerk")
 
                         // TODO employee can only view there details
-                        //.requestMatchers("").hasAnyRole("employee")
+                        .requestMatchers("/employee/employee-login").hasAnyRole("employee")
 
                         .requestMatchers("/user/getAllUserData").hasAnyRole("user")
                         //any one who is authenticated can access /users
-                        .requestMatchers("/bankUser/login","/employee/employee-login", "/user", "/user/getXSRfToken", "/logout").authenticated()
+                        .requestMatchers("/bankUser/login", "/user", "/user/getXSRfToken", "/logout").authenticated()
                         //all the rest are open to public
                         .requestMatchers("/exposed/applyForAccount","/Sign-up/signup-user").permitAll()
                 )

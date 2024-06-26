@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "b7319b08-db13-4dcc-9249-ebdfb3163dad",
+		"name": "Manager colection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29967989"
+	},
+	"item": [
+		{
+			"name": "getEmployeesByBranch",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/manager/get-employees-by-branch?branchId=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"manager",
+						"get-employees-by-branch"
+					],
+					"query": [
+						{
+							"key": "branchId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getClerkByBranch",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/manager/get-clerk-by-branch?branchId=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"manager",
+						"get-clerk-by-branch"
+					],
+					"query": [
+						{
+							"key": "branchId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getEmployeeById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/manager/get-employees-by-empId?employeeId=1000001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"manager",
+						"get-employees-by-empId"
+					],
+					"query": [
+						{
+							"key": "employeeId",
+							"value": "1000001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getEmployeeByPhoneNumber",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/manager/get-employees-by-phone?phoneNumber=123123123123",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"manager",
+						"get-employees-by-phone"
+					],
+					"query": [
+						{
+							"key": "phoneNumber",
+							"value": "123123123123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getEmployeeByEmail",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/manager/get-employees-by-email?email=donjohn@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"manager",
+						"get-employees-by-email"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "donjohn@gmail.com"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -3,6 +3,7 @@ package com.mathew.bank.Mathewbank.DTO;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Set;
 
 public class EmployeeDTO implements AllowedLoginOutputGeneric{
 
@@ -21,12 +22,15 @@ public class EmployeeDTO implements AllowedLoginOutputGeneric{
 
     private String password;
 
-    private Collection<RolesDto> rolesName;
+    private int branchId;
+
+    private Set<RolesDto> rolesName;
+
 
     public EmployeeDTO() {
     }
 
-    public EmployeeDTO(int empId, String phone_number, String full_name, String email, LocalDate dateOfBirth, double salary, String password, Collection<RolesDto> rolesName) {
+    public EmployeeDTO(int empId, String phone_number, String full_name, String email, LocalDate dateOfBirth, double salary, String password, Set<RolesDto> rolesName) {
         this.empId = empId;
         this.phone_number = phone_number;
         this.full_name = full_name;
@@ -35,6 +39,27 @@ public class EmployeeDTO implements AllowedLoginOutputGeneric{
         this.salary = salary;
         this.password = password;
         this.rolesName = rolesName;
+    }
+
+    public EmployeeDTO(int empId, String phone_number, String full_name, String email, LocalDate dateOfBirth, double salary, String password, int branchId, Set<RolesDto> rolesName) {
+        this.empId = empId;
+        this.phone_number = phone_number;
+        this.full_name = full_name;
+        this.email = email;
+        this.dateOfBirth = dateOfBirth;
+        this.salary = salary;
+        this.password = password;
+        this.branchId = branchId;
+        this.rolesName = rolesName;
+    }
+
+
+    public int getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(int branchId) {
+        this.branchId = branchId;
     }
 
     public int getEmpId() {
@@ -97,9 +122,10 @@ public class EmployeeDTO implements AllowedLoginOutputGeneric{
         return rolesName;
     }
 
-    public void setRolesName(Collection<RolesDto> rolesName) {
+    public void setRolesName(Set<RolesDto> rolesName) {
         this.rolesName = rolesName;
     }
+
 
     @Override
     public String toString() {
@@ -111,6 +137,7 @@ public class EmployeeDTO implements AllowedLoginOutputGeneric{
                 ", dateOfBirth=" + dateOfBirth +
                 ", salary=" + salary +
                 ", password='" + password + '\'' +
+                ", branchId=" + branchId +
                 ", rolesName=" + rolesName +
                 '}';
     }

@@ -47,4 +47,6 @@ public interface EmpRepo extends User_emp_commonRepo {
 
     public Employee getEmployeeById(int employeeId);
 
+    public Collection<Employee> getEmployeeUnderBranch(int branchId);
+
 }

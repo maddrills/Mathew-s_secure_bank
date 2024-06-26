@@ -41,7 +41,7 @@ public class AdminService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    private int authCheck(Authentication authentication){
+    private int accessLevelAuthCheck(Authentication authentication){
 
         int accessLevel = 0;
 
@@ -62,7 +62,13 @@ public class AdminService {
     //adds an employee with his or her credentials and at least one role
     public String addAnyEmployee(EmployeeDTO employeeDTO, HttpServletResponse response, Authentication authentication){
 
-        int accessLevel = authCheck(authentication);
+        // sanity check
+        if(employeeDTO == null) {
+            response.setStatus(HttpServletResponse.SC_CONFLICT);
+            return "error null entry";
+        }
+
+        int accessLevel = accessLevelAuthCheck(authentication);
         //check the auth object
         System.out.println(accessLevel);
         if(accessLevel == 3){
@@ -78,18 +84,26 @@ public class AdminService {
         //a collection of unique roles
         Set<String> allowedRoles = new LinkedHashSet<>();
 
-        // sanity check
-        if(employeeDTO == null) {
-            response.setStatus(HttpServletResponse.SC_CONFLICT);
-            return "error null entry";
-        }
+        boolean employeeRoleExists = false;
 
         //check if someone put admin in the request
         for(RolesDto role : employeeDTO.getRolesName()){
+
+            //forbid if someone added admin role
             if(role.getRoleName().equals("admin")){
                 response.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 return "ROLE Admin not allowed";
             }
+
+            // check if employee role was added
+            if(role.getRoleName().equals("employee")){
+                employeeRoleExists = true;
+            }
+        }
+
+        //if employee is being added without employee role then add the role to it
+        if(!employeeRoleExists){
+            employeeDTO.getRolesName().add(new RolesDto("employee",true));
         }
 
         for(RolesDto role : employeeDTO.getRolesName()){
@@ -231,7 +245,7 @@ public class AdminService {
     //change employee role
     public List<RolesDto> changeEmployeePermission(int empId, List<RolesDto> roles, HttpServletResponse response, Authentication authentication){
 
-        int authLevel = authCheck(authentication);
+        int authLevel = accessLevelAuthCheck(authentication);
 
         if(authLevel == 3){
             //then manager is adding a role
@@ -268,7 +282,7 @@ public class AdminService {
 
     public List<RolesDto> addAnEmployeeRole(int empId, List<RolesDto> roles,HttpServletResponse response,Authentication authentication){
 
-        int authLevel = authCheck(authentication);
+        int authLevel = accessLevelAuthCheck(authentication);
 
         if(authLevel == 3){
             //then manager is adding a role
