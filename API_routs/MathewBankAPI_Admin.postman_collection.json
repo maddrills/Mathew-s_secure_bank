@@ -519,7 +519,7 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/admin/manager_to_branch?employeeAKAManager=1000002&branchId=2",
+					"raw": "http://localhost:8080/admin/manager_to_branch?employeeAKAManager=1000002&branchId=11",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -536,7 +536,7 @@
 						},
 						{
 							"key": "branchId",
-							"value": "2"
+							"value": "11"
 						}
 					]
 				}
@@ -682,6 +682,36 @@
 					"path": [
 						"admin",
 						"get_all_users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "removeManagerFromBranch",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/remove-manager-from-branch?employeeAKAManager=1000002&branchId=11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"remove-manager-from-branch"
+					],
+					"query": [
+						{
+							"key": "employeeAKAManager",
+							"value": "1000002"
+						},
+						{
+							"key": "branchId",
+							"value": "11"
+						}
 					]
 				}
 			},

@@ -98,4 +98,13 @@ public class AdminController {
 
         return this.adminService.changeEmployeePermission(employeeId,rolesDto,response,authentication);
     }
+
+    @PutMapping("/remove-manager-from-branch")
+    public boolean removeEmployeeFromBank(@RequestParam int employeeAKAManager ,HttpServletResponse response){
+
+        System.out.println(employeeAKAManager);
+
+        this.adminService.removeManagerFromBranch(employeeAKAManager, response);
+        return false;
+    }
 }

@@ -82,7 +82,8 @@ public class ProjectSecurityConfig {
                                 "/admin/get_all_employees_by_a_role_name",
                                 "/admin/get_all_employees",
                                 "/admin/create_a_branch",
-                                "/admin/manager_to_branch").hasAnyRole("admin")
+                                "/admin/manager_to_branch",
+                                "/admin/remove-manager-from-branch").hasAnyRole("admin")
 
                         .requestMatchers(
                                 //TODO if its a manager then prevent add employee with permission manager

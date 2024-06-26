@@ -51,6 +51,10 @@ public interface EmpRepo extends User_emp_commonRepo {
 
     public boolean setClerkIntoBank(int managerID, int clerkId);
 
+    public boolean removeManagerFromBank(int managerId);
+
+    public List<Employee> findAllEmployeesWhoAreNotManagersOrAdminsInBank(int bankId);
+
     public Branch getBranchByEmployeeId(int employeeBranch);
 
 }

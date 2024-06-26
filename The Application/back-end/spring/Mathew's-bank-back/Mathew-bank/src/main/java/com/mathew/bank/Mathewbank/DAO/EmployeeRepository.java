@@ -483,7 +483,42 @@ public class EmployeeRepository implements EmpRepo {
         }
     }
 
+    @Override
+    public boolean removeManagerFromBank(int managerId) {
 
+        //get manager by id
+        // find all clerks under branch
+        Collection<Employee> employees = this.findAllEmployeesWhoAreNotManagersOrAdminsInBank(managerId);
+
+        System.out.println("Reached here");
+
+        employees.forEach(employee -> {
+            System.out.println("Employee without manager as cred "+employee.getId());
+        });
+
+        return false;
+    }
+
+    @Override
+    public List<Employee> findAllEmployeesWhoAreNotManagersOrAdminsInBank(int bankId) {
+
+        //find admin role
+/*        List<Role> exclusionRoles = new ArrayList<>(
+                List.of(this.findRoleByRoleName("admin"),this.findRoleByRoleName("manager"))
+        );*/
+        Role admin = this.findRoleByRoleName("admin");
+        Role manager = this.findRoleByRoleName("manager");
+
+
+        TypedQuery<Employee> query = entityManager.createQuery(
+                "SELECT e from Employee AS e JOIN FETCH e.roles WHERE :roleAd NOT MEMBER OF e.roles AND :roleMan NOT MEMBER OF e.roles"
+        ,Employee.class);
+
+        query.setParameter("roleAd", admin);
+        query.setParameter("roleMan", manager);
+
+        return query.getResultList();
+    }
 
 
     @Override

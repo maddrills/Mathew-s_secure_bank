@@ -499,7 +499,7 @@ public class AdminService {
         final List<UserAndDetailsDTO> userAndDetailsDTOS = new LinkedList<>();
 
         //get a list of all employee details from db
-        this.empRepo. getAllUserAndThereInfo().forEach(
+        this.empRepo.getAllUserAndThereInfo().forEach(
                 //for each employee detail add them to the DTO
                 userDetails -> userAndDetailsDTOS.add(
                         new UserAndDetailsDTO(
@@ -517,6 +517,22 @@ public class AdminService {
         );
 
         return userAndDetailsDTOS;
+    }
+
+    //removes manager from bank 1) points all clerks to admin 2) only after manager is removed
+
+    public boolean removeManagerFromBranch(int employeeId, HttpServletResponse httpServletResponse){
+
+        //sanity check
+        if(employeeId <=0) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return false;
+        }
+
+        this.empRepo.removeManagerFromBank(employeeId);
+
+        return false;
+
     }
 
 
