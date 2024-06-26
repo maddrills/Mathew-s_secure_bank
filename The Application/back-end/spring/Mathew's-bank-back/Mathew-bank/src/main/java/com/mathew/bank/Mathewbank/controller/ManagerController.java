@@ -5,10 +5,7 @@ import com.mathew.bank.Mathewbank.service.EmployeeService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
@@ -51,5 +48,15 @@ public class ManagerController {
     public EmployeeDTO getEmployeeByEmail(@RequestParam String email){
         System.out.println(email);
         return null;
+    }
+
+
+    @PutMapping("/add-clark-to-branch")
+    public boolean addClerkToBankBranch(@RequestParam int employeeClerk, Authentication authentication, HttpServletResponse response){
+
+        System.out.println(employeeClerk);
+        System.out.println(authentication.getName());
+
+        return this.employeeService.addClarkToManagerBranch(employeeClerk,authentication,response);
     }
 }

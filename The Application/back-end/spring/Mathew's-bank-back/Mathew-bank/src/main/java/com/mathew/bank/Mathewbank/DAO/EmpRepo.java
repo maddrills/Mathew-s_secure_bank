@@ -49,4 +49,8 @@ public interface EmpRepo extends User_emp_commonRepo {
 
     public Collection<Employee> getEmployeeUnderBranch(int branchId);
 
+    public boolean setClerkIntoBank(int managerID, int clerkId);
+
+    public Branch getBranchByEmployeeId(int employeeBranch);
+
 }

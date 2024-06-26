@@ -17,6 +17,7 @@ import jakarta.persistence.TypedQuery;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
@@ -426,6 +427,69 @@ public class EmployeeRepository implements EmpRepo {
         query.setParameter("branchId", branchId);
 
         return query.getResultList();
+    }
+
+    @Override
+    @Transactional
+    public boolean setClerkIntoBank(int managerID, int clerkId) {
+
+        //getManager
+        Employee manager = this.getEmployeeById(managerID);
+
+        //get the back branch by manager
+        if(manager.getBankBranch() == null){
+            throw new NullPointerException("Bank branch not assigned to manager");
+        }
+        Branch managerBranch = this.getBranchById(manager.getBankBranch().getId());
+
+
+        //get the employee who has clerk in roles
+        Employee clark = this.getEmployeeById(clerkId);
+
+        boolean clerkAssignable = false;
+
+        //makes sure only two romes are available clerk and employee
+        if(clark.getRoles().size() == 2){
+            for(var role : clark.getRoles()){
+                if(role.getRole().equals("ROLE_clerk") || role.getRole().equals("ROLE_employee")){
+                    clerkAssignable = true;
+                }else {
+                    clerkAssignable = false;
+                    break;
+                }
+            }
+        }else {
+            //not a clark
+            throw new DataIntegrityViolationException("Cant add employee  with more than 2 permission to a branch as a clerk");
+        }
+
+        //if clerk is assignable provide with commitment
+        if(clerkAssignable)
+        {
+            // check if clerk in branch
+            if(clark.getBankBranch() != null){
+                throw new DataIntegrityViolationException("Cant add an employee who is already in branch");
+            }
+            //update reporting manager
+            clark.setManager(manager);
+            // set the manager branch to clerk branch
+            clark.setBankBranch(managerBranch);
+            //commit
+            this.entityManager.merge(clark);
+            return true;
+
+        }else {
+            throw new DataIntegrityViolationException("Employee does not have the role clerk");
+        }
+    }
+
+
+
+
+    @Override
+    public Branch getBranchByEmployeeId(int employeeBranch) {
+
+        return null;
     }
 
 }

@@ -9,6 +9,7 @@ import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDetails;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -137,7 +138,7 @@ public class EmployeeService {
                     employee.getDetails().getDateOfBirth(),
                     employee.getDetails().getSalary(),
                     null,
-                    employee.getBankBranch().getId(),
+                    employee.getBankBranch() == null ? 0 : employee.getBankBranch().getId(),
                     rolesDtos);
 
         }catch (Exception e){
@@ -193,6 +194,27 @@ public class EmployeeService {
 
         }catch (Exception e){
             return null;
+        }
+    }
+
+
+    public boolean addClarkToManagerBranch(int employeeClerk,
+                                           Authentication authentication,
+                                           HttpServletResponse response){
+
+        int authIdManager = Integer.parseInt(authentication.getName());
+        //check if manager and clerk have the same if yes then return error
+        if(employeeClerk == authIdManager){
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            return false;
+        }
+
+        try{
+            return this.employeeRepository.setClerkIntoBank(authIdManager, employeeClerk);
+        }catch (Exception e){
+            System.out.println(e);
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            return false;
         }
     }
 }

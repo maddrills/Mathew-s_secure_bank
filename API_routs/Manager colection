@@ -135,6 +135,32 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "addClarkToManagerBranch",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/manager/add-clark-to-branch?employeeClerk=1000004",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"manager",
+						"add-clark-to-branch"
+					],
+					"query": [
+						{
+							"key": "employeeClerk",
+							"value": "1000004"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
