@@ -117,6 +117,7 @@ public class AdminService {
                 employeeDTO.getDateOfBirth(),
                 employeeDTO.getSalary(),
                 employeeDTO.getPassword(),
+                Integer.parseInt(authentication.getName()),
                 allowedRoles
         ).equals("error")){
             response.setStatus(HttpServletResponse.SC_CONFLICT);
@@ -128,7 +129,7 @@ public class AdminService {
 
     private String addEmployeeAndDetails(
             String phone_number, String full_name, String email, LocalDate dateOfBirth, double salary,
-            String password, Collection<String> rolesName
+            String password,int adderId, Collection<String> rolesName
     ){
 
         if(phone_number.isEmpty() || full_name.isEmpty() || email.isEmpty() || dateOfBirth == null || salary < 0 || password.isEmpty() || rolesName.isEmpty()) return "error";
@@ -155,7 +156,7 @@ public class AdminService {
 
         // TODO catch individual exceptions
         try{
-            empRepo.addAnEmployeeAndThereDetails(employeeDetails, rolesName);
+            empRepo.addAnEmployeeAndThereDetails(employeeDetails, adderId, rolesName);
         }catch (Exception e){
             System.out.println(e);
             return "error";
@@ -569,7 +570,7 @@ public class AdminService {
 
         // TODO catch individual exceptions
         try{
-            empRepo.addAnEmployeeAndThereDetails(employeeDetails, new HashSet<>(Set.of("admin")));
+            empRepo.addAnEmployeeAndThereDetails(employeeDetails,0, new HashSet<>(Set.of("admin")));
         }catch (Exception e){
             System.out.println(e);
         }

@@ -15,7 +15,7 @@ public interface EmpRepo extends User_emp_commonRepo {
 
     public boolean addedAnyEmployee(Employee employee);
 
-    public void addAnEmployeeAndThereDetails(EmployeeDetails employeeDetails,  Collection<String> roleNames);
+    public void addAnEmployeeAndThereDetails(EmployeeDetails employeeDetails,int adderId,  Collection<String> roleNames);
 
     public void addARole(Role role);
 

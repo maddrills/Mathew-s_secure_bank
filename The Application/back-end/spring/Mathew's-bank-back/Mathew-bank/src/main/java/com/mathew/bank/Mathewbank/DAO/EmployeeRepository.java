@@ -17,6 +17,7 @@ import jakarta.persistence.TypedQuery;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
@@ -49,11 +50,27 @@ public class EmployeeRepository implements EmpRepo {
 
     @Override
     @Transactional
-    public void  addAnEmployeeAndThereDetails(EmployeeDetails employeeDetails, Collection<String> roleNames) {
+    public void  addAnEmployeeAndThereDetails(EmployeeDetails employeeDetails,int managerId, Collection<String> roleNames) {
 
+        if(managerId < 0){
+            //error occurred
+            throw new BadCredentialsException("Negative contain as input");
+        }
         //first checks if role is available only then does it persist else it will throw an exception and not persist
         roleNames.forEach(role -> employeeDetails.getEmployee().setARole(this.findRoleByRoleName(role)));
 
+
+        if(managerId != 0){
+            //get the reporting manager by id
+            Employee manager = this.getEmployeeById(managerId);
+            //with reporting manager
+
+            employeeDetails.getEmployee().setManager(manager);
+            //added repointing manager to employee to be added
+
+            entityManager.persist(employeeDetails);
+        }
+        //without any reporting manager
         entityManager.persist(employeeDetails);
     }
 
