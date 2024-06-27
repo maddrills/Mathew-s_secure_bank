@@ -87,7 +87,6 @@ public class ProjectSecurityConfig {
                                 "/admin/remove-clerk-from-bank-by-admin").hasAnyRole("admin")
 
                         .requestMatchers(
-                                //TODO if its a manager then prevent add employee with permission manager
                                 "/admin/add_an_employee",
                                 "/admin/remove_employee_permission",
                                 "/admin/add_employee_permission",
@@ -100,7 +99,7 @@ public class ProjectSecurityConfig {
                                 "/employee/acceptApplication",
                                 "/employee/rejectApplication").hasAnyRole("clerk")
 
-                        // TODO employee can only view there details
+                        // TODO employee can only Login
                         .requestMatchers("/employee/employee-login").hasAnyRole("employee")
 
                         .requestMatchers("/bankUser/**").hasAnyRole("user")

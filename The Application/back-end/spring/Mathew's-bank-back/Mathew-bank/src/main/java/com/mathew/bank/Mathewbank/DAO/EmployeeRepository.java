@@ -1,11 +1,8 @@
 package com.mathew.bank.Mathewbank.DAO;
 
-import com.mathew.bank.Mathewbank.DTO.RolesDto;
-import com.mathew.bank.Mathewbank.DTO.UserAndDetailsDTO;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
-import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.TimeSpace;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDetails;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
@@ -13,7 +10,6 @@ import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Savings;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.UserDetails;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Subgraph;
 import jakarta.persistence.TypedQuery;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
@@ -23,8 +19,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Repository
@@ -312,6 +306,15 @@ public class EmployeeRepository implements EmpRepo {
         return userDetailsTypedQuery.getResultList();
     }
 
+    @Override
+    public List<User> getAllUserAndThereInfoVViaUser(){
+        TypedQuery<User> userDetailsTypedQuery = this.entityManager.createQuery(
+                "SELECT u FROM User AS u",
+                User.class);
+
+        return userDetailsTypedQuery.getResultList();
+    }
+
 
     //get all user application
     @Override
@@ -343,7 +346,7 @@ public class EmployeeRepository implements EmpRepo {
     }
 
 
-    //@Transactional
+    @Transactional
     private void persistUserDetails(UserDetails userDetails, int branchId) {
 
         System.out.println(branchId);

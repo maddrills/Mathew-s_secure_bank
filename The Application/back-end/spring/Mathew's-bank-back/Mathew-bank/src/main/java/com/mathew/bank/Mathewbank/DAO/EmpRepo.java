@@ -37,6 +37,8 @@ public interface EmpRepo extends User_emp_commonRepo {
 
     public List<UserDetails> getAllUserAndThereInfo();
 
+    public List<User> getAllUserAndThereInfoVViaUser();
+
     public List<UserApplication> getAllUserApplications();
     UserApplication getApplicationByIdNumber(int number);
 

@@ -501,21 +501,41 @@ public class AdminService {
         final List<UserAndDetailsDTO> userAndDetailsDTOS = new LinkedList<>();
 
         //get a list of all employee details from db
-        this.empRepo.getAllUserAndThereInfo().forEach(
+//        this.empRepo.getAllUserAndThereInfo().forEach(
+//                //for each employee detail add them to the DTO
+//                userDetails -> userAndDetailsDTOS.add(
+//                        new UserAndDetailsDTO(
+//                                userDetails.getId(),
+//                                userDetails.getFullName(),
+//                                null,
+//                                0,
+//                                userDetails.getFullName(),
+//                                userDetails.getPhoneNumber(),
+//                                userDetails.getDateOfBerth(),
+//                                userDetails.getAge(),
+//                                userDetails.getEmail()
+//                        )
+//                )
+//        );
+        this.empRepo.getAllUserAndThereInfoVViaUser().forEach(
                 //for each employee detail add them to the DTO
-                userDetails -> userAndDetailsDTOS.add(
-                        new UserAndDetailsDTO(
-                                userDetails.getId(),
-                                userDetails.getFullName(),
-                                null,
-                                0,
-                                userDetails.getFullName(),
-                                userDetails.getPhoneNumber(),
-                                userDetails.getDateOfBerth(),
-                                userDetails.getAge(),
-                                userDetails.getEmail()
-                        )
-                )
+                user -> {
+                    UserDetails userDetails = user.getUserDetails();
+
+                    userAndDetailsDTOS.add(
+                            new UserAndDetailsDTO(
+                                    user.getId(),
+                                    user.getUserName(),
+                                    user.getUserAccountId(),
+                                    user.getBranchId().getId(),
+                                    userDetails.getFullName(),
+                                    userDetails.getPhoneNumber(),
+                                    userDetails.getDateOfBerth(),
+                                    userDetails.getAge(),
+                                    userDetails.getEmail()
+                            )
+                    );
+                }
         );
 
         return userAndDetailsDTOS;
