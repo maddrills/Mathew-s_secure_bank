@@ -210,7 +210,19 @@ public class EmployeeRepository implements EmpRepo {
 
         //get the employee and branch entity's
         Branch branch = getBranchById(bankId);
+        //check if branch already has a manager
+        if(!(branch.getBranchManager() == null)){
+            throw new RuntimeException("Batch already has a manager");
+        }
+
         Employee employee = getEmployeeById(managerId);
+
+        //find everyone under manager
+        Collection<Employee> clerks = this.findAllEmployeesWhoAreNotManagersOrAdminsInBank(branch.getId());
+        if(clerks != null){
+            //assign manager to all sub employees
+            clerks.forEach(unassignedClerk -> unassignedClerk.setManager(employee));
+        }
 
         //add branch to manager and manager to branch
         employee.setBankBranch(branch);
@@ -483,20 +495,34 @@ public class EmployeeRepository implements EmpRepo {
         }
     }
 
+    //admin specific operation
     @Override
-    public boolean removeManagerFromBank(int managerId) {
+    @Transactional
+    public boolean removeManagerFromBank(int managerId, int adminId) {
 
-        //get manager by id
+        //get manager and admin entity by id
+        Employee manager = getEmployeeById(managerId);
+        Employee admin = getEmployeeById(adminId);
         // find all clerks under branch
-        Collection<Employee> employees = this.findAllEmployeesWhoAreNotManagersOrAdminsInBank(managerId);
+        Collection<Employee> employees = this.findAllEmployeesWhoAreNotManagersOrAdminsInBank(manager.getBankBranch().getId());
+        // point all clerks to point to manager
+        employees.forEach(employee -> {
+            employee.setManager(admin);
+        });
 
-        System.out.println("Reached here");
+        //remove manager from bank
+        manager.getBankBranch().setBranchManager(null);
+        //finally remove bank from manager
+        manager.setBankBranch(null);
+
 
         employees.forEach(employee -> {
             System.out.println("Employee without manager as cred "+employee.getId());
         });
 
-        return false;
+        this.entityManager.merge(manager);
+
+        return true;
     }
 
     @Override
@@ -509,13 +535,22 @@ public class EmployeeRepository implements EmpRepo {
         Role admin = this.findRoleByRoleName("admin");
         Role manager = this.findRoleByRoleName("manager");
 
+        System.out.println("Branch id is "+bankId);
 
+        // TODO filter by branch id
+        // does not return employees with null as associated bank
         TypedQuery<Employee> query = entityManager.createQuery(
-                "SELECT e from Employee AS e JOIN FETCH e.roles WHERE :roleAd NOT MEMBER OF e.roles AND :roleMan NOT MEMBER OF e.roles"
+                "SELECT e from Employee AS e " +
+                        "JOIN FETCH e.roles " +
+                        "JOIN FETCH e.bankBranch AS b " +
+                        "WHERE b.id = :branchId AND " +
+                        ":roleAd NOT MEMBER OF e.roles AND " +
+                        ":roleMan NOT MEMBER OF e.roles "
         ,Employee.class);
 
         query.setParameter("roleAd", admin);
         query.setParameter("roleMan", manager);
+        query.setParameter("branchId", bankId);
 
         return query.getResultList();
     }
@@ -525,6 +560,27 @@ public class EmployeeRepository implements EmpRepo {
     public Branch getBranchByEmployeeId(int employeeBranch) {
 
         return null;
+    }
+
+    @Override
+    @Transactional
+    public boolean removeClerkFromBranchAdminControl(int bankId, int employeeId, int adminId) {
+
+        //get employee entity
+        Employee clerk = this.getEmployeeById(employeeId);
+        Employee admin = this.getEmployeeById(adminId);
+
+        //check if clerk has a bank association
+        if(clerk.getBankBranch() == null) return false;
+        if(!(clerk.getBankBranch().getId() == bankId)) return false;
+
+        //manager to admin and bank to null
+        clerk.setManager(admin);
+        clerk.setBankBranch(null);
+
+        //commit the changes
+        this.entityManager.merge(clerk);
+        return true;
     }
 
 }

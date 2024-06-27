@@ -352,6 +352,7 @@ public class AdminService {
         try{
             this.empRepo.addManagerToBranch(managerID, branchId);
         }catch (Exception e){
+            System.out.println(e);
             return false;
         }
         return true;
@@ -521,7 +522,7 @@ public class AdminService {
 
     //removes manager from bank 1) points all clerks to admin 2) only after manager is removed
 
-    public boolean removeManagerFromBranch(int employeeId, HttpServletResponse httpServletResponse){
+    public boolean removeManagerFromBranch(int employeeId,Authentication authentication, HttpServletResponse httpServletResponse){
 
         //sanity check
         if(employeeId <=0) {
@@ -529,9 +530,38 @@ public class AdminService {
             return false;
         }
 
-        this.empRepo.removeManagerFromBank(employeeId);
+        int adminId = Integer.parseInt(authentication.getName());
 
-        return false;
+        // admin can not remove themselves from the bank
+        if(adminId == employeeId){
+            httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return false;
+        }
+
+        try{
+            return this.empRepo.removeManagerFromBank(employeeId,Integer.parseInt(authentication.getName()));
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
+    }
+
+
+    public boolean removeClerkFromAnyBank(int bankId, int clerkId, Authentication authentication, HttpServletResponse httpServletResponse){
+
+        //sanity check
+        if(bankId <= 0 || clerkId <= 0) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return false;
+        }
+
+        try {
+            return this.empRepo.removeClerkFromBranchAdminControl(bankId, clerkId, Integer.parseInt(authentication.getName()));
+        }catch (Exception e){
+            httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            System.out.println(e);
+            return false;
+        }
 
     }
 

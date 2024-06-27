@@ -100,11 +100,18 @@ public class AdminController {
     }
 
     @PutMapping("/remove-manager-from-branch")
-    public boolean removeEmployeeFromBank(@RequestParam int employeeAKAManager ,HttpServletResponse response){
+    public boolean removeEmployeeFromBank(@RequestParam int employeeAKAManager,Authentication authentication ,HttpServletResponse response){
 
         System.out.println(employeeAKAManager);
 
-        this.adminService.removeManagerFromBranch(employeeAKAManager, response);
-        return false;
+        return this.adminService.removeManagerFromBranch(employeeAKAManager, authentication, response);
+    }
+
+    @PutMapping("/remove-clerk-from-bank-by-admin")
+    public boolean removeClerkFromBankByAdmin(@RequestParam int bankId,@RequestParam int clerkId, Authentication authentication, HttpServletResponse httpServletResponse ){
+
+        System.out.println(bankId);
+
+        return this.adminService.removeClerkFromAnyBank(bankId, clerkId, authentication, httpServletResponse);
     }
 }

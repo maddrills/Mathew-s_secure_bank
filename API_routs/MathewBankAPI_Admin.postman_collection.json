@@ -716,6 +716,36 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "removeClerkFromBankByAdmin",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/remove-clerk-from-bank-by-admin?bankId=1&clerkId=1000005",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"remove-clerk-from-bank-by-admin"
+					],
+					"query": [
+						{
+							"key": "bankId",
+							"value": "1"
+						},
+						{
+							"key": "clerkId",
+							"value": "1000005"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
