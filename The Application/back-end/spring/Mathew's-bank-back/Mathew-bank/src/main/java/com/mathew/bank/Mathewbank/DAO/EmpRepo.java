@@ -59,4 +59,8 @@ public interface EmpRepo extends User_emp_commonRepo {
 
     public boolean removeClerkFromBranchAdminControl(int bankId, int employeeId, int adminID);
 
+    public boolean removeSubEmployeeUnderManagerInBankByManager(int subEmpId, int ManagerId);
+
+    public Employee findEmployeeThatHasRoleName(String roleName);
+
 }

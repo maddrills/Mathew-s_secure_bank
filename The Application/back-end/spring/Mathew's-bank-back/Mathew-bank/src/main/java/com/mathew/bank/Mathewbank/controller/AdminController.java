@@ -99,7 +99,7 @@ public class AdminController {
         return this.adminService.changeEmployeePermission(employeeId,rolesDto,response,authentication);
     }
 
-    @PutMapping("/remove-manager-from-branch")
+    @PatchMapping("/remove-manager-from-branch")
     public boolean removeEmployeeFromBank(@RequestParam int employeeAKAManager,Authentication authentication ,HttpServletResponse response){
 
         System.out.println(employeeAKAManager);
@@ -107,7 +107,7 @@ public class AdminController {
         return this.adminService.removeManagerFromBranch(employeeAKAManager, authentication, response);
     }
 
-    @PutMapping("/remove-clerk-from-bank-by-admin")
+    @PatchMapping("/remove-clerk-from-bank-by-admin")
     public boolean removeClerkFromBankByAdmin(@RequestParam int bankId,@RequestParam int clerkId, Authentication authentication, HttpServletResponse httpServletResponse ){
 
         System.out.println(bankId);

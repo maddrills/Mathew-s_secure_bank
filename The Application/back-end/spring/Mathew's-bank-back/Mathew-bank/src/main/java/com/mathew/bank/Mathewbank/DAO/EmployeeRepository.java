@@ -478,7 +478,7 @@ public class EmployeeRepository implements EmpRepo {
         //if clerk is assignable provide with commitment
         if(clerkAssignable)
         {
-            // check if clerk in branch
+            // check if clerk already in branch
             if(clark.getBankBranch() != null){
                 throw new DataIntegrityViolationException("Cant add an employee who is already in branch");
             }
@@ -582,5 +582,53 @@ public class EmployeeRepository implements EmpRepo {
         this.entityManager.merge(clerk);
         return true;
     }
+
+    @Override
+    @Transactional
+    public boolean removeSubEmployeeUnderManagerInBankByManager(int subEmpId, int ManagerId) {
+
+        //get the subEmployee
+        Employee suEmployee = this.getEmployeeById(subEmpId);
+        Employee admin = this.findEmployeeThatHasRoleName("admin");
+        //get manager entity
+        Employee manager = this.getEmployeeById(ManagerId);
+        //get manager and sunEmployee associated bank
+        //if they are void return false
+        if(suEmployee.getBankBranch() == null || manager.getBankBranch() == null){
+            return false;
+        }
+        //check if he subEmp under manager bank
+        if(!(suEmployee.getBankBranch().equals(manager.getBankBranch()))){
+            //if not then return error
+            return false;
+        }
+        //else
+        //only then proceed with subEmp dereferencing
+        suEmployee.setBankBranch(null);
+        //change manager to admin
+        suEmployee.setManager(admin);
+
+        //only then commit
+        this.entityManager.merge(suEmployee);
+        return true;
+    }
+
+    @Override
+    public Employee findEmployeeThatHasRoleName(String roleName) {
+
+        //find role admin
+        Role adminRole = this.findRoleByRoleName("admin");
+
+        TypedQuery<Employee> query = this.entityManager.createQuery(
+                "SELECT e FROM Employee AS e " +
+                        "JOIN FETCH e.roles " +
+                        "WHERE :adminRole MEMBER OF e.roles"
+                ,Employee.class);
+
+        query.setParameter("adminRole", adminRole);
+
+        return query.getSingleResult();
+    }
+
 
 }

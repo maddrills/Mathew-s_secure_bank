@@ -690,10 +690,10 @@
 		{
 			"name": "removeManagerFromBranch",
 			"request": {
-				"method": "PUT",
+				"method": "PATCH",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/admin/remove-manager-from-branch?employeeAKAManager=1000002&branchId=11",
+					"raw": "http://localhost:8080/admin/remove-manager-from-branch?employeeAKAManager=1000002",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -707,10 +707,6 @@
 						{
 							"key": "employeeAKAManager",
 							"value": "1000002"
-						},
-						{
-							"key": "branchId",
-							"value": "11"
 						}
 					]
 				}
@@ -720,7 +716,7 @@
 		{
 			"name": "removeClerkFromBankByAdmin",
 			"request": {
-				"method": "PUT",
+				"method": "PATCH",
 				"header": [],
 				"url": {
 					"raw": "http://localhost:8080/admin/remove-clerk-from-bank-by-admin?bankId=1&clerkId=1000005",

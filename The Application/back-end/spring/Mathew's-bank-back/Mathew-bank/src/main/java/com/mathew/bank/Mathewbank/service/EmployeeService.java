@@ -217,4 +217,29 @@ public class EmployeeService {
             return false;
         }
     }
+
+    public boolean removeSubEmployeeFromBankByManager(int employeeClerk, Authentication authentication, HttpServletResponse response){
+
+        if(employeeClerk <= 0){
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return false;
+        }
+
+        int manager = Integer.parseInt(authentication.getName());
+        //check if manager is trying to remove himself
+        if(manager == employeeClerk){
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return false;
+        }
+
+
+        try{
+            return this.employeeRepository.removeSubEmployeeUnderManagerInBankByManager(employeeClerk, manager);
+        }catch (Exception e){
+            System.out.println(e);
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            return false;
+        }
+
+    }
 }

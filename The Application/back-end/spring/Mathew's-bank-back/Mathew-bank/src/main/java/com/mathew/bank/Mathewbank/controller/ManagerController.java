@@ -59,4 +59,14 @@ public class ManagerController {
 
         return this.employeeService.addClarkToManagerBranch(employeeClerk,authentication,response);
     }
+
+    @PatchMapping("/remove-clerk-from-managers-branch")
+    public boolean removeClerkFromBankBranch(@RequestParam int employeeClerk, Authentication authentication, HttpServletResponse response){
+
+        System.out.println("clerk -> "+employeeClerk);
+        System.out.println("manager auth id -> " +authentication.getName());
+
+        return this.employeeService.removeSubEmployeeFromBankByManager(employeeClerk, authentication, response);
+
+    }
 }
