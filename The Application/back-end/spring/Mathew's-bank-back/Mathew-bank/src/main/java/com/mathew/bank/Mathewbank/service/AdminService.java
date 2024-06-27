@@ -41,16 +41,16 @@ public class AdminService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    private int accessLevelAuthCheck(Authentication authentication){
+    private int accessLevelAuthCheck(Authentication authentication) {
 
         int accessLevel = 0;
 
         authentication.getAuthorities().forEach(System.out::println);
 
         // cycle through permissions and set an access level
-        for(GrantedAuthority empRoles : authentication.getAuthorities()){
+        for (GrantedAuthority empRoles : authentication.getAuthorities()) {
 
-            if(empRoles.toString().equals("ROLE_admin")){
+            if (empRoles.toString().equals("ROLE_admin")) {
                 accessLevel = 4;
             } else if (empRoles.toString().equals("ROLE_manager") && accessLevel != 4) {
                 accessLevel = 3;
@@ -60,10 +60,10 @@ public class AdminService {
     }
 
     //adds an employee with his or her credentials and at least one role
-    public String addAnyEmployee(EmployeeDTO employeeDTO, HttpServletResponse response, Authentication authentication){
+    public String addAnyEmployee(EmployeeDTO employeeDTO, HttpServletResponse response, Authentication authentication) {
 
         // sanity check
-        if(employeeDTO == null) {
+        if (employeeDTO == null) {
             response.setStatus(HttpServletResponse.SC_CONFLICT);
             return "error null entry";
         }
@@ -71,10 +71,10 @@ public class AdminService {
         int accessLevel = accessLevelAuthCheck(authentication);
         //check the auth object
         System.out.println(accessLevel);
-        if(accessLevel == 3){
+        if (accessLevel == 3) {
             // then only
-            for(RolesDto role : employeeDTO.getRolesName()){
-                if(role.getRoleName().equals("admin") || role.getRoleName().equals("manager")){
+            for (RolesDto role : employeeDTO.getRolesName()) {
+                if (role.getRoleName().equals("admin") || role.getRoleName().equals("manager")) {
                     response.setStatus(HttpServletResponse.SC_FORBIDDEN);
                     return "manager cannot add role manager";
                 }
@@ -87,30 +87,30 @@ public class AdminService {
         boolean employeeRoleExists = false;
 
         //check if someone put admin in the request
-        for(RolesDto role : employeeDTO.getRolesName()){
+        for (RolesDto role : employeeDTO.getRolesName()) {
 
             //forbid if someone added admin role
-            if(role.getRoleName().equals("admin")){
+            if (role.getRoleName().equals("admin")) {
                 response.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 return "ROLE Admin not allowed";
             }
 
             // check if employee role was added
-            if(role.getRoleName().equals("employee")){
+            if (role.getRoleName().equals("employee")) {
                 employeeRoleExists = true;
             }
         }
 
         //if employee is being added without employee role then add the role to it
-        if(!employeeRoleExists){
-            employeeDTO.getRolesName().add(new RolesDto("employee",true));
+        if (!employeeRoleExists) {
+            employeeDTO.getRolesName().add(new RolesDto("employee", true));
         }
 
-        for(RolesDto role : employeeDTO.getRolesName()){
+        for (RolesDto role : employeeDTO.getRolesName()) {
             allowedRoles.add(role.getRoleName());
         }
 
-        if( this.addEmployeeAndDetails(
+        if (this.addEmployeeAndDetails(
                 employeeDTO.getPhone_number(),
                 employeeDTO.getFull_name(),
                 employeeDTO.getEmail(),
@@ -119,7 +119,7 @@ public class AdminService {
                 employeeDTO.getPassword(),
                 Integer.parseInt(authentication.getName()),
                 allowedRoles
-        ).equals("error")){
+        ).equals("error")) {
             response.setStatus(HttpServletResponse.SC_CONFLICT);
             return "Error";
         }
@@ -129,12 +129,13 @@ public class AdminService {
 
     private String addEmployeeAndDetails(
             String phone_number, String full_name, String email, LocalDate dateOfBirth, double salary,
-            String password,int adderId, Collection<String> rolesName
-    ){
+            String password, int adderId, Collection<String> rolesName
+    ) {
 
-        if(phone_number.isEmpty() || full_name.isEmpty() || email.isEmpty() || dateOfBirth == null || salary < 0 || password.isEmpty() || rolesName.isEmpty()) return "error";
+        if (phone_number.isEmpty() || full_name.isEmpty() || email.isEmpty() || dateOfBirth == null || salary < 0 || password.isEmpty() || rolesName.isEmpty())
+            return "error";
 
-        if(!phone_number.matches("[0-9]+")) return "error";
+        if (!phone_number.matches("[0-9]+")) return "error";
 
         Employee employee = new Employee(
                 this.passwordEncoder.encode(password),
@@ -155,9 +156,9 @@ public class AdminService {
         employeeDetails.setEmployee(employee);
 
         // TODO catch individual exceptions
-        try{
+        try {
             empRepo.addAnEmployeeAndThereDetails(employeeDetails, adderId, rolesName);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             return "error";
         }
@@ -165,12 +166,11 @@ public class AdminService {
     }
 
 
+    public Role findARoleInDb(String role) {
 
-    public Role findARoleInDb(String role){
-
-        try{
+        try {
             this.empRepo.findRoleByRoleName(role);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             return null;
         }
@@ -179,31 +179,31 @@ public class AdminService {
     }
 
 
-    public void makeAnAdminBankAccount(User user,String branch){
+    public void makeAnAdminBankAccount(User user, String branch) {
 
         //TODO sanity check on user
 
-        this.empRepo.createAUserInBank(user,branch);
+        this.empRepo.createAUserInBank(user, branch);
     }
 
-    public List<RolesDto> AddARoleToDb(List<RolesDto> rolesDto, HttpServletResponse response){
+    public List<RolesDto> AddARoleToDb(List<RolesDto> rolesDto, HttpServletResponse response) {
 
         //holds the response depending on the Success of the persistence
         List<RolesDto> respRoles = new LinkedList<>();
 
         //sanity check
-        if(rolesDto == null || rolesDto.isEmpty()){
+        if (rolesDto == null || rolesDto.isEmpty()) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             //an empty response
             respRoles.add(new RolesDto());
             return respRoles;
         }
 
-        for(RolesDto role : rolesDto){
+        for (RolesDto role : rolesDto) {
             System.out.println(role);
 
             // return here because of illegal data in List
-            if(role.getRoleName().isEmpty()){
+            if (role.getRoleName().isEmpty()) {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 //send back the empty role
                 respRoles.add(role);
@@ -211,16 +211,15 @@ public class AdminService {
             }
 
             //add each role to db
-            try{
-                this.empRepo.addARole(new Role("ROLE_"+role.getRoleName()));
+            try {
+                this.empRepo.addARole(new Role("ROLE_" + role.getRoleName()));
                 role.setAdded(true);
                 respRoles.add(role);
-            }
-            catch (DataIntegrityViolationException b){
+            } catch (DataIntegrityViolationException b) {
                 System.out.println(b);
                 role.setAdded(false);
                 respRoles.add(role);
-                }
+            }
         }
         //return a success list and response
         response.setStatus(HttpServletResponse.SC_ACCEPTED);
@@ -229,37 +228,37 @@ public class AdminService {
 
 
     //sanity check
-    private boolean SanityCheckForEmpPermission(int empId, List<RolesDto> roles){
+    private boolean SanityCheckForEmpPermission(int empId, List<RolesDto> roles) {
 
-        if(roles == null) return false;
+        if (roles == null) return false;
 
         //if there are 7 or more digits and its a positive number
-        if(empId <= 0 || !this.employeeIdValidator(empId)) return false;
+        if (empId <= 0 || !this.employeeIdValidator(empId)) return false;
 
-        for(var role : roles){
+        for (var role : roles) {
             //deny the addition of admin role
-            if(role.getRoleName().equals("admin") || role.getRoleName().isEmpty()) return false;
+            if (role.getRoleName().equals("admin") || role.getRoleName().isEmpty()) return false;
         }
         return true;
     }
 
     //change employee role
-    public List<RolesDto> changeEmployeePermission(int empId, List<RolesDto> roles, HttpServletResponse response, Authentication authentication){
+    public List<RolesDto> changeEmployeePermission(int empId, List<RolesDto> roles, HttpServletResponse response, Authentication authentication) {
 
         int authLevel = accessLevelAuthCheck(authentication);
 
-        if(authLevel == 3){
+        if (authLevel == 3) {
             //then manager is adding a role
             //make sure he cant add manager as a role
-            for( RolesDto rolesDto : roles){
-                if(rolesDto.getRoleName().equals("manager")){
+            for (RolesDto rolesDto : roles) {
+                if (rolesDto.getRoleName().equals("manager")) {
                     response.setStatus(HttpServletResponse.SC_FORBIDDEN);
                     return null;
                 }
             }
         }
         // forbid any illegal
-        if(!this.SanityCheckForEmpPermission(empId, roles)) {
+        if (!this.SanityCheckForEmpPermission(empId, roles)) {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             return null;
         }
@@ -267,13 +266,13 @@ public class AdminService {
         //holds the response depending on the Success of the persistence
         List<RolesDto> respRoles = new LinkedList<>();
 
-        for(var role : roles){
-            try{
+        for (var role : roles) {
+            try {
                 this.empRepo.removeRoleFromEmployee(empId, role.getRoleName());
                 role.setAdded(true);
                 respRoles.add(role);
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 role.setAdded(false);
                 respRoles.add(role);
             }
@@ -281,15 +280,15 @@ public class AdminService {
         return respRoles;
     }
 
-    public List<RolesDto> addAnEmployeeRole(int empId, List<RolesDto> roles,HttpServletResponse response,Authentication authentication){
+    public List<RolesDto> addAnEmployeeRole(int empId, List<RolesDto> roles, HttpServletResponse response, Authentication authentication) {
 
         int authLevel = accessLevelAuthCheck(authentication);
 
-        if(authLevel == 3){
+        if (authLevel == 3) {
             //then manager is adding a role
             //make sure he cant add manager as a role
-            for( RolesDto rolesDto : roles){
-                if(rolesDto.getRoleName().equals("manager")){
+            for (RolesDto rolesDto : roles) {
+                if (rolesDto.getRoleName().equals("manager")) {
                     response.setStatus(HttpServletResponse.SC_FORBIDDEN);
                     return null;
                 }
@@ -297,7 +296,7 @@ public class AdminService {
         }
 
         // forbid any illegal
-        if(!this.SanityCheckForEmpPermission(empId, roles)) {
+        if (!this.SanityCheckForEmpPermission(empId, roles)) {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             return null;
         }
@@ -305,13 +304,13 @@ public class AdminService {
         //holds the response depending on the Success of the persistence
         List<RolesDto> respRoles = new LinkedList<>();
 
-        for(var role : roles){
-            try{
+        for (var role : roles) {
+            try {
                 this.empRepo.addARoleToAnEmployee(empId, role.getRoleName());
                 role.setAdded(true);
                 respRoles.add(role);
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 //if permission already exists
                 response.setStatus(HttpServletResponse.SC_ACCEPTED);
                 role.setAdded(false);
@@ -323,35 +322,36 @@ public class AdminService {
     }
 
 
-    private boolean employeeIdValidator(int employeeId){
+    private boolean employeeIdValidator(int employeeId) {
         int count = 0;
         //counts the decimal value
-        while (employeeId != 0){
+        while (employeeId != 0) {
             employeeId = employeeId / 10;
-            count+=1;
+            count += 1;
         }
         //not a valid emp id range
-        if(count < 7) return false;
-        return  true;
+        if (count < 7) return false;
+        return true;
     }
-    private boolean branchIdValidator(int branchId){
+
+    private boolean branchIdValidator(int branchId) {
         return branchId > 0;
     }
 
 
     //adds a manager to a bank can only be done by admin
-    public boolean addAManagerToBranch(final int managerID, final int branchId, HttpServletResponse response){
+    public boolean addAManagerToBranch(final int managerID, final int branchId, HttpServletResponse response) {
 
         //sanity check
-        if(!this.employeeIdValidator(managerID) || managerID <= 0){
+        if (!this.employeeIdValidator(managerID) || managerID <= 0) {
             return false;
         }
-        if(!this.branchIdValidator(branchId)) return false;
+        if (!this.branchIdValidator(branchId)) return false;
 
         //proceed with persisting
-        try{
+        try {
             this.empRepo.addManagerToBranch(managerID, branchId);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             return false;
         }
@@ -360,40 +360,41 @@ public class AdminService {
     }
 
 
-    private boolean branchFieldsCheck(BranchDTO branchDTO){
+    private boolean branchFieldsCheck(BranchDTO branchDTO) {
         return branchDTO.getBranchName() == null || branchDTO.getCountry() == null || branchDTO.getState() == null
                 || branchDTO.getBranchName().isEmpty() || branchDTO.getCountry().isEmpty() || branchDTO.getState().isEmpty() || branchDTO.getBranchManagerId() < 0;
     }
-    public boolean createABranchWithOrWithoutManager(BranchDTO branchDTO, HttpServletResponse response){
+
+    public boolean createABranchWithOrWithoutManager(BranchDTO branchDTO, HttpServletResponse response) {
 
         //standard sanity check
-        if(branchDTO == null || branchFieldsCheck(branchDTO)){
+        if (branchDTO == null || branchFieldsCheck(branchDTO)) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return false;
         }
 
-        if(branchDTO.getBranchManagerId() == 0){
+        if (branchDTO.getBranchManagerId() == 0) {
             //create a branch without a manager
-            try{
-            this.empRepo.createBranch(new Branch(
-                    branchDTO.getBranchName(),
-                    branchDTO.getState(),
-                    branchDTO.getCountry(),
-                    branchDTO.isOpen(),
-                    null
-            ));}
-            catch (Exception e){
+            try {
+                this.empRepo.createBranch(new Branch(
+                        branchDTO.getBranchName(),
+                        branchDTO.getState(),
+                        branchDTO.getCountry(),
+                        branchDTO.isOpen(),
+                        null
+                ));
+            } catch (Exception e) {
                 //if conflict occurs in db
                 response.setStatus(HttpServletResponse.SC_CONFLICT);
                 return false;
             }
             //add country and state the cache
-            this.countryCache.addACountryAndStateToCache(branchDTO.getCountry(),branchDTO.getState());
+            this.countryCache.addACountryAndStateToCache(branchDTO.getCountry(), branchDTO.getState());
             return true;
-        }else {
-            if(!this.employeeIdValidator(branchDTO.getBranchManagerId())) return false;
+        } else {
+            if (!this.employeeIdValidator(branchDTO.getBranchManagerId())) return false;
             //create a branch with a manager included
-            try{
+            try {
                 this.empRepo.createBranch(new Branch(
                         branchDTO.getBranchName(),
                         branchDTO.getState(),
@@ -401,7 +402,7 @@ public class AdminService {
                         branchDTO.isOpen(),
                         null
                 ), branchDTO.getBranchManagerId());
-            }catch (Exception e){
+            } catch (Exception e) {
                 //if conflict occurs in db
                 response.setStatus(HttpServletResponse.SC_CONFLICT);
                 System.out.println(e);
@@ -409,15 +410,15 @@ public class AdminService {
             }
         }
         //add country and state the cache
-        this.countryCache.addACountryAndStateToCache(branchDTO.getCountry(),branchDTO.getState());
+        this.countryCache.addACountryAndStateToCache(branchDTO.getCountry(), branchDTO.getState());
         return true;
     }
 
     //get all employees from db with an option of sending back a user
     // with roles should return a list of employees
-    public List<EmployeeDTO> allEmployeesOrByThereRole(String role){
+    public List<EmployeeDTO> allEmployeesOrByThereRole(String role) {
         //check if roles are given
-        if(role != null){
+        if (role != null) {
             //return a specific employee
             //create an DTO instance (necessary for lazy load)
             final List<EmployeeDTO> employeeDTOS = new LinkedList<>();
@@ -463,17 +464,17 @@ public class AdminService {
                             null,
                             rolesDtos));
                 }
-                );
+        );
 
         return employeeDTOS;
     }
 
 
-    public List<BranchDTO> getAllBranches(){
+    public List<BranchDTO> getAllBranches() {
 
         List<BranchDTO> branchDTOS = new LinkedList<>();
 
-        try{
+        try {
             final List<Branch> branches = this.empRepo.getAllBranchFromDB();
 
             branches.forEach(branch -> branchDTOS.add(
@@ -487,14 +488,14 @@ public class AdminService {
                     )
             ));
 
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
         return branchDTOS;
 
     }
 
-    public List<UserAndDetailsDTO> getAllUsersAndThereDetails(){
+    public List<UserAndDetailsDTO> getAllUsersAndThereDetails() {
 
         //using linked list because the number of elements returned is unpredictable
         final List<UserAndDetailsDTO> userAndDetailsDTOS = new LinkedList<>();
@@ -522,10 +523,10 @@ public class AdminService {
 
     //removes manager from bank 1) points all clerks to admin 2) only after manager is removed
 
-    public boolean removeManagerFromBranch(int employeeId,Authentication authentication, HttpServletResponse httpServletResponse){
+    public boolean removeManagerFromBranch(int employeeId, Authentication authentication, HttpServletResponse httpServletResponse) {
 
         //sanity check
-        if(employeeId <=0) {
+        if (employeeId <= 0) {
             httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return false;
         }
@@ -533,31 +534,31 @@ public class AdminService {
         int adminId = Integer.parseInt(authentication.getName());
 
         // admin can not remove themselves from the bank
-        if(adminId == employeeId){
+        if (adminId == employeeId) {
             httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return false;
         }
 
-        try{
-            return this.empRepo.removeManagerFromBank(employeeId,Integer.parseInt(authentication.getName()));
-        }catch (Exception e){
+        try {
+            return this.empRepo.removeManagerFromBank(employeeId, Integer.parseInt(authentication.getName()));
+        } catch (Exception e) {
             System.out.println(e);
             return false;
         }
     }
 
 
-    public boolean removeClerkFromAnyBank(int bankId, int clerkId, Authentication authentication, HttpServletResponse httpServletResponse){
+    public boolean removeClerkFromAnyBank(int bankId, int clerkId, Authentication authentication, HttpServletResponse httpServletResponse) {
 
         //sanity check
-        if(bankId <= 0 || clerkId <= 0) {
+        if (bankId <= 0 || clerkId <= 0) {
             httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return false;
         }
 
         try {
             return this.empRepo.removeClerkFromBranchAdminControl(bankId, clerkId, Integer.parseInt(authentication.getName()));
-        }catch (Exception e){
+        } catch (Exception e) {
             httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             System.out.println(e);
             return false;
@@ -566,20 +567,10 @@ public class AdminService {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
     /**
-     * BELLOW is admin setup*/
-    public void createTheAdminAccount(){
+     * BELLOW is admin setup
+     */
+    public void createTheAdminAccount() {
 
         Branch defaultBranch = new Branch(
                 "Admin_Central",
@@ -615,9 +606,9 @@ public class AdminService {
         employeeDetails.setEmployee(employee);
 
         // TODO catch individual exceptions
-        try{
-            empRepo.addAnEmployeeAndThereDetails(employeeDetails,0, new HashSet<>(Set.of("admin")));
-        }catch (Exception e){
+        try {
+            empRepo.addAnEmployeeAndThereDetails(employeeDetails, 0, new HashSet<>(Set.of("admin")));
+        } catch (Exception e) {
             System.out.println(e);
         }
 
@@ -627,7 +618,7 @@ public class AdminService {
                 1000000000.11,
                 LocalDateTime.now().plusMonths(1),
                 false,
-                new TimeSpace("savings",0,0,0,0,1,0,0.07),
+                new TimeSpace("savings", 0, 0, 0, 0, 1, 0, 0.07),
                 LocalDateTime.now()
         );
 
@@ -667,16 +658,16 @@ public class AdminService {
 //            System.out.println(e);
 //        }
 
-        try{
+        try {
             this.makeAnAdminBankAccount(adminBankAccount, "Admin_Central");
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
 
         //add back account to first employee ADMIN
-        try{
-            this.empRepo.addOeUpdateEmployeeBankAccount(1000001,102000001);
-        }catch (Exception e){
+        try {
+            this.empRepo.addOeUpdateEmployeeBankAccount(1000001, 102000001);
+        } catch (Exception e) {
             System.out.println(e);
         }
     }

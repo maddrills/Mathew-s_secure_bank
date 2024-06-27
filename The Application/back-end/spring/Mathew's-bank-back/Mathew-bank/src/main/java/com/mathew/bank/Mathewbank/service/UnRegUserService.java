@@ -20,29 +20,29 @@ public class UnRegUserService {
     private UserRepo userRepo;
 
     // sanity check also hold for phone number digit check
-    private boolean applicationObjectCheck(UserApplicationDTO userApplicationDTO){
+    private boolean applicationObjectCheck(UserApplicationDTO userApplicationDTO) {
         return userApplicationDTO.getFullName().isEmpty()
-        || (userApplicationDTO.getPhoneNumber().isEmpty() || !userApplicationDTO.getPhoneNumber().matches("[0-9]+"))
-        || userApplicationDTO.getDateOfBirth() == null || userApplicationDTO.getAge() <= 0
-        || userApplicationDTO.getEmail() == null;
+                || (userApplicationDTO.getPhoneNumber().isEmpty() || !userApplicationDTO.getPhoneNumber().matches("[0-9]+"))
+                || userApplicationDTO.getDateOfBirth() == null || userApplicationDTO.getAge() <= 0
+                || userApplicationDTO.getEmail() == null;
     }
 
     //checks for sanity and throws an exception in case of a run time error
     //appropriate HTTP resp sent back
-    public Boolean applyForABankAccount(int branchId, UserApplicationDTO userApplicationDTO, HttpServletResponse response){
+    public Boolean applyForABankAccount(int branchId, UserApplicationDTO userApplicationDTO, HttpServletResponse response) {
 
         //sanity check
-        if(userApplicationDTO == null || branchId <= 0) {
+        if (userApplicationDTO == null || branchId <= 0) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return false;
         }
 
-        if(this.applicationObjectCheck(userApplicationDTO)){
+        if (this.applicationObjectCheck(userApplicationDTO)) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return false;
         }
         //try and persist
-        try{
+        try {
             //DTO to DAO for persistence
             this.userRepo.applyForBankAccount(branchId, new UserApplication(
                     userApplicationDTO.getFullName(),
@@ -56,8 +56,7 @@ public class UnRegUserService {
                     false,
                     null
             ));
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             response.setStatus(HttpServletResponse.SC_CONFLICT);
             return false;
@@ -68,19 +67,19 @@ public class UnRegUserService {
 
 
     // uppercases the first letter of the word + sanity check
-    private String transformText(String text, HttpServletResponse response){
+    private String transformText(String text, HttpServletResponse response) {
         //if user enters an empty field
-        if(text.isEmpty()){
+        if (text.isEmpty()) {
             response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
             throw new RuntimeException("Value is empty");
         }
         //lower case
         text = text.toLowerCase();
         //first letter uppercase + the rest of te word excluding the first letter
-        return text.substring(0,1).toUpperCase()+text.substring(1);
+        return text.substring(0, 1).toUpperCase() + text.substring(1);
     }
 
-    public List<BranchDTO> branchDTOList(String country, String state, HttpServletResponse response){
+    public List<BranchDTO> branchDTOList(String country, String state, HttpServletResponse response) {
 
         // clean input
         country = transformText(country, response);
@@ -90,7 +89,7 @@ public class UnRegUserService {
         List<BranchDTO> branchDTOS = new LinkedList<>();
 
         //tries to get branch info from db
-        try{
+        try {
             List<Branch> branches = this.userRepo.getBranchesByCountryAndName(country, state);
 
             //entity data is converted into DTO
@@ -106,39 +105,39 @@ public class UnRegUserService {
 
             response.setStatus(HttpServletResponse.SC_OK);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return null;
         }
 
-        System.out.println(country+" "+state);
+        System.out.println(country + " " + state);
         return branchDTOS;
     }
 
-    public UserApplicationDTO getUserApplication(String phoneNumber, String email, HttpServletResponse response){
+    public UserApplicationDTO getUserApplication(String phoneNumber, String email, HttpServletResponse response) {
 
         //check if phone number is provided PRIORITY
-        if(phoneNumber != null){
+        if (phoneNumber != null) {
             // if phone number is empty
-            if(phoneNumber.isEmpty()) {
+            if (phoneNumber.isEmpty()) {
                 //try calling the method again to try an email  SECONDARY
-                return getUserApplication(null,email,response);
+                return getUserApplication(null, email, response);
             }
             //check if phone number has digits
-            if(!phoneNumber.matches("[0-9]+")){
+            if (!phoneNumber.matches("[0-9]+")) {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 return null;
             }
             response.setStatus(HttpServletResponse.SC_OK);
 
             UserApplication userApplication;
-            try{
+            try {
                 userApplication = this.userRepo.getUserApplicationDetailsByPhoneNumber(phoneNumber);
-            }catch (Exception e){
+            } catch (Exception e) {
                 response.setStatus(HttpServletResponse.SC_EXPECTATION_FAILED);
                 System.out.println(e);
                 //try calling the method again this time check with email  SECONDARY
-                return getUserApplication(null,email,response);
+                return getUserApplication(null, email, response);
             }
 
             return new UserApplicationDTO(
@@ -155,16 +154,16 @@ public class UnRegUserService {
         }
 
         //if phone is not provided
-        if(email != null){
-            if(email.isEmpty()) {
+        if (email != null) {
+            if (email.isEmpty()) {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 return null;
             }
             response.setStatus(HttpServletResponse.SC_OK);
             UserApplication userApplication;
-            try{
+            try {
                 userApplication = this.userRepo.getUserApplicationDetailsByEmail(email);
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.out.println(e);
                 response.setStatus(HttpServletResponse.SC_EXPECTATION_FAILED);
                 return null;

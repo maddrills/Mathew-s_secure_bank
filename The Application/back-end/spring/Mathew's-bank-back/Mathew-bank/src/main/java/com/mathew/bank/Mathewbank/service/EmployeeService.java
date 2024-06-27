@@ -22,15 +22,15 @@ public class EmployeeService {
 
 
     //get all user applications
-    public List<UserApplicationDTO> getAllUserApplications(HttpServletResponse response){
+    public List<UserApplicationDTO> getAllUserApplications(HttpServletResponse response) {
 
         final List<UserApplicationDTO> userApplicationDTOS = new LinkedList<>();
 
         List<UserApplication> userApplications;
 
-        try{
+        try {
             userApplications = this.employeeRepository.getAllUserApplications();
-        }catch (Exception e){
+        } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return null;
         }
@@ -54,9 +54,9 @@ public class EmployeeService {
         return userApplicationDTOS;
     }
 
-    public UserApplicationDTO getApplicationByIdNumber(int idNumber, HttpServletResponse response){
+    public UserApplicationDTO getApplicationByIdNumber(int idNumber, HttpServletResponse response) {
 
-        if(idNumber < 0){
+        if (idNumber < 0) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return null;
         }
@@ -65,7 +65,7 @@ public class EmployeeService {
 
         try {
             userApplication = this.employeeRepository.getApplicationByIdNumber(idNumber);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return null;
@@ -85,34 +85,33 @@ public class EmployeeService {
     }
 
 
-
     //turns the status field to true and after that relays the application data to user table
-    public boolean acceptAnApplicationNyId(int applicationNumber,int employeeId, HttpServletResponse servletResponse) {
+    public boolean acceptAnApplicationNyId(int applicationNumber, int employeeId, HttpServletResponse servletResponse) {
 
-        if(applicationNumber <= 0){
+        if (applicationNumber <= 0) {
             servletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return false;
         }
 
-        try{
-            return this.employeeRepository.acceptUserApplication(applicationNumber,employeeId);
-        }catch (Exception e){
+        try {
+            return this.employeeRepository.acceptUserApplication(applicationNumber, employeeId);
+        } catch (Exception e) {
             System.out.println(e);
             servletResponse.setStatus(HttpServletResponse.SC_CONFLICT);
             return false;
         }
     }
 
-    public boolean rejectApplication(int applicationNumber, int employeeId, HttpServletResponse servletResponse){
+    public boolean rejectApplication(int applicationNumber, int employeeId, HttpServletResponse servletResponse) {
 
-        if(applicationNumber <= 0){
+        if (applicationNumber <= 0) {
             servletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return false;
         }
 
-        try{
+        try {
             this.employeeRepository.rejectUserApplication(applicationNumber, employeeId);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             servletResponse.setStatus(HttpServletResponse.SC_CONFLICT);
             return false;
@@ -122,13 +121,13 @@ public class EmployeeService {
 
     public EmployeeDTO getEmployeeDetailsById(int nameOrID, HttpServletResponse response) {
 
-        try{
+        try {
             Employee employee = this.employeeRepository.getEmployeeById(nameOrID);
 
             // get the roles from employee
             final Set<RolesDto> rolesDtos = new LinkedHashSet<>();
 
-            employee.getRoles().forEach( role -> rolesDtos.add(new RolesDto(role.getRole(),true)));
+            employee.getRoles().forEach(role -> rolesDtos.add(new RolesDto(role.getRole(), true)));
 
             return new EmployeeDTO(
                     employee.getId(),
@@ -141,24 +140,24 @@ public class EmployeeService {
                     employee.getBankBranch() == null ? 0 : employee.getBankBranch().getId(),
                     rolesDtos);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             System.out.println(e.toString());
             return null;
         }
     }
 
-    public Collection<EmployeeDTO> getEmployeesUnderABranch(int branchNNumber, HttpServletResponse httpServletResponse){
+    public Collection<EmployeeDTO> getEmployeesUnderABranch(int branchNNumber, HttpServletResponse httpServletResponse) {
         //sanity check
-        if(branchNNumber <= 0){
+        if (branchNNumber <= 0) {
             httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return null;
         }
-        
+
         //create a dto list
         final Collection<EmployeeDTO> employeesUnderBank = new LinkedList<>();
-        
-        try{
+
+        try {
             Collection<Employee> employees = this.employeeRepository.getEmployeeUnderBranch(branchNNumber);
 
             //cycle through the employee list
@@ -166,7 +165,7 @@ public class EmployeeService {
                 //assign each employee to the DTO list
                 //get the employee details from employee
                 EmployeeDetails employeeDetails = employee.getDetails();
-                
+
                 //get the roles from employee
                 Set<RolesDto> empRoles = new LinkedHashSet<>();
 
@@ -174,7 +173,7 @@ public class EmployeeService {
                 employee.getRoles().forEach(role -> {
                     empRoles.add(new RolesDto(role.getRole(), true));
                 });
-                
+
                 employeesUnderBank.add(
                         new EmployeeDTO(
                                 employee.getId(),
@@ -192,7 +191,7 @@ public class EmployeeService {
 
             return employeesUnderBank;
 
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
@@ -200,42 +199,42 @@ public class EmployeeService {
 
     public boolean addClarkToManagerBranch(int employeeClerk,
                                            Authentication authentication,
-                                           HttpServletResponse response){
+                                           HttpServletResponse response) {
 
         int authIdManager = Integer.parseInt(authentication.getName());
         //check if manager and clerk have the same if yes then return error
-        if(employeeClerk == authIdManager){
+        if (employeeClerk == authIdManager) {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             return false;
         }
 
-        try{
+        try {
             return this.employeeRepository.setClerkIntoBank(authIdManager, employeeClerk);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             return false;
         }
     }
 
-    public boolean removeSubEmployeeFromBankByManager(int employeeClerk, Authentication authentication, HttpServletResponse response){
+    public boolean removeSubEmployeeFromBankByManager(int employeeClerk, Authentication authentication, HttpServletResponse response) {
 
-        if(employeeClerk <= 0){
+        if (employeeClerk <= 0) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return false;
         }
 
         int manager = Integer.parseInt(authentication.getName());
         //check if manager is trying to remove himself
-        if(manager == employeeClerk){
+        if (manager == employeeClerk) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return false;
         }
 
 
-        try{
+        try {
             return this.employeeRepository.removeSubEmployeeUnderManagerInBankByManager(employeeClerk, manager);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             return false;

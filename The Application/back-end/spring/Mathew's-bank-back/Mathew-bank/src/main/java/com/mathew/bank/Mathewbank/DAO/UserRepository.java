@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public class UserRepository implements UserRepo{
+public class UserRepository implements UserRepo {
 
     @Autowired
     private EntityManager entityManager;
@@ -35,9 +35,9 @@ public class UserRepository implements UserRepo{
     @Override
     public Branch findBranchByName(String name) {
 
-        TypedQuery<Branch> query = this.entityManager.createQuery("SELECT B FROM Branch B WHERE B.branchName = :name",Branch.class);
+        TypedQuery<Branch> query = this.entityManager.createQuery("SELECT B FROM Branch B WHERE B.branchName = :name", Branch.class);
 
-        query.setParameter("name",name);
+        query.setParameter("name", name);
 
         return query.getSingleResult();
     }
@@ -45,9 +45,9 @@ public class UserRepository implements UserRepo{
     @Override
     public Branch getABranchById(int branchId) {
 
-        TypedQuery<Branch> query = this.entityManager.createQuery("SELECT B FROM Branch B WHERE B.id = :theId",Branch.class);
+        TypedQuery<Branch> query = this.entityManager.createQuery("SELECT B FROM Branch B WHERE B.id = :theId", Branch.class);
 
-        query.setParameter("theId",branchId);
+        query.setParameter("theId", branchId);
 
         return query.getSingleResult();
     }
@@ -67,10 +67,10 @@ public class UserRepository implements UserRepo{
     public boolean createASavingsAccountForUser(int userId, int accountId, HttpServletResponse response) {
         //first check if user already has a savings account using there accountId
         UserAccounts userAccounts = this.entityManager.find(UserAccounts.class, accountId);
-        if(userAccounts.getSavings() != null){
+        if (userAccounts.getSavings() != null) {
             //if yes then return false
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            return  false;
+            return false;
         }
 
         //by default you will have 2000 rs
@@ -86,7 +86,7 @@ public class UserRepository implements UserRepo{
                 .plusSeconds(timeSpace.getSecond());
 
         //create the account
-        Savings savings = new Savings(false, true, 2000.00,interestOn,false, timeSpace,LocalDateTime.now());
+        Savings savings = new Savings(false, true, 2000.00, interestOn, false, timeSpace, LocalDateTime.now());
 
         userAccounts.setSavings(savings);
 
@@ -94,7 +94,6 @@ public class UserRepository implements UserRepo{
 
         return true;
     }
-
 
 
     @Override
@@ -108,7 +107,7 @@ public class UserRepository implements UserRepo{
                         "WHERE u.userName = :name",
                 User.class);
 
-        query.setParameter("name",userName);
+        query.setParameter("name", userName);
 
         return query.getSingleResult();
     }
@@ -125,47 +124,48 @@ public class UserRepository implements UserRepo{
      * checks if the branch is in the db else I will throw an exception<br>
      * no two applications can be the same when it comme to phone numbers <br>
      * <span style = "color : #D7E438">WARNING :</span><span style = "color : #97a027"> this method only has two check and it checks if branch is open and if credentials are used by a bank user</span>
-     * */
+     */
 
     //check phone number or email have bine used in user
-    private boolean checkIfPhoneAndEmailExists(String phone, String email){
+    private boolean checkIfPhoneAndEmailExists(String phone, String email) {
 
         //check if phone number is already used by user
-        try{
+        try {
             TypedQuery<UserDetails> query1 = this.entityManager.createQuery(
                     "SELECT ud.phoneNumber FROM UserApplication ud WHERE ud.phoneNumber = :phone",
                     UserDetails.class);
 
-            query1.setParameter("phone",phone);
+            query1.setParameter("phone", phone);
 
-            if(query1.getSingleResult() == null){
+            if (query1.getSingleResult() == null) {
                 return false;
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             return false;
         }
 
         //check if email is already used by user
-        try{
+        try {
             TypedQuery<UserDetails> query2 = this.entityManager.createQuery(
                     "SELECT ud.email FROM UserApplication ud WHERE ud.email = :email",
                     UserDetails.class);
 
-            query2.setParameter("email",email);
+            query2.setParameter("email", email);
 
-            if(query2.getSingleResult() == null){
+            if (query2.getSingleResult() == null) {
                 return false;
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             return false;
         }
 
         return true;
     }
+
     @Override
     @Transactional
     public void applyForBankAccount(final int BranchId, UserApplication userApplication) {
@@ -173,13 +173,14 @@ public class UserRepository implements UserRepo{
         System.out.println("Entering application");
 
         //sanity check for application
-        if(checkIfPhoneAndEmailExists(userApplication.getPhoneNumber(), userApplication.getEmail())) throw new IllegalArgumentException();
+        if (checkIfPhoneAndEmailExists(userApplication.getPhoneNumber(), userApplication.getEmail()))
+            throw new IllegalArgumentException();
 
 
         Branch branch = getABranchById(BranchId);
 
         //check if branch is open before persisting
-        if(!branch.isOpen()){
+        if (!branch.isOpen()) {
             throw new RuntimeException("Branch is closed");
         }
 
@@ -220,7 +221,7 @@ public class UserRepository implements UserRepo{
                 "SELECT ua FROM UserApplication ua WHERE ua.phoneNumber = :phone",
                 UserApplication.class);
 
-        query.setParameter("phone",phone);
+        query.setParameter("phone", phone);
 
         return query.getSingleResult();
     }
@@ -232,7 +233,7 @@ public class UserRepository implements UserRepo{
                 "SELECT ua FROM UserApplication ua WHERE ua.email = :email",
                 UserApplication.class);
 
-        query.setParameter("email",email);
+        query.setParameter("email", email);
 
         return query.getSingleResult();
     }
