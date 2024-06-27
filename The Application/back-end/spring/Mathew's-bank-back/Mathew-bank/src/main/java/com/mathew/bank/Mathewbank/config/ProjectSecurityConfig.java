@@ -103,7 +103,7 @@ public class ProjectSecurityConfig {
                         // TODO employee can only view there details
                         .requestMatchers("/employee/employee-login").hasAnyRole("employee")
 
-                        .requestMatchers("/user/getAllUserData").hasAnyRole("user")
+                        .requestMatchers("/bankUser/**").hasAnyRole("user")
                         //any one who is authenticated can access /users
                         .requestMatchers("/bankUser/login", "/user", "/user/getXSRfToken", "/logout").authenticated()
                         //all the rest are open to public

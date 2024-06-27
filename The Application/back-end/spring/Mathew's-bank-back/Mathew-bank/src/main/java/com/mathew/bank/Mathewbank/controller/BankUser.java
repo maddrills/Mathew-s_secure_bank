@@ -34,9 +34,11 @@ public class BankUser {
 
     //create savings account
     @PutMapping("/user-add-savings-account")
-    public boolean createASavingAccount(@RequestParam int userId, @RequestParam int accountId, HttpServletResponse response) {
+    public boolean createASavingAccount(Authentication authentication,HttpServletResponse response) {
 
-        return this.userInBankService.createASavingsAccount(userId, accountId, response);
+        System.out.println(authentication.getName());
+
+        return this.userInBankService.createASavingsAccount(authentication.getName(), response);
     }
 
     //TODO will be implemented after UI

@@ -36,7 +36,7 @@ public class UserInBankService {
 
             return new UserAndDetailsDTO(
                     userDetails.getId(),
-                    userDetails.getFullName(),
+                    user.getUserName(),
                     null,
                     user.getBranchId().getId(),
                     userDetails.getFullName(),
@@ -105,10 +105,13 @@ public class UserInBankService {
         );
     }
 
-    public boolean createASavingsAccount(int userId, int accountId, HttpServletResponse response) {
+    public boolean createASavingsAccount(String userAuth, HttpServletResponse response) {
+
+        UserAuthDecodedValues userAuthDecodedValues = this.authenticatedUserDecoder(userAuth);
+        System.out.println(userAuthDecodedValues);
 
         //sanity check
-        if (userId <= 0 || accountId <= 0) {
+        if (userAuthDecodedValues.userId <= 0 || userAuthDecodedValues.accountID <= 0) {
 
             response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
             return false;
@@ -116,10 +119,71 @@ public class UserInBankService {
 
         //create a users bank account
         try {
-            return this.userRepository.createASavingsAccountForUser(userId, accountId, response);
+            return this.userRepository.createASavingsAccountForUser(userAuthDecodedValues.userId, userAuthDecodedValues.accountID, response);
         } catch (Exception e) {
             System.out.println(e);
             return false;
         }
+    }
+
+    //this class is used to access decoded values
+    private class UserAuthDecodedValues{
+
+        private String userName;
+
+        private int userId;
+
+        private int accountID;
+
+        public UserAuthDecodedValues(String userName, int userId, int accountID){
+            this.userName = userName;
+            this.userId = userId;
+            this.accountID = accountID;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
+
+        public int getUserId() {
+            return userId;
+        }
+
+        public void setUserId(int userId) {
+            this.userId = userId;
+        }
+
+        public int getAccountID() {
+            return accountID;
+        }
+
+        public void setAccountID(int accountID) {
+            this.accountID = accountID;
+        }
+
+        @Override
+        public String toString() {
+            return "UserAuthDecodedValues{" +
+                    "userName='" + userName + '\'' +
+                    ", userId=" + userId +
+                    ", accountID=" + accountID +
+                    '}';
+        }
+    }
+
+    private UserAuthDecodedValues authenticatedUserDecoder(String auth){
+        // [0] -> username  [1] -> userId  [2] -> accountId
+
+        String[] authDecode = auth.split(",");
+
+        return new UserAuthDecodedValues(
+                authDecode[0],
+                Integer.parseInt(authDecode[1]),
+                Integer.parseInt(authDecode[2])
+        );
     }
 }

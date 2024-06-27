@@ -126,7 +126,7 @@ public class CustomAuthenticationProviderForUser implements AuthenticationProvid
                 // in this edit i wont store the password but a use id
 
                 //this is so that i can get a global access to an authenticated users name and id
-                username = username + "," + customer.getId();
+                username = username + "," + customer.getId() + "," + customer.getUserAccountId().getId();
 
                 return new UsernamePasswordAuthenticationToken(username, pwd, authorities);
             } else {
