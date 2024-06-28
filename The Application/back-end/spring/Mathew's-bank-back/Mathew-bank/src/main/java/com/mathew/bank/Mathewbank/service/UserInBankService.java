@@ -9,6 +9,7 @@ import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.UserDetails;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -110,7 +111,7 @@ public class UserInBankService {
         UserAuthDecodedValues userAuthDecodedValues = this.authenticatedUserDecoder(userAuth);
         System.out.println(userAuthDecodedValues);
 
-        //sanity check
+        //sanity check unnecessary sanity check
         if (userAuthDecodedValues.userId <= 0 || userAuthDecodedValues.accountID <= 0) {
 
             response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
@@ -120,6 +121,27 @@ public class UserInBankService {
         //create a users bank account
         try {
             return this.userRepository.createASavingsAccountForUser(userAuthDecodedValues.userId, userAuthDecodedValues.accountID, response);
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+
+    public boolean transferMoneyAndUpdateBothAccounts(int accountNumberFrom, int accountNumberTo, int amount, Authentication authentication, HttpServletResponse response) {
+
+        UserAuthDecodedValues userAuthDecodedValues = this.authenticatedUserDecoder(authentication.getName());
+        System.out.println(userAuthDecodedValues);
+
+        //sanity check
+        if (accountNumberFrom <= 0 || accountNumberTo <= 0 || amount <= 0) {
+
+            response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+            return false;
+        }
+
+        //create a users bank account
+        try {
+            return this.userRepository.transferMoneyFromUserAccountToAnother(accountNumberFrom, accountNumberTo, amount, userAuthDecodedValues.userId, userAuthDecodedValues.accountID);
         } catch (Exception e) {
             System.out.println(e);
             return false;

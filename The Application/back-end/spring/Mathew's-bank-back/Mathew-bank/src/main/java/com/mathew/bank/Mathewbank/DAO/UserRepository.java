@@ -245,6 +245,48 @@ public class UserRepository implements UserRepo {
     }
 
     @Override
+    @Transactional
+    public boolean transferMoneyFromUserAccountToAnother(int accountNumberFrom, int accountNumberTo,
+                                                         int amount, int userId, int accountID) {
+
+        //check if fromm account number is the same as auth user's account
+        //first get from user object
+        User fromUser = this.getUserFromDb(userId);
+        //fromUser.getUserAccountId().get
+
+        System.out.println(accountNumberFrom);
+        int number = accountNumberFrom / 1000000;
+
+        System.out.println(number);
+
+        boolean proceed = false;
+
+        switch (number) {
+            case 101:
+                //checking
+                break;
+            case 102:
+                //savings
+                if(fromUser.getUserAccountId().getSavings().getId() == accountNumberFrom) proceed = true;
+                break;
+            case 103:
+                //build up
+                break;
+            case 104:
+                //business
+                break;
+            case 105:
+                //joint account
+        }
+
+        if(proceed){
+            fromUser.getUserAccountId().getSavings();
+        }
+
+        return false;
+    }
+
+    @Override
     public Savings getSavingsAccountByNumber(int accountNumber) {
         return null;
     }

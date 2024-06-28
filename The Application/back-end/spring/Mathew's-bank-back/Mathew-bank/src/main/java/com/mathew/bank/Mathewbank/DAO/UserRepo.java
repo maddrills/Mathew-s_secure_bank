@@ -17,4 +17,6 @@ public interface UserRepo extends User_emp_commonRepo{
     public UserApplication getUserApplicationDetailsByEmail(String email);
 
     public User getUserFromDb(int usedId);
+
+    boolean transferMoneyFromUserAccountToAnother(int accountNumberFrom, int accountNumberTo, int amount, int userId, int accountID);
 }

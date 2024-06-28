@@ -52,6 +52,14 @@ public class BankUser {
         return false;
     }
 
+    @PatchMapping("send-money-via-account-number")
+    public boolean transferMoneyByAccountNumber(@RequestParam int accountNumberFrom,@RequestParam int accountNumberTo, @RequestParam int amount, Authentication authentication, HttpServletResponse response){
+
+        System.out.println("From -> "+accountNumberFrom+" To -> "+accountNumberTo+" amount -> "+amount);
+
+        return this.userInBankService.transferMoneyAndUpdateBothAccounts(accountNumberFrom, accountNumberTo, amount, authentication, response);
+    }
+
 
     //returns two types of outputs either of type UserAndDetailsDTO or EmployeeDTO
     // the generic <T extends AllowedLoginOutputGeneric> is used to enforce the above condition
