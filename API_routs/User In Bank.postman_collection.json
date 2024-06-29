@@ -539,6 +539,40 @@
 					"body": "{\n    \"userId\": 1,\n    \"userName\": \"mathew francis\",\n    \"userAccountId\": null,\n    \"branchId\": null,\n    \"fullName\": \"mathew francis\",\n    \"phoneNumber\": \"3343350332\",\n    \"dateOfBerth\": \"1998-07-21\",\n    \"age\": 30,\n    \"email\": \"mat@admin\",\n    \"userAccountDTO\": {\n        \"userAccountID\": 1,\n        \"savingsID\": 102000001,\n        \"checkingID\": 0,\n        \"buildUpID\": 0,\n        \"jointAccountsID\": 0,\n        \"frozen\": false\n    },\n    \"rolesDto\": [\n        {\n            \"roleName\": \"ROLE_user\",\n            \"added\": true\n        }\n    ]\n}"
 				}
 			]
+		},
+		{
+			"name": "transferMoneyByAccountNumber",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/bankUser/send-money-via-account-number?accountNumberFrom=1000001&accountNumberTo=1231231&amount=333",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bankUser",
+						"send-money-via-account-number"
+					],
+					"query": [
+						{
+							"key": "accountNumberFrom",
+							"value": "1000001"
+						},
+						{
+							"key": "accountNumberTo",
+							"value": "1231231"
+						},
+						{
+							"key": "amount",
+							"value": "333"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

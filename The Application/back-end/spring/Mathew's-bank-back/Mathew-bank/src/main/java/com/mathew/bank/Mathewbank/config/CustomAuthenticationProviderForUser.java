@@ -78,6 +78,14 @@ public class CustomAuthenticationProviderForUser implements AuthenticationProvid
 
                     //loop through the users authorities and add each of them to simple granted authority
                     try {
+                        
+                        //check if employee is part of permission set for employee signing in
+                        boolean hasEmployee = false;
+                        for(var permission : employee.getRoles()){
+                            if(permission.getRole().equals("ROLE_employee")) hasEmployee = true;
+                        }
+                        if(!hasEmployee) throw new BadCredentialsException("no employee permission for given employee");
+
                         employee.getRoles().forEach(a -> authorities.add(new SimpleGrantedAuthority(a.getRole())));
                     } catch (Exception e) {
                         //user doesn't have permissions or roles = null

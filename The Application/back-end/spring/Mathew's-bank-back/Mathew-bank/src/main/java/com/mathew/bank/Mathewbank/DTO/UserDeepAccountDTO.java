@@ -1,61 +1,48 @@
-package com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts;
+package com.mathew.bank.Mathewbank.DTO;
 
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.TimeSpace;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "savings")
-final public class Savings {
+public class UserDeepAccountDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "s_account_number")
     private int id;
 
-    @Column(name = "hold")
     private boolean hold;
 
-    @Column(name = "active")
     private boolean active;
 
-    @Column(name = "amount")
     private double amount;
 
-    @Column(name = "next_interest_on")
     private LocalDateTime nextInterestOn;
 
-    @Column(name = "created_on")
     private LocalDateTime createdOn;
 
-    @Column(name = "frozen")
     private boolean frozen;
 
-    @OneToOne(fetch = FetchType.EAGER,
-            cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "account_type")
+    private boolean jointAccount;
+
     private TimeSpace accountType;
 
-    public Savings() {
-    }
-
-    public Savings(boolean hold, boolean active, double amount, LocalDateTime nextInterestOn, boolean frozen, TimeSpace accountType,LocalDateTime createdOn) {
+    public UserDeepAccountDTO(int id, boolean hold, boolean active, double amount, LocalDateTime nextInterestOn, LocalDateTime createdOn, boolean frozen, boolean jointAccount, TimeSpace accountType) {
+        this.id = id;
         this.hold = hold;
         this.active = active;
         this.amount = amount;
         this.nextInterestOn = nextInterestOn;
-        this.frozen = frozen;
-        this.accountType = accountType;
         this.createdOn = createdOn;
-    }
-
-    public LocalDateTime getCreatedOn() {
-        return createdOn;
+        this.frozen = frozen;
+        this.jointAccount = jointAccount;
+        this.accountType = accountType;
     }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public boolean isHold() {
@@ -90,12 +77,28 @@ final public class Savings {
         this.nextInterestOn = nextInterestOn;
     }
 
+    public LocalDateTime getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(LocalDateTime createdOn) {
+        this.createdOn = createdOn;
+    }
+
     public boolean isFrozen() {
         return frozen;
     }
 
     public void setFrozen(boolean frozen) {
         this.frozen = frozen;
+    }
+
+    public boolean isJointAccount() {
+        return jointAccount;
+    }
+
+    public void setJointAccount(boolean jointAccount) {
+        this.jointAccount = jointAccount;
     }
 
     public TimeSpace getAccountType() {

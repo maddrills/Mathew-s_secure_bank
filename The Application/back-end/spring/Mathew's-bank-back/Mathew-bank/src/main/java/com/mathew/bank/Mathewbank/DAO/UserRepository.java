@@ -1,14 +1,12 @@
 package com.mathew.bank.Mathewbank.DAO;
 
-import com.mathew.bank.Mathewbank.DTO.RolesDto;
-import com.mathew.bank.Mathewbank.DTO.UserAndDetailsDTO;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.TimeSpace;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
-import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Savings;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Account;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.UserDetails;
 import jakarta.persistence.EntityManager;
@@ -67,7 +65,7 @@ public class UserRepository implements UserRepo {
     public boolean createASavingsAccountForUser(int userId, int accountId, HttpServletResponse response) {
         //first check if user already has a savings account using there accountId
         UserAccounts userAccounts = this.entityManager.find(UserAccounts.class, accountId);
-        if (userAccounts.getSavings() != null) {
+        if (userAccounts.getAllUserAccounts() != null) {
             //if yes then return false
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             return false;
@@ -86,9 +84,9 @@ public class UserRepository implements UserRepo {
                 .plusSeconds(timeSpace.getSecond());
 
         //create the account
-        Savings savings = new Savings(false, true, 2000.00, interestOn, false, timeSpace, LocalDateTime.now());
+        Account savings = new Account(false, true, 2000.00, interestOn, false, timeSpace, LocalDateTime.now(),false);
 
-        userAccounts.setSavings(savings);
+        userAccounts.addAnAccountToUserAccounts(savings);
 
         this.entityManager.persist(userAccounts);
 
@@ -267,7 +265,7 @@ public class UserRepository implements UserRepo {
                 break;
             case 102:
                 //savings
-                if(fromUser.getUserAccountId().getSavings().getId() == accountNumberFrom) proceed = true;
+                //if(fromUser.getUserAccountId().getSavings().getId() == accountNumberFrom) proceed = true;
                 break;
             case 103:
                 //build up
@@ -280,14 +278,14 @@ public class UserRepository implements UserRepo {
         }
 
         if(proceed){
-            fromUser.getUserAccountId().getSavings();
+            //fromUser.getUserAccountId().getSavings();
         }
 
         return false;
     }
 
     @Override
-    public Savings getSavingsAccountByNumber(int accountNumber) {
+    public Account getSavingsAccountByNumber(int accountNumber) {
         return null;
     }
 

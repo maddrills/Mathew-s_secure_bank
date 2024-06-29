@@ -1,28 +1,29 @@
 package com.mathew.bank.Mathewbank.DTO;
 
-import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Savings;
+import java.util.Collection;
 
 public class UserAccountDTO {
 
     private int userAccountID;
 
-    private int savingsID;
-
-    private int checkingID;
-
-    private int buildUpID;
-
-    private int jointAccountsID;
+    private Collection<UserDeepAccountDTO> allUserAccounts;
 
     private boolean frozen;
 
-    public UserAccountDTO(int userAccountID, int savingsID, int checkingID, int buildUpID, int jointAccountsID, boolean frozen) {
+
+    public UserAccountDTO(int userAccountID, Collection<UserDeepAccountDTO> allUserAccounts, boolean frozen) {
         this.userAccountID = userAccountID;
-        this.savingsID = savingsID;
-        this.checkingID = checkingID;
-        this.buildUpID = buildUpID;
-        this.jointAccountsID = jointAccountsID;
+        this.allUserAccounts = allUserAccounts;
         this.frozen = frozen;
+    }
+
+
+    public Collection<UserDeepAccountDTO> getAllUserAccounts() {
+        return allUserAccounts;
+    }
+
+    public void setAllUserAccounts(Collection<UserDeepAccountDTO> allUserAccounts) {
+        this.allUserAccounts = allUserAccounts;
     }
 
     public int getUserAccountID() {
@@ -31,38 +32,6 @@ public class UserAccountDTO {
 
     public void setUserAccountID(int userAccountID) {
         this.userAccountID = userAccountID;
-    }
-
-    public int getSavingsID() {
-        return savingsID;
-    }
-
-    public void setSavingsID(int savingsID) {
-        this.savingsID = savingsID;
-    }
-
-    public int getCheckingID() {
-        return checkingID;
-    }
-
-    public void setCheckingID(int checkingID) {
-        this.checkingID = checkingID;
-    }
-
-    public int getBuildUpID() {
-        return buildUpID;
-    }
-
-    public void setBuildUpID(int buildUpID) {
-        this.buildUpID = buildUpID;
-    }
-
-    public int getJointAccountsID() {
-        return jointAccountsID;
-    }
-
-    public void setJointAccountsID(int jointAccountsID) {
-        this.jointAccountsID = jointAccountsID;
     }
 
     public boolean isFrozen() {

@@ -4,6 +4,7 @@ import com.mathew.bank.Mathewbank.DAO.UserRepository;
 import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.DTO.UserAccountDTO;
 import com.mathew.bank.Mathewbank.DTO.UserAndDetailsDTO;
+import com.mathew.bank.Mathewbank.DTO.UserDeepAccountDTO;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.UserDetails;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedList;
 
 @Service
 public class UserInBankService {
@@ -35,6 +37,24 @@ public class UserInBankService {
             //assign roles to the RolesDto collection
             userDetails.getUserId().getRoles().forEach(role -> rolesDtos.add(new RolesDto(role.getRole(), true)));
 
+            //create a collection of AccountDeapDTO
+            final Collection<UserDeepAccountDTO> userDeepAccountDTOS = new LinkedList<>();
+
+            //transfer each value to a DTO
+            userAccounts.getAllUserAccounts().forEach(
+                    account -> userDeepAccountDTOS.add(new UserDeepAccountDTO(
+                            account.getId(),
+                            account.isHold(),
+                            account.isActive(),
+                            account.getAmount(),
+                            account.getNextInterestOn(),
+                            account.getCreatedOn(),
+                            account.isFrozen(),
+                            account.isJointAccount(),
+                            account.getAccountType()
+                    ))
+            );
+
             return new UserAndDetailsDTO(
                     userDetails.getId(),
                     user.getUserName(),
@@ -47,14 +67,9 @@ public class UserInBankService {
                     userDetails.getEmail(),
                     new UserAccountDTO(
                             userAccounts.getId(),
-                            userAccounts.getSavings() == null ? 0 : userAccounts.getSavings().getId(),
-                            userAccounts.getChecking() == null ? 0 : userAccounts.getChecking().getId(),
-                            userAccounts.getBuildUp() == null ? 0 : userAccounts.getBuildUp().getId(),
-                            userAccounts.getJointAccounts() == null ? 0 : userAccounts.getJointAccounts().getId(),
-                            userAccounts.isFrozen())
-                    , rolesDtos
-            );
-
+                            userDeepAccountDTOS,
+                            userAccounts.isFrozen()),
+                    rolesDtos);
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             System.out.println(e);
@@ -83,6 +98,24 @@ public class UserInBankService {
         //sanity check
         if (userDetails == null) return null;
 
+        //create a collection of AccountDeapDTO
+        final Collection<UserDeepAccountDTO> userDeepAccountDTOS = new LinkedList<>();
+
+        //transfer each value to a DTO
+        userAccounts.getAllUserAccounts().forEach(
+                account -> userDeepAccountDTOS.add(new UserDeepAccountDTO(
+                        account.getId(),
+                        account.isHold(),
+                        account.isActive(),
+                        account.getAmount(),
+                        account.getNextInterestOn(),
+                        account.getCreatedOn(),
+                        account.isFrozen(),
+                        account.isJointAccount(),
+                        account.getAccountType()
+                ))
+        );
+
 
         //now get the credentials from entity to TDO
         return new UserAndDetailsDTO(
@@ -97,10 +130,7 @@ public class UserInBankService {
                 userDetails.getEmail(),
                 new UserAccountDTO(
                         userAccounts.getId(),
-                        userAccounts.getSavings() == null ? 0 : userAccounts.getSavings().getId(),
-                        userAccounts.getChecking() == null ? 0 : userAccounts.getChecking().getId(),
-                        userAccounts.getBuildUp() == null ? 0 : userAccounts.getBuildUp().getId(),
-                        userAccounts.getJointAccounts() == null ? 0 : userAccounts.getJointAccounts().getId(),
+                        userDeepAccountDTOS,
                         userAccounts.isFrozen()
                 )
         );
@@ -149,7 +179,7 @@ public class UserInBankService {
     }
 
     //this class is used to access decoded values
-    private class UserAuthDecodedValues{
+    private class UserAuthDecodedValues {
 
         private String userName;
 
@@ -157,7 +187,7 @@ public class UserInBankService {
 
         private int accountID;
 
-        public UserAuthDecodedValues(String userName, int userId, int accountID){
+        public UserAuthDecodedValues(String userName, int userId, int accountID) {
             this.userName = userName;
             this.userId = userId;
             this.accountID = accountID;
@@ -197,7 +227,7 @@ public class UserInBankService {
         }
     }
 
-    private UserAuthDecodedValues authenticatedUserDecoder(String auth){
+    private UserAuthDecodedValues authenticatedUserDecoder(String auth) {
         // [0] -> username  [1] -> userId  [2] -> accountId
 
         String[] authDecode = auth.split(",");

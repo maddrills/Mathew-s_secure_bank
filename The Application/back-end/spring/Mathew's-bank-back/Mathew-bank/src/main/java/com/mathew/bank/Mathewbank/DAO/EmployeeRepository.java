@@ -6,7 +6,7 @@ import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDetails;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
-import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Savings;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Account;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.UserDetails;
 import jakarta.persistence.EntityManager;
@@ -100,17 +100,17 @@ public class EmployeeRepository implements EmpRepo {
     }
 
     @Override
-    public Savings getSavingsAccountByNumber(int accountNumber) {
+    public Account getSavingsAccountByNumber(int accountNumber) {
 
-        TypedQuery<Savings> query = this.entityManager.createQuery("SELECT S FROM Savings AS S WHERE S.id = :accountNumber", Savings.class);
+        TypedQuery<Account> query = this.entityManager.createQuery("SELECT S FROM Savings AS S WHERE S.id = :accountNumber", Account.class);
 
         query.setParameter("accountNumber", accountNumber);
 
-        Savings savings = query.getSingleResult();
+        Account account = query.getSingleResult();
 
-        System.out.println(savings.getAmount() - 50);
+        System.out.println(account.getAmount() - 50);
 
-        return savings;
+        return account;
     }
 
     //TODO IF ever required
@@ -147,9 +147,9 @@ public class EmployeeRepository implements EmpRepo {
         System.out.println(employeeDetails.getEmail());
 
         //find the corresponding account number made to add employees salary
-        Savings savings = this.entityManager.find(Savings.class, bankAccountNumber);
+        Account account = this.entityManager.find(Account.class, bankAccountNumber);
 
-        employeeDetails.setSavings(savings);
+        employeeDetails.setSavings(account);
         //finally update it
         this.entityManager.merge(employeeDetails);
     }
@@ -202,14 +202,24 @@ public class EmployeeRepository implements EmpRepo {
     @Transactional
     public void addManagerToBranch(int managerId, int bankId) {
 
+        Employee employee = getEmployeeById(managerId);
+        //check if employee is manager else throw an exception
+        boolean isManager = false;
+        for(var role : employee.getRoles()){
+            if(role.getRole().equals("ROLE_manager")){
+                isManager = true;
+            }
+        }
+        if(!isManager){
+            throw new RuntimeException("Not a manager please raise permissions for the user");
+        }
+
         //get the employee and branch entity's
         Branch branch = getBranchById(bankId);
         //check if branch already has a manager
         if (!(branch.getBranchManager() == null)) {
             throw new RuntimeException("Batch already has a manager");
         }
-
-        Employee employee = getEmployeeById(managerId);
 
         //find everyone under manager
         Collection<Employee> clerks = this.findAllEmployeesWhoAreNotManagersOrAdminsInBank(branch.getId());
@@ -235,8 +245,19 @@ public class EmployeeRepository implements EmpRepo {
     @Override
     @Transactional
     public void createBranch(Branch branch, int manager) {
-        //find the employee In DB
+
+        //find the employee In DB and has manager as role
         Employee employeeManager = this.getEmployeeById(manager);
+        boolean isManager = false;
+        for(var role : employeeManager.getRoles()){
+            if(role.getRole().equals("ROLE_manager")){
+                isManager = true;
+            }
+        }
+        if(!isManager){
+            throw new RuntimeException("Not a manager please raise permissions for the user");
+        }
+
         //update the branch field to have the respective manager
         branch.setBranchManager(employeeManager);
         //add the new branch to db
@@ -334,7 +355,11 @@ public class EmployeeRepository implements EmpRepo {
 
         //gets the branch the user will be added to
         Branch branch = this.findBranchByName(branchName);
-        user.setBranchId(branch);
+
+        System.out.println(branch.getId());
+        System.out.println("User id -> "+user.getId());
+
+//        user.setBranchId(branch);
         this.entityManager.merge(user);
     }
 

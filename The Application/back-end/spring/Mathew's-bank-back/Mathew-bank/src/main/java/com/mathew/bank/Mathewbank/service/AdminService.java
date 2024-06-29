@@ -13,7 +13,7 @@ import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.TimeSpace;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDetails;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
-import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Savings;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Account;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.UserDetails;
 import jakarta.servlet.http.HttpServletResponse;
@@ -608,9 +608,10 @@ public class AdminService {
                 defaultBranch
         );
 
-        employee.setARole(new Role("ROLE_manager"));
-        employee.setARole(new Role("ROLE_clerk"));
-        employee.setARole(new Role("ROLE_employee"));
+//        employee.setARole(new Role("ROLE_admin"));
+//        employee.setARole(new Role("ROLE_manager"));
+//        employee.setARole(new Role("ROLE_clerk"));
+//        employee.setARole(new Role("ROLE_employee"));
 
 
         EmployeeDetails employeeDetails = new EmployeeDetails(
@@ -627,36 +628,36 @@ public class AdminService {
 
         // TODO catch individual exceptions
         try {
-            empRepo.addAnEmployeeAndThereDetails(employeeDetails, 0, new HashSet<>(Set.of("admin")));
+            empRepo.addAnEmployeeAndThereDetails(employeeDetails, 0, new HashSet<>(Set.of("admin","manager","clerk","employee")));
         } catch (Exception e) {
             System.out.println(e);
         }
 
-        Savings savings = new Savings(
+        Account savings = new Account(
                 false,
                 true,
                 1000000000.11,
                 LocalDateTime.now().plusMonths(1),
                 false,
                 new TimeSpace("savings", 0, 0, 0, 0, 1, 0, 0.07),
-                LocalDateTime.now()
-        );
-
-
-        UserAccounts AdminAccount = new UserAccounts(
-                savings,
-                null,
-                null,
-                null,
+                LocalDateTime.now(),
                 false
         );
+
+
+        //add the savings account to admin account
+        UserAccounts adminAccount = new UserAccounts(
+                false
+        );
+        adminAccount.addAnAccountToUserAccounts(savings);
+        savings.setUserAccounts(adminAccount);
 
 
         User adminBankAccount = new User(
                 "Mathew Francis",
                 this.passwordEncoder.encode("12345"),
-                AdminAccount,
-                null
+                adminAccount,
+                defaultBranch
         );
 
         adminBankAccount.setARole(new Role("ROLE_user"));
@@ -686,8 +687,9 @@ public class AdminService {
 
         //add back account to first employee ADMIN
         try {
-            this.empRepo.addOeUpdateEmployeeBankAccount(1000001, 102000001);
+            this.empRepo.addOeUpdateEmployeeBankAccount(1000001, 101000001);
         } catch (Exception e) {
+            System.out.println("Last exe");
             System.out.println(e);
         }
     }

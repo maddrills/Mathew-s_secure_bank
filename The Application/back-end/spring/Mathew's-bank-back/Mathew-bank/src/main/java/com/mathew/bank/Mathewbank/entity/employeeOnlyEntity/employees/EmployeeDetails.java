@@ -1,6 +1,6 @@
 package com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees;
 
-import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Savings;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Account;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -37,27 +37,27 @@ final public class EmployeeDetails {
 
     @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "salary_account")
-    private Savings savings;
+    private Account account;
 
 
     public EmployeeDetails() {
     }
 
-    public EmployeeDetails(String phone_number, String fullName, String email, LocalDate dateOfBirth, double salary, Savings savings) {
+    public EmployeeDetails(String phone_number, String fullName, String email, LocalDate dateOfBirth, double salary, Account account) {
         this.phone_number = phone_number;
         this.fullName = fullName;
         this.email = email;
         this.dateOfBirth = dateOfBirth;
         this.salary = salary;
-        this.savings = savings;
+        this.account = account;
     }
 
-    public Savings getSavings() {
-        return savings;
+    public Account getSavings() {
+        return account;
     }
 
-    public void setSavings(Savings savings) {
-        this.savings = savings;
+    public void setSavings(Account account) {
+        this.account = account;
     }
 
     public int getId() {
