@@ -78,7 +78,7 @@ public class CustomAuthenticationProviderForUser implements AuthenticationProvid
 
                     //loop through the users authorities and add each of them to simple granted authority
                     try {
-                        
+
                         //check if employee is part of permission set for employee signing in
                         boolean hasEmployee = false;
                         for(var permission : employee.getRoles()){

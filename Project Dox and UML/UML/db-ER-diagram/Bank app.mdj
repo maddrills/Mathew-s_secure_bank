@@ -1654,7 +1654,7 @@
 									"fillColor": "#fcffaf",
 									"font": "Arial;13;1",
 									"left": 1080,
-									"top": 525,
+									"top": 517,
 									"width": 248,
 									"height": 13,
 									"text": "user_loan"
@@ -1681,7 +1681,7 @@
 											"fillColor": "#fcffaf",
 											"font": "Arial;13;0",
 											"left": 1085,
-											"top": 548,
+											"top": 540,
 											"width": 238,
 											"height": 13
 										},
@@ -1697,7 +1697,7 @@
 											"fillColor": "#fcffaf",
 											"font": "Arial;13;0",
 											"left": 1085,
-											"top": 563,
+											"top": 555,
 											"width": 238,
 											"height": 13
 										},
@@ -1713,7 +1713,7 @@
 											"fillColor": "#fcffaf",
 											"font": "Arial;13;0",
 											"left": 1085,
-											"top": 578,
+											"top": 570,
 											"width": 238,
 											"height": 13
 										},
@@ -1730,7 +1730,7 @@
 											"fillColor": "#fcffaf",
 											"font": "Arial;13;0",
 											"left": 1085,
-											"top": 593,
+											"top": 577,
 											"width": 238,
 											"height": 13
 										},
@@ -1746,7 +1746,7 @@
 											"fillColor": "#fcffaf",
 											"font": "Arial;13;0",
 											"left": 1085,
-											"top": 593,
+											"top": 585,
 											"width": 238,
 											"height": 13
 										},
@@ -1762,7 +1762,7 @@
 											"fillColor": "#fcffaf",
 											"font": "Arial;13;0",
 											"left": 1085,
-											"top": 608,
+											"top": 600,
 											"width": 238,
 											"height": 13
 										}
@@ -1770,7 +1770,7 @@
 									"fillColor": "#fcffaf",
 									"font": "Arial;13;0",
 									"left": 1080,
-									"top": 543,
+									"top": 535,
 									"width": 248,
 									"height": 83
 								}
@@ -1778,7 +1778,7 @@
 							"fillColor": "#fcffaf",
 							"font": "Arial;13;0",
 							"left": 1080,
-							"top": 520,
+							"top": 512,
 							"width": 248,
 							"height": 136,
 							"nameLabel": {

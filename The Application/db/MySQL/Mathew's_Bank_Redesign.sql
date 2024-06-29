@@ -94,8 +94,9 @@ CREATE TABLE `account`(
 `next_interest_on` DATETIME NOT NULL,
 `created_on` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 `frozen` BOOLEAN NOT NULL DEFAULT 0,
-`account_type` VARCHAR(30) DEFAULT 'savings',
 `is_joint_account` BOOLEAN NOT NULL DEFAULT 0, 
+`user_accounts_id` INTEGER NOT NULL,
+`account_type` VARCHAR(30) DEFAULT 'savings',
 CONSTRAINT `savings_pk` PRIMARY KEY (`s_account_number`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 101000001, DEFAULT CHARSET 'latin1';
 
@@ -178,7 +179,7 @@ CONSTRAINT `savings_pk` PRIMARY KEY (`s_account_number`)
 CREATE TABLE `user_accounts`(
 `u_acc_id` INTEGER NOT NULL AUTO_INCREMENT,
 -- all fks go here
-`account` INTEGER UNIQUE,
+-- `account` INTEGER UNIQUE,
 `frozen` BOOLEAN NOT NULL DEFAULT 0,
 CONSTRAINT `user_acount_pk` PRIMARY KEY (`u_acc_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
@@ -277,8 +278,8 @@ CREATE TABLE `website_visited`(
 
 -- users foreign keys
  -- ALTER TABLE `user_acount` ADD CONSTRAINT `user_acount_unique` UNIQUE (`s_ac_no`,`ack_ac_no`,`b_ac_no`,`joint_ac_id`);
-ALTER TABLE `user_accounts` ADD CONSTRAINT `user_acount_fk_to_account` FOREIGN KEY(`account`) REFERENCES `account`(`s_account_number`);
-DESC `user_accounts`;
+-- ALTER TABLE `user_accounts` ADD CONSTRAINT `user_acount_fk_to_account` FOREIGN KEY(`account`) REFERENCES `account`(`s_account_number`);
+-- DESC `user_accounts`;
 
 -- ALTER TABLE `business_account` ADD CONSTRAINT `business_account_fk_to_joint_accounts` FOREIGN KEY(`joint_account_id`) REFERENCES `joint_accounts`(`joint_account_id`);
 -- DESC `business_account`;
@@ -347,6 +348,7 @@ DESC `user_application`;
 
 
 ALTER TABLE `account` ADD CONSTRAINT `account_fk_to_time_space` FOREIGN KEY(`account_type`) REFERENCES `time_space`(`account_type`);
+ALTER TABLE `account` ADD CONSTRAINT `account_fk_to_user_accounts` FOREIGN KEY(`user_accounts_id`) REFERENCES `user_accounts`(`u_acc_id`);
 DESC `account`;
 
 -- ALTER TABLE `business_account` ADD CONSTRAINT `business_account_fk_to_time_space` FOREIGN KEY(`account_type`) REFERENCES `time_space`(`account_type`);
@@ -365,6 +367,12 @@ DESCRIBE `emp_details`;
 SELECT * FROM `emp_roles`;
 
 INSERT `roles`(`role_name`) VALUES ('ROLE_admin');
+INSERT `roles`(`role_name`) VALUES ('ROLE_manager');
+INSERT `roles`(`role_name`) VALUES ('ROLE_clerk');
+INSERT `roles`(`role_name`) VALUES ('ROLE_employee');
+
+-- employee role is given in the app dafinition 
+
 SELECT * FROM `roles`;
 
 
@@ -375,6 +383,8 @@ DESC `branch`;
 DESC `user`;
 SELECT * FROM `user_details`;
 SELECT * FROM `user_accounts`;
+DESC `user_accounts`;
 SELECT * FROM `account`;
+DESC `account`;
 SELECT * FROM `user_application`;
 DESCRIBE `user_application`;
