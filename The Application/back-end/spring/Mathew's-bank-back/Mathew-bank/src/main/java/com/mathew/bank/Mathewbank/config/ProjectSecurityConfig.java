@@ -106,7 +106,7 @@ public class ProjectSecurityConfig {
                         //any one who is authenticated can access /users
                         .requestMatchers("/bankUser/login", "/user", "/user/getXSRfToken", "/logout").authenticated()
                         //all the rest are open to public
-                        .requestMatchers("/exposed/applyForAccount","/Sign-up/signup-user").permitAll()
+                        .requestMatchers("/exposed/**","/Sign-up/signup-user").permitAll()
                 )
                 // redirect to /login if the user is not authenticated  Customizer.withDefaults() enables a security feature using the defaults provided by Spring Security
                 .formLogin(Customizer.withDefaults())

@@ -522,19 +522,24 @@ public class AdminService {
                 user -> {
                     UserDetails userDetails = user.getUserDetails();
 
-                    userAndDetailsDTOS.add(
-                            new UserAndDetailsDTO(
-                                    user.getId(),
-                                    user.getUserName(),
-                                    user.getUserAccountId(),
-                                    user.getBranchId().getId(),
-                                    userDetails.getFullName(),
-                                    userDetails.getPhoneNumber(),
-                                    userDetails.getDateOfBerth(),
-                                    userDetails.getAge(),
-                                    userDetails.getEmail()
-                            )
+                    UserAndDetailsDTO userAndDetailsDTO = new UserAndDetailsDTO(
+                            user.getId(),
+                            user.getUserName(),
+                            user.getUserAccountId().getId(),
+                            user.getBranchId().getId(),
+                            userDetails.getFullName(),
+                            userDetails.getPhoneNumber(),
+                            userDetails.getDateOfBerth(),
+                            userDetails.getAge(),
+                            userDetails.getEmail()
                     );
+
+                    //add roles
+                    final List<RolesDto> rolesDtos = new LinkedList<>();
+                    user.getRoles().forEach(role -> rolesDtos.add(new RolesDto(role.getRole(), true)));
+                    userAndDetailsDTO.setRolesDto(rolesDtos);
+
+                    userAndDetailsDTOS.add(userAndDetailsDTO);
                 }
         );
 
@@ -636,7 +641,7 @@ public class AdminService {
         Account savings = new Account(
                 false,
                 true,
-                1000000000.11,
+                100_000_000.11,
                 LocalDateTime.now().plusMonths(1),
                 false,
                 new TimeSpace("savings", 0, 0, 0, 0, 1, 0, 0.07),

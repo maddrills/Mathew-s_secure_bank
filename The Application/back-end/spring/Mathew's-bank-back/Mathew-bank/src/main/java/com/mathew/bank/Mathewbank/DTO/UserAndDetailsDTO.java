@@ -27,7 +27,7 @@ public class UserAndDetailsDTO implements AllowedLoginOutputGeneric{
 
     private UserAccountDTO userAccountDTO;
 
-    private int userAccountNumber;
+    private int userAccountsNumber;
 
     private Collection<RolesDto> rolesDto;
 
@@ -48,7 +48,7 @@ public class UserAndDetailsDTO implements AllowedLoginOutputGeneric{
                              String fullName, String phoneNumber, LocalDate dateOfBerth, int age, String email) {
         this.userId = userId;
         this.userName = userName;
-        this.userAccountNumber = userAccountNumber;
+        this.userAccountsNumber = userAccountNumber;
         this.branchId = branchId;
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
@@ -87,12 +87,12 @@ public class UserAndDetailsDTO implements AllowedLoginOutputGeneric{
         this.rolesDto = rolesDto;
     }
 
-    public int getUserAccountNumber() {
-        return userAccountNumber;
+    public int getUserAccountsNumber() {
+        return userAccountsNumber;
     }
 
-    public void setUserAccountNumber(int userAccountNumber) {
-        this.userAccountNumber = userAccountNumber;
+    public void setUserAccountsNumber(int userAccountNumber) {
+        this.userAccountsNumber = userAccountNumber;
     }
 
     public Collection<RolesDto> getRolesDto() {

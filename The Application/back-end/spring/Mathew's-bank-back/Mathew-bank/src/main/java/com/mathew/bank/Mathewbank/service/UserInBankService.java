@@ -42,18 +42,22 @@ public class UserInBankService {
 
             //transfer each value to a DTO
             userAccounts.getAllUserAccounts().forEach(
-                    account -> userDeepAccountDTOS.add(new UserDeepAccountDTO(
-                            account.getId(),
-                            account.isHold(),
-                            account.isActive(),
-                            account.getAmount(),
-                            account.getNextInterestOn(),
-                            account.getCreatedOn(),
-                            account.isFrozen(),
-                            account.isJointAccount(),
-                            account.getAccountType()
-                    ))
-            );
+                    account -> {
+
+                        System.out.println(account.getAmount() - 50);
+
+                        userDeepAccountDTOS.add(new UserDeepAccountDTO(
+                                account.getId(),
+                                account.isHold(),
+                                account.isActive(),
+                                account.getAmount(),
+                                account.getNextInterestOn(),
+                                account.getCreatedOn(),
+                                account.isFrozen(),
+                                account.isJointAccount(),
+                                account.getAccountType()
+                        ));
+                    });
 
             return new UserAndDetailsDTO(
                     userDetails.getId(),
