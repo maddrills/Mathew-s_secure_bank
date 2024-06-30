@@ -82,14 +82,17 @@ public class UserInBankService {
     }
 
 
-    public UserAndDetailsDTO getUserAndUserDetailsFromService(int userID, HttpServletResponse response) {
+    public UserAndDetailsDTO getUserAndUserDetailsFromService(Authentication authentication, HttpServletResponse response) {
+
+        UserAuthDecodedValues userAuthDecodedValues = this.authenticatedUserDecoder(authentication.getName());
+
 
         User user;
         UserDetails userDetails;
         UserAccounts userAccounts;
 
         try {
-            user = this.userRepository.getUserFromDb(userID);
+            user = this.userRepository.getUserFromDb(userAuthDecodedValues.getUserId());
             userDetails = user.getUserDetails();
             //get the account details like savings account build up etc etc
             userAccounts = user.getUserAccountId();
@@ -180,6 +183,38 @@ public class UserInBankService {
             System.out.println(e);
             return false;
         }
+    }
+
+    public boolean createABankAccount(String accountName, double initialAmount, Authentication authentication, HttpServletResponse httpServletResponse) {
+
+        //sanity checks
+
+        //check if initial amount is positive
+        if(initialAmount <= 0){
+            httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return false;
+        }
+        //check if account name is a string
+        try{
+            Integer.parseInt(accountName);
+            httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return false;
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+
+        UserAuthDecodedValues userAuthDecodedValues = this.authenticatedUserDecoder(authentication.getName());
+
+        try{
+            return this.userRepository.addBankAccountToUser(accountName, initialAmount, userAuthDecodedValues.getUserId(),
+                    userAuthDecodedValues.getAccountID(), userAuthDecodedValues.getUserName());
+
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
+
     }
 
     //this class is used to access decoded values

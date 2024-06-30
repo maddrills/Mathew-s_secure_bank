@@ -12,7 +12,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/bankUser/user-details?userId=1",
+					"raw": "http://localhost:8080/bankUser/user-details",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -21,12 +21,6 @@
 					"path": [
 						"bankUser",
 						"user-details"
-					],
-					"query": [
-						{
-							"key": "userId",
-							"value": "1"
-						}
 					]
 				}
 			},
@@ -143,7 +137,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/bankUser/user-details?userId=1",
+					"raw": "http://localhost:8080/bankUser/user-details",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -152,12 +146,6 @@
 					"path": [
 						"bankUser",
 						"user-details"
-					],
-					"query": [
-						{
-							"key": "userId",
-							"value": "1"
-						}
 					]
 				}
 			},
@@ -568,6 +556,36 @@
 						{
 							"key": "amount",
 							"value": "333"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createUserBankAccount",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/bankUser/createNewSavingsAccount?accountName=saving&initialAmount=2000.11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bankUser",
+						"createNewSavingsAccount"
+					],
+					"query": [
+						{
+							"key": "accountName",
+							"value": "saving"
+						},
+						{
+							"key": "initialAmount",
+							"value": "2000.11"
 						}
 					]
 				}

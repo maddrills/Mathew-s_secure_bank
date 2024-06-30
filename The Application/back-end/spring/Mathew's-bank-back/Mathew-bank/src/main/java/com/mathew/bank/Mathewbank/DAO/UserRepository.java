@@ -285,6 +285,55 @@ public class UserRepository implements UserRepo {
     }
 
     @Override
+    @Transactional
+    public boolean addBankAccountToUser(String accountName, double initialAmount, int userId, int accountID, String userName) {
+
+        //get savings account by account name
+        TimeSpace accountType = this.getAccountTypeByName(accountName);
+
+        //check if initial amount is grater or equal to min selected amount
+        System.out.println(accountType.getAccountType());
+        if(initialAmount < accountType.getMinStartingAmount()){
+            return false;
+        }
+
+        //find user by id
+        User user = this.getUserFromDb(userId);
+        UserAccounts userAccounts = user.getUserAccountId();
+
+        //create user account
+        Account savings = new Account(
+                false,
+                true,
+                initialAmount,
+                LocalDateTime.now().plusYears(accountType.getYears()).
+                        plusMonths(accountType.getMonths()).
+                        plusDays(accountType.getDays()).
+                        plusHours(accountType.getHour()).
+                        plusMinutes(accountType.getMin()).
+                        plusSeconds(accountType.getSecond()),
+                false,
+                accountType
+                ,
+                LocalDateTime.now(),
+                accountType.isAJointAccount()
+        );
+
+        //bind account to user
+        savings.setUserAccounts(userAccounts);
+
+        this.entityManager.persist(savings);
+
+        return true;
+    }
+
+    @Override
+    public TimeSpace getAccountTypeByName(String name) {
+
+        return this.entityManager.find(TimeSpace.class, name);
+    }
+
+    @Override
     public Account getSavingsAccountByNumber(int accountNumber) {
         return null;
     }

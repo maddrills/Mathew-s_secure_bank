@@ -25,10 +25,10 @@ public class BankUser {
     // get them by user_id from JWT
     // https://stackoverflow.com/questions/54909509/accessing-jwt-token-from-a-spring-boot-rest-controller
     @GetMapping("/user-details")
-    public UserAndDetailsDTO getUserDetails(@RequestParam int userId, HttpServletResponse response) {
+    public UserAndDetailsDTO getUserDetails(Authentication authentication, HttpServletResponse response) {
         //for now ill be using 2
-        System.out.println(userId);
-        return userInBankService.getUserAndUserDetailsFromService(userId, response);
+        System.out.println(authentication.getName());
+        return userInBankService.getUserAndUserDetailsFromService(authentication, response);
     }
 
 
@@ -52,12 +52,20 @@ public class BankUser {
         return false;
     }
 
-    @PatchMapping("send-money-via-account-number")
+    @PatchMapping("/send-money-via-account-number")
     public boolean transferMoneyByAccountNumber(@RequestParam int accountNumberFrom,@RequestParam int accountNumberTo, @RequestParam int amount, Authentication authentication, HttpServletResponse response){
 
         System.out.println("From -> "+accountNumberFrom+" To -> "+accountNumberTo+" amount -> "+amount);
 
         return this.userInBankService.transferMoneyAndUpdateBothAccounts(accountNumberFrom, accountNumberTo, amount, authentication, response);
+    }
+
+    @PutMapping("/createNewSavingsAccount")
+    public boolean createUserBankAccount(@RequestParam String accountName,@RequestParam double initialAmount, Authentication authentication, HttpServletResponse httpServletResponse){
+
+        System.out.println(authentication.getName()+"-----"+accountName+"----"+initialAmount);
+
+        return this.userInBankService.createABankAccount(accountName, initialAmount, authentication, httpServletResponse);
     }
 
 

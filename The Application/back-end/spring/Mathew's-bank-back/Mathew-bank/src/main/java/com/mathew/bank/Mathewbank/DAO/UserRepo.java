@@ -2,6 +2,7 @@ package com.mathew.bank.Mathewbank.DAO;
 
 import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
+import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.TimeSpace;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -19,4 +20,9 @@ public interface UserRepo extends User_emp_commonRepo{
     public User getUserFromDb(int usedId);
 
     boolean transferMoneyFromUserAccountToAnother(int accountNumberFrom, int accountNumberTo, int amount, int userId, int accountID);
+
+    boolean addBankAccountToUser(String accountName, double initialAmount, int userId, int accountID, String userName);
+
+    TimeSpace getAccountTypeByName(String name);
+
 }
