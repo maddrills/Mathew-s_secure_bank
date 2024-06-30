@@ -95,8 +95,11 @@ CREATE TABLE `account`(
 `created_on` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 `frozen` BOOLEAN NOT NULL DEFAULT 0,
 `is_joint_account` BOOLEAN NOT NULL DEFAULT 0, 
-`user_accounts_id` INTEGER NOT NULL,
+`latest_withdrawal_date` DATETIME,
+`periodic_withdrawal_count` SMALLINT NOT NULL DEFAULT 0,
+`withdrawal_count` INTEGER NOT NULL DEFAULT 0,
 `account_type` VARCHAR(30) DEFAULT 'savings',
+`user_accounts_id` INTEGER NOT NULL,
 CONSTRAINT `savings_pk` PRIMARY KEY (`s_account_number`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 101000001, DEFAULT CHARSET 'latin1';
 
@@ -235,6 +238,16 @@ CREATE TABLE `time_space`(
 `months` SMALLINT NOT NULL DEFAULT 0 CHECK(`months` >=0),
 `years` SMALLINT NOT NULL DEFAULT 0 CHECK(`years` >=0 AND `years` < 100),
 `base_interest_rate` FLOAT NOT NULL DEFAULT 0.00,
+`joint_account` BOOLEAN NOT NULL DEFAULT 0,
+`min_amount` DECIMAL(20,2) NOT NULL,
+
+`withdrawal_count_limit` DECIMAL(20,2) NOT NULL,
+`money_transfer_limit` DECIMAL(20,2) NOT NULL,
+`base_limit` SMALLINT NOT NULL DEFAULT 0,
+`monthly_draw` SMALLINT NOT NULL DEFAULT 0,
+`daily_draw` SMALLINT NOT NULL DEFAULT 0,
+`hourly_draw` SMALLINT NOT NULL DEFAULT 0,
+`minutes_draw`  SMALLINT NOT NULL DEFAULT 0,
 CONSTRAINT `time_space_pk` PRIMARY KEY (`account_type`)
 )ENGINE = 'Innodb' , DEFAULT CHARSET 'latin1';
 

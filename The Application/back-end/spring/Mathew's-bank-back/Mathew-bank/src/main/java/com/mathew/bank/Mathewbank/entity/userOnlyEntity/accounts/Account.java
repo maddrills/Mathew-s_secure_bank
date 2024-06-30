@@ -36,6 +36,15 @@ final public class Account {
     @Column(name = "is_joint_account")
     private boolean jointAccount;
 
+    @Column(name = "latest_withdrawal_date")
+    private LocalDateTime lastWithdrawalDate;
+
+    @Column(name = "periodic_withdrawal_count")
+    private int periodicWithdrawalCount;
+
+    @Column(name = "withdrawal_count")
+    private int withdrawalCount;
+
     @ManyToOne(fetch = FetchType.EAGER,
             cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "account_type")
@@ -50,6 +59,11 @@ final public class Account {
     }
 
     public Account(boolean hold, boolean active, double amount, LocalDateTime nextInterestOn, boolean frozen, TimeSpace accountType, LocalDateTime createdOn, boolean jointAccount) {
+        this(hold,active,amount,nextInterestOn,frozen,accountType,createdOn,jointAccount,null,0,0);
+    }
+
+    public Account(boolean hold, boolean active, double amount, LocalDateTime nextInterestOn, boolean frozen,
+                   TimeSpace accountType, LocalDateTime createdOn, boolean jointAccount,LocalDateTime lastWithdrawalDate,int periodicWithdrawalCount,int withdrawalCount) {
         this.hold = hold;
         this.active = active;
         this.amount = amount;
@@ -58,6 +72,41 @@ final public class Account {
         this.accountType = accountType;
         this.createdOn = createdOn;
         this.jointAccount = jointAccount;
+        this.lastWithdrawalDate = lastWithdrawalDate;
+        this.periodicWithdrawalCount = periodicWithdrawalCount;
+        this.withdrawalCount = withdrawalCount;
+    }
+
+    public void setCreatedOn(LocalDateTime createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public void setJointAccount(boolean jointAccount) {
+        this.jointAccount = jointAccount;
+    }
+
+    public LocalDateTime getLastWithdrawalDate() {
+        return lastWithdrawalDate;
+    }
+
+    public void setLastWithdrawalDate(LocalDateTime lastWithdrawalDate) {
+        this.lastWithdrawalDate = lastWithdrawalDate;
+    }
+
+    public int getPeriodicWithdrawalCount() {
+        return periodicWithdrawalCount;
+    }
+
+    public void setPeriodicWithdrawalCount(int periodicWithdrawalCount) {
+        this.periodicWithdrawalCount = periodicWithdrawalCount;
+    }
+
+    public int getWithdrawalCount() {
+        return withdrawalCount;
+    }
+
+    public void setWithdrawalCount(int withdrawalCount) {
+        this.withdrawalCount = withdrawalCount;
     }
 
     public UserAccounts getUserAccounts() {
