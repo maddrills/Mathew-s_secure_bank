@@ -3,6 +3,7 @@ package com.mathew.bank.Mathewbank.controller;
 import com.mathew.bank.Mathewbank.DAO.UserRepository;
 import com.mathew.bank.Mathewbank.DTO.AllowedLoginOutputGeneric;
 import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
+import com.mathew.bank.Mathewbank.DTO.UserAccountDTO;
 import com.mathew.bank.Mathewbank.DTO.UserAndDetailsDTO;
 import com.mathew.bank.Mathewbank.service.EmployeeService;
 import com.mathew.bank.Mathewbank.service.UserInBankService;
@@ -10,6 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/bankUser")
@@ -29,6 +32,13 @@ public class BankUser {
         //for now ill be using 2
         System.out.println(authentication.getName());
         return userInBankService.getUserAndUserDetailsFromService(authentication, response);
+    }
+
+
+    @GetMapping("/get_all_accounts")
+    public List<UserAccountDTO> getAllUsersAccounts(HttpServletResponse response, Authentication authentication){
+
+        return this.userInBankService.getAllUserAccounts(response, authentication);
     }
 
 

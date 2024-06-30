@@ -334,6 +334,11 @@ public class UserRepository implements UserRepo {
     }
 
     @Override
+    public UserAccounts getAllUserAccounts(int accountID) {
+        return null;
+    }
+
+    @Override
     public Account getSavingsAccountByNumber(int accountNumber) {
         return null;
     }

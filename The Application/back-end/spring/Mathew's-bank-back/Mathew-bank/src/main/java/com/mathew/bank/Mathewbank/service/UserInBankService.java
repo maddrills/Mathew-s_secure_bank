@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 
 @Service
 public class UserInBankService {
@@ -85,7 +86,6 @@ public class UserInBankService {
     public UserAndDetailsDTO getUserAndUserDetailsFromService(Authentication authentication, HttpServletResponse response) {
 
         UserAuthDecodedValues userAuthDecodedValues = this.authenticatedUserDecoder(authentication.getName());
-
 
         User user;
         UserDetails userDetails;
@@ -215,6 +215,18 @@ public class UserInBankService {
             return false;
         }
 
+    }
+
+    public List<UserAccountDTO> getAllUserAccounts(HttpServletResponse response, Authentication authentication) {
+
+        // decode auth values
+        UserAuthDecodedValues userAuthDecodedValues = this.authenticatedUserDecoder(authentication.getName());
+
+        //List of UserAccountDTO
+
+        UserAccounts userAccounts = this.userRepository.getAllUserAccounts(userAuthDecodedValues.getAccountID());
+
+        return null;
     }
 
     //this class is used to access decoded values
