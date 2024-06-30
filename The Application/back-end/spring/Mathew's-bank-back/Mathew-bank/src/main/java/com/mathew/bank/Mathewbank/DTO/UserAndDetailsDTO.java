@@ -44,6 +44,23 @@ public class UserAndDetailsDTO implements AllowedLoginOutputGeneric{
         this.email = email;
     }
 
+    public UserAndDetailsDTO(int userId, String userName, UserAccounts userAccountId, int branchId,
+                             String fullName, String phoneNumber, LocalDate dateOfBerth, int age, String email, Collection<RolesDto> rolesDto, int userAccountsNumber) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userAccountId = userAccountId;
+        this.branchId = branchId;
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBerth = dateOfBerth;
+        this.age = age;
+        this.email = email;
+        this.rolesDto = rolesDto;
+        this.userAccountsNumber = userAccountsNumber;
+    }
+
+
+
     public UserAndDetailsDTO(int userId, String userName, int userAccountNumber, int branchId,
                              String fullName, String phoneNumber, LocalDate dateOfBerth, int age, String email) {
         this.userId = userId;

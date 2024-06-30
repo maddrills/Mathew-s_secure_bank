@@ -25,6 +25,8 @@ public class UserDeepAccountDTO {
 
     private TimeSpace accountType;
 
+    private String accountTypeName;
+
     public UserDeepAccountDTO(int id, boolean hold, boolean active, double amount, LocalDateTime nextInterestOn, LocalDateTime createdOn, boolean frozen, boolean jointAccount, TimeSpace accountType) {
         this.id = id;
         this.hold = hold;
@@ -35,6 +37,25 @@ public class UserDeepAccountDTO {
         this.frozen = frozen;
         this.jointAccount = jointAccount;
         this.accountType = accountType;
+    }
+    public UserDeepAccountDTO(int id, boolean hold, boolean active, double amount, LocalDateTime nextInterestOn, LocalDateTime createdOn, boolean frozen, boolean jointAccount, String accountTypeName) {
+        this.id = id;
+        this.hold = hold;
+        this.active = active;
+        this.amount = amount;
+        this.nextInterestOn = nextInterestOn;
+        this.createdOn = createdOn;
+        this.frozen = frozen;
+        this.jointAccount = jointAccount;
+        this.accountTypeName = accountTypeName;
+    }
+
+    public String getAccountTypeName() {
+        return accountTypeName;
+    }
+
+    public void setAccountTypeName(String accountTypeName) {
+        this.accountTypeName = accountTypeName;
     }
 
     public int getId() {

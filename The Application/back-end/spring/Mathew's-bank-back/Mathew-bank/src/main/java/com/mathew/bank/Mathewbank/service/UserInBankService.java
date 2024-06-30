@@ -39,26 +39,38 @@ public class UserInBankService {
             userDetails.getUserId().getRoles().forEach(role -> rolesDtos.add(new RolesDto(role.getRole(), true)));
 
             //create a collection of AccountDeapDTO
-            final Collection<UserDeepAccountDTO> userDeepAccountDTOS = new LinkedList<>();
+            //final Collection<UserDeepAccountDTO> userDeepAccountDTOS = new LinkedList<>();
 
             //transfer each value to a DTO
-            userAccounts.getAllUserAccounts().forEach(
-                    account -> {
+//            userAccounts.getAllUserAccounts().forEach(
+//                    account -> {
+//
+//                        System.out.println(account.getAmount() - 50);
+//
+//                        userDeepAccountDTOS.add(new UserDeepAccountDTO(
+//                                account.getId(),
+//                                account.isHold(),
+//                                account.isActive(),
+//                                account.getAmount(),
+//                                account.getNextInterestOn(),
+//                                account.getCreatedOn(),
+//                                account.isFrozen(),
+//                                account.isJointAccount(),
+//                                account.getAccountType()
+//                        ));
+//                    });
 
-                        System.out.println(account.getAmount() - 50);
-
-                        userDeepAccountDTOS.add(new UserDeepAccountDTO(
-                                account.getId(),
-                                account.isHold(),
-                                account.isActive(),
-                                account.getAmount(),
-                                account.getNextInterestOn(),
-                                account.getCreatedOn(),
-                                account.isFrozen(),
-                                account.isJointAccount(),
-                                account.getAccountType()
-                        ));
-                    });
+            /*
+            *         this.userId = userId;
+        this.userName = userName;
+        this.userAccountsNumber = userAccountNumber;
+        this.branchId = branchId;
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBerth = dateOfBerth;
+        this.age = age;
+        this.email = email;
+            * */
 
             return new UserAndDetailsDTO(
                     userDetails.getId(),
@@ -70,11 +82,9 @@ public class UserInBankService {
                     userDetails.getDateOfBerth(),
                     userDetails.getAge(),
                     userDetails.getEmail(),
-                    new UserAccountDTO(
-                            userAccounts.getId(),
-                            userDeepAccountDTOS,
-                            userAccounts.isFrozen()),
-                    rolesDtos);
+                    rolesDtos,
+                    userAccounts.getId()
+                    );
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             System.out.println(e);
@@ -217,16 +227,45 @@ public class UserInBankService {
 
     }
 
-    public List<UserAccountDTO> getAllUserAccounts(HttpServletResponse response, Authentication authentication) {
+    public List<UserDeepAccountDTO> getAllUserAccounts(HttpServletResponse response, Authentication authentication) {
 
         // decode auth values
         UserAuthDecodedValues userAuthDecodedValues = this.authenticatedUserDecoder(authentication.getName());
 
         //List of UserAccountDTO
-
+        List<UserDeepAccountDTO> userAccountDTOS = new LinkedList<>();
         UserAccounts userAccounts = this.userRepository.getAllUserAccounts(userAuthDecodedValues.getAccountID());
 
-        return null;
+
+        /*
+        *
+        *         this.id = id;
+        this.hold = hold;
+        this.active = active;
+        this.amount = amount;
+        this.nextInterestOn = nextInterestOn;
+        this.createdOn = createdOn;
+        this.frozen = frozen;
+        this.jointAccount = jointAccount;
+        this.accountType = accountType;
+        *
+        * */
+
+        userAccounts.getAllUserAccounts().forEach(account -> {
+            userAccountDTOS.add(new UserDeepAccountDTO(
+                    account.getId(),
+                    account.isActive(),
+                    account.isHold(),
+                    account.getAmount(),
+                    account.getNextInterestOn(),
+                    account.getCreatedOn(),
+                    account.isFrozen(),
+                    account.isJointAccount(),
+                    account.getAccountType().getAccountType()
+            ));
+        });
+
+        return userAccountDTOS;
     }
 
     //this class is used to access decoded values

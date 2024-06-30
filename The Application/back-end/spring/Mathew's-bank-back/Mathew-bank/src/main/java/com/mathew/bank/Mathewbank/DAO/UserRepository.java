@@ -335,7 +335,7 @@ public class UserRepository implements UserRepo {
 
     @Override
     public UserAccounts getAllUserAccounts(int accountID) {
-        return null;
+        return this.entityManager.find(UserAccounts.class, accountID);
     }
 
     @Override
