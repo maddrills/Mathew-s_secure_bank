@@ -1,10 +1,8 @@
 package com.mathew.bank.Mathewbank.service;
 
 import com.mathew.bank.Mathewbank.DAO.UserRepository;
-import com.mathew.bank.Mathewbank.DTO.RolesDto;
-import com.mathew.bank.Mathewbank.DTO.UserAccountDTO;
-import com.mathew.bank.Mathewbank.DTO.UserAndDetailsDTO;
-import com.mathew.bank.Mathewbank.DTO.UserDeepAccountDTO;
+import com.mathew.bank.Mathewbank.DTO.*;
+import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.TimeSpace;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.UserDetails;
@@ -266,6 +264,43 @@ public class UserInBankService {
         });
 
         return userAccountDTOS;
+    }
+
+    public TimeSpaceDTO getAccountSettingsByAccountType(String accountType, Authentication authentication) {
+
+        TimeSpace timeSpace = this.userRepository.getAccountTypeByName(accountType);
+
+        //data conversion
+        //String accountType, int second, int min, int hour,
+        // int days, int months, int years, double baseInterestRate,
+        // boolean isAJointAccount, double minStartingAmount,
+        // double withdrawalCountLimit, double moneyTransferLimit,
+        // int baseLimit, int monthlyDraw, int dailyDraw, int hourlyDraw, int minutesDraw
+        try{
+            return new TimeSpaceDTO(
+                    timeSpace.getAccountType(),
+                    timeSpace.getSecond(),
+                    timeSpace.getMin(),
+                    timeSpace.getHour(),
+                    timeSpace.getDays(),
+                    timeSpace.getMonths(),
+                    timeSpace.getYears(),
+                    timeSpace.getBaseInterestRate(),
+                    timeSpace.isAJointAccount(),
+                    timeSpace.getMinStartingAmount(),
+                    timeSpace.getWithdrawalCountLimit(),
+                    timeSpace.getMoneyTransferLimit(),
+                    timeSpace.getBaseLimit(),
+                    timeSpace.getMonthlyDraw(),
+                    timeSpace.getDailyDraw(),
+                    timeSpace.getHourlyDraw(),
+                    timeSpace.getMinutesDraw()
+            );
+
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
     }
 
     //this class is used to access decoded values

@@ -14,6 +14,9 @@ final public class Transactions {
     @Column(name = "id")
     private int id;
 
+    @Column(name = "description")
+    private String transactionDescription;
+
     @Column(name = "to_account_number")
     private int toAccountNumber;
 
@@ -43,12 +46,22 @@ final public class Transactions {
     @JoinTable(name = "u_id")
     private User userId;
 
-    public Transactions(int toAccountNumber, int fromAccountNumber, boolean deposited, double amount, User userId) {
+    public Transactions(String transactionDescription, int toAccountNumber, int fromAccountNumber, LocalDateTime transactionDate, boolean deposited, double amount, User userId) {
+        this.transactionDescription = transactionDescription;
         this.toAccountNumber = toAccountNumber;
         this.fromAccountNumber = fromAccountNumber;
+        this.transactionDate = transactionDate;
         this.deposited = deposited;
         this.amount = amount;
         this.userId = userId;
+    }
+
+    public String getTransactionDescription() {
+        return transactionDescription;
+    }
+
+    public void setTransactionDescription(String transactionDescription) {
+        this.transactionDescription = transactionDescription;
     }
 
     public int getId() {

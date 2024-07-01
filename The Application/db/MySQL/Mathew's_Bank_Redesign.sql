@@ -20,6 +20,7 @@ CONSTRAINT `user_table_pk` PRIMARY KEY(`u_id`)
 
 CREATE TABLE `transactions`(
 `id` INTEGER NOT NULL AUTO_INCREMENT,
+`transactions` VARCHAR(120) NOT NULL,
 `to_account_number` INTEGER NOT NULL,
 `from_account_number` INTEGER NOT NULL,
 `transaction_date` DATETIME DEFAULT now(),

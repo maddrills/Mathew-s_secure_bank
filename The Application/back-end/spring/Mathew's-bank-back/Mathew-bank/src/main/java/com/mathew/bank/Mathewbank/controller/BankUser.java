@@ -38,6 +38,11 @@ public class BankUser {
         return this.userInBankService.getAllUserAccounts(response, authentication);
     }
 
+    @GetMapping("/get_account_settings")
+    public TimeSpaceDTO getAccountSettings(@RequestParam String accountType, Authentication authentication){
+        return this.userInBankService.getAccountSettingsByAccountType(accountType, authentication);
+    }
+
 
     //create savings account
     @PutMapping("/user-add-savings-account")
