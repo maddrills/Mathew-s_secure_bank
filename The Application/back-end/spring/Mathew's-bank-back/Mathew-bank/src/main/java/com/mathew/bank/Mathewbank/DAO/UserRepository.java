@@ -5,6 +5,7 @@ import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.TimeSpace;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.Transactions;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Account;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
@@ -250,6 +251,15 @@ public class UserRepository implements UserRepo {
         //check if fromm account number is the same as auth user's account
         //first get from user object
         User fromUser = this.getUserFromDb(userId);
+
+        //User Account entity
+        Account fromAccountEntity;
+        Account toAccountEntity;
+
+        //To user Accounts
+        Transactions userTransactionsFromAccount;
+        Transactions userTransactionsToAccountEntity;
+
         //check if from account belongs to user
         boolean isUserFromAccount = false;
         //also check if to account belongs to user
@@ -260,6 +270,7 @@ public class UserRepository implements UserRepo {
             }
             if(accounts.getId() == accountNumberTo){
                 //user transferring between users own accounts
+                toAccountEntity = accounts;
                 isUserToAccount = true;
             }
         }
@@ -270,7 +281,50 @@ public class UserRepository implements UserRepo {
         }
 
 
-        return false;
+        //get to user account
+        fromAccountEntity = this.findAccountById(accountNumberFrom);
+        toAccountEntity = this.findAccountById(accountNumberTo);
+        //first check if money can be debited
+        double remainingAmount = fromAccountEntity.getAmount() - amount;
+        if(remainingAmount < 0.00){
+            return false;
+        }
+        // debit from user
+        fromAccountEntity.setAmount(remainingAmount);
+        userTransactionsFromAccount = new Transactions(
+                "Account Transfer",
+                accountNumberTo,
+                accountNumberFrom,
+                LocalDateTime.now(),
+                false,
+                amount,
+                fromAccountEntity.getUserAccounts());
+        fromAccountEntity.getUserAccounts().setATransaction(userTransactionsFromAccount);
+
+        //credit to user
+        toAccountEntity.setAmount(toAccountEntity.getAmount() + amount);
+        userTransactionsToAccountEntity = new Transactions(
+                "Account Transfer",
+                accountNumberFrom,
+                accountNumberTo,
+                LocalDateTime.now(),
+                true,
+                amount,
+                toAccountEntity.getUserAccounts());
+
+        toAccountEntity.getUserAccounts().setATransaction(userTransactionsToAccountEntity);
+
+
+        // if destination account is part of Users from account then user is transferring between accounts
+        if(isUserToAccount){
+            userTransactionsFromAccount.setTransactionDescription("Between accounts");
+        }
+
+        //commit both transactions
+        this.entityManager.merge(fromAccountEntity);
+        this.entityManager.merge(toAccountEntity);
+
+        return true;
     }
 
     @Override
@@ -325,6 +379,11 @@ public class UserRepository implements UserRepo {
     @Override
     public UserAccounts getAllUserAccounts(int accountID) {
         return this.entityManager.find(UserAccounts.class, accountID);
+    }
+
+    @Override
+    public Account findAccountById(int accountNumberTo) {
+        return this.entityManager.find(Account.class, accountNumberTo);
     }
 
     @Override

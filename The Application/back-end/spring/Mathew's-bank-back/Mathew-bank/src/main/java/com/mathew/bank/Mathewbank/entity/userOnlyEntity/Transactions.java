@@ -44,16 +44,20 @@ final public class Transactions {
             }
     )
     @JoinTable(name = "u_id")
-    private User userId;
+    private UserAccounts userAccounts;
 
-    public Transactions(String transactionDescription, int toAccountNumber, int fromAccountNumber, LocalDateTime transactionDate, boolean deposited, double amount, User userId) {
+    public Transactions(String transactionDescription, int toAccountNumber, int fromAccountNumber, LocalDateTime transactionDate, boolean deposited, double amount, UserAccounts userAccounts) {
         this.transactionDescription = transactionDescription;
         this.toAccountNumber = toAccountNumber;
         this.fromAccountNumber = fromAccountNumber;
         this.transactionDate = transactionDate;
         this.deposited = deposited;
         this.amount = amount;
-        this.userId = userId;
+        this.userAccounts = userAccounts;
+    }
+
+    public UserAccounts getUserAccounts() {
+        return userAccounts;
     }
 
     public String getTransactionDescription() {
@@ -104,11 +108,4 @@ final public class Transactions {
         this.amount = amount;
     }
 
-    public User getUserId() {
-        return userId;
-    }
-
-    public void setUserId(User userId) {
-        this.userId = userId;
-    }
 }

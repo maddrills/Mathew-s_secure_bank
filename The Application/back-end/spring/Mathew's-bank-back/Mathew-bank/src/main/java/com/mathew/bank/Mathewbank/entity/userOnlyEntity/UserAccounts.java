@@ -22,6 +22,10 @@ final public class UserAccounts {
             cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     private Collection<Account> account;
 
+    @OneToMany(mappedBy = "userAccounts", fetch = FetchType.LAZY,
+            cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
+    private Collection<Transactions> transactions;
+
     @Column(name = "frozen")
     private boolean frozen;
 
@@ -61,5 +65,16 @@ final public class UserAccounts {
 
     public void setFrozen(boolean frozen) {
         this.frozen = frozen;
+    }
+
+    public Collection<Transactions> getTransactions() {
+        return transactions;
+    }
+
+    public void setATransaction(Transactions transaction) {
+        if(this.transactions == null){
+            this.transactions = new LinkedList<>();
+        }
+        this.transactions.add(transaction);
     }
 }
