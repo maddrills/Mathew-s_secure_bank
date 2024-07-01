@@ -65,7 +65,7 @@ public class BankUser {
     }
 
     @PatchMapping("/send-money-via-account-number")
-    public boolean transferMoneyByAccountNumber(@RequestParam int accountNumberFrom,@RequestParam int accountNumberTo, @RequestParam int amount, Authentication authentication, HttpServletResponse response){
+    public boolean transferMoneyByAccountNumber(@RequestParam int accountNumberFrom,@RequestParam int accountNumberTo, @RequestParam double amount, Authentication authentication, HttpServletResponse response){
 
         System.out.println("From -> "+accountNumberFrom+" To -> "+accountNumberTo+" amount -> "+amount);
 

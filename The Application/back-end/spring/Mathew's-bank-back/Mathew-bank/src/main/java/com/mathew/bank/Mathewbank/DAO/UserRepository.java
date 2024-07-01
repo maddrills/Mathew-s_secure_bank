@@ -246,7 +246,7 @@ public class UserRepository implements UserRepo {
     @Override
     @Transactional
     public boolean transferMoneyFromUserAccountToAnother(int accountNumberFrom, int accountNumberTo,
-                                                         int amount, int userId, int accountID) {
+                                                         double amount, int userId, int accountID) {
 
         //check if fromm account number is the same as auth user's account
         //first get from user object
@@ -289,35 +289,41 @@ public class UserRepository implements UserRepo {
         if(remainingAmount < 0.00){
             return false;
         }
+
+        System.out.println(amount);
+        System.out.println(remainingAmount);
+        System.out.println(fromAccountEntity.getUserAccounts().getId());
         // debit from user
         fromAccountEntity.setAmount(remainingAmount);
         userTransactionsFromAccount = new Transactions(
-                "Account Transfer",
+                fromAccountEntity.getAccountType().getAccountType()+" Account Money going out",
                 accountNumberTo,
                 accountNumberFrom,
                 LocalDateTime.now(),
                 false,
                 amount,
-                fromAccountEntity.getUserAccounts());
+                fromAccountEntity.getUserAccounts(),
+                fromAccountEntity.getAccountType());
         fromAccountEntity.getUserAccounts().setATransaction(userTransactionsFromAccount);
 
         //credit to user
         toAccountEntity.setAmount(toAccountEntity.getAmount() + amount);
         userTransactionsToAccountEntity = new Transactions(
-                "Account Transfer",
+                fromAccountEntity.getAccountType().getAccountType()+" Account Credited",
                 accountNumberFrom,
                 accountNumberTo,
                 LocalDateTime.now(),
                 true,
                 amount,
-                toAccountEntity.getUserAccounts());
-
+                toAccountEntity.getUserAccounts(),
+                fromAccountEntity.getAccountType());
         toAccountEntity.getUserAccounts().setATransaction(userTransactionsToAccountEntity);
 
 
         // if destination account is part of Users from account then user is transferring between accounts
         if(isUserToAccount){
-            userTransactionsFromAccount.setTransactionDescription("Between accounts");
+            userTransactionsFromAccount.setTransactionDescription(fromAccountEntity.getAccountType().getAccountType()+" from Between accounts");
+            userTransactionsToAccountEntity.setTransactionDescription(toAccountEntity.getAccountType().getAccountType()+" to Between accounts");
         }
 
         //commit both transactions

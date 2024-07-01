@@ -172,7 +172,7 @@ public class UserInBankService {
         }
     }
 
-    public boolean transferMoneyAndUpdateBothAccounts(int accountNumberFrom, int accountNumberTo, int amount, Authentication authentication, HttpServletResponse response) {
+    public boolean transferMoneyAndUpdateBothAccounts(int accountNumberFrom, int accountNumberTo, double amount, Authentication authentication, HttpServletResponse response) {
 
         UserAuthDecodedValues userAuthDecodedValues = this.authenticatedUserDecoder(authentication.getName());
         System.out.println(userAuthDecodedValues);
@@ -185,6 +185,17 @@ public class UserInBankService {
         }
 
         if(accountNumberFrom == accountNumberTo){
+            response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+            return false;
+        }
+
+        String amountInnStringForm = Double.toString(amount);
+        //System.out.println(amountInnStringForm);
+        int decimalPlace = amountInnStringForm.indexOf(".");
+        //System.out.println(amountInnStringForm.substring(decimalPlace));
+        int numberOfDecimalPlaces = amountInnStringForm.substring(decimalPlace).length();
+        //System.out.println(numberOfDecimalPlaces);
+        if(numberOfDecimalPlaces > 3){
             response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
             return false;
         }

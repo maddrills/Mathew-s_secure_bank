@@ -18,15 +18,18 @@ CONSTRAINT `user_table_pk` PRIMARY KEY(`u_id`)
 )ENGINE = 'Innodb', AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
 
+-- DROP TABLE `transactions`;
+
 CREATE TABLE `transactions`(
 `id` INTEGER NOT NULL AUTO_INCREMENT,
-`transactions` VARCHAR(120) NOT NULL,
+`tran_desc` VARCHAR(120) NOT NULL,
 `to_account_number` INTEGER NOT NULL,
 `from_account_number` INTEGER NOT NULL,
-`transaction_date` DATETIME DEFAULT now(),
+`transaction_date` DATETIME,
 `deposited` BOOLEAN NOT NULL DEFAULT 0,
 `amount` DOUBLE NOT NULL,
-`u_id` INTEGER NOT NULL,
+`user_accounts` INTEGER NOT NULL,
+`account_type_name_id` VARCHAR(20) NOT NULL,
 CONSTRAINT `transactions_pk` PRIMARY KEY(`id`)
 )ENGINE = 'Innodb', AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
@@ -329,7 +332,8 @@ ALTER TABLE `user_roles` ADD CONSTRAINT `user_lones_U_fk_to_user` FOREIGN KEY(`u
 ALTER TABLE `user_roles` ADD CONSTRAINT `user_lones_R_fk_to_user` FOREIGN KEY(`role_id`) REFERENCES `roles`(`role_id`);
 DESC `user_roles`;
 
-ALTER TABLE `transactions` ADD CONSTRAINT `user_fk_transactions` FOREIGN KEY(`u_id`) REFERENCES `user`(`u_id`);
+ALTER TABLE `transactions` ADD CONSTRAINT `user_accounts_fk_transactions` FOREIGN KEY(`user_accounts`) REFERENCES `user_accounts`(`u_acc_id`);
+ALTER TABLE `transactions` ADD CONSTRAINT `user_accountType_fk_transactions` FOREIGN KEY(`account_type_name_id`) REFERENCES `time_space`(`account_type`);
 DESC `transactions`;
 
 
@@ -338,7 +342,7 @@ DESC `transactions`;
 
 
 ALTER TABLE `emp_details` ADD CONSTRAINT `emp_details_fk_to_employee` FOREIGN KEY(`emp_id`) REFERENCES `employee`(`emp_id`);
-ALTER TABLE `emp_details` ADD CONSTRAINT `salary_account_fk_to_savings` FOREIGN KEY(`salary_account`) REFERENCES `account`(`s_account_number`);
+ALTER TABLE `emp_details` ADD CONSTRAINT `salary_account_fk_to_savings` FOREIGN KEY(`account_type_name_id`) REFERENCES `time_space`(`s_account_number`);
 DESC `emp_details`;
 
 ALTER TABLE `employee` ADD CONSTRAINT `employee_fk_to_employee` FOREIGN KEY(`reports_to`) REFERENCES `employee`(`emp_id`);
@@ -389,6 +393,8 @@ INSERT `roles`(`role_name`) VALUES ('ROLE_employee');
 
 SELECT * FROM `roles`;
 
+SET SQL_SAFE_UPDATES = 0;
+-- UPDATE`account` SET `amount` = 10000000;
 
 SELECT * FROM `user`;
 SELECT * FROM `user_roles`;
@@ -399,6 +405,7 @@ SELECT * FROM `user_details`;
 SELECT * FROM `user_accounts`;
 DESC `user_accounts`;
 SELECT * FROM `account`;
+SELECT * FROM `transactions`;
 DESC `account`;
 SELECT * FROM `user_application`;
 DESCRIBE `user_application`;

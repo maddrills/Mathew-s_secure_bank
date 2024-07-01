@@ -21,7 +21,7 @@ public interface UserRepo extends User_emp_commonRepo{
 
     public User getUserFromDb(int usedId);
 
-    boolean transferMoneyFromUserAccountToAnother(int accountNumberFrom, int accountNumberTo, int amount, int userId, int accountID);
+    boolean transferMoneyFromUserAccountToAnother(int accountNumberFrom, int accountNumberTo, double amount, int userId, int accountID);
 
     boolean addBankAccountToUser(String accountName, double initialAmount, int userId, int accountID, String userName);
 

@@ -4723,6 +4723,22 @@
 										},
 										{
 											"_type": "ERDColumnView",
+											"_id": "AAAAAAGQb1th7QC1/zQ=",
+											"_parent": {
+												"$ref": "AAAAAAGPoBrmdiI6zfU="
+											},
+											"model": {
+												"$ref": "AAAAAAGQb1thrQCyAHA="
+											},
+											"fillColor": "#fcffaf",
+											"font": "Arial;13;0",
+											"left": 373,
+											"top": 573,
+											"width": 254,
+											"height": 13
+										},
+										{
+											"_type": "ERDColumnView",
 											"_id": "AAAAAAGPoCDpyiKpXlg=",
 											"_parent": {
 												"$ref": "AAAAAAGPoBrmdiI6zfU="
@@ -4733,7 +4749,7 @@
 											"fillColor": "#fcffaf",
 											"font": "Arial;13;0",
 											"left": 373,
-											"top": 573,
+											"top": 588,
 											"width": 254,
 											"height": 13
 										}
@@ -4743,7 +4759,7 @@
 									"left": 368,
 									"top": 463,
 									"width": 264,
-									"height": 128
+									"height": 143
 								}
 							],
 							"fillColor": "#fcffaf",
@@ -4751,7 +4767,7 @@
 							"left": 368,
 							"top": 440,
 							"width": 264,
-							"height": 151,
+							"height": 166,
 							"nameLabel": {
 								"$ref": "AAAAAAGPoBrmdiI5h4A="
 							},
@@ -5572,7 +5588,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 503,
-									"top": 609,
+									"top": 624,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 30,
@@ -5606,7 +5622,7 @@
 								"$ref": "AAAAAAGPoBrmdiI4yJg="
 							},
 							"lineStyle": 2,
-							"points": "488:590;488:680;568:680",
+							"points": "488:605;488:680;568:680",
 							"nameLabel": {
 								"$ref": "AAAAAAGQbJT3cDwoSlI="
 							},
@@ -9046,11 +9062,21 @@
 						},
 						{
 							"_type": "ERDColumn",
+							"_id": "AAAAAAGQb1thrQCyAHA=",
+							"_parent": {
+								"$ref": "AAAAAAGPoBrmdSI2QZM="
+							},
+							"name": "account_type_name_id",
+							"type": "INTEGER",
+							"length": 0
+						},
+						{
+							"_type": "ERDColumn",
 							"_id": "AAAAAAGPoCDpmCKm3SY=",
 							"_parent": {
 								"$ref": "AAAAAAGPoBrmdSI2QZM="
 							},
-							"name": "u_a_id",
+							"name": "user_accounts",
 							"type": "INTEGER",
 							"length": 0,
 							"foreignKey": true

@@ -1,5 +1,6 @@
 package com.mathew.bank.Mathewbank.entity.userOnlyEntity;
 
+import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.TimeSpace;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 import jakarta.persistence.*;
 
@@ -14,7 +15,7 @@ final public class Transactions {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "description")
+    @Column(name = "tran_desc")
     private String transactionDescription;
 
     @Column(name = "to_account_number")
@@ -43,10 +44,23 @@ final public class Transactions {
                     CascadeType.REFRESH
             }
     )
-    @JoinTable(name = "u_id")
+    @JoinColumn(name = "user_accounts")
     private UserAccounts userAccounts;
 
-    public Transactions(String transactionDescription, int toAccountNumber, int fromAccountNumber, LocalDateTime transactionDate, boolean deposited, double amount, UserAccounts userAccounts) {
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.MERGE,
+                    CascadeType.DETACH,
+                    CascadeType.PERSIST,
+                    CascadeType.REFRESH
+            })
+    @JoinColumn(name = "account_type_name_id")
+    private TimeSpace accountType;
+
+    public Transactions() {
+    }
+
+    public Transactions(String transactionDescription, int toAccountNumber, int fromAccountNumber, LocalDateTime transactionDate, boolean deposited, double amount, UserAccounts userAccounts, TimeSpace accountType) {
         this.transactionDescription = transactionDescription;
         this.toAccountNumber = toAccountNumber;
         this.fromAccountNumber = fromAccountNumber;
@@ -54,6 +68,15 @@ final public class Transactions {
         this.deposited = deposited;
         this.amount = amount;
         this.userAccounts = userAccounts;
+        this.accountType = accountType;
+    }
+
+    public TimeSpace getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(TimeSpace accountType) {
+        this.accountType = accountType;
     }
 
     public UserAccounts getUserAccounts() {
