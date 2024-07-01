@@ -250,36 +250,25 @@ public class UserRepository implements UserRepo {
         //check if fromm account number is the same as auth user's account
         //first get from user object
         User fromUser = this.getUserFromDb(userId);
-        //fromUser.getUserAccountId().get
-
-        System.out.println(accountNumberFrom);
-        int number = accountNumberFrom / 1000000;
-
-        System.out.println(number);
-
-        boolean proceed = false;
-
-        switch (number) {
-            case 101:
-                //checking
-                break;
-            case 102:
-                //savings
-                //if(fromUser.getUserAccountId().getSavings().getId() == accountNumberFrom) proceed = true;
-                break;
-            case 103:
-                //build up
-                break;
-            case 104:
-                //business
-                break;
-            case 105:
-                //joint account
+        //check if from account belongs to user
+        boolean isUserFromAccount = false;
+        //also check if to account belongs to user
+        boolean isUserToAccount = false;
+        for(var accounts : fromUser.getUserAccountId().getAllUserAccounts()){
+            if(accounts.getId() == accountNumberFrom){
+                isUserFromAccount = true;
+            }
+            if(accounts.getId() == accountNumberTo){
+                //user transferring between users own accounts
+                isUserToAccount = true;
+            }
         }
 
-        if(proceed){
-            //fromUser.getUserAccountId().getSavings();
+        // if user not using his own account
+        if(!isUserFromAccount){
+            return false;
         }
+
 
         return false;
     }

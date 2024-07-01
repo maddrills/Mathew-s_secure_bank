@@ -184,6 +184,11 @@ public class UserInBankService {
             return false;
         }
 
+        if(accountNumberFrom == accountNumberTo){
+            response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+            return false;
+        }
+
         //create a users bank account
         try {
             return this.userRepository.transferMoneyFromUserAccountToAnother(accountNumberFrom, accountNumberTo, amount, userAuthDecodedValues.userId, userAuthDecodedValues.accountID);

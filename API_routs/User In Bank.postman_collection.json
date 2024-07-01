@@ -591,6 +591,32 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "getAccountSettings",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/bankUser/get_account_settings?accountType=savings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bankUser",
+						"get_account_settings"
+					],
+					"query": [
+						{
+							"key": "accountType",
+							"value": "savings"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

@@ -110,6 +110,7 @@ public class BankUser {
         if (proceedWithUser) {
             return (T) this.userInBankService.getUserAndUserDetailsFromService(nameOrID, response);
         }
+        System.out.println("Get emp by id");
         return (T) this.employeeService.getEmployeeDetailsById(employeeId, response);
     }
 }

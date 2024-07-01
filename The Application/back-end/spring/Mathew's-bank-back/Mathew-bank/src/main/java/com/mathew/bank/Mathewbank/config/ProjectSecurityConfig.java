@@ -99,12 +99,11 @@ public class ProjectSecurityConfig {
                                 "/employee/acceptApplication",
                                 "/employee/rejectApplication").hasAnyRole("clerk")
 
-                        // TODO employee can only Login
                         .requestMatchers("/employee/employee-login").hasAnyRole("employee")
-
-                        .requestMatchers("/bankUser/**").hasAnyRole("user")
                         //any one who is authenticated can access /users
                         .requestMatchers("/bankUser/login", "/user", "/user/getXSRfToken", "/logout").authenticated()
+                        // TODO employee can access these routs
+                        .requestMatchers("/bankUser/**").hasAnyRole("user")
                         //all the rest are open to public
                         .requestMatchers("/exposed/**","/Sign-up/signup-user").permitAll()
                 )
