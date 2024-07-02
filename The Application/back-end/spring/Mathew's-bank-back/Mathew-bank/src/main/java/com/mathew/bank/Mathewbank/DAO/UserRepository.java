@@ -303,16 +303,19 @@ public class UserRepository implements UserRepo {
                 false,
                 amount,
                 fromAccountEntity.getUserAccounts(),
-                fromAccountEntity.getAccountType());
+                fromAccountEntity.getAccountType(),
+                remainingAmount);
         fromAccountEntity.setLastWithdrawalDate(LocalDateTime.now());
-        fromAccountEntity.setWithdrawalCount(fromAccountEntity.getPeriodicWithdrawalCount() + 1);
-        //if account is has a periodic_withdrawal_count then process accordingly
+        fromAccountEntity.setWithdrawalCount(fromAccountEntity.getWithdrawalCount() + 1);
+        //TODO
+        // if account is has a periodic_withdrawal_count then process accordingly
         if(fromAccountEntity.getAccountType().isPeriodic()){
             //process accordingly
         }
         fromAccountEntity.getUserAccounts().setATransaction(userTransactionsFromAccount);
 
         //credit to user
+        double creditedAmount = toAccountEntity.getAmount() + amount;
         toAccountEntity.setAmount(toAccountEntity.getAmount() + amount);
         userTransactionsToAccountEntity = new Transactions(
                 fromAccountEntity.getAccountType().getAccountType()+" Account Credited",
@@ -322,7 +325,8 @@ public class UserRepository implements UserRepo {
                 true,
                 amount,
                 toAccountEntity.getUserAccounts(),
-                fromAccountEntity.getAccountType());
+                fromAccountEntity.getAccountType(),
+                creditedAmount);
         toAccountEntity.getUserAccounts().setATransaction(userTransactionsToAccountEntity);
 
 

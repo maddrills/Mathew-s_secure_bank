@@ -3,6 +3,7 @@ package com.mathew.bank.Mathewbank.service;
 import com.mathew.bank.Mathewbank.DAO.UserRepository;
 import com.mathew.bank.Mathewbank.DTO.*;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.TimeSpace;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.Transactions;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.UserDetails;
@@ -317,6 +318,32 @@ public class UserInBankService {
             System.out.println(e);
             return null;
         }
+    }
+
+    public Collection<TransactionsDTO> getAllUserTransactions(Authentication authentication, HttpServletResponse httpServletResponse) {
+
+       UserAuthDecodedValues userAuthDecodedValues = this.authenticatedUserDecoder(authentication.getName());
+
+       final Collection<TransactionsDTO> transactionsDTOS = new LinkedList<>();
+       //get all user transactions
+        //first get userAccount which has a join to transactions
+        UserAccounts userAccounts = this.userRepository.getAllUserAccounts(userAuthDecodedValues.accountID);
+
+        //from accounts get transactions
+        userAccounts.getTransactions().forEach(transactions -> {
+            transactionsDTOS.add(new TransactionsDTO(
+                    transactions.getId(),
+                    transactions.getTransactionDescription(),
+                    transactions.getToAccountNumber(),
+                    transactions.getFromAccountNumber(),
+                    transactions.getTransactionDate(),
+                    transactions.isDeposited(),
+                    transactions.getAmount(),
+                    transactions.getRemainingAmount()
+            ));
+        });
+
+        return transactionsDTOS;
     }
 
     //this class is used to access decoded values

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -78,6 +79,18 @@ public class BankUser {
         System.out.println(authentication.getName()+"-----"+accountName+"----"+initialAmount);
 
         return this.userInBankService.createABankAccount(accountName, initialAmount, authentication, httpServletResponse);
+    }
+
+    @GetMapping("/get_all_user_transactions")
+    public Collection<TransactionsDTO> getTransactionsForAUser(Authentication authentication, HttpServletResponse httpServletResponse){
+
+        try{
+            return this.userInBankService.getAllUserTransactions(authentication, httpServletResponse);
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
+
     }
 
 

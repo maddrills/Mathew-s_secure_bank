@@ -33,6 +33,9 @@ final public class Transactions {
     @Column(name = "amount")
     private double amount;
 
+    @Column(name = "remaining_amount")
+    private double remainingAmount;
+
     //TODO change bellow for foreign key relationship
     @ManyToOne(
             fetch = FetchType.EAGER,
@@ -60,7 +63,7 @@ final public class Transactions {
     public Transactions() {
     }
 
-    public Transactions(String transactionDescription, int toAccountNumber, int fromAccountNumber, LocalDateTime transactionDate, boolean deposited, double amount, UserAccounts userAccounts, TimeSpace accountType) {
+    public Transactions(String transactionDescription, int toAccountNumber, int fromAccountNumber, LocalDateTime transactionDate, boolean deposited, double amount, UserAccounts userAccounts, TimeSpace accountType, double remainingAmount) {
         this.transactionDescription = transactionDescription;
         this.toAccountNumber = toAccountNumber;
         this.fromAccountNumber = fromAccountNumber;
@@ -69,6 +72,11 @@ final public class Transactions {
         this.amount = amount;
         this.userAccounts = userAccounts;
         this.accountType = accountType;
+        this.remainingAmount = remainingAmount;
+    }
+
+    public double getRemainingAmount() {
+        return remainingAmount;
     }
 
     public TimeSpace getAccountType() {

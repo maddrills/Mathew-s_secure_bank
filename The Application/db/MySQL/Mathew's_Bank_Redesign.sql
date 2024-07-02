@@ -30,6 +30,7 @@ CREATE TABLE `transactions`(
 `amount` DOUBLE NOT NULL,
 `user_accounts` INTEGER NOT NULL,
 `account_type_name_id` VARCHAR(20) NOT NULL,
+`remaining_amount` DECIMAL(20,2) NOT NULL,
 CONSTRAINT `transactions_pk` PRIMARY KEY(`id`)
 )ENGINE = 'Innodb', AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 

@@ -534,7 +534,7 @@
 				"method": "PATCH",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/bankUser/send-money-via-account-number?accountNumberFrom=101000002&accountNumberTo=101000001&amount=3337.12",
+					"raw": "http://localhost:8080/bankUser/send-money-via-account-number?accountNumberFrom=101000002&accountNumberTo=101000001&amount=337.12",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -555,7 +555,7 @@
 						},
 						{
 							"key": "amount",
-							"value": "3337.12"
+							"value": "337.12"
 						}
 					]
 				}
@@ -613,6 +613,26 @@
 							"key": "accountType",
 							"value": "savings"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllUserTransactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/bankUser/get_all_user_transactions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bankUser",
+						"get_all_user_transactions"
 					]
 				}
 			},
