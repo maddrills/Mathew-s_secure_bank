@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"fullName\": \"John Logan\",\r\n    \"phoneNumber\": \"1234567890\",\r\n    \"dateOfBirth\": \"1999-09-12\",\r\n    \"age\": \"25\",\r\n    \"email\": \"john@gmail.com\"\r\n}",
+					"raw": "// {\r\n//     \"fullName\": \"John Logan\",\r\n//     \"phoneNumber\": \"1234567890\",\r\n//     \"dateOfBirth\": \"1999-09-12\",\r\n//     \"age\": \"25\",\r\n//     \"email\": \"john@gmail.com\"\r\n// }\r\n// {\r\n//     \"fullName\": \"Peater Grifin\",\r\n//     \"phoneNumber\": \"2134567890\",\r\n//     \"dateOfBirth\": \"1999-09-12\",\r\n//     \"age\": \"22\",\r\n//     \"email\": \"peater@gmail.com\"\r\n// }\r\n{\r\n    \"fullName\": \"Violet Francis\",\r\n    \"phoneNumber\": \"2154567890\",\r\n    \"dateOfBirth\": \"1999-09-12\",\r\n    \"age\": \"22\",\r\n    \"email\": \"smart@gmail.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,7 +21,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/exposed/applyForAccount?branchId=1",
+					"raw": "http://localhost:8080/exposed/applyForAccount?branchId=22",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -34,7 +34,7 @@
 					"query": [
 						{
 							"key": "branchId",
-							"value": "1"
+							"value": "22"
 						}
 					]
 				}

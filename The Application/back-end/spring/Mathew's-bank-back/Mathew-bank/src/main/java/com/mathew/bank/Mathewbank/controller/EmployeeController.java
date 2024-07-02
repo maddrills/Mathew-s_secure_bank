@@ -51,17 +51,17 @@ public class EmployeeController {
     //TODO entertain JWT in here  use this link
     // https://stackoverflow.com/questions/54909509/accessing-jwt-token-from-a-spring-boot-rest-controller
     @PatchMapping("/acceptApplication")
-    public boolean acceptApplication(@RequestParam int applicationNumber, HttpServletResponse servletResponse) {
+    public boolean acceptApplication(@RequestParam int applicationNumber, HttpServletResponse servletResponse, Authentication authentication) {
 
         System.out.println(applicationNumber);
 
-        return this.employeeService.acceptAnApplicationNyId(applicationNumber, 0, servletResponse);
+        return this.employeeService.acceptAnApplicationNyId(applicationNumber, Integer.parseInt(authentication.getName()), servletResponse);
     }
 
     @PatchMapping("/rejectApplication")
-    public boolean rejectApplication(@RequestParam int applicationNumber, HttpServletResponse servletResponse) {
+    public boolean rejectApplication(@RequestParam int applicationNumber, HttpServletResponse servletResponse, Authentication authentication) {
 
-        return this.employeeService.rejectApplication(applicationNumber, 0, servletResponse);
+        return this.employeeService.rejectApplication(applicationNumber, Integer.parseInt(authentication.getName()), servletResponse);
     }
 
     @GetMapping("/employee-login")

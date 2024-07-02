@@ -149,7 +149,8 @@ public class UnRegUserService {
                     userApplication.getEmail(),
                     userApplication.getAppliedOn(),
                     userApplication.isStatus(),
-                    userApplication.isRejected()
+                    userApplication.isRejected(),
+                    userApplication.getBranch().getId()
             );
         }
 
@@ -178,7 +179,8 @@ public class UnRegUserService {
                     userApplication.getEmail(),
                     userApplication.getAppliedOn(),
                     userApplication.isStatus(),
-                    userApplication.isRejected()
+                    userApplication.isRejected(),
+                    userApplication.getBranch().getId()
             );
         }
         response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

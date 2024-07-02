@@ -45,7 +45,7 @@ public interface EmpRepo extends User_emp_commonRepo {
     public void createAUserInBank(User user, String branch);
 
     public boolean acceptUserApplication(int applicationNumber,int employeeId);
-    public void rejectUserApplication(int applicationNumber, int employeeId);
+    public boolean rejectUserApplication(int applicationNumber, int employeeId);
 
     public Employee getEmployeeById(int employeeId);
 

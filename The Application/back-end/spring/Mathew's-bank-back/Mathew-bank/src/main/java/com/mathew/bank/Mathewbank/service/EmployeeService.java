@@ -46,7 +46,8 @@ public class EmployeeService {
                                 userApplication.getEmail(),
                                 userApplication.getAppliedOn(),
                                 userApplication.isStatus(),
-                                userApplication.isRejected()
+                                userApplication.isRejected(),
+                                userApplication.getBranch().getId()
                         )
                 )
         );
@@ -80,7 +81,8 @@ public class EmployeeService {
                 userApplication.getEmail(),
                 userApplication.getAppliedOn(),
                 userApplication.isStatus(),
-                userApplication.isRejected()
+                userApplication.isRejected(),
+                userApplication.getBranch().getId()
         );
     }
 
@@ -110,13 +112,12 @@ public class EmployeeService {
         }
 
         try {
-            this.employeeRepository.rejectUserApplication(applicationNumber, employeeId);
+            return this.employeeRepository.rejectUserApplication(applicationNumber, employeeId);
         } catch (Exception e) {
             System.out.println(e);
             servletResponse.setStatus(HttpServletResponse.SC_CONFLICT);
             return false;
         }
-        return true;
     }
 
     public EmployeeDTO getEmployeeDetailsById(int nameOrID, HttpServletResponse response) {

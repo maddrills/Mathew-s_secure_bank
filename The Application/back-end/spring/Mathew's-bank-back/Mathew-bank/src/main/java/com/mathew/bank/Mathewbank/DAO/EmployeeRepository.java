@@ -383,6 +383,25 @@ public class EmployeeRepository implements EmpRepo {
         this.entityManager.persist(userDetails);
     }
 
+    //check if not admin then make sure the application and the employee branch are the same
+    private boolean checkIfApplicationAndClerkAreOfTheSameBranchAdminException(UserApplication applicationNumber, int employeeId){
+
+        Employee employee = this.getEmployeeById(employeeId);
+        int applicationBranch = applicationNumber.getBranch().getId();
+        //check if employee is admin
+        boolean isAdmin = false;
+        for(var roles : employee.getRoles()){
+            if(roles.getRole().equals("ROLE_admin")){
+                isAdmin = true;
+            }
+        }
+        if(isAdmin) return true;
+
+        // if not admin any approval must be done from a branch
+        int employeeBranch = employee.getBankBranch().getId();
+        return applicationBranch == employeeBranch;
+    }
+
     @Override
     @Transactional
     public boolean acceptUserApplication(int applicationNumber, int employeeId) {
@@ -395,6 +414,9 @@ public class EmployeeRepository implements EmpRepo {
         UserAccounts basicAccount = new UserAccounts(
                 false
         );
+
+        //check if employee and application are of the same branch
+        if(!checkIfApplicationAndClerkAreOfTheSameBranchAdminException(userApplication, employeeId)) return false;
 
         //create an employee and employee details a default username of full nname and password oof 12345 will be made
         User user = new User(
@@ -429,9 +451,7 @@ public class EmployeeRepository implements EmpRepo {
             //return false;
         }
         userApplication.setStatus(true);
-        //TODO when JWT is implemented then add the user who approved this
-        // get employee entity to make who rejected the employee
-        //userApplication.setApprovedBy(getEmployeeById(employeeId));
+        userApplication.setApprovedBy(getEmployeeById(employeeId));
 
         //corresponding
         this.entityManager.merge(userApplication);
@@ -440,16 +460,18 @@ public class EmployeeRepository implements EmpRepo {
 
     @Override
     @Transactional
-    public void rejectUserApplication(int applicationNumber, int employeeId) {
+    public boolean rejectUserApplication(int applicationNumber, int employeeId) {
         UserApplication userApplication = this.entityManager.find(UserApplication.class, applicationNumber);
 
-        //TODO set approved by employee when JWT id added
-        // get employee entity to make who rejected the employee
-        //userApplication.setApprovedBy(getEmployeeById(employeeId));
+        if(!checkIfApplicationAndClerkAreOfTheSameBranchAdminException(userApplication, employeeId)) return false;
+
+        userApplication.setApprovedBy(getEmployeeById(employeeId));
 
         userApplication.setRejected(true);
 
         this.entityManager.merge(userApplication);
+
+        return true;
 
     }
 

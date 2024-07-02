@@ -22,6 +22,8 @@ public class UserApplicationDTO {
 
     private boolean rejected;
 
+    private int branchId;
+
     public UserApplicationDTO() {
     }
 
@@ -45,7 +47,7 @@ public class UserApplicationDTO {
     }
 
 
-    public UserApplicationDTO(int applicationId, String fullName, String phoneNumber, LocalDate dateOfBirth, int age, String email, LocalDateTime appliedOn, boolean status, boolean rejected) {
+    public UserApplicationDTO(int applicationId, String fullName, String phoneNumber, LocalDate dateOfBirth, int age, String email, LocalDateTime appliedOn, boolean status, boolean rejected, int branchId) {
         this.applicationId = applicationId;
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
@@ -55,6 +57,7 @@ public class UserApplicationDTO {
         this.appliedOn = appliedOn;
         this.status = status;
         this.rejected = rejected;
+        this.branchId = branchId;
     }
 
     public int getApplicationId() {
@@ -127,6 +130,14 @@ public class UserApplicationDTO {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public int getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(int branchId) {
+        this.branchId = branchId;
     }
 
     @Override

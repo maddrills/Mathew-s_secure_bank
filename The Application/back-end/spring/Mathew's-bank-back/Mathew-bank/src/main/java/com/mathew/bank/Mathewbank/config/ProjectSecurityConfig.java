@@ -100,9 +100,8 @@ public class ProjectSecurityConfig {
                                 "/employee/rejectApplication").hasAnyRole("clerk")
 
                         .requestMatchers("/employee/employee-login").hasAnyRole("employee")
-                        //any one who is authenticated can access /users
-                        .requestMatchers("/bankUser/login", "/user", "/user/getXSRfToken", "/logout").authenticated()
-                        // TODO employee can access these routs
+                        //any one who is authenticated can access /logout
+                        .requestMatchers("/bankUser/login", "/user/getXSRfToken", "/logout").authenticated()
                         .requestMatchers("/bankUser/**").hasAnyRole("user")
                         //all the rest are open to public
                         .requestMatchers("/exposed/**","/Sign-up/signup-user").permitAll()
