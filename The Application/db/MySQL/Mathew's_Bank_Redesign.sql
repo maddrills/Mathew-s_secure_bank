@@ -89,12 +89,13 @@ CONSTRAINT `user_roles_pk` PRIMARY KEY(`u_id`,`role_id`)
 -- CONSTRAINT `user_roles_roles_fk` FOREIGN KEY (`role_id`) REFERENCES `roles`(`role_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
+-- DROP TABLE `account`;
 
 CREATE TABLE `account`(
 `s_account_number` INTEGER NOt NULL AUTO_INCREMENT,
 `hold` BOOLEAN NOT NULL DEFAULT 0,
 `active` BOOLEAN NOT NULL DEFAULT 0,
-`amount` DOUBLE NOT NULl DEFAULT 0.00 CHECK(`amount` >= 0.00),
+`amount` DECIMAL(20,2) NOT NULl DEFAULT 0.00 CHECK(`amount` >= 0.00),
 `next_interest_on` DATETIME NOT NULL,
 `created_on` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 `frozen` BOOLEAN NOT NULL DEFAULT 0,
@@ -252,6 +253,7 @@ CREATE TABLE `time_space`(
 `daily_draw` SMALLINT NOT NULL DEFAULT 0,
 `hourly_draw` SMALLINT NOT NULL DEFAULT 0,
 `minutes_draw`  SMALLINT NOT NULL DEFAULT 0,
+`is_periodic` BOOLEAN NOT NULL DEFAULT 0,
 CONSTRAINT `time_space_pk` PRIMARY KEY (`account_type`)
 )ENGINE = 'Innodb' , DEFAULT CHARSET 'latin1';
 
@@ -342,7 +344,7 @@ DESC `transactions`;
 
 
 ALTER TABLE `emp_details` ADD CONSTRAINT `emp_details_fk_to_employee` FOREIGN KEY(`emp_id`) REFERENCES `employee`(`emp_id`);
-ALTER TABLE `emp_details` ADD CONSTRAINT `salary_account_fk_to_savings` FOREIGN KEY(`account_type_name_id`) REFERENCES `time_space`(`s_account_number`);
+ALTER TABLE `emp_details` ADD CONSTRAINT `salary_account_fk_to_account` FOREIGN KEY(`salary_account`) REFERENCES `account`(`s_account_number`);
 DESC `emp_details`;
 
 ALTER TABLE `employee` ADD CONSTRAINT `employee_fk_to_employee` FOREIGN KEY(`reports_to`) REFERENCES `employee`(`emp_id`);

@@ -304,6 +304,12 @@ public class UserRepository implements UserRepo {
                 amount,
                 fromAccountEntity.getUserAccounts(),
                 fromAccountEntity.getAccountType());
+        fromAccountEntity.setLastWithdrawalDate(LocalDateTime.now());
+        fromAccountEntity.setWithdrawalCount(fromAccountEntity.getPeriodicWithdrawalCount() + 1);
+        //if account is has a periodic_withdrawal_count then process accordingly
+        if(fromAccountEntity.getAccountType().isPeriodic()){
+            //process accordingly
+        }
         fromAccountEntity.getUserAccounts().setATransaction(userTransactionsFromAccount);
 
         //credit to user

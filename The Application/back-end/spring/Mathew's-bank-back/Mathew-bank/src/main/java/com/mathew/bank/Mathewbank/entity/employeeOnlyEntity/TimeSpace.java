@@ -64,6 +64,9 @@ final public class TimeSpace {
     @Column(name = "minutes_draw")
     private int minutesDraw;
 
+    @Column(name = "is_periodic")
+    private boolean isPeriodic;
+
     //TODO may need to add a relationship back to the accounts
 
 
@@ -84,7 +87,7 @@ final public class TimeSpace {
     }
 
     public TimeSpace(String accountType, int second, int min, int hour, int days, int months, int years, double baseInterestRate, boolean isAJointAccount, double minStartingAmount,
-                     double withdrawalCountLimit, double moneyTransferLimit, int baseLimit, int monthlyDraw, int dailyDraw, int hourlyDraw, int minutesDraw) {
+                     double withdrawalCountLimit, double moneyTransferLimit, int baseLimit, int monthlyDraw, int dailyDraw, int hourlyDraw, int minutesDraw, boolean isPeriodic) {
         this.accountType = accountType;
         this.second = second;
         this.min = min;
@@ -103,6 +106,11 @@ final public class TimeSpace {
         this.dailyDraw = dailyDraw;
         this.hourlyDraw = hourlyDraw;
         this.minutesDraw = minutesDraw;
+        this.isPeriodic = isPeriodic;
+    }
+
+    public boolean isPeriodic() {
+        return isPeriodic;
     }
 
     public double getWithdrawalCountLimit() {
