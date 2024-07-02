@@ -54,10 +54,14 @@ final public class UserApplication {
     @JoinColumn(name = "branch_id")
     private Branch branch;
 
+    @OneToOne
+    @JoinColumn(name = "assigned_to")
+    private Employee assignedTo;
+
     public UserApplication() {
     }
 
-    public UserApplication(String fullName, String phoneNumber, LocalDate dateOfBirth, int age, String email, LocalDateTime appliedOn, boolean status, boolean rejected, Branch branch) {
+    public UserApplication(String fullName, String phoneNumber, LocalDate dateOfBirth, int age, String email, LocalDateTime appliedOn, boolean status, boolean rejected, Branch branch,Employee assignedTo) {
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
         this.dateOfBirth = dateOfBirth;
@@ -67,6 +71,7 @@ final public class UserApplication {
         this.status = status;
         this.rejected = rejected;
         this.branch = branch;
+        this.assignedTo = assignedTo;
     }
 
     public UserApplication(String fullName, String phoneNumber, LocalDate dateOfBirth, int age, String email, LocalDateTime appliedOn, boolean status, Branch branch) {
@@ -80,6 +85,13 @@ final public class UserApplication {
         this.branch = branch;
     }
 
+    public Employee getAssignedTo() {
+        return assignedTo;
+    }
+
+    public void setAssignedTo(Employee assignedTo) {
+        this.assignedTo = assignedTo;
+    }
 
     public int getApplication_number() {
         return application_number;

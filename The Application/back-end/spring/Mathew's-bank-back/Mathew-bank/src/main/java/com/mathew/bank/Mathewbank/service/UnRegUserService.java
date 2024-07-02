@@ -5,6 +5,7 @@ import com.mathew.bank.Mathewbank.DTO.BranchDTO;
 import com.mathew.bank.Mathewbank.DTO.UserApplicationDTO;
 import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
+import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,20 @@ public class UnRegUserService {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return false;
         }
+
+        //get manager of branch
+        Branch branch = userRepo.getABranchById(branchId);
+        Employee branchManager;
+
+        //check if branch manager is available else make admin the manager
+        if(branch.getBranchManager() == null){
+            //then make admin the branch head
+            branchManager = this.userRepo.getEmployeeById(1000001);
+
+        }else {
+            branchManager = branch.getBranchManager();
+        }
+
         //try and persist
         try {
             //DTO to DAO for persistence
@@ -54,7 +69,8 @@ public class UnRegUserService {
                     //Zero so that it will indicate it is an unresolved application
                     false,
                     false,
-                    null
+                    null,
+                    branchManager
             ));
         } catch (Exception e) {
             System.out.println(e);

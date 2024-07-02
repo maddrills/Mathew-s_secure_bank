@@ -272,7 +272,7 @@ CONSTRAINT `branch_pk` PRIMARY KEY (`branch_id`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 1, DEFAULT CHARSET 'latin1';
 
 
-
+-- DROP TABLE `user_application`;
 
 CREATE TABLE `user_application`(
 `application_number` INTEGER NOT NULL AUTO_INCREMENT,
@@ -287,6 +287,7 @@ CREATE TABLE `user_application`(
 `approved_by` INTEGER,
 `created_user_id` INTEGER,
 `branch_id` INTEGER NOT NULL,
+`assigned_to` INTEGER,
 CONSTRAINT `user_application_pk` PRIMARY KEY (`application_number`)
 )ENGINE = 'Innodb' AUTO_INCREMENT = 101, DEFAULT CHARSET 'latin1';
 
@@ -365,6 +366,7 @@ DESC `branch`;
 ALTER TABLE `user_application` ADD CONSTRAINT `user_application_fk_to_employee` FOREIGN KEY(`approved_by`) REFERENCES `employee`(`emp_id`);
 ALTER TABLE `user_application` ADD CONSTRAINT `user_application_fk_to_user` FOREIGN KEY(`created_user_id`) REFERENCES `user`(`u_id`);
 ALTER TABLE `user_application` ADD CONSTRAINT `user_application_fk_to_branch` FOREIGN KEY(`branch_id`) REFERENCES `branch`(`branch_id`);
+ALTER TABLE `user_application` ADD CONSTRAINT `user_application_fk_to_user_assigned_to` FOREIGN KEY(`assigned_to`) REFERENCES `employee`(`emp_id`);
 DESC `user_application`;
 
 
