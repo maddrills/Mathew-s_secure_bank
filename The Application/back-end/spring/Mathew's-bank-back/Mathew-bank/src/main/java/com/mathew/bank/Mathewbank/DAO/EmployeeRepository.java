@@ -222,10 +222,17 @@ public class EmployeeRepository implements EmpRepo {
         }
 
         //find everyone under manager
-        Collection<Employee> clerks = this.findAllEmployeesWhoAreNotManagersOrAdminsInBank(branch.getId());
+        Collection<Employee> clerks = this.findAllEmployeesWhoAreNotManagersOrAdminsInBankBranch(branch.getId());
         if (clerks != null) {
             //assign manager to all sub employees
             clerks.forEach(unassignedClerk -> unassignedClerk.setManager(employee));
+        }
+
+        //point all applications in branch that point to admin to point to manager
+        //get all applications that are assigned to admin
+        Collection<UserApplication> userApplicationsAdmin = this.findAllApplicationsInBranchThatPointToAdmin(bankId);
+        if(userApplicationsAdmin != null){
+            userApplicationsAdmin.forEach(userApplication -> userApplication.setAssignedTo(employee));
         }
 
         //add branch to manager and manager to branch
@@ -242,6 +249,7 @@ public class EmployeeRepository implements EmpRepo {
         this.entityManager.persist(branch);
     }
 
+//    TODO can be modeled better
     @Override
     @Transactional
     public void createBranch(Branch branch, int manager) {
@@ -250,8 +258,9 @@ public class EmployeeRepository implements EmpRepo {
         Employee employeeManager = this.getEmployeeById(manager);
         boolean isManager = false;
         for(var role : employeeManager.getRoles()){
-            if(role.getRole().equals("ROLE_manager")){
+            if (role.getRole().equals("ROLE_manager")) {
                 isManager = true;
+                break;
             }
         }
         if(!isManager){
@@ -262,6 +271,9 @@ public class EmployeeRepository implements EmpRepo {
         branch.setBranchManager(employeeManager);
         //add the new branch to db
         this.entityManager.persist(branch);
+        //now update the manager to have branch
+        employeeManager.setBankBranch(branch);
+        this.entityManager.merge(employeeManager);
     }
 
     @Override
@@ -384,22 +396,35 @@ public class EmployeeRepository implements EmpRepo {
     }
 
     //check if not admin then make sure the application and the employee branch are the same
-    private boolean checkIfApplicationAndClerkAreOfTheSameBranchAdminException(UserApplication applicationNumber, int employeeId){
+    //make sure the UserApplication entity is open at this point
+    private boolean checkIfApplicationAndEmployeeAreOfTheSameBranchAdminException(UserApplication applicationNumber, int employeeId){
 
         Employee employee = this.getEmployeeById(employeeId);
         int applicationBranch = applicationNumber.getBranch().getId();
-        //check if employee is admin
+        //check what roles an employee has
         boolean isAdmin = false;
+        boolean isManager = false;
         for(var roles : employee.getRoles()){
+            //if admin
             if(roles.getRole().equals("ROLE_admin")){
                 isAdmin = true;
+            }
+            //if manager
+            if(roles.getRole().equals("ROLE_manager")){
+                isManager = true;
             }
         }
         if(isAdmin) return true;
 
         // if not admin any approval must be done from a branch
         int employeeBranch = employee.getBankBranch().getId();
-        return applicationBranch == employeeBranch;
+        if(applicationBranch == employeeBranch){
+            //manager can approve regardless if application is or sent assigned to manager
+            if(isManager) return true;
+            //else check if the application is assigned to the employee
+            return employee.getId() == applicationNumber.getAssignedTo().getId();
+        }
+        return false;
     }
 
     @Override
@@ -416,7 +441,7 @@ public class EmployeeRepository implements EmpRepo {
         );
 
         //check if employee and application are of the same branch
-        if(!checkIfApplicationAndClerkAreOfTheSameBranchAdminException(userApplication, employeeId)) return false;
+        if(!checkIfApplicationAndEmployeeAreOfTheSameBranchAdminException(userApplication, employeeId)) return false;
 
         //create an employee and employee details a default username of full nname and password oof 12345 will be made
         User user = new User(
@@ -463,7 +488,7 @@ public class EmployeeRepository implements EmpRepo {
     public boolean rejectUserApplication(int applicationNumber, int employeeId) {
         UserApplication userApplication = this.entityManager.find(UserApplication.class, applicationNumber);
 
-        if(!checkIfApplicationAndClerkAreOfTheSameBranchAdminException(userApplication, employeeId)) return false;
+        if(!checkIfApplicationAndEmployeeAreOfTheSameBranchAdminException(userApplication, employeeId)) return false;
 
         userApplication.setApprovedBy(getEmployeeById(employeeId));
 
@@ -554,11 +579,19 @@ public class EmployeeRepository implements EmpRepo {
         Employee manager = getEmployeeById(managerId);
         Employee admin = getEmployeeById(adminId);
         // find all clerks under branch
-        Collection<Employee> employees = this.findAllEmployeesWhoAreNotManagersOrAdminsInBank(manager.getBankBranch().getId());
+        Collection<Employee> employees = this.findAllEmployeesWhoAreNotManagersOrAdminsInBankBranch(manager.getBankBranch().getId());
         // point all clerks to point to manager
         employees.forEach(employee -> {
             employee.setManager(admin);
         });
+
+        //point all applications in branch that point to admin to point to manager
+        //get all applications that are assigned to admin
+        Collection<UserApplication> userApplicationsAdmin = this.findAllApplicationsInBranchThatPointToAdmin(manager.getBankBranch().getId());
+        if(userApplicationsAdmin != null){
+            userApplicationsAdmin.forEach(userApplication -> userApplication.setAssignedTo(admin));
+        }
+
 
         //remove manager from bank
         manager.getBankBranch().setBranchManager(null);
@@ -576,7 +609,7 @@ public class EmployeeRepository implements EmpRepo {
     }
 
     @Override
-    public List<Employee> findAllEmployeesWhoAreNotManagersOrAdminsInBank(int bankId) {
+    public List<Employee> findAllEmployeesWhoAreNotManagersOrAdminsInBankBranch(int bankId) {
 
         //find admin role
 /*        List<Role> exclusionRoles = new ArrayList<>(
@@ -587,7 +620,6 @@ public class EmployeeRepository implements EmpRepo {
 
         System.out.println("Branch id is " + bankId);
 
-        // TODO filter by branch id
         // does not return employees with null as associated bank
         TypedQuery<Employee> query = entityManager.createQuery(
                 "SELECT e from Employee AS e " +
@@ -678,6 +710,24 @@ public class EmployeeRepository implements EmpRepo {
         query.setParameter("adminRole", adminRole);
 
         return query.getSingleResult();
+    }
+
+    @Override
+    public Collection<UserApplication> findAllApplicationsInBranchThatPointToAdmin(int bankId) {
+
+        //get the admin entity
+        Employee employee = getEmployeeById(1000001);
+        //now find bank branch
+        Branch branch = getABranchById(bankId);
+        //now find all applications that correspond to branch and pont to employee
+        TypedQuery<UserApplication> query = this.entityManager.createQuery(
+                "SELECT ua FROM UserApplication AS ua WHERE ua.branch = :branch AND ua.assignedTo = :employee"
+                ,UserApplication.class);
+
+        query.setParameter("branch",branch);
+        query.setParameter("employee",employee);
+
+        return query.getResultList();
     }
 
 

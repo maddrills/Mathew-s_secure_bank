@@ -55,7 +55,7 @@ public interface EmpRepo extends User_emp_commonRepo {
 
     public boolean removeManagerFromBank(int managerId, int adminId);
 
-    public List<Employee> findAllEmployeesWhoAreNotManagersOrAdminsInBank(int bankId);
+    public List<Employee> findAllEmployeesWhoAreNotManagersOrAdminsInBankBranch(int bankId);
 
     public Branch getBranchByEmployeeId(int employeeBranch);
 
@@ -65,4 +65,5 @@ public interface EmpRepo extends User_emp_commonRepo {
 
     public Employee findEmployeeThatHasRoleName(String roleName);
 
+    Collection<UserApplication> findAllApplicationsInBranchThatPointToAdmin(int bankId);
 }

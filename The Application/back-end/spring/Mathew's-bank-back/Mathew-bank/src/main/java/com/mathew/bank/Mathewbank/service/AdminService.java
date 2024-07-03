@@ -400,7 +400,7 @@ public class AdminService {
                         branchDTO.getState(),
                         branchDTO.getCountry(),
                         branchDTO.isOpen(),
-                        null
+                        this.empRepo.getEmployeeById(branchDTO.getBranchManagerId())
                 ), branchDTO.getBranchManagerId());
             } catch (Exception e) {
                 //if conflict occurs in db

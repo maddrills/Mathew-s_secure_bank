@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "cd3e9684-ad26-489b-84c8-385f185f70ad",
+		"_postman_id": "4d50dcfc-8a88-43d7-a56a-0145830f5595",
 		"name": "MathewBankAPI_Admin",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "29967989"
@@ -36,13 +36,13 @@
 			"response": []
 		},
 		{
-			"name": "admin- add an employee",
+			"name": "admin-or-manager add an employee",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"phone_number\": \"2234567893\",\r\n    \"full_name\": \"King Ron\",\r\n    \"email\": \"King@gmail.com\",\r\n    \"dateOfBirth\": \"1668-10-16\",\r\n    \"salary\": 537625,\r\n    \"password\": \"12345\",\r\n    \"rolesName\": [\r\n        {\r\n            \"roleName\": \"manager\"\r\n        },\r\n        {\r\n            \"roleName\": \"employee\"\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"phone_number\": \"2234567893\",\r\n    \"full_name\": \"King Ron\",\r\n    \"email\": \"King@gmail.com\",\r\n    \"dateOfBirth\": \"1668-10-16\",\r\n    \"salary\": 537625,\r\n    \"password\": \"12345\",\r\n    \"rolesName\": [\r\n        {\r\n            \"roleName\": \"manager\"\r\n        },\r\n        {\r\n            \"roleName\": \"employee\"\r\n        },\r\n        {\r\n            \"roleName\": \"clerk\"\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -387,7 +387,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "[\r\n    {\r\n        \"roleName\": \"manager\"\r\n    },\r\n    {\r\n        \"roleName\": \"employee\"\r\n    }\r\n    // ,\r\n    // {\r\n    //     \"roleName\": \"admin\"\r\n    // }\r\n]",
+					"raw": "[\r\n    {\r\n        \"roleName\": \"manager\"\r\n    },\r\n    {\r\n        \"roleName\": \"employee\"\r\n    },\r\n    {\r\n        \"roleName\": \"clerk\"\r\n    }\r\n    // ,\r\n    // {\r\n    //     \"roleName\": \"admin\"\r\n    // }\r\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -579,7 +579,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"branchName\":\"Branch_Two\",\r\n    \"state\":\"Delhi\",\r\n    \"country\":\"India\",\r\n    \"open\":1,\r\n    \"branchManagerId\":1000003\r\n}",
+					"raw": "{\r\n    \"branchName\":\"Branch_Two\",\r\n    \"state\":\"Delhi\",\r\n    \"country\":\"India\",\r\n    \"open\":1,\r\n    \"branchManagerId\":1000002\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

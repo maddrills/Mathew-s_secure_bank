@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "539d7831-9a08-42e6-889d-1368fc08c6c6",
+		"_postman_id": "9ed41a50-ccd2-46a3-9920-471b80921a6e",
 		"name": "unRegisteredUser",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "29967989"
@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "// {\r\n//     \"fullName\": \"John Logan\",\r\n//     \"phoneNumber\": \"1234567890\",\r\n//     \"dateOfBirth\": \"1999-09-12\",\r\n//     \"age\": \"25\",\r\n//     \"email\": \"john@gmail.com\"\r\n// }\r\n// {\r\n//     \"fullName\": \"Peater Grifin\",\r\n//     \"phoneNumber\": \"2134567890\",\r\n//     \"dateOfBirth\": \"1999-09-12\",\r\n//     \"age\": \"22\",\r\n//     \"email\": \"peater@gmail.com\"\r\n// }\r\n{\r\n    \"fullName\": \"Violet Francis\",\r\n    \"phoneNumber\": \"2154567890\",\r\n    \"dateOfBirth\": \"1999-09-12\",\r\n    \"age\": \"22\",\r\n    \"email\": \"smart@gmail.com\"\r\n}",
+					"raw": "// {\r\n//     \"fullName\": \"John Logan\",\r\n//     \"phoneNumber\": \"1234567890\",\r\n//     \"dateOfBirth\": \"1999-09-12\",\r\n//     \"age\": \"25\",\r\n//     \"email\": \"john@gmail.com\"\r\n// }\r\n// {\r\n//     \"fullName\": \"Peater Grifin\",\r\n//     \"phoneNumber\": \"2134567890\",\r\n//     \"dateOfBirth\": \"1999-09-12\",\r\n//     \"age\": \"22\",\r\n//     \"email\": \"peater@gmail.com\"\r\n// }\r\n// {\r\n//     \"fullName\": \"Violet Francis\",\r\n//     \"phoneNumber\": \"2154567890\",\r\n//     \"dateOfBirth\": \"1999-09-12\",\r\n//     \"age\": \"22\",\r\n//     \"email\": \"smart@gmail.com\"\r\n// }\r\n// {\r\n//     \"fullName\": \"George Francis\",\r\n//     \"phoneNumber\": \"5154567833\",\r\n//     \"dateOfBirth\": \"1999-09-12\",\r\n//     \"age\": \"22\",\r\n//     \"email\": \"george@gmail.com\"\r\n// }\r\n// {\r\n//     \"fullName\": \"Loran Epsem\",\r\n//     \"phoneNumber\": \"5514567833\",\r\n//     \"dateOfBirth\": \"1999-09-12\",\r\n//     \"age\": \"22\",\r\n//     \"email\": \"ogorge@gmail.com\"\r\n// }\r\n{\r\n    \"fullName\": \"Logen Paul\",\r\n    \"phoneNumber\": \"5514567833\",\r\n    \"dateOfBirth\": \"1999-09-12\",\r\n    \"age\": \"22\",\r\n    \"email\": \"loganPaul@gmail.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
