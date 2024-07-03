@@ -5,6 +5,7 @@ import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
 import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.DTO.UserApplicationDTO;
 import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
+import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDetails;
 import jakarta.servlet.http.HttpServletResponse;
@@ -242,4 +243,96 @@ public class EmployeeService {
         }
 
     }
+
+    public boolean assignOrReassignUserApplication(int employeeNumber, int applicationNumber, Authentication authentication, HttpServletResponse httpServletResponse) {
+        //Sub employee logic
+        Employee assignee;
+        Branch assigneeBranch;
+        try {
+            assignee = this.employeeRepository.getEmployeeById(employeeNumber);
+            assigneeBranch = assignee.getBankBranch();
+            if(assigneeBranch == null) return false;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+
+        //directer logic
+        Employee managerOrAdminEmployee = this.employeeRepository.getEmployeeById(Integer.parseInt(authentication.getName()));
+        //get employee branch
+        Branch managerOrAdminBranch = managerOrAdminEmployee.getBankBranch();
+        if(managerOrAdminBranch == null) return false;
+
+        //only auth admin or manager will reach here
+        int level = this.highestAccessLevel(managerOrAdminEmployee);
+
+        UserApplication userApplication = this.employeeRepository.getApplicationByIdNumber(applicationNumber);
+        //if manager
+        if(level == 2){
+            //only allow reassignment to branch employees provided in branch
+            //check if manager and employee belong to the same branch
+            System.out.println("access level-> " +level);
+            if(!assigneeBranch.equals(managerOrAdminBranch)){
+                System.out.println("assigneeBranch.equals(managerOrAdminBranch) FALSE");
+                return false;
+            }
+            //now check if userApplication belongs to manager or userApplication assigned to manager
+            if(userApplication.getBranch().equals(managerOrAdminBranch) || userApplication.getAssignedTo().getId() == managerOrAdminBranch.getId()){
+                //assign to sub employee
+                userApplication.setAssignedTo(assignee);
+                try{
+                    this.employeeRepository.commitEmployee(userApplication);
+                    return true;
+                }catch (Exception e){
+                    System.out.println(e);
+                    return false;
+                }
+            }
+            //
+            return false;
+        }
+        //then allow to inter branch reassignment
+        System.out.println("access level-> " +level);
+        //admin can reassign to anyone
+        userApplication.setAssignedTo(assignee);
+        try{
+            this.employeeRepository.commitEmployee(userApplication);
+            return true;
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
+    }
+
+
+
+    private int highestAccessLevel(Employee employee) {
+
+        // 4 is the number of roles
+        int accessLevel = 4;
+
+        for (var level : employee.getRoles()) {
+            if(level.getRole().equals("ROLE_admin")){
+                if(accessLevel > 1){
+                    accessLevel = 1;
+                }
+            }
+            if(level.getRole().equals("ROLE_manager")){
+                if(accessLevel > 2){
+                    accessLevel = 2;
+                }
+            }
+            if(level.getRole().equals("ROLE_clerk")){
+                if(accessLevel > 3){
+                    accessLevel = 3;
+                }
+            }
+        }
+        return accessLevel;
+    }
+
+
+
+
+
 }

@@ -66,4 +66,7 @@ public interface EmpRepo extends User_emp_commonRepo {
     public Employee findEmployeeThatHasRoleName(String roleName);
 
     Collection<UserApplication> findAllApplicationsInBranchThatPointToAdmin(int bankId);
+
+    void commitEmployee(UserApplication userApplication);
+
 }

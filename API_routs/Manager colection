@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b7319b08-db13-4dcc-9249-ebdfb3163dad",
+		"_postman_id": "1a1f73df-7d19-4f94-9201-12a6e73298b9",
 		"name": "Manager colection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "29967989"
@@ -9,7 +9,7 @@
 		{
 			"name": "getEmployeesByBranch",
 			"request": {
-				"method": "GET",
+				"method": "PUT",
 				"header": [],
 				"url": {
 					"raw": "http://localhost:8080/manager/get-employees-by-branch?branchId=3",
@@ -182,6 +182,36 @@
 						{
 							"key": "employeeClerk",
 							"value": "1000005"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "assignOrReassignUserApplication",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/manager/assign-application-to?employeeNumber=1000005&applicationNumber=105",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"manager",
+						"assign-application-to"
+					],
+					"query": [
+						{
+							"key": "employeeNumber",
+							"value": "1000005"
+						},
+						{
+							"key": "applicationNumber",
+							"value": "105"
 						}
 					]
 				}

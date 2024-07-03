@@ -3,6 +3,8 @@ package com.mathew.bank.Mathewbank.entity.employeeOnlyEntity;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "branch")
 final public class Branch {
@@ -85,5 +87,13 @@ final public class Branch {
 
     public void setBranchManager(Employee branchManager) {
         this.branchManager = branchManager;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Branch branch = (Branch) o;
+        return id == branch.id;
     }
 }

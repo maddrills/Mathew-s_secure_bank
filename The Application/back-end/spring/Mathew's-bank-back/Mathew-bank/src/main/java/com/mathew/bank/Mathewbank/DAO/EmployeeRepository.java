@@ -435,6 +435,9 @@ public class EmployeeRepository implements EmpRepo {
 
         System.out.println(userApplication.getFullName());
 
+        //check if application has been rejected
+        if(userApplication.isStatus() || userApplication.isRejected()) return false;
+
         //create a basic account
         UserAccounts basicAccount = new UserAccounts(
                 false
@@ -489,6 +492,9 @@ public class EmployeeRepository implements EmpRepo {
         UserApplication userApplication = this.entityManager.find(UserApplication.class, applicationNumber);
 
         if(!checkIfApplicationAndEmployeeAreOfTheSameBranchAdminException(userApplication, employeeId)) return false;
+
+        //check if application has already been approved or rejected
+        if(userApplication.isRejected() || userApplication.isStatus()) return false;
 
         userApplication.setApprovedBy(getEmployeeById(employeeId));
 
@@ -587,7 +593,7 @@ public class EmployeeRepository implements EmpRepo {
 
         //point all applications in branch that point to admin to point to manager
         //get all applications that are assigned to admin
-        Collection<UserApplication> userApplicationsAdmin = this.findAllApplicationsInBranchThatPointToAdmin(manager.getBankBranch().getId());
+        Collection<UserApplication> userApplicationsAdmin = manager.getUserApplications();
         if(userApplicationsAdmin != null){
             userApplicationsAdmin.forEach(userApplication -> userApplication.setAssignedTo(admin));
         }
@@ -728,6 +734,12 @@ public class EmployeeRepository implements EmpRepo {
         query.setParameter("employee",employee);
 
         return query.getResultList();
+    }
+
+    @Override
+    @Transactional
+    public void commitEmployee(UserApplication userApplication) {
+        this.entityManager.merge(userApplication);
     }
 
 

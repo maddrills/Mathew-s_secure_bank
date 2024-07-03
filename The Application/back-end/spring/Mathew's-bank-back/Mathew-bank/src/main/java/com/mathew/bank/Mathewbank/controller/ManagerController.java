@@ -69,4 +69,11 @@ public class ManagerController {
         return this.employeeService.removeSubEmployeeFromBankByManager(employeeClerk, authentication, response);
 
     }
+
+
+    @PatchMapping("/assign-application-to")
+    public boolean assignApplicationTo(@RequestParam int employeeNumber,@RequestParam int applicationNumber, Authentication authentication, HttpServletResponse httpServletResponse){
+
+        return this.employeeService.assignOrReassignUserApplication(employeeNumber,applicationNumber, authentication, httpServletResponse);
+    }
 }

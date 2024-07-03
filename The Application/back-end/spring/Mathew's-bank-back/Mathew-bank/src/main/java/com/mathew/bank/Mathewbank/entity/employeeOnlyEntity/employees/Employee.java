@@ -2,6 +2,7 @@ package com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees;
 
 import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
+import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import jakarta.persistence.*;
 
@@ -82,6 +83,14 @@ final public class Employee {
     @OneToOne(mappedBy = "employee",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private EmployeeDetails details;
 
+    @OneToMany(mappedBy = "assignedTo", fetch = FetchType.LAZY,cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST,
+            CascadeType.REFRESH,
+    })
+    private Collection<UserApplication> userApplications;
+
 
     public Employee() {
     }
@@ -97,6 +106,14 @@ final public class Employee {
         this.manager = manager;
         this.employeeUnderManager = employeeUnderManager;
         this.bankBranch = bankBranch;
+    }
+
+    public Collection<UserApplication> getUserApplications() {
+        return userApplications;
+    }
+
+    public void setUserApplications(Collection<UserApplication> userApplications) {
+        this.userApplications = userApplications;
     }
 
     public EmployeeDetails getDetails() {

@@ -54,7 +54,12 @@ final public class UserApplication {
     @JoinColumn(name = "branch_id")
     private Branch branch;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY,cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST,
+            CascadeType.REFRESH,
+    })
     @JoinColumn(name = "assigned_to")
     private Employee assignedTo;
 
