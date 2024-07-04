@@ -4,6 +4,7 @@ import { WelcomePageComponent } from './components/welcome-page/welcome-page.com
 import { ApplyForAccountComponent } from './components/apply-for-account/apply-for-account.component';
 import { LogInPageComponent } from './components/log-in-page/log-in-page.component';
 import { CommonModule } from '@angular/common';
+import { EmployeeLoggedInComponent } from './components/employee-logged-in/employee-logged-in.component';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ import { CommonModule } from '@angular/common';
     WelcomePageComponent,
     ApplyForAccountComponent,
     LogInPageComponent,
+    EmployeeLoggedInComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
