@@ -172,9 +172,7 @@ public class EmployeeService {
                 Set<RolesDto> empRoles = new LinkedHashSet<>();
 
                 //translate employeeRoles to RolesDTO
-                employee.getRoles().forEach(role -> {
-                    empRoles.add(new RolesDto(role.getRole(), true));
-                });
+                employee.getRoles().forEach(role -> empRoles.add(new RolesDto(role.getRole(), true)));
 
                 employeesUnderBank.add(
                         new EmployeeDTO(
@@ -253,6 +251,7 @@ public class EmployeeService {
             assigneeBranch = assignee.getBankBranch();
             if(assigneeBranch == null) return false;
         } catch (Exception e) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             System.out.println(e);
             return false;
         }
@@ -261,7 +260,10 @@ public class EmployeeService {
         Employee managerOrAdminEmployee = this.employeeRepository.getEmployeeById(Integer.parseInt(authentication.getName()));
         //get employee branch
         Branch managerOrAdminBranch = managerOrAdminEmployee.getBankBranch();
-        if(managerOrAdminBranch == null) return false;
+        if(managerOrAdminBranch == null){
+            httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return false;
+        }
 
         //only auth admin or manager will reach here
         int level = this.highestAccessLevel(managerOrAdminEmployee);
@@ -273,6 +275,7 @@ public class EmployeeService {
             //check if manager and employee belong to the same branch
             System.out.println("access level-> " +level);
             if(!assigneeBranch.equals(managerOrAdminBranch)){
+                httpServletResponse.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
                 System.out.println("assigneeBranch.equals(managerOrAdminBranch) FALSE");
                 return false;
             }
@@ -284,6 +287,7 @@ public class EmployeeService {
                     this.employeeRepository.commitEmployee(userApplication);
                     return true;
                 }catch (Exception e){
+                    httpServletResponse.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
                     System.out.println(e);
                     return false;
                 }
@@ -299,6 +303,7 @@ public class EmployeeService {
             this.employeeRepository.commitEmployee(userApplication);
             return true;
         }catch (Exception e){
+            httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             System.out.println(e);
             return false;
         }
@@ -309,7 +314,7 @@ public class EmployeeService {
     private int highestAccessLevel(Employee employee) {
 
         // 4 is the number of roles
-        int accessLevel = 4;
+        int accessLevel = employee.getRoles().size();
 
         for (var level : employee.getRoles()) {
             if(level.getRole().equals("ROLE_admin")){
