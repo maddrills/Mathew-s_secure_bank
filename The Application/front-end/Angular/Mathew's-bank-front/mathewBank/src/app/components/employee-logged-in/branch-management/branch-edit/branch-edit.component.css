@@ -1,11 +1,10 @@
 section {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-top: 10rem;
 }
 
 .open-up-section-common {
-  background-color: #5f3dc4;
-  color: #f3f0ff;
+  background-color: #087f5b;
+  color: #e6fcf5;
   display: flex;
   align-items: center;
   padding: 0.4rem;
@@ -17,11 +16,12 @@ section {
 .open-up-section-common:hover,
 .open-up-section-common:active {
   cursor: pointer;
-  background-color: #7048e8;
+  background-color: #0ca678;
 }
 
 .bank-application-heading {
-  border: solid 1px #5f3dc4;
+  border: solid 1px #087f5b;
+  margin-bottom: 2rem;
 }
 
 .open-up-section-common h5 {
@@ -30,7 +30,7 @@ section {
 
 .open-up-section-common svg {
   width: 2.4rem;
-  fill: #f3f0ff;
+  fill: #e6fcf5;
 }
 
 .applications-query {
@@ -51,9 +51,9 @@ section {
 
 .button button {
   padding: 0.8rem 1.8rem;
-  background-color: #f3f0ff;
+  background-color: #e6fcf5;
   font-size: 1.4rem;
-  color: #5f3dc4;
+  color: #087f5b;
   font-weight: 600;
   border: solid 1px #b197fc;
   transition: all 0.33s;
@@ -61,7 +61,7 @@ section {
 .button button:hover,
 .button button:active {
   cursor: pointer;
-  border: solid 1px #f3f0ff;
+  border: solid 1px #e6fcf5;
 }
 
 .applications-query form div {
@@ -82,7 +82,7 @@ section {
 }
 
 .count .num {
-  color: #5f3dc4;
+  color: #087f5b;
   font-weight: 600;
 }
 
@@ -104,12 +104,12 @@ section {
 }
 
 .applications-data table tr:nth-child(odd) {
-  background-color: #f3f0ff;
+  background-color: #e6fcf5;
 }
 
 .applications-data table tr:first-child {
-  background-color: #5f3dc4;
-  color: #e5dbff;
+  background-color: #087f5b;
+  color: #c3fae8;
   font-size: 1.4rem;
 }
 .applications-data table tr:first-child th {
@@ -129,14 +129,14 @@ section {
 .next-bubble span {
   font-size: 1.2rem;
   border-radius: 50%;
-  color: #5f3dc4;
+  color: #087f5b;
   padding: 1rem;
   transition: all 0.33s;
 }
 .next-bubble span:hover,
 .next-bubble span:active {
   cursor: pointer;
-  color: #5f3dc4;
+  color: #087f5b;
   background-color: #e5dbff;
   font-size: 1.2rem;
 }
@@ -144,7 +144,7 @@ section {
 .next-bubble svg {
   width: 3.4rem;
   border-radius: 50%;
-  fill: #5f3dc4;
+  fill: #087f5b;
   transition: all 0.33s;
 }
 
@@ -153,43 +153,76 @@ section {
   cursor: pointer;
   fill: #ffffff;
   border-radius: 50%;
-  background-color: #5f3dc4;
+  background-color: #087f5b;
 }
 .three-dotes {
   align-self: center;
 }
 
-.sub-emp-details {
-  display: grid;
-  gap: 2rem;
-  font-size: 1.8rem;
+.heding-baner {
+  font-size: 3rem;
+  color: #087f5b;
+  margin-bottom: 2rem;
+}
+
+.create-branch {
+  margin-top: 3rem;
+}
+
+.branch-details {
   padding: 2rem;
 }
 
-.sub-emp-details h6 {
-  margin-bottom: 0.6rem;
-  color: #d0bfff;
-  font-size: 1.6rem;
-}
-
-.sub-emp .heading-ele {
-  margin-left: 2rem;
-}
-
-.sub-emp h2 {
-  margin-bottom: 1.2rem;
-}
-
-.sub-emp {
-  background-color: #5f3dc4;
-}
-.sub-emp:hover,
-.sub-emp:active {
-  cursor: auto;
-  background-color: #5f3dc4;
-}
-
-.back-button {
-  color: #d0bfff;
+.branch-details h3 {
   font-size: 2rem;
+  color: #087f5b;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.branch-details form {
+  display: grid;
+  padding: 1rem 2rem;
+}
+
+.branch-details form div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.branch-details form label {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-top: 2rem;
+}
+
+.branch-details form input {
+  padding: 0.4rem 1.4rem;
+  font-size: 1.6rem;
+  color: #087f5b;
+}
+
+.branch-button {
+  margin-top: 2rem;
+  grid-column: 1/3;
+}
+
+.branch-button button {
+  padding: 1rem;
+  border: solid 1px #c3fae8;
+  background-color: #087f5b;
+  color: #c3fae8;
+  font-weight: 600;
+  align-self: center;
+  transition: all 0.33s;
+}
+
+.branch-button button:hover,
+.branch-button button:active {
+  border: solid 1px #099268;
+  background-color: #099268;
+  color: #fff;
+  cursor: pointer;
 }

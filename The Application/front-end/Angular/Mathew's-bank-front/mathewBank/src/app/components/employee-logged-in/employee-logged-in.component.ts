@@ -4,6 +4,8 @@ import { FooterSectionComponent } from '../top-down/footer-section/footer-sectio
 import { BankApplicationsComponent } from './bank-applications/bank-applications.component';
 import { AssignedApplicationsComponent } from './assigned-applications/assigned-applications.component';
 import { EmployeeManagementComponent } from '../employee-management/employee-management.component';
+import { BranchManagementComponent } from './branch-management/branch-management.component';
+import { BranchEditComponent } from './branch-management/branch-edit/branch-edit.component';
 
 @Component({
   selector: 'app-employee-logged-in',
@@ -14,6 +16,8 @@ import { EmployeeManagementComponent } from '../employee-management/employee-man
     BankApplicationsComponent,
     AssignedApplicationsComponent,
     EmployeeManagementComponent,
+    BranchManagementComponent,
+    BranchEditComponent,
   ],
   templateUrl: './employee-logged-in.component.html',
   styleUrl: './employee-logged-in.component.css',
