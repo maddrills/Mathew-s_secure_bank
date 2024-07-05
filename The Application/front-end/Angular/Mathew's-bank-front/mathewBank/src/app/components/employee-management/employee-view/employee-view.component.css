@@ -157,3 +157,24 @@ section {
 .three-dotes {
   align-self: center;
 }
+
+.sub-emp-details {
+  display: grid;
+  gap: 2rem;
+  font-size: 1.8rem;
+  padding: 2rem;
+}
+
+.sub-emp-details h6 {
+  margin-bottom: 0.6rem;
+  color: #d0bfff;
+  font-size: 1.6rem;
+}
+
+.sub-emp .heading-ele {
+  margin-left: 2rem;
+}
+
+.sub-emp h2 {
+  margin-bottom: 1.2rem;
+}
