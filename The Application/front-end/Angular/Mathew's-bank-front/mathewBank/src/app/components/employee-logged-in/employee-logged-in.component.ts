@@ -3,6 +3,7 @@ import { NavBarComponent } from '../top-down/nav-bar/nav-bar.component';
 import { FooterSectionComponent } from '../top-down/footer-section/footer-section.component';
 import { BankApplicationsComponent } from './bank-applications/bank-applications.component';
 import { AssignedApplicationsComponent } from './assigned-applications/assigned-applications.component';
+import { EmployeeManagementComponent } from '../employee-management/employee-management.component';
 
 @Component({
   selector: 'app-employee-logged-in',
@@ -12,6 +13,7 @@ import { AssignedApplicationsComponent } from './assigned-applications/assigned-
     FooterSectionComponent,
     BankApplicationsComponent,
     AssignedApplicationsComponent,
+    EmployeeManagementComponent,
   ],
   templateUrl: './employee-logged-in.component.html',
   styleUrl: './employee-logged-in.component.css',
