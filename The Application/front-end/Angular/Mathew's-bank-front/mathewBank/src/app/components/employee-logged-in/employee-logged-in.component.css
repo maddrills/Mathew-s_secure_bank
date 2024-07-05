@@ -1,3 +1,77 @@
+section {
+  margin-top: 3rem;
+}
+
 .employee-welcome {
-  margin-top: 7rem;
+  margin-top: 9rem;
+  border: solid 1px #5f3dc4;
+}
+
+.grid-3-uneven-spacing {
+  grid-template-columns: 2fr 1fr;
+}
+
+.common-gap {
+  margin: 1.6rem;
+}
+
+.basic-details {
+  display: grid;
+  gap: 1.4rem;
+  font-size: 1.7rem;
+}
+
+.basic-details p {
+  margin-top: 0.2rem;
+  color: #5f3dc4;
+  font-weight: 600;
+}
+.basic-details h6 {
+  color: #868e96;
+  font-size: 1.6rem;
+}
+
+.details {
+  display: flex;
+  gap: 1.4rem;
+  align-items: center;
+}
+
+.details ul {
+  list-style: none;
+  display: flex;
+  gap: 0.6rem;
+  flex-direction: row;
+  font-weight: 600;
+  color: #5f3dc4;
+}
+.details div {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.profile {
+  background-color: #5f3dc4;
+  color: #f3f0ff;
+}
+
+.edit-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.4rem;
+}
+
+.edit-profile svg {
+  width: 8rem;
+  height: 8rem;
+  fill: #f3f0ff;
+  transition: all 0.33s;
+}
+
+.edit-profile svg:hover,
+.edit-profile svg:active {
+  cursor: pointer;
+  fill: #fff;
 }
