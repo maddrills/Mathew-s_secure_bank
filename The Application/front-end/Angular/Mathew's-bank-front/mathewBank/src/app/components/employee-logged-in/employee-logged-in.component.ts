@@ -15,7 +15,7 @@ import { BranchEditComponent } from './branch-management/branch-edit/branch-edit
     FooterSectionComponent,
     BankApplicationsComponent,
     AssignedApplicationsComponent,
-    EmployeeManagementComponent,
+    EmployeeManagementComponent ,
     BranchManagementComponent,
     BranchEditComponent,
   ],
