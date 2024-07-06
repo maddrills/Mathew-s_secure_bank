@@ -24,6 +24,8 @@ public class EmployeeDTO implements AllowedLoginOutputGeneric{
 
     private int branchId;
 
+    private int reportsTo;
+
     private Set<RolesDto> rolesName;
 
 
@@ -41,7 +43,7 @@ public class EmployeeDTO implements AllowedLoginOutputGeneric{
         this.rolesName = rolesName;
     }
 
-    public EmployeeDTO(int empId, String phone_number, String full_name, String email, LocalDate dateOfBirth, double salary, String password, int branchId, Set<RolesDto> rolesName) {
+    public EmployeeDTO(int empId, String phone_number, String full_name, String email, LocalDate dateOfBirth, double salary, String password, int branchId, Set<RolesDto> rolesName, int reportsTo) {
         this.empId = empId;
         this.phone_number = phone_number;
         this.full_name = full_name;
@@ -51,8 +53,16 @@ public class EmployeeDTO implements AllowedLoginOutputGeneric{
         this.password = password;
         this.branchId = branchId;
         this.rolesName = rolesName;
+        this.reportsTo = reportsTo;
     }
 
+    public int getReportsTo() {
+        return reportsTo;
+    }
+
+    public void setReportsTo(int reportsTo) {
+        this.reportsTo = reportsTo;
+    }
 
     public int getBranchId() {
         return branchId;

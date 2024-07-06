@@ -3,14 +3,17 @@ import { Injectable } from '@angular/core';
 import { ApplicationHttpRoutes } from '../constants/http-routes';
 import { UserModel } from '../model/user-model';
 import { BehaviorSubject } from 'rxjs';
+import { EmployeeDataModel } from '../model/employee-model';
 
 @Injectable({ providedIn: 'root' })
 export class UnRegService {
   //initiate Http service
   constructor(private http: HttpClient) {}
 
-  userDetails = new BehaviorSubject<UserModel | null>(null);
-  userIsLoggedIn = new BehaviorSubject<boolean>(false);
+  public employeeData = new BehaviorSubject<EmployeeDataModel | null>(null);
+  public userDetails = new BehaviorSubject<UserModel | null>(null);
+  public userIsLoggedIn = new BehaviorSubject<boolean>(false);
+  public employeeIsLoggedIn = new BehaviorSubject<boolean>(false);
 
   public commonUserLogin(username: string, password: string): void {
     console.log(username, password);
@@ -25,7 +28,30 @@ export class UnRegService {
     if (employeeId) {
       console.log('Its a number');
       this.employeeLogin(employeeId, password).subscribe({
-        next: (a) => console.log(a),
+        next: (employee) => {
+          console.log(employee);
+          const resultBody = employee.body;
+          const resultBodyString = JSON.stringify(employee.body);
+
+          localStorage.setItem('employeeData', resultBodyString);
+
+          this.employeeData.next(
+            new EmployeeDataModel(
+              resultBody?.empId,
+              resultBody?.reportsTo,
+              resultBody?.branchId,
+              resultBody?.empDetailsId,
+              resultBody?.phone_number,
+              resultBody?.full_name,
+              resultBody?.email,
+              resultBody?.dateOfBirth,
+              resultBody?.salary,
+              resultBody?.salaryAccount,
+              resultBody?.rolesName
+            )
+          );
+          this.employeeIsLoggedIn.next(true);
+        },
         error: (e) => console.log(e),
       });
       return;

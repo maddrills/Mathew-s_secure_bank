@@ -30,6 +30,14 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'employee-welcome',
+    //employee logged in ... lazy load everything else that follows
+    loadChildren: () =>
+      import('./components/employee-logged-in/emmployee-logedin.routes').then(
+        (mode) => mode.EMPLOYEE_LOGGED_IN
+      ),
+  },
+  {
     path: '**',
     component: WelcomePageComponent,
   },

@@ -140,7 +140,8 @@ public class EmployeeService {
                     employee.getDetails().getSalary(),
                     null,
                     employee.getBankBranch() == null ? 0 : employee.getBankBranch().getId(),
-                    rolesDtos);
+                    rolesDtos,
+                    employee.getManager() == null ? 0 : employee.getManager().getId());
 
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -184,7 +185,8 @@ public class EmployeeService {
                                 employeeDetails.getSalary(),
                                 null,
                                 employee.getBankBranch().getId(),
-                                empRoles
+                                empRoles,
+                                employee.getManager().getId()
                         )
                 );
             });

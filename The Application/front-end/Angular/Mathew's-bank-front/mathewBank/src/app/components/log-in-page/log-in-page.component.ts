@@ -45,5 +45,13 @@ export class LogInPageComponent {
         this.router.navigate(['user-welcome']);
       }
     });
+
+    this.unRegService.employeeIsLoggedIn.subscribe((isEmployee) => {
+      console.log('Employee is ' + isEmployee);
+
+      if (isEmployee) {
+        this.router.navigate(['employee-welcome']);
+      }
+    });
   }
 }
