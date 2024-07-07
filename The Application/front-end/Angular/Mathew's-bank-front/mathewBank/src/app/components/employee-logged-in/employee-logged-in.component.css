@@ -35,6 +35,7 @@ section {
   display: flex;
   gap: 1.4rem;
   align-items: center;
+  text-transform: capitalize;
 }
 
 .details ul {

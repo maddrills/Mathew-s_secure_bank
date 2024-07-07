@@ -141,7 +141,8 @@ public class EmployeeService {
                     null,
                     employee.getBankBranch() == null ? 0 : employee.getBankBranch().getId(),
                     rolesDtos,
-                    employee.getManager() == null ? 0 : employee.getManager().getId());
+                    employee.getManager() == null ? 0 : employee.getManager().getId(),
+                    employee.getBankBranch() == null ? "No Branch" : employee.getBankBranch().getBranchName());
 
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -184,9 +185,10 @@ public class EmployeeService {
                                 employeeDetails.getDateOfBirth(),
                                 employeeDetails.getSalary(),
                                 null,
-                                employee.getBankBranch().getId(),
+                                employee.getBankBranch() == null ? 0 : employee.getBankBranch().getId(),
                                 empRoles,
-                                employee.getManager().getId()
+                                employee.getManager().getId(),
+                                employee.getBankBranch() == null ? "No Branch" : employee.getBankBranch().getBranchName()
                         )
                 );
             });

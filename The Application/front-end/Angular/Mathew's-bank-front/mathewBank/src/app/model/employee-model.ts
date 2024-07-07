@@ -7,12 +7,13 @@ export class EmployeeDataModel {
     public reportsTo: number = 0,
     public branchId: number = 0,
     public empDetailsId: number = 0,
-    public phoneNumber: string = '',
-    public empName: string = '',
+    public phone_number: string = '',
+    public full_name: string = '',
     public email: string = '',
-    public dob: string = '',
+    public dateOfBirth: string = '',
     public salary: number = 0,
     public salaryAccount: number = 0,
-    public rolesDTO: rolesModel[] | null = null
+    public branchName: string = '',
+    public rolesName: rolesModel[] | null = null
   ) {}
 }

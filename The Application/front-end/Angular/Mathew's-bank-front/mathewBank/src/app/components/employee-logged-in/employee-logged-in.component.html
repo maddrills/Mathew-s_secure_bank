@@ -4,27 +4,27 @@
     <div class="basic-details common-gap grid--2-cols">
       <div class="details">
         <h6>Welcome:</h6>
-        <p>Person name</p>
+        <p>{{ employeeDetails?.full_name }}</p>
       </div>
       <div class="details">
         <h6 style="margin-left: 2rem">Employee Id:</h6>
-        <p>1760336</p>
+        <p>{{ employeeDetails?.empId }}</p>
       </div>
       <div class="details">
         <h6>Branch:</h6>
-        <p>admin central</p>
+        <p>{{ employeeDetails?.branchName }}</p>
       </div>
       <div class="details">
         <h6 style="margin-left: 2rem">Id:</h6>
-        <p>admin central</p>
+        <p>{{ employeeDetails?.branchId }}</p>
       </div>
       <div class="details">
         <h6>Roles:</h6>
         <ul>
-          <li>Employee,</li>
-          <li>Clerk,</li>
-          <li>Manager,</li>
-          <li>Admin</li>
+          @for (role of employeeDetails?.rolesName; track role.roleName; let
+          last = $last) {
+          <li>{{ role.roleName.slice(5) }}@if(!last){,}</li>
+          }
         </ul>
       </div>
     </div>

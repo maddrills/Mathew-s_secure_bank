@@ -34,22 +34,7 @@ export class UnRegService {
           const resultBodyString = JSON.stringify(employee.body);
 
           localStorage.setItem('employeeData', resultBodyString);
-
-          this.employeeData.next(
-            new EmployeeDataModel(
-              resultBody?.empId,
-              resultBody?.reportsTo,
-              resultBody?.branchId,
-              resultBody?.empDetailsId,
-              resultBody?.phone_number,
-              resultBody?.full_name,
-              resultBody?.email,
-              resultBody?.dateOfBirth,
-              resultBody?.salary,
-              resultBody?.salaryAccount,
-              resultBody?.rolesName
-            )
-          );
+          this.userIsLoggedIn.next(true);
           this.employeeIsLoggedIn.next(true);
         },
         error: (e) => console.log(e),

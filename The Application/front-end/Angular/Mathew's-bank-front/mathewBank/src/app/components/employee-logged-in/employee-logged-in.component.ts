@@ -8,6 +8,8 @@ import { BranchManagementComponent } from './branch-management/branch-management
 import { BranchEditComponent } from './branch-management/branch-edit/branch-edit.component';
 import { UnRegService } from '../../service/unRegService';
 import { EmployeeDataModel } from '../../model/employee-model';
+import { RefreshDataFetcherService } from '../../service/dataRefresh';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-employee-logged-in',
@@ -20,39 +22,29 @@ import { EmployeeDataModel } from '../../model/employee-model';
     EmployeeManagementComponent,
     BranchManagementComponent,
     BranchEditComponent,
+    CommonModule,
   ],
   templateUrl: './employee-logged-in.component.html',
   styleUrl: './employee-logged-in.component.css',
 })
 export class EmployeeLoggedInComponent {
-  constructor(private userService: UnRegService) {
+  public employeeDetails: EmployeeDataModel | null = null;
+  public permissionLen: number | undefined = 0;
+  constructor(
+    private userService: UnRegService,
+    private userDataRefreshUpDate: RefreshDataFetcherService
+  ) {
     console.log('Employee logged in');
-    this.printTheUserService();
+    this.runUserService();
 
-    // const empData: EmployeeDataModel | null = JSON.parse(
-    //   localStorage.getItem('employeeData')!
-    // );
-
-    // console.log(empData);
-    // this.userService.employeeData.next(
-    //   new EmployeeDataModel(
-    //     empData?.empId,
-    //     empData?.reportsTo,
-    //     empData?.branchId,
-    //     empData?.empDetailsId,
-    //     empData?.phoneNumber,
-    //     empData?.empName,
-    //     empData?.email,
-    //     empData?.dob,
-    //     empData?.salary,
-    //     empData?.salaryAccount,
-    //     empData?.rolesDTO
-    //   )
-    // );
+    userDataRefreshUpDate.checkIfEmployeeDataAvailable();
   }
 
-  printTheUserService() {
-    this.userService.employeeData.subscribe((data) => console.log(data));
+  runUserService() {
+    this.userService.employeeData.subscribe((data) => {
+      this.employeeDetails = data;
+      this.permissionLen = data?.rolesName?.length;
+    });
 
     const empData: EmployeeDataModel | null = JSON.parse(
       localStorage.getItem('employeeData')!
