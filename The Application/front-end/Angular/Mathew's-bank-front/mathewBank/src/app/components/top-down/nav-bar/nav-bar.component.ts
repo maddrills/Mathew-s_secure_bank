@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UnRegService } from '../../../service/unRegService';
 import { CommonModule } from '@angular/common';
+import { NavBarGoldService } from '../../../service/navBarService';
 
 @Component({
   selector: 'app-nav-bar',
@@ -15,48 +16,89 @@ export class NavBarComponent {
 
   public mathewBackHome: boolean = false;
 
-  // user login control
+  // user nav login control
+  public userIsLoggedIn: boolean = false;
   public loginSelected: boolean = false;
   public loginUserHome: boolean = false;
+
+  // employee nav login control
+  public employeeHomeSelected: boolean = false;
+
+  //employee logged in
+  public employeeLoggedIn: boolean = false;
+  //employee access level
+  public isAdmin: boolean = false;
+
+  public url = this.router.url;
 
   constructor(
     private router: Router,
     private unRegService: UnRegService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private navBarComponent: NavBarGoldService
   ) {
-    unRegService.userIsLoggedIn.subscribe(
+    //check for login
+    unRegService.logInDetected.subscribe(
       (userIn) => (this.loginActive = userIn)
     );
-    console.log(`nav bar ${this.loginActive}`);
 
-    const url = this.router.url;
+    //bank user presence
+    unRegService.userDetails.subscribe((data) => {
+      this.userIsLoggedIn = data != null;
+    });
 
-    console.log(url);
-    // if (url === '/log-in') {
-    //   this.loginSelected = true;
-    // } else if (url === '/welcome') {
-    //   this.mathewBackHome = true;
-    // }
+    //employee
+    unRegService.employeeIsLoggedIn.subscribe(
+      (employee) => (this.employeeLoggedIn = employee)
+    );
+    console.log('nav Constructor called');
 
-    this.urlToStyleResolver(url);
+    this.navBarComponent.inEmployeeHomeComponent.subscribe((mathewBank) => {
+      console.log('Home is -' + mathewBank);
+      this.employeeHomeSelected = mathewBank;
+    });
+    this.navBarComponent.onMathewsBank.subscribe((home) => {
+      console.log('Home is -' + home);
+      this.mathewBackHome = home;
+    });
+    //this.mathewBackHome = this.navBarComponent.onMathewsBank;
+    console.log(this.employeeHomeSelected);
+    console.log(this.mathewBackHome);
   }
 
-  private urlToStyleResolver(path: string) {
-    switch (path) {
-      case '/log-in':
-        this.loginSelected = true;
-        break;
-      case '/welcome':
-        this.mathewBackHome = true;
-        break;
-      case '/user-welcome':
-        this.loginUserHome = true;
-        break;
-    }
-  }
+  // private falseFire() {
+  //   this.loginSelected = false;
+  //   this.mathewBackHome = false;
+  //   this.mathewBackHome = false;
+  //   this.employeeHomeSelected = false;
+  // }
+
+  // private urlToStyleResolver(path: string) {
+  //   console.log('ROUTE NAME -----' + path);
+  //   switch (path) {
+  //     case '/log-in':
+  //       this.loginSelected = true;
+  //       break;
+  //     case '/welcome':
+  //       this.mathewBackHome = true;
+  //       break;
+  //     case '/user-welcome':
+  //       this.mathewBackHome = true;
+  //       break;
+  //     case '/employee-welcome':
+  //       console.log('ROUTE WELCOME NAME -----' + path);
+  //       this.employeeHomeSelected = true;
+  //       break;
+  //   }
+  // }
 
   userHomePage() {
     this.router.navigate(['user-welcome']);
+  }
+  empHome() {
+    this.router.navigate(['employee-welcome']);
+    console.log(`nav bar ${this.loginActive}`);
+    this.employeeHomeSelected = true;
   }
 
   loginPage() {
@@ -69,7 +111,7 @@ export class NavBarComponent {
 
   logOutPage() {
     //emit a logout that user is no longer longed in
-    this.unRegService.userIsLoggedIn.next(false);
+    this.unRegService.logInDetected.next(false);
     this.loginActive = false;
     this.router.navigate(['welcome']);
   }

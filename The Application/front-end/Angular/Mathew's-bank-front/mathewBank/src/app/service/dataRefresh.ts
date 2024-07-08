@@ -12,7 +12,8 @@ export class RefreshDataFetcherService {
     );
 
     if (empData != null) {
-      this.userRefresh.userIsLoggedIn.next(true);
+      this.userRefresh.logInDetected.next(true);
+      this.userRefresh.employeeIsLoggedIn.next(true);
     }
 
     console.log('------------------------------', empData);

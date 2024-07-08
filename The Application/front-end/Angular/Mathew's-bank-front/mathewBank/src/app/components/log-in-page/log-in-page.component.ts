@@ -38,7 +38,7 @@ export class LogInPageComponent {
     //   console.log(userDetails);
     // });
 
-    this.unRegService.userIsLoggedIn.subscribe((isUser) => {
+    this.unRegService.bankUserLoggedIn.subscribe((isUser) => {
       console.log(isUser);
 
       if (isUser) {

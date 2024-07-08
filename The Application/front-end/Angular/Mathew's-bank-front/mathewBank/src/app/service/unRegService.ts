@@ -12,7 +12,8 @@ export class UnRegService {
 
   public employeeData = new BehaviorSubject<EmployeeDataModel | null>(null);
   public userDetails = new BehaviorSubject<UserModel | null>(null);
-  public userIsLoggedIn = new BehaviorSubject<boolean>(false);
+  public logInDetected = new BehaviorSubject<boolean>(false);
+  public bankUserLoggedIn = new BehaviorSubject<boolean>(false);
   public employeeIsLoggedIn = new BehaviorSubject<boolean>(false);
 
   public commonUserLogin(username: string, password: string): void {
@@ -34,7 +35,8 @@ export class UnRegService {
           const resultBodyString = JSON.stringify(employee.body);
 
           localStorage.setItem('employeeData', resultBodyString);
-          this.userIsLoggedIn.next(true);
+          this.logInDetected.next(true);
+          this.bankUserLoggedIn.next(true);
           this.employeeIsLoggedIn.next(true);
         },
         error: (e) => console.log(e),
@@ -71,7 +73,7 @@ export class UnRegService {
         console.log(userDetails);
 
         userDetails?.rolesDto?.forEach((roles) => {
-          this.userIsLoggedIn.next(roles.roleName == 'ROLE_user');
+          this.logInDetected.next(roles.roleName == 'ROLE_user');
         });
 
         console.log('the Role name is');

@@ -22,15 +22,9 @@
         </div>
       </div>
       <section class="RHS">
-        @if(!loginActive){
-        <div
-          class="login RHS-common"
-          (click)="loginPage()"
-          [ngClass]="loginSelected ? 'golden-inlay' : 'inviableInlay'"
-        >
-          <div>Log-in</div>
-        </div>
-        }@else {
+        @if(loginActive){
+        <!-- if user is logged in -->
+        @if(userIsLoggedIn){
         <div
           class="login RHS-common"
           (click)="userHomePage()"
@@ -38,10 +32,41 @@
         >
           <div>User-Home</div>
         </div>
+        } @if(employeeLoggedIn){
+        <div
+          class="login RHS-common"
+          (click)="empHome()"
+          [ngClass]="
+            this.employeeHomeSelected ? 'golden-inlay' : 'inviableInlay'
+          "
+        >
+          <div>home</div>
+        </div>
+        <div
+          class="login RHS-common"
+          [ngClass]="loginUserHome ? 'golden-inlay' : 'inviableInlay'"
+        >
+          <div>Emp-Management</div>
+        </div>
+        <div
+          class="login RHS-common"
+          [ngClass]="loginUserHome ? 'golden-inlay' : 'inviableInlay'"
+        >
+          <div>Bank-Management</div>
+        </div>
+        }
 
         <hr />
         <div class="log-out RHS-common inviableInlay" (click)="logOutPage()">
           <div>Log-out</div>
+        </div>
+        }@else {
+        <div
+          class="login RHS-common"
+          (click)="loginPage()"
+          [ngClass]="loginSelected ? 'golden-inlay' : 'inviableInlay'"
+        >
+          <div>Log-in</div>
         </div>
         }
       </section>
