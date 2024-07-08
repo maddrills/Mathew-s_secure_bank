@@ -126,11 +126,23 @@ export class UnRegService {
   public logUserOut() {
     console.log(ApplicationHttpRoutes.LOGOUT);
 
-    return this.http.post(ApplicationHttpRoutes.LOGOUT, null, {
-      observe: 'response',
-      //send all relevant cookeys
-      withCredentials: true,
-      responseType: 'text',
-    });
+    return this.http
+      .post(ApplicationHttpRoutes.LOGOUT, null, {
+        observe: 'response',
+        //send all relevant cookeys
+        withCredentials: true,
+        responseType: 'text',
+      })
+      .subscribe({
+        next: (nextIng) => {
+          console.log(nextIng);
+          this.logInDetected.next(false);
+          this.bankUserLoggedIn.next(false);
+          this.employeeIsLoggedIn.next(false);
+          this.employeeIsLoggedIn.next(false);
+          this.userDetails.next(null);
+        },
+        error: (errorIng) => console.log(errorIng, 'Error Logging out'),
+      });
   }
 }

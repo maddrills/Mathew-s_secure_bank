@@ -116,16 +116,10 @@ export class NavBarComponent {
 
   logOutPage() {
     //emit a logout that user is no longer longed in
-    this.unRegService.logInDetected.next(false);
-    this.unRegService.bankUserLoggedIn.next(false);
-    this.unRegService.employeeIsLoggedIn.next(false);
     this.loginActive = false;
     //local storage null
     localStorage.clear();
     this.router.navigate(['welcome']);
-    this.unRegService.logUserOut().subscribe({
-      next: (nextIng) => console.log(nextIng),
-      error: (errorIng) => console.log(errorIng, 'Error Logging out'),
-    });
+    this.unRegService.logUserOut();
   }
 }
