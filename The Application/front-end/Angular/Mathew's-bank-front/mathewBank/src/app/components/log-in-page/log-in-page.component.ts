@@ -69,22 +69,5 @@ export class LogInPageComponent {
         empData?.rolesName
       )
     );
-    // ***
-
-    // this.unRegService.bankUserLoggedIn.subscribe((isUser) => {
-    //   console.log(isUser);
-
-    //   if (isUser) {
-    //     this.router.navigate(['user-welcome']);
-    //   }
-    // });
-
-    // this.unRegService.employeeIsLoggedIn.subscribe((isEmployee) => {
-    //   console.log('Employee is ' + isEmployee);
-
-    //   if (isEmployee) {
-    //     this.router.navigate(['employee-welcome']);
-    //   }
-    // });
   }
 }

@@ -20,6 +20,8 @@ export class NavBarComponent {
   public userIsLoggedIn: boolean = false;
   public loginSelected: boolean = false;
   public loginUserHome: boolean = false;
+  public empManagementSelected: boolean = false;
+  public bankManagementSelected: boolean = false;
 
   // employee nav login control
   public employeeHomeSelected: boolean = false;
@@ -55,12 +57,16 @@ export class NavBarComponent {
 
     //nav bar stuff
     this.navBarComponent.inEmployeeHomeComponent.subscribe((mathewBank) => {
-      console.log('Home is -' + mathewBank);
       this.employeeHomeSelected = mathewBank;
     });
     this.navBarComponent.onMathewsBank.subscribe((home) => {
-      console.log('Home is -' + home);
       this.mathewBackHome = home;
+    });
+    this.navBarComponent.empManagement.subscribe((empMan) => {
+      this.empManagementSelected = empMan;
+    });
+    this.navBarComponent.bankManagement.subscribe((bankManagement) => {
+      this.bankManagementSelected = bankManagement;
     });
     //log in
     this.navBarComponent.logIn.subscribe(
@@ -71,39 +77,24 @@ export class NavBarComponent {
     console.log(this.mathewBackHome);
   }
 
-  // private falseFire() {
-  //   this.loginSelected = false;
-  //   this.mathewBackHome = false;
-  //   this.mathewBackHome = false;
-  //   this.employeeHomeSelected = false;
-  // }
-
-  // private urlToStyleResolver(path: string) {
-  //   console.log('ROUTE NAME -----' + path);
-  //   switch (path) {
-  //     case '/log-in':
-  //       this.loginSelected = true;
-  //       break;
-  //     case '/welcome':
-  //       this.mathewBackHome = true;
-  //       break;
-  //     case '/user-welcome':
-  //       this.mathewBackHome = true;
-  //       break;
-  //     case '/employee-welcome':
-  //       console.log('ROUTE WELCOME NAME -----' + path);
-  //       this.employeeHomeSelected = true;
-  //       break;
-  //   }
-  // }
-
   userHomePage() {
     this.router.navigate(['user-welcome']);
   }
   empHome() {
     this.router.navigate(['employee-welcome']);
     console.log(`nav bar ${this.loginActive}`);
-    this.employeeHomeSelected = true;
+  }
+
+  //needs improvement as it should work with activated router
+  empManagement() {
+    console.log(this.activatedRoute.snapshot.url);
+    this.router.navigate(['employee-welcome/emp-management'], {
+      //relativeTo: this.activatedRoute,
+    });
+  }
+
+  bankManagement() {
+    this.router.navigate(['employee-welcome/bank-management']);
   }
 
   loginPage() {

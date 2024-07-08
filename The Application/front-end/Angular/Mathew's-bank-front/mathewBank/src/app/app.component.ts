@@ -5,6 +5,8 @@ import { ApplyForAccountComponent } from './components/apply-for-account/apply-f
 import { LogInPageComponent } from './components/log-in-page/log-in-page.component';
 import { CommonModule } from '@angular/common';
 import { EmployeeLoggedInComponent } from './components/employee-logged-in/employee-logged-in.component';
+import { FooterSectionComponent } from './components/top-down/footer-section/footer-section.component';
+import { NavBarComponent } from './components/top-down/nav-bar/nav-bar.component';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +20,8 @@ import { EmployeeLoggedInComponent } from './components/employee-logged-in/emplo
     ApplyForAccountComponent,
     LogInPageComponent,
     EmployeeLoggedInComponent,
+    NavBarComponent,
+    FooterSectionComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

@@ -44,13 +44,17 @@
         </div>
         <div
           class="login RHS-common"
-          [ngClass]="loginUserHome ? 'golden-inlay' : 'inviableInlay'"
+          (click)="empManagement()"
+          [ngClass]="
+            this.empManagementSelected ? 'golden-inlay' : 'inviableInlay'
+          "
         >
           <div>Emp-Management</div>
         </div>
         <div
           class="login RHS-common"
-          [ngClass]="loginUserHome ? 'golden-inlay' : 'inviableInlay'"
+          (click)="bankManagement()"
+          [ngClass]="bankManagementSelected ? 'golden-inlay' : 'inviableInlay'"
         >
           <div>Bank-Management</div>
         </div>
