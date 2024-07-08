@@ -42,7 +42,7 @@ export class EmployeeLoggedInComponent {
     this.navBarGoldService.resetAll();
     this.navBarGoldService.inEmployeeHomeComponent.next(true);
 
-    userDataRefreshUpDate.checkIfEmployeeDataAvailable();
+    this.userDataRefreshUpDate.checkIfEmployeeDataAvailable();
   }
   runUserService() {
     this.userService.employeeData.subscribe((data) => {

@@ -4,6 +4,8 @@ import { SubEmployeesComponent } from './sub-employees/sub-employees.component';
 import { NavBarGoldService } from '../../service/navBarService';
 import { NavBarComponent } from '../top-down/nav-bar/nav-bar.component';
 import { FooterSectionComponent } from '../top-down/footer-section/footer-section.component';
+import { UnRegService } from '../../service/unRegService';
+import { RefreshDataFetcherService } from '../../service/dataRefresh';
 
 @Component({
   selector: 'app-employee-management',
@@ -18,8 +20,13 @@ import { FooterSectionComponent } from '../top-down/footer-section/footer-sectio
   styleUrl: './employee-management.component.css',
 })
 export class EmployeeManagementComponent {
-  constructor(private navBarGoldService: NavBarGoldService) {
+  constructor(
+    private navBarGoldService: NavBarGoldService,
+    private userService: UnRegService,
+    private userDataRefreshUpDate: RefreshDataFetcherService
+  ) {
     this.navBarGoldService.resetAll();
     this.navBarGoldService.empManagement.next(true);
+    userDataRefreshUpDate.checkIfEmployeeDataAvailable();
   }
 }
