@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { UnRegService } from '../../service/unRegService';
 import { Router } from '@angular/router';
+import { NavBarGoldService } from '../../service/navBarService';
+import { EmployeeDataModel } from '../../model/employee-model';
 
 @Component({
   selector: 'app-log-in-page',
@@ -14,7 +16,14 @@ import { Router } from '@angular/router';
   styleUrl: './log-in-page.component.css',
 })
 export class LogInPageComponent {
-  constructor(private unRegService: UnRegService, private router: Router) {}
+  constructor(
+    private unRegService: UnRegService,
+    private router: Router,
+    private navBarGoldService: NavBarGoldService
+  ) {
+    this.navBarGoldService.resetAll();
+    this.navBarGoldService.logIn.next(true);
+  }
 
   onSubmit(formSettings: NgForm) {
     const formDataFields = formSettings.form.value;
@@ -33,25 +42,49 @@ export class LogInPageComponent {
       formDataFields.UserPassword
     );
 
-    // this.unRegService.userDetails.subscribe((userDetails) => {
-    //   console.log('From User');
-    //   console.log(userDetails);
+    //first time submit ***
+    const empData: EmployeeDataModel | null = JSON.parse(
+      localStorage.getItem('employeeData')!
+    );
+
+    if (empData != null) {
+      this.unRegService.logInDetected.next(true);
+      this.unRegService.employeeIsLoggedIn.next(true);
+    }
+
+    console.log('------------------------------', empData);
+    this.unRegService.employeeData.next(
+      new EmployeeDataModel(
+        empData?.empId,
+        empData?.reportsTo,
+        empData?.branchId,
+        empData?.empDetailsId,
+        empData?.phone_number,
+        empData?.full_name,
+        empData?.email,
+        empData?.dateOfBirth,
+        empData?.salary,
+        empData?.salaryAccount,
+        empData?.branchName,
+        empData?.rolesName
+      )
+    );
+    // ***
+
+    // this.unRegService.bankUserLoggedIn.subscribe((isUser) => {
+    //   console.log(isUser);
+
+    //   if (isUser) {
+    //     this.router.navigate(['user-welcome']);
+    //   }
     // });
 
-    this.unRegService.bankUserLoggedIn.subscribe((isUser) => {
-      console.log(isUser);
+    // this.unRegService.employeeIsLoggedIn.subscribe((isEmployee) => {
+    //   console.log('Employee is ' + isEmployee);
 
-      if (isUser) {
-        this.router.navigate(['user-welcome']);
-      }
-    });
-
-    this.unRegService.employeeIsLoggedIn.subscribe((isEmployee) => {
-      console.log('Employee is ' + isEmployee);
-
-      if (isEmployee) {
-        this.router.navigate(['employee-welcome']);
-      }
-    });
+    //   if (isEmployee) {
+    //     this.router.navigate(['employee-welcome']);
+    //   }
+    // });
   }
 }

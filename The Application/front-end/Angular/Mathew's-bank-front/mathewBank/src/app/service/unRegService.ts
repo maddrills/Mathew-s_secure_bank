@@ -4,11 +4,12 @@ import { ApplicationHttpRoutes } from '../constants/http-routes';
 import { UserModel } from '../model/user-model';
 import { BehaviorSubject } from 'rxjs';
 import { EmployeeDataModel } from '../model/employee-model';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class UnRegService {
   //initiate Http service
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   public employeeData = new BehaviorSubject<EmployeeDataModel | null>(null);
   public userDetails = new BehaviorSubject<UserModel | null>(null);
@@ -38,6 +39,8 @@ export class UnRegService {
           this.logInDetected.next(true);
           this.bankUserLoggedIn.next(true);
           this.employeeIsLoggedIn.next(true);
+          //on success navigate out to employee
+          this.router.navigate(['employee-welcome']);
         },
         error: (e) => console.log(e),
       });
@@ -62,6 +65,8 @@ export class UnRegService {
             resultBody?.rolesDto
           )
         );
+        //navigate to user
+        this.router.navigate(['user-welcome']);
       },
       error: (e) => console.log(e),
     });
@@ -114,5 +119,18 @@ export class UnRegService {
       'Authorization',
       'Basic ' + window.btoa(employeeOrUserId + ':' + password)
     );
+  }
+
+  //common logout route
+  //needs modification when XSRF token is involved
+  public logUserOut() {
+    console.log(ApplicationHttpRoutes.LOGOUT);
+
+    return this.http.post(ApplicationHttpRoutes.LOGOUT, null, {
+      observe: 'response',
+      //send all relevant cookeys
+      withCredentials: true,
+      responseType: 'text',
+    });
   }
 }

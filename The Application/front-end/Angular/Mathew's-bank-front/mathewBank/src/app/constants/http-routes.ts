@@ -10,4 +10,6 @@ export class ApplicationHttpRoutes {
     this.SOCKET + '/employee/employee-login';
 
   static readonly LOGIN_ROUTE_USER: string = this.SOCKET + '/bankUser/login';
+
+  static readonly LOGOUT: string = this.SOCKET + '/logout';
 }

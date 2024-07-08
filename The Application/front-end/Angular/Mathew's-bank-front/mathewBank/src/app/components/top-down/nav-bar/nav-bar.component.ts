@@ -53,6 +53,7 @@ export class NavBarComponent {
     );
     console.log('nav Constructor called');
 
+    //nav bar stuff
     this.navBarComponent.inEmployeeHomeComponent.subscribe((mathewBank) => {
       console.log('Home is -' + mathewBank);
       this.employeeHomeSelected = mathewBank;
@@ -61,6 +62,10 @@ export class NavBarComponent {
       console.log('Home is -' + home);
       this.mathewBackHome = home;
     });
+    //log in
+    this.navBarComponent.logIn.subscribe(
+      (logIn) => (this.loginSelected = logIn)
+    );
     //this.mathewBackHome = this.navBarComponent.onMathewsBank;
     console.log(this.employeeHomeSelected);
     console.log(this.mathewBackHome);
@@ -112,7 +117,15 @@ export class NavBarComponent {
   logOutPage() {
     //emit a logout that user is no longer longed in
     this.unRegService.logInDetected.next(false);
+    this.unRegService.bankUserLoggedIn.next(false);
+    this.unRegService.employeeIsLoggedIn.next(false);
     this.loginActive = false;
+    //local storage null
+    localStorage.clear();
     this.router.navigate(['welcome']);
+    this.unRegService.logUserOut().subscribe({
+      next: (nextIng) => console.log(nextIng),
+      error: (errorIng) => console.log(errorIng, 'Error Logging out'),
+    });
   }
 }
