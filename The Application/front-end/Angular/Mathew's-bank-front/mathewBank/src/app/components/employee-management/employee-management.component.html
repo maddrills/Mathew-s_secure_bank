@@ -52,71 +52,33 @@
     <div class="applications-data">
       <table>
         <tr class="head prevent-select">
-          <th>From</th>
-          <th>To</th>
-          <th>Date Time</th>
-          <th>Amount</th>
+          <th>Employee-Id</th>
+          <th>Name & click for details</th>
+          <th>Phone Number</th>
+          <th>Email</th>
+          <th>Permission set</th>
+          <th>Salary</th>
         </tr>
+        @for(empData of allEmployeesCalledByAdmin ; track empData){
         <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
+          <td>{{ empData.empId }}</td>
+          <td>
+            <button (click)="personId(empData.empId)">
+              {{ empData.full_name }}
+            </button>
+          </td>
+          <td>{{ empData.phone_number }}</td>
+          <td>{{ empData.email }}</td>
+          <td>
+            @for(roles of empData.rolesName ; track roles){
+            <div style="text-transform: capitalize">
+              {{ roles.roleName.slice(5) }}
+            </div>
+            }
+          </td>
+          <td>{{ empData.salary }}</td>
         </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
+        }
       </table>
       <div class="next-bubble prevent-select">
         <svg
@@ -151,5 +113,5 @@
   </div>
 </section>
 <!-- <app-employee-view></app-employee-view> -->
-<app-sub-employees></app-sub-employees>
+<!-- <app-sub-employees></app-sub-employees> -->
 <!-- <app-footer-section></app-footer-section> -->

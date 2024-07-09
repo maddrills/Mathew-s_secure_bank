@@ -8,8 +8,10 @@ export class ApplicationHttpRoutes {
   // log in route routes employee and user
   static readonly LOGIN_ROUTE_EMPLOYEE: string =
     this.SOCKET + '/employee/employee-login';
-
   static readonly LOGIN_ROUTE_USER: string = this.SOCKET + '/bankUser/login';
-
   static readonly LOGOUT: string = this.SOCKET + '/logout';
+
+  //employee stuff
+  static readonly GET_ALL_EMPLOYEE_DATA: string =
+    this.SOCKET + '/admin/get_all_employees';
 }

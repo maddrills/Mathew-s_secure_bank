@@ -152,7 +152,7 @@ section {
 
 .applications-data {
   margin-top: 2rem;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   display: flex;
   flex-direction: column;
 }
@@ -161,6 +161,25 @@ section {
   border-collapse: collapse;
   text-align: center;
   margin: 1rem 2rem;
+}
+
+.applications-data button {
+  padding: 1rem;
+  border: 0;
+  color: #5f3dc4;
+  background-image: linear-gradient(#e5dbff, #d0bfff);
+  border-radius: 25px;
+  min-width: 15rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.applications-data button:hover {
+  cursor: pointer;
+}
+
+.applications-data button:active {
+  background-image: linear-gradient(#d0bfff, #e5dbff);
 }
 
 .applications-data table tr td {

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UnRegService } from '../../../service/unRegService';
 import { CommonModule } from '@angular/common';
 import { NavBarGoldService } from '../../../service/navBarService';
+import { EmployeeService } from '../../../service/employee-post-login.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -37,7 +38,8 @@ export class NavBarComponent {
     private router: Router,
     private unRegService: UnRegService,
     private activatedRoute: ActivatedRoute,
-    private navBarComponent: NavBarGoldService
+    private navBarComponent: NavBarGoldService,
+    private employeeService: EmployeeService
   ) {
     //check for login
     unRegService.logInDetected.subscribe(
@@ -87,10 +89,19 @@ export class NavBarComponent {
 
   //needs improvement as it should work with activated router
   empManagement() {
-    console.log(this.activatedRoute.snapshot.url);
-    this.router.navigate(['employee-welcome/emp-management'], {
-      //relativeTo: this.activatedRoute,
-    });
+    //get all employee data
+    // this.employeeService.getAllEmployees().subscribe({
+    //   next: (empData) => {
+    //     console.log(empData.body);
+    //     //set this as the global array of data
+    //     this.employeeService.allEmployeeData.next(empData.body);
+    //     this.router.navigate(['employee-welcome/emp-management'], {
+    //       //relativeTo: this.activatedRoute,
+    //     });
+    //   },
+    //   error: (wrong) => {},
+    // });
+    this.router.navigate(['employee-welcome/emp-management/all-employees']);
   }
 
   bankManagement() {
