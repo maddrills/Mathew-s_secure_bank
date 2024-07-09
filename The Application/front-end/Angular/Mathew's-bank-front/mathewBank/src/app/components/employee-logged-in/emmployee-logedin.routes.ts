@@ -4,6 +4,8 @@ import { EmployeeManagementComponent } from '../employee-management/employee-man
 import { BranchManagementComponent } from './branch-management/branch-management.component';
 import { SubEmployeesComponent } from '../employee-management/sub-employees/sub-employees.component';
 import { EmployeeManagementShellComponent } from '../employee-management/employee-management-shell/employee-management-shell.component';
+import { LogInPageComponent } from '../log-in-page/log-in-page.component';
+import { AddNewEmployeeComponent } from '../employee-management/add-new-employee/add-new-employee.component';
 
 export const EMPLOYEE_LOGGED_IN: Route[] = [
   { path: '', component: EmployeeLoggedInComponent },
@@ -14,6 +16,12 @@ export const EMPLOYEE_LOGGED_IN: Route[] = [
       {
         path: 'all-employees',
         component: EmployeeManagementComponent,
+        children: [
+          {
+            path: 'add-employee',
+            component: AddNewEmployeeComponent,
+          },
+        ],
       },
       {
         path: 'sub-employee',

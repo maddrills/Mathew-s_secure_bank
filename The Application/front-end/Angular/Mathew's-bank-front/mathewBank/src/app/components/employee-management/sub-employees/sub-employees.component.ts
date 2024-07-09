@@ -3,7 +3,7 @@ import { AssignedApplicationsComponent } from '../../employee-logged-in/assigned
 import { EmployeeManagementComponent } from '../employee-management.component';
 import { NavBarGoldService } from '../../../service/navBarService';
 import { EmployeeService } from '../../../service/employee-post-login.service';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { RefreshDataFetcherService } from '../../../service/dataRefresh';
 import { EmployeeDataModel } from '../../../model/employee-model';
 import { BehaviorSubject } from 'rxjs';
@@ -11,7 +11,7 @@ import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'app-sub-employees',
   standalone: true,
-  imports: [AssignedApplicationsComponent],
+  imports: [AssignedApplicationsComponent, RouterOutlet],
   templateUrl: './sub-employees.component.html',
   styleUrl: './sub-employees.component.css',
 })
