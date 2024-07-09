@@ -167,6 +167,10 @@ section {
   padding: 2rem;
 }
 
+.capitalize {
+  text-transform: capitalize;
+}
+
 .sub-emp-details h6 {
   margin-bottom: 0.6rem;
   color: #d0bfff;
@@ -206,4 +210,8 @@ section {
   gap: 1rem;
   color: #fff;
   font-size: 2rem;
+}
+
+.lift {
+  margin-top: 2rem;
 }

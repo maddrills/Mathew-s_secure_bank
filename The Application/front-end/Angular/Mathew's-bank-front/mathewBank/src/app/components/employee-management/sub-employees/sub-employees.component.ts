@@ -10,7 +10,7 @@ import { EmployeeDataModel } from '../../../model/employee-model';
 @Component({
   selector: 'app-sub-employees',
   standalone: true,
-  imports: [],
+  imports: [AssignedApplicationsComponent],
   templateUrl: './sub-employees.component.html',
   styleUrl: './sub-employees.component.css',
 })

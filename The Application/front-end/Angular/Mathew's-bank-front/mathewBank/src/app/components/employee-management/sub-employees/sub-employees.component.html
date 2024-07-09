@@ -20,20 +20,20 @@
         </div>
       </div>
       <div class="sub-emp-details grid--3-cols">
-        <div>
+        <div class="capitalize">
           <h6>Name</h6>
           <div>{{ employeeData?.full_name }}</div>
         </div>
-        <div>
+        <div class="capitalize">
           <h6>Employee Id</h6>
           <div>{{ employeeData?.empId }}</div>
         </div>
-        <div>
+        <div class="capitalize">
           <h6>Report's To</h6>
           <div>{{ employeeData?.reportsTo }}</div>
         </div>
         <div>
-          <h6>Branch Id</h6>
+          <h6 class="capitalize">Branch Id</h6>
           <div>{{ employeeData?.branchId }}</div>
         </div>
         <div>
@@ -41,25 +41,25 @@
           <div>{{ employeeData?.branchName }}</div>
         </div>
         <div>
-          <h6>Phone Number</h6>
+          <h6 class="capitalize">Phone Number</h6>
           <div>{{ employeeData?.phone_number }}</div>
         </div>
         <div>
-          <h6>email</h6>
+          <h6>Email</h6>
           <div>{{ employeeData?.email }}</div>
         </div>
-        <div>
+        <div class="capitalize">
           <h6>Date Of Birth</h6>
           <div>{{ employeeData?.dateOfBirth }}</div>
         </div>
         <div>
-          <h6>Salary</h6>
+          <h6 class="capitalize">Salary</h6>
           <div>{{ employeeData?.salary }}</div>
         </div>
       </div>
     </div>
 
-    <section class="container">
+    <section class="container lift">
       <div class="bank-application-heading">
         <div class="open-up-section-common">
           <h5>Employees Under Employee name</h5>
@@ -194,6 +194,6 @@
         </div>
       </div>
     </section>
-    <!-- <app-assigned-applications></app-assigned-applications> -->
+    <app-assigned-applications></app-assigned-applications>
   </div>
 </section>
