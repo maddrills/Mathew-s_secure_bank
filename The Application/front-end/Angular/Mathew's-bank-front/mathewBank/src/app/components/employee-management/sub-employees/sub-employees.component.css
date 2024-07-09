@@ -233,3 +233,13 @@ section {
 .applications-data button:active {
   background-image: linear-gradient(#d0bfff, #e5dbff);
 }
+
+.sapn-out {
+  text-transform: capitalize;
+  grid-column: -4/-1;
+}
+
+.sub-emp-details hr {
+  border: 1px solid #ffd700;
+  grid-column: -4/-1;
+}

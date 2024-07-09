@@ -56,6 +56,14 @@
           <h6 class="capitalize">Salary</h6>
           <div>{{ employeeData?.salary }}</div>
         </div>
+        <hr />
+        <div class="sapn-out">
+          <h6 class="capitalize">roles</h6>
+          @for (role of employeeData?.rolesName; track role.roleName; let last =
+          $last) {
+          <span>{{ role.roleName.slice(5) }}@if(!last){ ,}</span>
+          }
+        </div>
       </div>
     </div>
 

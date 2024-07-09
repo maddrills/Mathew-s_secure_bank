@@ -33,6 +33,7 @@ export class EmployeeService {
 
     this.http
       .get<EmployeeDataModel>(ApplicationHttpRoutes.GET_EMPLOYEE_BY_ID, {
+        params: new HttpParams().append('employeeId', empId),
         observe: 'response',
         //send all relevant cookeys
         withCredentials: true,

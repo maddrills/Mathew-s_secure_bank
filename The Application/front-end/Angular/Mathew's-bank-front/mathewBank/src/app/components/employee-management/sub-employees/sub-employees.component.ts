@@ -85,6 +85,14 @@ export class SubEmployeesComponent {
   public personId(id: number) {
     console.log(id);
 
+    this.employeeService.getEmployeeById(id);
     //find employee by this id
+    this.employeeService.employeeById.subscribe((employee) => {
+      console.log(employee);
+      this.employeeData = employee;
+    });
+
+    //get sub employees
+    this.listOutAllSubEmployees();
   }
 }
