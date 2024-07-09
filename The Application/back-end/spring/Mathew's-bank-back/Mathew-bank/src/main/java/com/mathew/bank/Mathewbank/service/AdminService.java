@@ -429,6 +429,7 @@ public class AdminService {
 
                         employee.getRoles().forEach(a -> rolesDtos.add(new RolesDto(a.getRole(), true)));
 
+                        System.out.println( "Branch is ---"+employee.getBankBranch().getId());
                         employeeDTOS.add(new EmployeeDTO(
                                 employee.getId(),
                                 employee.getDetails().getPhone_number(),
@@ -437,7 +438,13 @@ public class AdminService {
                                 employee.getDetails().getDateOfBirth(),
                                 employee.getDetails().getSalary(),
                                 null,
-                                rolesDtos));
+                                employee.getBankBranch() == null ? 0 : employee.getBankBranch().getId(),
+                                rolesDtos,
+                                employee.getManager() == null ? 0 : employee.getManager().getId(),
+                                employee.getBankBranch() == null ? "No Branch" : employee.getBankBranch().getBranchName())
+
+
+                        );
                     }
             );
 
@@ -462,7 +469,10 @@ public class AdminService {
                             employee.getDetails().getDateOfBirth(),
                             employee.getDetails().getSalary(),
                             null,
-                            rolesDtos));
+                            employee.getBankBranch() == null ? 0 : employee.getBankBranch().getId(),
+                            rolesDtos,
+                            employee.getManager() == null ? 0 : employee.getManager().getId(),
+                            employee.getBankBranch() == null ? "No Branch" : employee.getBankBranch().getBranchName()));
                 }
         );
 

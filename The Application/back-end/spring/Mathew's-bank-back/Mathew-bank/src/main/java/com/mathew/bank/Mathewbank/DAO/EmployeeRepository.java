@@ -297,7 +297,9 @@ public class EmployeeRepository implements EmpRepo {
          * values in some collection in your entity.*/
 
         TypedQuery<Employee> query = this.entityManager.createQuery(
-                "SELECT E FROM Employee AS E JOIN FETCH E.details " +
+                "SELECT E FROM Employee AS E " +
+                        "JOIN FETCH E.details " +
+                        "JOIN FETCH E.bankBranch" +
                         "WHERE :roleEntity MEMBER OF E.roles",
                 Employee.class);
 

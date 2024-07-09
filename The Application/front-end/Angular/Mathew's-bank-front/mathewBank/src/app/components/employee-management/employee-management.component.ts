@@ -52,12 +52,25 @@ export class EmployeeManagementComponent {
     // });
   }
 
-  public personId(id: number) {
+  public personId(id: number, selectedIndex: number) {
     console.log(id);
+    localStorage.removeItem('selectedEmployee');
+
+    if (this.allEmployeesCalledByAdmin != null) {
+      this.employeeService.employeeById.next(
+        this.allEmployeesCalledByAdmin[selectedIndex]
+      );
+    } else return;
     //reroute to sub employee
-    this.route.navigate(['/employee-welcome/emp-management/sub-employee'], {
-      relativeTo: this.activatedRoute,
-    });
+    this.route.navigate(
+      [
+        `/employee-welcome/emp-management/sub-employee`,
+        { EMPIndex: selectedIndex, employeeId: id },
+      ],
+      {
+        relativeTo: this.activatedRoute,
+      }
+    );
   }
 
   private allUsersDataRefresh() {

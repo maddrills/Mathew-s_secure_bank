@@ -55,20 +55,21 @@
           <th>Employee-Id</th>
           <th>Name & click for details</th>
           <th>Phone Number</th>
-          <th>Email</th>
+          <th>Branch</th>
           <th>Permission set</th>
           <th>Salary</th>
         </tr>
-        @for(empData of allEmployeesCalledByAdmin ; track empData){
+        @for(empData of allEmployeesCalledByAdmin ; track empData;let position =
+        $index){
         <tr>
           <td>{{ empData.empId }}</td>
           <td>
-            <button (click)="personId(empData.empId)">
+            <button (click)="personId(empData.empId, position)">
               {{ empData.full_name }}
             </button>
           </td>
           <td>{{ empData.phone_number }}</td>
-          <td>{{ empData.email }}</td>
+          <td>{{ empData.branchName }}</td>
           <td>
             @for(roles of empData.rolesName ; track roles){
             <div style="text-transform: capitalize">

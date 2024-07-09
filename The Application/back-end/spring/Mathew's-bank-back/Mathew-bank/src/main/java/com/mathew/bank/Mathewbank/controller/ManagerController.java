@@ -33,9 +33,9 @@ public class ManagerController {
     }
 
     @GetMapping("/get-employees-by-empId")
-    public EmployeeDTO getEmployeeById(@RequestParam int employeeId){
+    public EmployeeDTO getEmployeeById(@RequestParam int employeeId,HttpServletResponse response){
         System.out.println(employeeId);
-        return null;
+        return this.employeeService.getEmployeeDetailsById(employeeId,response);
     }
 
     @GetMapping("/get-employees-by-phone")

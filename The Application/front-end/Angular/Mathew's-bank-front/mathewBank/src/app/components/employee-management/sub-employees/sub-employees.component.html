@@ -1,43 +1,60 @@
+<div class="ng-view" autoscroll="true"></div>
 <section class="container">
   <div class="bank-application-heading">
     <div class="open-up-section-common sub-emp">
       <div class="heading-ele">
         <h2>Sub Employee View</h2>
-        <div class="back-button">go back</div>
-        xcx
+        <div class="back-button" (click)="goBack()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            fill="#000000"
+            viewBox="0 0 256 256"
+          >
+            <path
+              d="M222,128a6,6,0,0,1-6,6H54.49l61.75,61.76a6,6,0,1,1-8.48,8.48l-72-72a6,6,0,0,1,0-8.48l72-72a6,6,0,0,1,8.48,8.48L54.49,122H216A6,6,0,0,1,222,128Z"
+            ></path>
+          </svg>
+          <span>go back</span>
+        </div>
       </div>
       <div class="sub-emp-details grid--3-cols">
         <div>
           <h6>Name</h6>
-          <div>Mathew Francis</div>
+          <div>{{ employeeData?.full_name }}</div>
         </div>
         <div>
-          <h6>In Number</h6>
-          <div>12345678</div>
+          <h6>Employee Id</h6>
+          <div>{{ employeeData?.empId }}</div>
         </div>
         <div>
           <h6>Report's To</h6>
-          <div>234567244</div>
+          <div>{{ employeeData?.reportsTo }}</div>
         </div>
         <div>
           <h6>Branch Id</h6>
-          <div>347</div>
+          <div>{{ employeeData?.branchId }}</div>
+        </div>
+        <div>
+          <h6>Branch Name</h6>
+          <div>{{ employeeData?.branchName }}</div>
         </div>
         <div>
           <h6>Phone Number</h6>
-          <div>7836489221</div>
+          <div>{{ employeeData?.phone_number }}</div>
         </div>
         <div>
           <h6>email</h6>
-          <div>mathewAtgmail.com</div>
+          <div>{{ employeeData?.email }}</div>
         </div>
         <div>
           <h6>Date Of Birth</h6>
-          <div>21/09/2003</div>
+          <div>{{ employeeData?.dateOfBirth }}</div>
         </div>
         <div>
           <h6>Salary</h6>
-          <div>100,000,000</div>
+          <div>{{ employeeData?.salary }}</div>
         </div>
       </div>
     </div>
