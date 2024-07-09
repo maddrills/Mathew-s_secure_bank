@@ -742,6 +742,32 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "getEmmployeeUnderEmployee",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/get_all_employees_under?employeeId=1000001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"get_all_employees_under"
+					],
+					"query": [
+						{
+							"key": "employeeId",
+							"value": "1000001"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

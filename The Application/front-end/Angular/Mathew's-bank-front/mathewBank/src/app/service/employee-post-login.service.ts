@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { ApplicationHttpRoutes } from '../constants/http-routes';
 import { Injectable } from '@angular/core';
 import { EmployeeDataModel } from '../model/employee-model';
@@ -42,5 +42,18 @@ export class EmployeeService {
         error: (err) =>
           console.log(err, 'while getting an employee by id from backend'),
       });
+  }
+
+  //admin get employee under employee
+  public getEmployeesUnderEmployee(empId: number) {
+    return this.http.get<EmployeeDataModel[]>(
+      ApplicationHttpRoutes.GET_employee_UNDER_EMPLOYEE,
+      {
+        params: new HttpParams().append('employeeId', empId),
+        observe: 'response',
+        //send all relevant cookeys
+        withCredentials: true,
+      }
+    );
   }
 }

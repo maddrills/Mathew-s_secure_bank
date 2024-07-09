@@ -61,8 +61,8 @@
 
     <section class="container lift">
       <div class="bank-application-heading">
-        <div class="open-up-section-common">
-          <h5>Employees Under Employee name</h5>
+        <div class="open-up-section-common" (click)="listOutAllSubEmployees()">
+          <h5>Employees Under - {{ employeeData?.full_name }}</h5>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="32"
@@ -96,71 +96,33 @@
         <div class="applications-data">
           <table>
             <tr class="head prevent-select">
-              <th>From</th>
-              <th>To</th>
-              <th>Date Time</th>
-              <th>Amount</th>
+              <th>Employee-Id</th>
+              <th>Name & click for details</th>
+              <th>Phone Number</th>
+              <th>Branch</th>
+              <th>Permission set</th>
+              <th>Salary</th>
             </tr>
+            @for(subEmp of subEmployees; track subEmp.empId;){
             <tr>
-              <td>192.168.10.1</td>
-              <td>172.168.2.1</td>
-              <td>sample</td>
-              <td>sample</td>
+              <td>{{ subEmp.empId }}</td>
+              <td>
+                <button (click)="personId(subEmp.empId)">
+                  {{ subEmp.full_name }}
+                </button>
+              </td>
+              <td>{{ subEmp.phone_number }}</td>
+              <td>{{ subEmp.branchName }}</td>
+              <td>
+                @for(roles of subEmp.rolesName ; track roles){
+                <div style="text-transform: capitalize">
+                  {{ roles.roleName.slice(5) }}
+                </div>
+                }
+              </td>
+              <td>{{ subEmp.salary }}</td>
             </tr>
-            <tr>
-              <td>192.168.10.1</td>
-              <td>172.168.2.1</td>
-              <td>sample</td>
-              <td>sample</td>
-            </tr>
-            <tr>
-              <td>192.168.10.1</td>
-              <td>172.168.2.1</td>
-              <td>sample</td>
-              <td>sample</td>
-            </tr>
-            <tr>
-              <td>192.168.10.1</td>
-              <td>172.168.2.1</td>
-              <td>sample</td>
-              <td>sample</td>
-            </tr>
-            <tr>
-              <td>192.168.10.1</td>
-              <td>172.168.2.1</td>
-              <td>sample</td>
-              <td>sample</td>
-            </tr>
-            <tr>
-              <td>192.168.10.1</td>
-              <td>172.168.2.1</td>
-              <td>sample</td>
-              <td>sample</td>
-            </tr>
-            <tr>
-              <td>192.168.10.1</td>
-              <td>172.168.2.1</td>
-              <td>sample</td>
-              <td>sample</td>
-            </tr>
-            <tr>
-              <td>192.168.10.1</td>
-              <td>172.168.2.1</td>
-              <td>sample</td>
-              <td>sample</td>
-            </tr>
-            <tr>
-              <td>192.168.10.1</td>
-              <td>172.168.2.1</td>
-              <td>sample</td>
-              <td>sample</td>
-            </tr>
-            <tr>
-              <td>192.168.10.1</td>
-              <td>172.168.2.1</td>
-              <td>sample</td>
-              <td>sample</td>
-            </tr>
+            }
           </table>
           <div class="next-bubble prevent-select">
             <svg

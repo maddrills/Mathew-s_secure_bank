@@ -6,6 +6,7 @@ import { EmployeeService } from '../../../service/employee-post-login.service';
 import { Router } from '@angular/router';
 import { RefreshDataFetcherService } from '../../../service/dataRefresh';
 import { EmployeeDataModel } from '../../../model/employee-model';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-sub-employees',
@@ -17,6 +18,11 @@ import { EmployeeDataModel } from '../../../model/employee-model';
 export class SubEmployeesComponent {
   //fetch data from this point
   employeeData: EmployeeDataModel | null = null;
+
+  //array of all sub employees
+  //subEmployees = new BehaviorSubject<EmployeeDataModel[] | null>(null);
+  subEmployees: EmployeeDataModel[] | null = null;
+
   constructor(
     private navBarGoldService: NavBarGoldService,
     private userDataRefreshUpDate: RefreshDataFetcherService,
@@ -44,10 +50,41 @@ export class SubEmployeesComponent {
 
     console.log('Indi emp is');
     console.log(this.employeeData);
+    this.listOutAllSubEmployees();
     window.scrollTo(0, 0);
   }
 
   goBack() {
     this.route.navigate(['/employee-welcome/emp-management/all-employees']);
+  }
+
+  listOutAllSubEmployees() {
+    //TODO optimise
+    //only check if employee data available
+    if (this.employeeData) {
+      this.employeeService
+        .getEmployeesUnderEmployee(this.employeeData.empId)
+        .subscribe({
+          next: (employee) => {
+            //this.subEmployees.next(employee.body);
+            this.subEmployees = employee.body;
+          },
+          error: (err) =>
+            console.log(err, 'while getting an employee by id from backend'),
+        });
+    } else {
+      alert('No employee set');
+      console.log('No employee set');
+    }
+
+    console.log('click');
+    //this.subEmployees.subscribe((data) => console.log(data));
+    console.log(this.subEmployees);
+  }
+
+  public personId(id: number) {
+    console.log(id);
+
+    //find employee by this id
   }
 }

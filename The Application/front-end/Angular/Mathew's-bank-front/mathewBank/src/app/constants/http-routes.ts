@@ -16,4 +16,6 @@ export class ApplicationHttpRoutes {
     this.SOCKET + '/admin/get_all_employees';
   static readonly GET_EMPLOYEE_BY_ID: string =
     this.SOCKET + '/manager/get-employees-by-empId';
+  static readonly GET_employee_UNDER_EMPLOYEE: string =
+    this.SOCKET + '/admin/get_all_employees_under';
 }
