@@ -1,5 +1,6 @@
 package com.mathew.bank.Mathewbank.DAO;
 
+import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
@@ -68,5 +69,7 @@ public interface EmpRepo extends User_emp_commonRepo {
     Collection<UserApplication> findAllApplicationsInBranchThatPointToAdmin(int bankId);
 
     void commitEmployee(UserApplication userApplication);
+
+    List<Employee> getEmployeesUnderManager(int employeeNumber);
 
 }

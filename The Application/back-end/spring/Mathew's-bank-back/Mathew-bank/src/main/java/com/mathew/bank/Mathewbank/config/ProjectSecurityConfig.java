@@ -83,6 +83,7 @@ public class ProjectSecurityConfig {
                                 "/admin/get_all_employees",
                                 "/admin/create_a_branch",
                                 "/admin/manager_to_branch",
+                                "/admin/get_all_employees_under",
                                 "/admin/remove-manager-from-branch",
                                 "/admin/remove-clerk-from-bank-by-admin").hasAnyRole("admin")
 

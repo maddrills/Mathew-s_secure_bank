@@ -142,7 +142,8 @@ public class EmployeeService {
                     employee.getBankBranch() == null ? 0 : employee.getBankBranch().getId(),
                     rolesDtos,
                     employee.getManager() == null ? 0 : employee.getManager().getId(),
-                    employee.getBankBranch() == null ? "No Branch" : employee.getBankBranch().getBranchName());
+                    employee.getBankBranch() == null ? "No Branch" : employee.getBankBranch().getBranchName()
+            );
 
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

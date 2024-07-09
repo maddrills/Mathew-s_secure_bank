@@ -41,6 +41,49 @@ public class AdminService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    public List<EmployeeDTO> getEmployeesUnderAnEmployee(int employeeNumber, HttpServletResponse httpServletResponse){
+
+        try{
+
+            final List<Employee> employees = this.empRepo.getEmployeesUnderManager(employeeNumber);
+
+            final List<EmployeeDTO> employeeDTOS = new LinkedList<>();
+
+            employees.forEach(employee -> {
+
+                //per user roles to rolesDto
+                final Set<RolesDto> rolesDtos = new LinkedHashSet<>();
+                employee.getRoles().forEach(role -> {
+                    rolesDtos.add(new RolesDto(
+                            role.getRole() ,
+                            true
+                    ));
+                });
+
+
+                employeeDTOS.add(new EmployeeDTO(
+                        employee.getId(),
+                        employee.getDetails().getPhone_number(),
+                        employee.getDetails().getFullName(),
+                        employee.getDetails().getEmail(),
+                        employee.getDetails().getDateOfBirth(),
+                        employee.getDetails().getSalary(),
+                        null,
+                        employee.getBankBranch() == null ? 0 : employee.getBankBranch().getId(),
+                        rolesDtos,
+                        employee.getManager() == null ? 0 : employee.getManager().getId(),
+                        employee.getBankBranch() == null ? "No Branch" : employee.getBankBranch().getBranchName()
+                ));
+            });
+
+            return employeeDTOS;
+
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+
     private int accessLevelAuthCheck(Authentication authentication) {
 
         int accessLevel = 0;

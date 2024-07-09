@@ -1,5 +1,6 @@
 package com.mathew.bank.Mathewbank.DAO;
 
+import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
@@ -742,6 +743,20 @@ public class EmployeeRepository implements EmpRepo {
     @Transactional
     public void commitEmployee(UserApplication userApplication) {
         this.entityManager.merge(userApplication);
+    }
+
+    @Override
+    public List<Employee> getEmployeesUnderManager(int employeeNumber) {
+
+        Employee managerEmployee = this.getEmployeeById(employeeNumber);
+
+        TypedQuery<Employee> query = this.entityManager.createQuery(
+                "SELECT e FROM Employee AS e WHERE e.manager = :manager"
+                ,Employee.class);
+
+        query.setParameter("manager",managerEmployee);
+
+        return query.getResultList();
     }
 
 

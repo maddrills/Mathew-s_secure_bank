@@ -40,6 +40,12 @@ public class AdminController {
         return this.adminService.allEmployeesOrByThereRole(null);
     }
 
+    @GetMapping("/get_all_employees_under")
+    public List<EmployeeDTO> getAllEmployeeUnderEmployee(@RequestParam int employeeId, HttpServletResponse httpServletResponse){
+
+        return this.adminService.getEmployeesUnderAnEmployee(employeeId, httpServletResponse);
+    }
+
 
     //returns all the employees according to their role
     @GetMapping("/get_all_employees_by_a_role_name")
