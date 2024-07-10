@@ -72,6 +72,10 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
     //should be executed for all the api except the login api
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        return request.getServletPath().equals("/bankUser/login") || request.getServletPath().equals("/employee/employee-login");
+
+        return request.getServletPath().equals("/bankUser/login") ||
+                request.getServletPath().equals("/employee/employee-login") ||
+                //bellow was done to archive this /exposed/**
+                request.getServletPath().split("/")[1].equals("exposed");
     }
 }

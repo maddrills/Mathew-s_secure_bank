@@ -5,6 +5,8 @@ export class ApplicationHttpRoutes {
   private static readonly SOCKET: string =
     this.PROTOCOL + '://' + this.BACKEND_SERVER + ':' + this.PORT_NUMBER;
 
+  //un reg routes
+
   // log in route routes employee and user
   static readonly LOGIN_ROUTE_EMPLOYEE: string =
     this.SOCKET + '/employee/employee-login';
