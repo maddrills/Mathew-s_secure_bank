@@ -167,3 +167,20 @@ form div input {
   margin-bottom: 1rem;
   row-gap: 2rem;
 }
+
+.reset-space button {
+  background-color: #ffd700;
+  color: #212529;
+  transition: all 0.33s;
+  padding: 0.6rem 1.6rem;
+  max-width: 20rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-top: 4rem;
+}
+
+.reset-space button:hover {
+  cursor: pointer;
+  background-color: #212529;
+  color: #ffd700;
+}

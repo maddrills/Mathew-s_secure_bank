@@ -1,6 +1,11 @@
 .holder {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  row-gap: 2rem;
+  column-gap: 1rem;
   margin-top: 3rem;
+  margin-bottom: 2rem;
+  min-width: 10rem;
 }
 
 .node {
@@ -8,8 +13,9 @@
   flex-direction: column;
   align-items: center;
   border: 1px solid black;
-  margin-left: 1rem;
   padding: 1rem;
+  min-width: 19rem;
+  max-width: 19rem;
 }
 
 .node svg {
@@ -60,4 +66,15 @@
 
 .cancel svg:hover {
   cursor: pointer;
+}
+
+.desc {
+  display: flex;
+  flex-direction: row;
+}
+
+.desc svg {
+  height: 3rem;
+  width: 3rem;
+  margin-left: 0.2rem;
 }

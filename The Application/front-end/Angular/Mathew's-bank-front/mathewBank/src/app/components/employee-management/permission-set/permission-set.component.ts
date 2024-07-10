@@ -13,8 +13,10 @@ export class PermissionSetComponent {
   public openUp: boolean = false;
 
   public permissionCount: number = 0;
+  //map that hold the position and array ref
   public permissions: Map<number, rolesModel> = new Map();
 
+  //TODO: replace with api data
   public arrayOfPermissions: rolesModel[] = [
     new rolesModel('ROLE_employee', false),
     new rolesModel('ROLE_clerk', false),
