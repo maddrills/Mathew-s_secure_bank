@@ -86,6 +86,7 @@ public class AdminController {
     public String addAnEmployee(@RequestBody EmployeeDTO employeeDTO,  HttpServletResponse response, Authentication authentication){
 
         //check if auth
+        System.out.println(employeeDTO);
 
         return this.adminService.addAnyEmployee(employeeDTO, response,authentication);
 

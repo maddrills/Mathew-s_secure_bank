@@ -1,6 +1,7 @@
 package com.mathew.bank.Mathewbank.controller;
 
 import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
+import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.service.EmployeeService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,5 +76,10 @@ public class ManagerController {
     public boolean assignApplicationTo(@RequestParam int employeeNumber,@RequestParam int applicationNumber, Authentication authentication, HttpServletResponse httpServletResponse){
 
         return this.employeeService.assignOrReassignUserApplication(employeeNumber,applicationNumber, authentication, httpServletResponse);
+    }
+
+    @GetMapping("/getAllAuthNames")
+    public Collection<RolesDto> allRoles(){
+        return this.employeeService.getAllRoles();
     }
 }

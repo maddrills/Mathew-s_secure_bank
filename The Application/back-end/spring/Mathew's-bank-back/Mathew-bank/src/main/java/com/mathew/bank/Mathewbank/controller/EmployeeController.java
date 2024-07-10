@@ -2,6 +2,7 @@ package com.mathew.bank.Mathewbank.controller;
 
 import com.mathew.bank.Mathewbank.DTO.AllowedLoginOutputGeneric;
 import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
+import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.DTO.UserApplicationDTO;
 import com.mathew.bank.Mathewbank.service.EmployeeService;
 import com.mathew.bank.Mathewbank.service.UnRegUserService;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController

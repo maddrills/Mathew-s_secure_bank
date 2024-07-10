@@ -6,38 +6,60 @@
     <div class="applications-data">
       <div class="next-bubble prevent-select">
         <div>
-          <form class="grid grid--3-cols reset-space">
+          <form
+            (ngSubmit)="createAnEmployee(f)"
+            class="grid grid--3-cols reset-space"
+            #f="ngForm"
+          >
             <div>
               <label for="fullName">Full Name</label>
-              <input type="text" id="fullName" />
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                required
+                ngModel
+              />
             </div>
             <div>
               <label for="phoneNumber">Phone Number</label>
-              <input type="text" id="phoneNumber" />
+              <input
+                type="number"
+                id="phoneNumber"
+                name="phoneNumber"
+                required
+                ngModel
+              />
             </div>
             <div>
               <label for="email">Email</label>
-              <input type="text" id="email" />
+              <input type="text" id="email" name="email" required ngModel />
             </div>
 
             <div>
               <label for="dob">DOB</label>
-              <input type="text" id="dob" />
+              <input type="date" id="dob" name="dob" required ngModel />
             </div>
             <div>
               <label for="salary">Salary</label>
-              <input type="text" id="salary" />
+              <input type="number" id="salary" name="salary" required ngModel />
             </div>
             <div>
               <label for="password">Password</label>
-              <input type="text" id="password" />
+              <input
+                type="text"
+                id="password"
+                name="password"
+                required
+                ngModel
+              />
             </div>
-            <button>Add employee</button>
+            <button type="submit">Add employee</button>
           </form>
         </div>
         <section>
           <article>
-            <h5>Permission set section</h5>
+            <h5>Permission set section <span>(optional)</span></h5>
             <p>
               Permission here allow the user to perform certain actions, can
               only add one unique permission to a user, unauthorized granting of

@@ -759,5 +759,15 @@ public class EmployeeRepository implements EmpRepo {
         return query.getResultList();
     }
 
+    @Override
+    public Collection<Role> getAllRoles() {
+
+        TypedQuery<Role> query = this.entityManager.createQuery(
+                "SELECT r FROM Role AS r",
+                Role.class);
+
+        return query.getResultList();
+    }
+
 
 }

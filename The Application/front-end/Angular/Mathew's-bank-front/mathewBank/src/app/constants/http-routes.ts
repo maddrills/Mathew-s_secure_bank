@@ -18,4 +18,8 @@ export class ApplicationHttpRoutes {
     this.SOCKET + '/manager/get-employees-by-empId';
   static readonly GET_employee_UNDER_EMPLOYEE: string =
     this.SOCKET + '/admin/get_all_employees_under';
+  static readonly GET_ALL_OFFICE_PERMISSIONS: string =
+    this.SOCKET + '/manager/getAllAuthNames';
+  static readonly POST_AN_EMPLOYEE: string =
+    this.SOCKET + '/admin/add_an_employee';
 }

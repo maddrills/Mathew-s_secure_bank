@@ -72,4 +72,5 @@ public interface EmpRepo extends User_emp_commonRepo {
 
     List<Employee> getEmployeesUnderManager(int employeeNumber);
 
+    Collection<Role> getAllRoles();
 }

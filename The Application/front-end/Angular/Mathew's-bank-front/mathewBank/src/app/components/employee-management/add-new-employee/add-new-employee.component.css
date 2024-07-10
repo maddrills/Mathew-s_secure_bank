@@ -128,6 +128,9 @@ section {
   margin-top: 3rem;
   margin-bottom: 0.6rem;
 }
+.next-bubble article h5 span {
+  color: #868e96;
+}
 
 .next-bubble svg {
   width: 3.4rem;

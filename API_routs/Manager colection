@@ -217,6 +217,26 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "allOfficeRoles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/manager/getAllAuthNames",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"manager",
+						"getAllAuthNames"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

@@ -107,7 +107,7 @@ public class AdminService {
 
         // sanity check
         if (employeeDTO == null) {
-            response.setStatus(HttpServletResponse.SC_CONFLICT);
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             return "error null entry";
         }
 

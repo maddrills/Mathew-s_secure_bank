@@ -4,6 +4,7 @@ import com.mathew.bank.Mathewbank.DAO.EmployeeRepository;
 import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
 import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.DTO.UserApplicationDTO;
+import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
@@ -342,7 +343,19 @@ public class EmployeeService {
     }
 
 
+    public Collection<RolesDto> getAllRoles() {
 
+        Collection<Role> roles = this.employeeRepository.getAllRoles();
 
+        Collection<RolesDto> rolesDtos = new ArrayList<>(roles.size());
 
+        roles.forEach(role -> {
+            //check if user roles exists
+            if (!role.getRole().equals("ROLE_user")){
+                rolesDtos.add(new RolesDto(role.getRole(), false));
+            }
+        });
+
+        return rolesDtos;
+    }
 }
