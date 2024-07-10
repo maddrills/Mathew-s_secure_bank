@@ -19,6 +19,8 @@ section {
 }
 
 .open-up-section-common h5 {
+  padding: 1rem;
+  color: #ffd700;
   margin-left: 1rem;
 }
 
@@ -115,24 +117,16 @@ section {
 .next-bubble {
   margin-top: 1rem;
   display: flex;
+  flex-direction: column;
   align-self: center;
   gap: 0.4rem;
   margin-bottom: 1rem;
 }
 
-.next-bubble span {
-  font-size: 1.2rem;
-  border-radius: 50%;
-  color: #5f3dc4;
-  padding: 1rem;
-  transition: all 0.33s;
-}
-.next-bubble span:hover,
-.next-bubble span:active {
-  cursor: pointer;
-  color: #5f3dc4;
-  background-color: #e5dbff;
-  font-size: 1.2rem;
+.next-bubble article h5 {
+  font-size: 1.8rem;
+  margin-top: 3rem;
+  margin-bottom: 0.6rem;
 }
 
 .next-bubble svg {
@@ -151,4 +145,25 @@ section {
 }
 .three-dotes {
   align-self: center;
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+}
+
+form div label {
+  font-size: 1.4rem;
+}
+
+form div input {
+  margin-top: 0.6rem;
+  padding: 0.6rem;
+  font-size: 1.6rem;
+}
+
+.reset-space {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  row-gap: 2rem;
 }

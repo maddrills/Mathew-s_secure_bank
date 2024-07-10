@@ -1,0 +1,63 @@
+.holder {
+  display: flex;
+  margin-top: 3rem;
+}
+
+.node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+  margin-left: 1rem;
+  padding: 1rem;
+}
+
+.node svg {
+  cursor: pointer;
+}
+
+.permission-set {
+  position: relative;
+}
+.set-permission {
+}
+.set-permission h5 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+}
+
+.permission-set ul {
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+  font-weight: 600;
+  flex-direction: column;
+  gap: 1rem;
+  list-style: none;
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0rem 0rem 0.8rem rgba(0, 0, 0, 0.2);
+  min-width: 15rem;
+}
+
+.permission-set ul li {
+  padding: 0.6rem 4rem;
+  transition: all 0.33s;
+  text-transform: capitalize;
+}
+.permission-set ul li:hover,
+.permission-set ul li:active {
+  cursor: pointer;
+  color: #fff;
+  background-color: #212529;
+  padding: 0.8rem 3rem;
+}
+
+.cancel svg {
+  fill: red;
+}
+
+.cancel svg:hover {
+  cursor: pointer;
+}

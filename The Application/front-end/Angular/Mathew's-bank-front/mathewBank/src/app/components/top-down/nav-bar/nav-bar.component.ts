@@ -101,7 +101,9 @@ export class NavBarComponent {
     //   },
     //   error: (wrong) => {},
     // });
-    this.router.navigate(['employee-welcome/emp-management/all-employees']);
+    this.router.navigate([
+      'employee-welcome/emp-management/all-employees/add-employee',
+    ]);
   }
 
   bankManagement() {
