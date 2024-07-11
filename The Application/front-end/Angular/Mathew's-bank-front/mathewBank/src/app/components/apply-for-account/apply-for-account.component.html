@@ -16,49 +16,153 @@
       </svg>
     </div>
     <div class="form-containment">
-      <form action="">
+      <form action="" (ngSubmit)="onSubmitApplication(f)" #f="ngForm">
         <div>
-          <label for="first-name">First Name</label>
-          <input class="inputs" id="first-name" type="text" name="firstName" />
+          <label for="first-name" class="fieldName">First Name</label>
+          <input
+            class="inputs"
+            id="first-name"
+            type="text"
+            name="firstName"
+            ngModel
+          />
         </div>
         <div>
-          <label for="last-name">Last Name</label>
-          <input class="inputs" id="last-name" type="text" name="LastName" />
+          <label for="last-name" class="fieldName">Last Name</label>
+          <input
+            class="inputs"
+            id="last-name"
+            type="text"
+            name="lastName"
+            ngModel
+          />
         </div>
         <div>
-          <label for="user-phone">Phone No</label>
+          <label for="user-phone" class="fieldName">Phone No</label>
           <input
             class="inputs"
             id="user-phone"
             type="text"
             name="phoneNumber"
+            ngModel
           />
         </div>
         <div>
-          <label for="user-email">email</label>
-          <input class="inputs" id="user-email" type="text" name="email" />
+          <label for="user-email" class="fieldName">email</label>
+          <input
+            class="inputs"
+            id="user-email"
+            type="text"
+            name="email"
+            ngModel
+          />
         </div>
         <div>
-          <label for="date of birth">Date of birth</label>
+          <label for="date of birth" class="fieldName">Date of birth</label>
           <input
             class="inputs small"
             id="first-name"
             type="date"
             name="dateOfBirth"
+            ngModel
           />
         </div>
-        <div class="location">
+        <div class="location prevent-select">
           <div>
             <label for="user-country">Country</label>
-            <input id="user-country" type="text" name="country" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              fill="#000000"
+              viewBox="0 0 256 256"
+              (click)="countryActive = !countryActive"
+            >
+              <path
+                d="M224,128a96,96,0,1,1-96-96A96,96,0,0,1,224,128Z"
+                opacity="0.2"
+              ></path>
+              <path
+                d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm45.66-109.66a8,8,0,0,1,0,11.32l-40,40a8,8,0,0,1-11.32,0l-40-40a8,8,0,0,1,11.32-11.32L128,140.69l34.34-34.35A8,8,0,0,1,173.66,106.34Z"
+              ></path>
+            </svg>
+            @if(countryActive){
+            <div class="drop-down prevent-select">
+              <ul>
+                @for(countryValue of countryNameArray; track countryValue){
+                <li (click)="country(countryValue)">{{ countryValue }}</li>
+                }
+              </ul>
+            </div>
+            }
+            <div class="selection-result">
+              <p>{{ countryName }}</p>
+            </div>
           </div>
           <div>
             <label for="user-state">State</label>
-            <input id="user-state" type="text" name="state" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              fill="#000000"
+              viewBox="0 0 256 256"
+              (click)="stateActive = !stateActive"
+            >
+              <path
+                d="M224,128a96,96,0,1,1-96-96A96,96,0,0,1,224,128Z"
+                opacity="0.2"
+              ></path>
+              <path
+                d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm45.66-109.66a8,8,0,0,1,0,11.32l-40,40a8,8,0,0,1-11.32,0l-40-40a8,8,0,0,1,11.32-11.32L128,140.69l34.34-34.35A8,8,0,0,1,173.66,106.34Z"
+              ></path>
+            </svg>
+            @if(stateActive){
+            <div class="drop-down prevent-select">
+              <ul>
+                @for(stateValue of stateNameArray; track stateValue){
+                <li (click)="state(stateValue)">{{ stateValue }}</li>
+                }
+              </ul>
+            </div>
+            }
+            <div class="selection-result">
+              <p>{{ stateName }}</p>
+            </div>
           </div>
           <div>
             <label for="user-branch">Branch</label>
-            <input id="user-branch" type="text" name="branch" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              fill="#000000"
+              viewBox="0 0 256 256"
+              (click)="branchActive = !branchActive"
+            >
+              <path
+                d="M224,128a96,96,0,1,1-96-96A96,96,0,0,1,224,128Z"
+                opacity="0.2"
+              ></path>
+              <path
+                d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm45.66-109.66a8,8,0,0,1,0,11.32l-40,40a8,8,0,0,1-11.32,0l-40-40a8,8,0,0,1,11.32-11.32L128,140.69l34.34-34.35A8,8,0,0,1,173.66,106.34Z"
+              ></path>
+            </svg>
+            @if(branchActive){
+            <div class="drop-down prevent-select">
+              <ul>
+                @for(branchesObject of branchNameArray; track branchesObject;
+                let arrPos = $index){
+                <li (click)="branch(branchesObject.branchName, arrPos)">
+                  {{ branchesObject.branchName }}
+                </li>
+                }
+              </ul>
+            </div>
+            }
+            <div class="selection-result">
+              <p>{{ branchName }}</p>
+            </div>
           </div>
         </div>
         <p>

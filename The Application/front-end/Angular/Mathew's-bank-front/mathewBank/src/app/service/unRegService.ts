@@ -1,10 +1,11 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApplicationHttpRoutes } from '../constants/http-routes';
 import { UserModel } from '../model/user-model';
 import { BehaviorSubject } from 'rxjs';
 import { EmployeeDataModel } from '../model/employee-model';
 import { Router } from '@angular/router';
+import { RolesModel } from '../model/branch-model';
 
 @Injectable({ providedIn: 'root' })
 export class UnRegService {
@@ -144,5 +145,72 @@ export class UnRegService {
         },
         error: (errorIng) => console.log(errorIng, 'Error Logging out'),
       });
+  }
+
+  public getCountryNames() {
+    console.log(ApplicationHttpRoutes.GET_COUNTRY_S);
+
+    return this.http.get<string[]>(ApplicationHttpRoutes.GET_COUNTRY_S, {
+      observe: 'response',
+      //send all relevant cookeys
+      withCredentials: true,
+      //responseType: 'text',
+    });
+  }
+
+  public getStateNames(countryName: string) {
+    console.log(ApplicationHttpRoutes.GET_STATE_S);
+
+    return this.http.get<string[]>(ApplicationHttpRoutes.GET_STATE_S, {
+      params: new HttpParams().set('country', countryName),
+      observe: 'response',
+      //send all relevant cookeys
+      withCredentials: true,
+      //responseType: 'text',
+    });
+  }
+
+  public getBranchByCountryAndState(country: string, state: string) {
+    console.log(ApplicationHttpRoutes.GET_STATE_S);
+
+    return this.http.get<RolesModel[]>(
+      ApplicationHttpRoutes.GET_STATE_AND_COUNTRY,
+      {
+        params: new HttpParams().set('country', country).set('state', state),
+        observe: 'response',
+        //send all relevant cookeys
+        withCredentials: true,
+        //responseType: 'text',
+      }
+    );
+  }
+
+  public applyForAnAccount(
+    branchId: number,
+    fullName: string,
+    phoneNumber: string,
+    dateOfBirth: string,
+    email: string,
+    age: number
+  ) {
+    console.log(ApplicationHttpRoutes.GET_STATE_S);
+
+    return this.http.post<any>(
+      ApplicationHttpRoutes.REGISTER_USER,
+      {
+        fullName: fullName,
+        phoneNumber: phoneNumber,
+        dateOfBirth: dateOfBirth,
+        age: age,
+        email: email,
+      },
+      {
+        params: new HttpParams().set('branchId', branchId),
+        observe: 'response',
+        //send all relevant cookeys
+        withCredentials: true,
+        //responseType: 'text',
+      }
+    );
   }
 }

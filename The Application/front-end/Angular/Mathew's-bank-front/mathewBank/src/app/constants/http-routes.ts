@@ -6,6 +6,14 @@ export class ApplicationHttpRoutes {
     this.PROTOCOL + '://' + this.BACKEND_SERVER + ':' + this.PORT_NUMBER;
 
   //un reg routes
+  static readonly GET_COUNTRY_S: string =
+    this.SOCKET + '/exposed/getAllCountriesThatHaveBranches';
+  static readonly GET_STATE_S: string =
+    this.SOCKET + '/exposed/getAllStateBranchesInCountry';
+  static readonly GET_STATE_AND_COUNTRY: string =
+    this.SOCKET + '/exposed/getBranchByCountryAndState';
+  static readonly REGISTER_USER: string =
+    this.SOCKET + '/exposed/applyForAccount';
 
   // log in route routes employee and user
   static readonly LOGIN_ROUTE_EMPLOYEE: string =

@@ -33,10 +33,10 @@
 
 .form-containment form div {
   display: flex;
-  gap: 2.4rem;
+  gap: 1rem;
 }
 
-.form-containment form div > label {
+.form-containment form div > .fieldName {
   align-self: center;
   text-align: end;
   font-size: 1.8rem;
@@ -53,10 +53,54 @@
   border: 1px solid #1864ab;
 }
 
+.location {
+  position: relative;
+}
+
 .location div {
+  width: 20rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
   border: 1px solid #1864ab;
+}
+
+.location div svg {
+  fill: #1864ab;
+  margin-bottom: 2rem;
+}
+.location div svg:hover {
+  cursor: pointer;
+  fill: #1864ab;
+}
+
+.drop-down {
+  position: absolute;
+  top: 8rem;
+  background-color: #e7f5ff;
+  overflow-y: scroll;
+}
+
+.drop-down ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: 1rem;
+  padding: 1rem;
+  min-width: 15rem;
+  max-height: 14rem;
+}
+
+.drop-down ul li {
+  font-size: 1.6rem;
+  transition: all 0.33s;
+}
+.drop-down ul li:hover,
+.drop-down ul li:active {
+  padding: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  background-color: #ffffff;
 }
 
 .location div > input {
@@ -66,11 +110,10 @@
   /* background-color: aqua; */
 }
 
-.location div :first-child {
-  padding: 2rem;
-  font-size: 10rem;
-  align-self: center;
-  justify-self: center;
+.location div label {
+  margin-top: 1rem;
+  font-size: 2rem;
+  /* background-color: aqua; */
 }
 
 .submit-button input {
@@ -104,4 +147,10 @@ p {
 .small {
   max-width: 15rem;
   margin-right: 15rem;
+}
+
+.selection-result {
+  font-size: 2rem;
+  font-weight: 600;
+  padding: 1rem;
 }
