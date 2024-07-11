@@ -91,9 +91,37 @@ export class BankService {
         next: (n) => {
           console.log('REMOVE_MANAGER_FROM_BRANCH');
           console.log(n.body);
-          this.managerSubject.next(n.body);
+          this.managerSubject.next(null);
         },
         error: (e) => console.log(e),
       });
+  }
+
+  //add manger to branch ADMIN only
+  public putManagerInBranch(id: number, branchId: number) {
+    return this.http.put<EmployeeDataModel>(
+      ApplicationHttpRoutes.PUT_MANAGER_IN_BANK,
+      null,
+      {
+        params: new HttpParams()
+          .set('employeeAKAManager', id)
+          .set('branchId', branchId),
+        observe: 'response',
+        withCredentials: true,
+      }
+    );
+  }
+
+  public removeAClerkFromABranch(id: number, branchId: number) {
+    console.log(id, branchId);
+    return this.http.patch<EmployeeDataModel>(
+      ApplicationHttpRoutes.REMOVE_EMPLOYEE_FROM_BRANCH_Admin,
+      null,
+      {
+        params: new HttpParams().set('clerkId', id).set('bankId', branchId),
+        observe: 'response',
+        withCredentials: true,
+      }
+    );
   }
 }

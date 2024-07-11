@@ -246,3 +246,40 @@ button:active {
   margin-left: 1rem;
   font-size: 2rem;
 }
+
+.add-manager form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.manager-field {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+
+.manager-field label {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.manager-field input {
+  padding: 0.4rem;
+  font-size: 1.4rem;
+}
+
+.add-manager-button {
+  background-image: linear-gradient(#37b24d, #2b8a3e);
+  margin-bottom: 2rem;
+}
+
+.add-manager-button:hover {
+  cursor: pointer;
+}
+
+.add-manager-button:active {
+  cursor: pointer;
+  background-image: linear-gradient(#2b8a3e, #37b24d);
+}

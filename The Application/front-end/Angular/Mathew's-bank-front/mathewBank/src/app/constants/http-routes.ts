@@ -40,6 +40,10 @@ export class ApplicationHttpRoutes {
   //admin exclusive
   static readonly REMOVE_MANAGER_FROM_BRANCH: string =
     this.SOCKET + '/admin/remove-manager-from-branch';
+  static readonly PUT_MANAGER_IN_BANK: string =
+    this.SOCKET + '/admin/manager_to_branch';
+  static readonly REMOVE_EMPLOYEE_FROM_BRANCH_Admin: string =
+    this.SOCKET + '/admin/remove-clerk-from-bank-by-admin';
 
   //Branch Management
   static readonly LIST_ALL_BRANCHES: string =

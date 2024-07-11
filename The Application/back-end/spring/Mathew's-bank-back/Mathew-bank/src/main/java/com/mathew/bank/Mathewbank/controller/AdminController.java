@@ -78,6 +78,8 @@ public class AdminController {
     @PutMapping("/manager_to_branch")
     public boolean addAManagerToBranch(@RequestParam int employeeAKAManager, @RequestParam int branchId ,HttpServletResponse response){
 
+        System.out.println("employeeAKAManager "+employeeAKAManager+" branchId "+branchId);
+
         return this.adminService.addAManagerToBranch(employeeAKAManager,branchId, response);
     }
 

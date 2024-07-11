@@ -60,6 +60,16 @@
           <button (click)="remove(bankManager?.empId)">Remove Manager</button>
         </div>
       </div>
+      <div class="add-manager">
+        <h4>Add manager to branch</h4>
+        <form #f="ngForm" (ngSubmit)="addMangerToBranch(f)">
+          <div class="manager-field">
+            <label> Manger Id</label>
+            <input type="number" name="manager" ngModel />
+          </div>
+          <button class="add-manager-button">Add Manger To Branch</button>
+        </form>
+      </div>
     </div>
     <div class="applications-data">
       <h6>Employee under branch</h6>
