@@ -3,8 +3,8 @@
   <div class="heding-baner">
     <h2>Branch Management Console</h2>
   </div>
-  <div class="bank-application-heading" (click)="listBranchRefresh()">
-    <div class="open-up-section-common">
+  <div class="bank-application-heading">
+    <div class="open-up-section-common" (click)="listBranchRefresh()">
       <h5>All Branches</h5>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -28,9 +28,14 @@
           <th>Open</th>
           <th>Branch Manager Id</th>
         </tr>
-        @for(branch of allBankNames ; track branch){
+        @for(branch of allBankNames ; track branch; let pos = $index){
         <tr>
-          <td>{{ branch.branchName }}</td>
+          <button
+            (click)="openBranch(branch.branchId, pos)"
+            class="branch-listing-button"
+          >
+            {{ branch.branchName }}
+          </button>
           <td>{{ branch.branchId }}</td>
           <td>{{ branch.state }}</td>
           <td>{{ branch.country }}</td>

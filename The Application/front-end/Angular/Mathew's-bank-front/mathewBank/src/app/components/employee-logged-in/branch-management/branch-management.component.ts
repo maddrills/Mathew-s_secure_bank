@@ -7,6 +7,7 @@ import { BankService } from '../../../service/bank.service';
 import { BehaviorSubject } from 'rxjs';
 import { BranchModel } from '../../../model/branch-model';
 import { FormsModule, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-branch-management',
@@ -22,7 +23,8 @@ export class BranchManagementComponent {
   constructor(
     private navBarGoldService: NavBarGoldService,
     private userDataRefreshUpDate: RefreshDataFetcherService,
-    private bankService: BankService
+    private bankService: BankService,
+    private router: Router
   ) {
     this.navBarGoldService.resetAll();
     this.navBarGoldService.bankManagement.next(true);
@@ -71,5 +73,23 @@ export class BranchManagementComponent {
         console.log(e);
       },
     });
+  }
+
+  public openBranch(selectedBranchId: number, pos: number) {
+    console.log(selectedBranchId, pos);
+
+    const chosenBranch: BranchModel | null =
+      this.allBankNames == null ? null : this.allBankNames[pos];
+
+    if (chosenBranch != null) {
+      localStorage.removeItem('selectedBank');
+      this.bankService.managerSubject.next(null);
+      localStorage.setItem('selectedBank', JSON.stringify(chosenBranch));
+      this.router.navigate(['/employee-welcome/branch-edit-component']);
+
+      console.log('findAllEmployeesUnderBranch');
+      this.bankService.findEmployeeById(chosenBranch.branchManagerId);
+      this.bankService.findAllEmployeesUnderBranch(chosenBranch.branchId);
+    }
   }
 }

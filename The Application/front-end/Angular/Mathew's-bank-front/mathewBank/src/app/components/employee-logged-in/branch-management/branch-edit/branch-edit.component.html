@@ -9,30 +9,164 @@
       <div class="sub-emp-details grid--3-cols">
         <div>
           <h6>Branch Name</h6>
-          <div>Mathew Francis</div>
+          <div>{{ selectedBrach?.branchName }}</div>
         </div>
         <div>
           <h6>Branch Id</h6>
-          <div>12345678</div>
+          <div>{{ selectedBrach?.branchId }}</div>
         </div>
         <div>
           <h6>State</h6>
-          <div>234567244</div>
+          <div>{{ selectedBrach?.state }}</div>
         </div>
         <div>
           <h6>Country</h6>
-          <div>347</div>
+          <div>{{ selectedBrach?.country }}</div>
         </div>
         <div>
           <h6>Branch Status</h6>
-          <div>7836489221</div>
+          <div>{{ selectedBrach?.state }}</div>
         </div>
         <div>
           <h6>Branch Manager</h6>
-          <div>mathewAtgmail.com</div>
+          <div>{{ selectedBrach?.branchManagerId }}</div>
         </div>
       </div>
     </div>
-    <app-employee-management></app-employee-management>
+    <div class="branch-management-manager">
+      <h4>Bank Manager</h4>
+      <div class="grid grid--4-cols manager-stuff cutter">
+        <div class="manager-info">
+          <h6>full name</h6>
+          <p>{{ bankManager?.full_name }}</p>
+        </div>
+        <div class="manager-info">
+          <h6>phone_number</h6>
+          <p>{{ bankManager?.phone_number }}</p>
+        </div>
+        <div class="manager-info">
+          <h6>email</h6>
+          <p>{{ bankManager?.email }}</p>
+        </div>
+        <div class="manager-info">
+          <h6>Date Of Birth</h6>
+          <p>{{ bankManager?.dateOfBirth }}</p>
+        </div>
+        <div class="manager-info">
+          <h6>Salary</h6>
+          <p>{{ bankManager?.salary }}</p>
+        </div>
+        <div class="manager-info">
+          <button>Remove Manager</button>
+        </div>
+      </div>
+    </div>
+    <div class="applications-data">
+      <h6>Employee under branch</h6>
+      <table>
+        <tr class="head prevent-select">
+          <th>Employee-Id</th>
+          <th>Name & click for details</th>
+          <th>Phone Number</th>
+          <th>Branch</th>
+          <th>Permission set</th>
+          <th>Salary</th>
+          <th>Remove</th>
+        </tr>
+        <tr>
+          <td>192.168.10.1</td>
+          <td>172.168.2.1</td>
+          <td>sample</td>
+          <td>sample</td>
+          <td>sample</td>
+          <td>sample</td>
+          <td><button>Remove</button></td>
+        </tr>
+        <tr>
+          <td>192.168.10.1</td>
+          <td>172.168.2.1</td>
+          <td>sample</td>
+          <td>sample</td>
+        </tr>
+        <tr>
+          <td>192.168.10.1</td>
+          <td>172.168.2.1</td>
+          <td>sample</td>
+          <td>sample</td>
+        </tr>
+        <tr>
+          <td>192.168.10.1</td>
+          <td>172.168.2.1</td>
+          <td>sample</td>
+          <td>sample</td>
+        </tr>
+        <tr>
+          <td>192.168.10.1</td>
+          <td>172.168.2.1</td>
+          <td>sample</td>
+          <td>sample</td>
+        </tr>
+        <tr>
+          <td>192.168.10.1</td>
+          <td>172.168.2.1</td>
+          <td>sample</td>
+          <td>sample</td>
+        </tr>
+        <tr>
+          <td>192.168.10.1</td>
+          <td>172.168.2.1</td>
+          <td>sample</td>
+          <td>sample</td>
+        </tr>
+        <tr>
+          <td>192.168.10.1</td>
+          <td>172.168.2.1</td>
+          <td>sample</td>
+          <td>sample</td>
+        </tr>
+        <tr>
+          <td>192.168.10.1</td>
+          <td>172.168.2.1</td>
+          <td>sample</td>
+          <td>sample</td>
+        </tr>
+        <tr>
+          <td>192.168.10.1</td>
+          <td>172.168.2.1</td>
+          <td>sample</td>
+          <td>sample</td>
+        </tr>
+      </table>
+      <div class="next-bubble prevent-select">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          fill="#000000"
+          viewBox="0 0 256 256"
+        >
+          <path
+            d="M128,26A102,102,0,1,0,230,128,102.12,102.12,0,0,0,128,26Zm0,192a90,90,0,1,1,90-90A90.1,90.1,0,0,1,128,218Zm46-90a6,6,0,0,1-6,6H102.49l21.75,21.76a6,6,0,1,1-8.48,8.48l-32-32a6,6,0,0,1,0-8.48l32-32a6,6,0,0,1,8.48,8.48L102.49,122H168A6,6,0,0,1,174,128Z"
+          ></path>
+        </svg>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <div class="three-dotes">...</div>
+        <span>10</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          fill="#000000"
+          viewBox="0 0 256 256"
+        >
+          <path
+            d="M128,26A102,102,0,1,0,230,128,102.12,102.12,0,0,0,128,26Zm0,192a90,90,0,1,1,90-90A90.1,90.1,0,0,1,128,218Zm44.24-94.24a6,6,0,0,1,0,8.48l-32,32a6,6,0,0,1-8.48-8.48L153.51,134H88a6,6,0,0,1,0-12h65.51l-21.75-21.76a6,6,0,0,1,8.48-8.48Z"
+          ></path>
+        </svg>
+      </div>
+    </div>
+    <!-- <app-employee-management></app-employee-management> -->
   </div>
 </section>

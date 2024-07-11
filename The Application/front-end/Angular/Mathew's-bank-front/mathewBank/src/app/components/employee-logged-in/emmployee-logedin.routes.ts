@@ -6,6 +6,7 @@ import { SubEmployeesComponent } from '../employee-management/sub-employees/sub-
 import { EmployeeManagementShellComponent } from '../employee-management/employee-management-shell/employee-management-shell.component';
 import { LogInPageComponent } from '../log-in-page/log-in-page.component';
 import { AddNewEmployeeComponent } from '../employee-management/add-new-employee/add-new-employee.component';
+import { BranchEditComponent } from './branch-management/branch-edit/branch-edit.component';
 
 export const EMPLOYEE_LOGGED_IN: Route[] = [
   { path: '', component: EmployeeLoggedInComponent },
@@ -30,5 +31,6 @@ export const EMPLOYEE_LOGGED_IN: Route[] = [
     ],
   },
   { path: 'bank-management', component: BranchManagementComponent },
+  { path: 'branch-edit-component', component: BranchEditComponent },
   // { path: 'sub-employee', component: SubEmployeesComponent },
 ];

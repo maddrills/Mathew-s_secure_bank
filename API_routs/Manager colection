@@ -9,10 +9,10 @@
 		{
 			"name": "getEmployeesByBranch",
 			"request": {
-				"method": "PUT",
+				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/manager/get-employees-by-branch?branchId=3",
+					"raw": "http://localhost:8080/manager/get-employees-by-branch?branchId=2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -25,7 +25,7 @@
 					"query": [
 						{
 							"key": "branchId",
-							"value": "3"
+							"value": "2"
 						}
 					]
 				}
@@ -168,7 +168,7 @@
 				"method": "PATCH",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/manager/add-clark-to-branch?employeeClerk=1000005",
+					"raw": "http://localhost:8080/manager/remove-clerk-from-managers-branch?employeeClerk=1000005",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -176,7 +176,7 @@
 					"port": "8080",
 					"path": [
 						"manager",
-						"add-clark-to-branch"
+						"remove-clerk-from-managers-branch"
 					],
 					"query": [
 						{

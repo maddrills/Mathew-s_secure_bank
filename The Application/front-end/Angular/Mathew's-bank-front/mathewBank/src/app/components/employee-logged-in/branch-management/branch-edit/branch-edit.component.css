@@ -3,11 +3,16 @@ section {
   margin-bottom: 2rem;
 }
 
+.container {
+  margin-top: 10rem;
+}
+
 .open-up-section-common {
   background-color: #087f5b;
   color: #ebfbee;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0.4rem;
   gap: 1rem;
   font-size: 2.4rem;
@@ -168,7 +173,7 @@ section {
 
 .sub-emp-details h6 {
   margin-bottom: 0.6rem;
-  color: #e6fcf5;
+  color: #b2f2bb;
   font-size: 1.6rem;
 }
 
@@ -191,5 +196,53 @@ section {
 
 .back-button {
   color: #e6fcf5;
+  font-size: 2rem;
+}
+
+.branch-management-manager {
+  background-color: #ebfbee;
+}
+.branch-management-manager h4 {
+  padding: 1rem;
+  font-size: 2rem;
+  color: #087f5b;
+}
+
+button {
+  padding: 0.8rem;
+  border-radius: 5px;
+  background-image: linear-gradient(#f03e3e, #c92a2a);
+  border: 0;
+  color: #fff;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:active {
+  background-image: linear-gradient(#c92a2a, #f03e3e);
+}
+
+.manager-stuff {
+  padding: 2rem;
+}
+
+.manager-info h6 {
+  font-size: 1.4rem;
+}
+
+.manager-info p {
+  margin-top: 1rem;
+  font-size: 2.4rem;
+}
+.cutter {
+  row-gap: 2rem;
+}
+
+.applications-data h6 {
+  color: #087f5b;
+  margin-top: 1rem;
+  margin-left: 1rem;
   font-size: 2rem;
 }
