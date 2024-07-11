@@ -223,6 +223,48 @@ public class EmployeeService {
         }
     }
 
+    public boolean addClarkToAnyBranch(int employeeClerk,
+                                           int bankBranch,
+                                           HttpServletResponse response) {
+        //find employee
+        Employee clerk = this.employeeRepository.getEmployeeById(employeeClerk);
+
+        //check if employee already in branch
+        if(clerk.getBankBranch() != null){
+            //then can remove user
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            return false;
+        }
+
+        //now check permissions
+        //if 3 ten clerk
+        int level = highestAccessLevel(clerk);
+        if( level < 3){
+            System.out.println("Level is" + level);
+            clerk.getRoles().forEach(System.out::println);
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            return false;
+        }
+
+        //check if manager exists in branch
+        //get branch
+        Branch branch = this.employeeRepository.getABranchById(bankBranch);
+        //check if branch is == null
+        if(branch == null){
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return false;
+        }
+
+        if(branch.getBranchManager() != null){
+            clerk.setManager(branch.getBranchManager());
+            clerk.setBankBranch(branch);
+            return this.employeeRepository.updateEmployee(clerk);
+        }
+        //point branch to corresponding branch with retained reports to
+        clerk.setBankBranch(branch);
+        return this.employeeRepository.updateEmployee(clerk);
+    }
+
     public boolean removeSubEmployeeFromBankByManager(int employeeClerk, Authentication authentication, HttpServletResponse response) {
 
         if (employeeClerk <= 0) {
@@ -320,9 +362,10 @@ public class EmployeeService {
     private int highestAccessLevel(Employee employee) {
 
         // 4 is the number of roles
-        int accessLevel = employee.getRoles().size();
+        int accessLevel = 4;
 
         for (var level : employee.getRoles()) {
+            System.out.println(level.getRole());
             if(level.getRole().equals("ROLE_admin")){
                 if(accessLevel > 1){
                     accessLevel = 1;

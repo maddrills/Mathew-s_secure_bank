@@ -768,6 +768,36 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "addClarkToAnyBranch",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/add-clerk-to-any-branch?branchId=2&clerkId=1000005",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"add-clerk-to-any-branch"
+					],
+					"query": [
+						{
+							"key": "branchId",
+							"value": "2"
+						},
+						{
+							"key": "clerkId",
+							"value": "1000005"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

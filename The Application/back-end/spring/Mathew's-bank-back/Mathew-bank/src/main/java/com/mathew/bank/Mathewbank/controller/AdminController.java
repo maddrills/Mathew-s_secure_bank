@@ -5,6 +5,7 @@ import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
 import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.DTO.UserAndDetailsDTO;
 import com.mathew.bank.Mathewbank.service.AdminService;
+import com.mathew.bank.Mathewbank.service.EmployeeService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,6 +19,9 @@ public class AdminController {
 
     @Autowired
     AdminService adminService;
+
+    @Autowired
+    EmployeeService employeeService;
 
     //returns a list of all branches
     @GetMapping("/list_all_branches_with_manager")
@@ -122,5 +126,11 @@ public class AdminController {
         System.out.println(bankId);
 
         return this.adminService.removeClerkFromAnyBank(bankId, clerkId, authentication, httpServletResponse);
+    }
+
+    @PutMapping("/add-clerk-to-any-branch")
+    public boolean addAClerkToAnyBranch(@RequestParam int branchId, @RequestParam int clerkId,HttpServletResponse httpServletResponse){
+
+        return this.employeeService.addClarkToAnyBranch(clerkId, branchId,httpServletResponse);
     }
 }

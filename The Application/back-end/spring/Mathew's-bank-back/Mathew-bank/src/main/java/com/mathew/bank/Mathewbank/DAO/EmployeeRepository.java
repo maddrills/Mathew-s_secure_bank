@@ -769,5 +769,18 @@ public class EmployeeRepository implements EmpRepo {
         return query.getResultList();
     }
 
+    @Override
+    @Transactional
+    public boolean updateEmployee(Employee clerk) {
+
+        try{
+            this.entityManager.merge(clerk);
+            return true;
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
+    }
+
 
 }
