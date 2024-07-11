@@ -37,6 +37,10 @@ export class ApplicationHttpRoutes {
   static readonly GET_ALL_EMPLOYEE_BY_UNDER_BRANCH: string =
     this.SOCKET + '/manager/get-employees-by-branch';
 
+  //admin exclusive
+  static readonly REMOVE_MANAGER_FROM_BRANCH: string =
+    this.SOCKET + '/admin/remove-manager-from-branch';
+
   //Branch Management
   static readonly LIST_ALL_BRANCHES: string =
     this.SOCKET + '/admin/list_all_branches_with_manager';

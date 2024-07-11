@@ -57,7 +57,7 @@
           <p>{{ bankManager?.salary }}</p>
         </div>
         <div class="manager-info">
-          <button>Remove Manager</button>
+          <button (click)="remove(bankManager?.empId)">Remove Manager</button>
         </div>
       </div>
     </div>
@@ -68,74 +68,24 @@
           <th>Employee-Id</th>
           <th>Name & click for details</th>
           <th>Phone Number</th>
-          <th>Branch</th>
           <th>Permission set</th>
           <th>Salary</th>
           <th>Remove</th>
         </tr>
+        @for(employee of allEmployees; track employee){
         <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-          <td>sample</td>
-          <td>sample</td>
-          <td><button>Remove</button></td>
+          <td>{{ employee.empId }}</td>
+          <td>{{ employee.full_name }}</td>
+          <td>{{ employee.phone_number }}</td>
+          <td>
+            @for(role of employee.rolesName; track role){
+            <div>{{ role.roleName.slice(5) }}</div>
+            }
+          </td>
+          <td>{{ employee.salary }}</td>
+          <td><button (click)="remove(employee.empId)">Remove</button></td>
         </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
+        }
       </table>
       <div class="next-bubble prevent-select">
         <svg

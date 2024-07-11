@@ -50,4 +50,19 @@ export class BranchEditComponent {
     console.log(this.allEmployees);
     console.log(this.userDataRefreshUpDate);
   }
+
+  //remove employee
+  remove(employeeID: number | undefined) {
+    console.log('Removing employee ' + employeeID);
+
+    //sanity check
+    if (!employeeID) return;
+    //check if manager
+    if (employeeID == this.bankManager?.empId) {
+      console.log('Removing manager');
+      this.bankService.removeEmployeeFrommBranch(employeeID);
+    } else {
+      console.log('Removing clerk');
+    }
+  }
 }

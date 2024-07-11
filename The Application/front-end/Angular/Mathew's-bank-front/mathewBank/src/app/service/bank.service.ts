@@ -75,4 +75,25 @@ export class BankService {
         error: (e) => console.log(e),
       });
   }
+
+  public removeEmployeeFrommBranch(id: number) {
+    return this.http
+      .patch<EmployeeDataModel>(
+        ApplicationHttpRoutes.REMOVE_MANAGER_FROM_BRANCH,
+        null,
+        {
+          params: new HttpParams().set('employeeAKAManager', id),
+          observe: 'response',
+          withCredentials: true,
+        }
+      )
+      .subscribe({
+        next: (n) => {
+          console.log('REMOVE_MANAGER_FROM_BRANCH');
+          console.log(n.body);
+          this.managerSubject.next(n.body);
+        },
+        error: (e) => console.log(e),
+      });
+  }
 }
