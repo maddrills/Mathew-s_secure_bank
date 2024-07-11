@@ -28,6 +28,8 @@ export class PermissionSetComponent {
         this.arrayOfPermissions = roles;
       }
     });
+
+    this.employeeService.rolesToBackend.next(null);
   }
   //TODO: replace with api data
   // public arrayOfPermissions: rolesModel[] = [

@@ -3,7 +3,7 @@
   <div class="heding-baner">
     <h2>Branch Management Console</h2>
   </div>
-  <div class="bank-application-heading">
+  <div class="bank-application-heading" (click)="listBranchRefresh()">
     <div class="open-up-section-common">
       <h5>All Branches</h5>
       <svg
@@ -21,71 +21,23 @@
     <div class="applications-data">
       <table>
         <tr class="head prevent-select">
-          <th>From</th>
-          <th>To</th>
-          <th>Date Time</th>
-          <th>Amount</th>
+          <th>Branch Name</th>
+          <th>Branch Id</th>
+          <th>State</th>
+          <th>Country</th>
+          <th>Open</th>
+          <th>Branch Manager Id</th>
         </tr>
+        @for(branch of allBankNames ; track branch){
         <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
+          <td>{{ branch.branchName }}</td>
+          <td>{{ branch.branchId }}</td>
+          <td>{{ branch.state }}</td>
+          <td>{{ branch.country }}</td>
+          <td>{{ branch.open }}</td>
+          <td>{{ branch.branchManagerId }}</td>
         </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
+        }
       </table>
       <div class="next-bubble prevent-select">
         <svg
@@ -137,22 +89,22 @@
     </div>
     <div class="branch-details">
       <h3>Fill Up Branch Details</h3>
-      <form class="grid--2-cols">
+      <form class="grid--2-cols" #f="ngForm" (ngSubmit)="createABranch(f)">
         <div>
           <label for="branch-name">Branch Name</label>
-          <input type="text" id="branch-name" />
+          <input type="text" id="branch-name" name="branchName" ngModel />
         </div>
         <div>
           <label for="state">State</label>
-          <input type="text" id="state" />
+          <input type="text" id="state" name="state" ngModel />
         </div>
         <div>
           <label for="country">Country</label>
-          <input type="text" id="country" />
+          <input type="text" id="country" name="country" ngModel />
         </div>
         <div>
-          <label for="open">Open</label>
-          <input type="checkbox" id="open" />
+          <label for="open">Closed</label>
+          <input type="checkbox" id="open" name="open" ngModel />
         </div>
         <div class="branch-button">
           <button class="button">Create Branch</button>

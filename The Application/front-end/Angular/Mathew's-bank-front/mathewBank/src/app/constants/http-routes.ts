@@ -32,4 +32,10 @@ export class ApplicationHttpRoutes {
     this.SOCKET + '/manager/getAllAuthNames';
   static readonly POST_AN_EMPLOYEE: string =
     this.SOCKET + '/admin/add_an_employee';
+
+  //Branch Management
+  static readonly LIST_ALL_BRANCHES: string =
+    this.SOCKET + '/admin/list_all_branches_with_manager';
+  static readonly ADD_A_BRANCH_WITH_OR_WITHOUT_A_MANAGER: string =
+    this.SOCKET + '/admin/create_a_branch';
 }

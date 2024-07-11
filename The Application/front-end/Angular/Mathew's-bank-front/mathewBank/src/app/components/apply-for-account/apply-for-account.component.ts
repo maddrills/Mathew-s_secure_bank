@@ -3,7 +3,7 @@ import { NavBarComponent } from '../top-down/nav-bar/nav-bar.component';
 import { FooterSectionComponent } from '../top-down/footer-section/footer-section.component';
 import { FormsModule, NgForm } from '@angular/forms';
 import { UnRegService } from '../../service/unRegService';
-import { RolesModel } from '../../model/branch-model';
+import { BranchModel } from '../../model/branch-model';
 
 @Component({
   selector: 'app-apply-for-account',
@@ -16,7 +16,7 @@ export class ApplyForAccountComponent {
   //Array List
   countryNameArray: string[] = [];
   stateNameArray: string[] = [];
-  branchNameArray: RolesModel[] = [];
+  branchNameArray: BranchModel[] = [];
   branchArrayPosition: number = -1;
 
   //UI conditional

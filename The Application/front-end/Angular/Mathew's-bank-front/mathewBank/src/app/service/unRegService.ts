@@ -5,7 +5,7 @@ import { UserModel } from '../model/user-model';
 import { BehaviorSubject } from 'rxjs';
 import { EmployeeDataModel } from '../model/employee-model';
 import { Router } from '@angular/router';
-import { RolesModel } from '../model/branch-model';
+import { BranchModel } from '../model/branch-model';
 
 @Injectable({ providedIn: 'root' })
 export class UnRegService {
@@ -173,7 +173,7 @@ export class UnRegService {
   public getBranchByCountryAndState(country: string, state: string) {
     console.log(ApplicationHttpRoutes.GET_STATE_S);
 
-    return this.http.get<RolesModel[]>(
+    return this.http.get<BranchModel[]>(
       ApplicationHttpRoutes.GET_STATE_AND_COUNTRY,
       {
         params: new HttpParams().set('country', country).set('state', state),
