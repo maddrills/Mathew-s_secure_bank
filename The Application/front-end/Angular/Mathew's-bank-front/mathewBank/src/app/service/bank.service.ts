@@ -124,4 +124,17 @@ export class BankService {
       }
     );
   }
+
+  public addAClerkToABranch(id: number, branchId: number) {
+    console.log(id, branchId);
+    return this.http.put<EmployeeDataModel>(
+      ApplicationHttpRoutes.PUT_CLERK_IN_BANK_ADMIN,
+      null,
+      {
+        params: new HttpParams().set('clerkId', id).set('branchId', branchId),
+        observe: 'response',
+        withCredentials: true,
+      }
+    );
+  }
 }

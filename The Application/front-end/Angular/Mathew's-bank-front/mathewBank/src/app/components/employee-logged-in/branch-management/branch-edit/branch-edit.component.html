@@ -70,6 +70,16 @@
           <button class="add-manager-button">Add Manger To Branch</button>
         </form>
       </div>
+      <div class="add-manager">
+        <h4>Add Clerk to branch</h4>
+        <form #c="ngForm" (ngSubmit)="addClerkToBranch(c)">
+          <div class="manager-field">
+            <label> Clerk Id</label>
+            <input type="number" name="clerk" ngModel />
+          </div>
+          <button class="add-manager-button">Add Clerk To Branch</button>
+        </form>
+      </div>
     </div>
     <div class="applications-data">
       <h6>Employee under branch</h6>

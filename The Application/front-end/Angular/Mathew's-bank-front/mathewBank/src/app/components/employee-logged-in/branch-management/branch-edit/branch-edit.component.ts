@@ -89,4 +89,40 @@ export class BranchEditComponent {
         error: (e) => console.log(e),
       });
   }
+
+  addClerkToBranch(ngForm: NgForm) {
+    const clerkId: { clerk: number } = ngForm.form.value;
+
+    if (!clerkId) return;
+    let isManager: boolean = false;
+    try {
+      isManager = this.checkIfManager(clerkId.clerk);
+    } catch (eer) {
+      console.log(eer);
+      return;
+    }
+
+    if (isManager) {
+      console.log('Manager not allowed here');
+      return;
+    }
+    console.log('is Clerk');
+    this.bankService
+      .addAClerkToABranch(clerkId.clerk, this.selectedBrach?.branchId!)
+      .subscribe({
+        next: (n) => {
+          console.log('REMOVE_MANAGER_FROM_BRANCH');
+          console.log(n.body);
+          ngForm.resetForm();
+        },
+        error: (e) => console.log(e),
+      });
+  }
+
+  private checkIfManager(employeeID: number | undefined): boolean {
+    //sanity check
+    if (!employeeID) throw 'Not a valid input';
+    //check if manager
+    return employeeID == this.bankManager?.empId;
+  }
 }
