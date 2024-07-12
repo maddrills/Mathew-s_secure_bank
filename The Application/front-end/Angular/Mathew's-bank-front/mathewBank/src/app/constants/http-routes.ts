@@ -50,6 +50,8 @@ export class ApplicationHttpRoutes {
     this.SOCKET + '/admin/add-clerk-to-any-branch';
   static readonly GET_BRANCH_BY_BRANCH_ID: string =
     this.SOCKET + '/admin/branches_with_manager';
+  static readonly GET_APPLICATIONS_ASSIGNED_TO_ME: string =
+    this.SOCKET + '/employee/getApplicationsAssignedToMe';
 
   //Branch Management
   static readonly LIST_ALL_BRANCHES: string =

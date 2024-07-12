@@ -12,7 +12,10 @@ import { applicationsModel } from '../../../model/applications-model';
 export class BankApplicationsComponent {
   applications: applicationsModel[] = [];
 
-  constructor(private employeeService: EmployeeService) {
+  constructor(private employeeService: EmployeeService) {}
+
+  getData() {
+    console.log('Get data');
     this.employeeService.fetchAllUserApplications().subscribe({
       next: (roles) => {
         console.log(roles.body);

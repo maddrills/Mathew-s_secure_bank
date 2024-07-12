@@ -390,6 +390,26 @@
 					"body": "{\n    \"empId\": 1000001,\n    \"phone_number\": \"3343350332\",\n    \"full_name\": \"mathew francis\",\n    \"email\": \"mat@admin\",\n    \"dateOfBirth\": \"1998-07-21\",\n    \"salary\": 543234.5,\n    \"password\": null,\n    \"branchId\": 1,\n    \"rolesName\": [\n        {\n            \"roleName\": \"ROLE_admin\",\n            \"added\": true\n        },\n        {\n            \"roleName\": \"ROLE_manager\",\n            \"added\": true\n        },\n        {\n            \"roleName\": \"ROLE_clerk\",\n            \"added\": true\n        },\n        {\n            \"roleName\": \"ROLE_employee\",\n            \"added\": true\n        }\n    ]\n}"
 				}
 			]
+		},
+		{
+			"name": "getAllApplicationsAssignedToMe",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/employee/getApplicationsAssignedToMe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee",
+						"getApplicationsAssignedToMe"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

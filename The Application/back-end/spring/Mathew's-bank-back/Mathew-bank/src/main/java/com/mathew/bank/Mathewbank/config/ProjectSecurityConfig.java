@@ -101,7 +101,8 @@ public class ProjectSecurityConfig {
                                 "/employee/getApplicationById",
                                 "/employee/getUserApplicationByPhoneOrEmail",
                                 "/employee/acceptApplication",
-                                "/employee/rejectApplication").hasAnyRole("clerk")
+                                "/employee/rejectApplication",
+                                "/employee/getApplicationsAssignedToMe").hasAnyRole("clerk")
 
                         .requestMatchers("/employee/employee-login").hasAnyRole("employee")
                         //any one who is authenticated can access /logout

@@ -141,4 +141,17 @@ export class EmployeeService {
       }
     );
   }
+
+  //fetch applications under user
+  public getAllApplicationsUnderMe() {
+    return this.http.get<applicationsModel[]>(
+      ApplicationHttpRoutes.GET_APPLICATIONS_ASSIGNED_TO_ME,
+      {
+        //params: new HttpParams().append('employeeId', empId),
+        observe: 'response',
+        //send all relevant cookeys
+        withCredentials: true,
+      }
+    );
+  }
 }

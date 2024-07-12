@@ -85,4 +85,8 @@ public class EmployeeController {
         return this.employeeService.getEmployeeDetailsById(employeeId, response);
     }
 
+    @GetMapping("/getApplicationsAssignedToMe")
+    public List<UserApplicationDTO> getAllApplicationUnderME(HttpServletResponse response, Authentication authentication){
+        return this.employeeService.getAllApplicationsAssignedToMe(response, authentication);
+    }
 }

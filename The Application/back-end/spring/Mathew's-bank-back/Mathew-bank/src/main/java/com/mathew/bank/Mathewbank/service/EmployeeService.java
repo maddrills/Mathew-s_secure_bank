@@ -358,35 +358,6 @@ public class EmployeeService {
         }
     }
 
-
-
-    private int highestAccessLevel(Employee employee) {
-
-        // 4 is the number of roles
-        int accessLevel = 4;
-
-        for (var level : employee.getRoles()) {
-            System.out.println(level.getRole());
-            if(level.getRole().equals("ROLE_admin")){
-                if(accessLevel > 1){
-                    accessLevel = 1;
-                }
-            }
-            if(level.getRole().equals("ROLE_manager")){
-                if(accessLevel > 2){
-                    accessLevel = 2;
-                }
-            }
-            if(level.getRole().equals("ROLE_clerk")){
-                if(accessLevel > 3){
-                    accessLevel = 3;
-                }
-            }
-        }
-        return accessLevel;
-    }
-
-
     public Collection<RolesDto> getAllRoles() {
 
         Collection<Role> roles = this.employeeRepository.getAllRoles();
@@ -415,4 +386,64 @@ public class EmployeeService {
             return null;
         }
     }
+
+    public List<UserApplicationDTO> getAllApplicationsAssignedToMe(HttpServletResponse response, Authentication authentication) {
+        try{
+
+            //get user from db
+            Employee employee  = this.employeeRepository.getEmployeeById(Integer.parseInt(authentication.getName()));
+
+            List<UserApplicationDTO> userApplicationsDto = new ArrayList<>(employee.getUserApplications().size());
+
+            employee.getUserApplications().forEach(userApplication -> {
+                userApplicationsDto.add(new UserApplicationDTO(
+                        userApplication.getApplication_number(),
+                        userApplication.getFullName(),
+                        userApplication.getPhoneNumber(),
+                        userApplication.getDateOfBirth(),
+                        userApplication.getAge(),
+                        userApplication.getEmail(),
+                        userApplication.getAppliedOn(),
+                        userApplication.isStatus(),
+                        userApplication.isRejected(),
+                        userApplication.getBranch().getId()
+                ));
+            });
+            //get all corresponding applications
+            return userApplicationsDto;
+
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+
+
+
+    private int highestAccessLevel(Employee employee) {
+
+        // 4 is the number of roles
+        int accessLevel = 4;
+
+        for (var level : employee.getRoles()) {
+            System.out.println(level.getRole());
+            if(level.getRole().equals("ROLE_admin")){
+                if(accessLevel > 1){
+                    accessLevel = 1;
+                }
+            }
+            if(level.getRole().equals("ROLE_manager")){
+                if(accessLevel > 2){
+                    accessLevel = 2;
+                }
+            }
+            if(level.getRole().equals("ROLE_clerk")){
+                if(accessLevel > 3){
+                    accessLevel = 3;
+                }
+            }
+        }
+        return accessLevel;
+    }
+
 }
