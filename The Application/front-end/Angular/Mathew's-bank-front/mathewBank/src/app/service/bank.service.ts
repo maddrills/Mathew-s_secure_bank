@@ -77,24 +77,15 @@ export class BankService {
   }
 
   public removeEmployeeFrommBranch(id: number) {
-    return this.http
-      .patch<EmployeeDataModel>(
-        ApplicationHttpRoutes.REMOVE_MANAGER_FROM_BRANCH,
-        null,
-        {
-          params: new HttpParams().set('employeeAKAManager', id),
-          observe: 'response',
-          withCredentials: true,
-        }
-      )
-      .subscribe({
-        next: (n) => {
-          console.log('REMOVE_MANAGER_FROM_BRANCH');
-          console.log(n.body);
-          this.managerSubject.next(null);
-        },
-        error: (e) => console.log(e),
-      });
+    return this.http.patch<EmployeeDataModel>(
+      ApplicationHttpRoutes.REMOVE_MANAGER_FROM_BRANCH,
+      null,
+      {
+        params: new HttpParams().set('employeeAKAManager', id),
+        observe: 'response',
+        withCredentials: true,
+      }
+    );
   }
 
   //add manger to branch ADMIN only

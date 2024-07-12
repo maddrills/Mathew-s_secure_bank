@@ -6,17 +6,18 @@ import { EmployeeDataModel } from '../../../../model/employee-model';
 import { NavBarGoldService } from '../../../../service/navBarService';
 import { RefreshDataFetcherService } from '../../../../service/dataRefresh';
 import { FormsModule, NgForm } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-branch-edit',
   standalone: true,
-  imports: [EmployeeManagementComponent, FormsModule],
+  imports: [EmployeeManagementComponent, FormsModule, CommonModule],
   templateUrl: './branch-edit.component.html',
   styleUrl: './branch-edit.component.css',
 })
 export class BranchEditComponent {
   selectedBrach: BranchModel | null = null;
-  allEmployees: EmployeeDataModel[] = [];
+  allEmployees: Map<number, EmployeeDataModel> = new Map();
   bankManager: EmployeeDataModel | null = null;
 
   constructor(
@@ -36,7 +37,11 @@ export class BranchEditComponent {
 
     this.bankService.allEmployeesUnderBranch.subscribe({
       next: (employees) => {
-        this.allEmployees = employees!;
+        if (employees) {
+          employees.forEach((employee, pos, full) =>
+            this.allEmployees.set(employee.empId, employee)
+          );
+        }
       },
     });
 
@@ -60,8 +65,18 @@ export class BranchEditComponent {
     //check if manager
     if (employeeID == this.bankManager?.empId) {
       console.log('Removing manager');
-      this.bankService.removeEmployeeFrommBranch(employeeID);
+      //remove manager
+      this.bankService.removeEmployeeFrommBranch(employeeID).subscribe({
+        next: (n) => {
+          console.log('REMOVE_MANAGER_FROM_BRANCH');
+          console.log(n.body);
+          this.bankService.managerSubject.next(null);
+          this.allEmployees.delete(employeeID);
+        },
+        error: (e) => console.log(e),
+      });
     } else {
+      //remove clerks
       console.log('Removing clerk');
       this.bankService
         .removeAClerkFromABranch(employeeID!, this.selectedBrach?.branchId!)
@@ -69,6 +84,7 @@ export class BranchEditComponent {
           next: (n) => {
             console.log('REMOVE_EMPLOYEE_FROM_BRANCH_Admin');
             console.log(n.body);
+            this.allEmployees.delete(employeeID);
           },
           error: (e) => console.log(e),
         });
@@ -85,6 +101,9 @@ export class BranchEditComponent {
           console.log('REMOVE_MANAGER_FROM_BRANCH');
           console.log(n.body);
           ngForm.resetForm();
+          this.bankService.findAllEmployeesUnderBranch(
+            this.selectedBrach!.branchId
+          );
         },
         error: (e) => console.log(e),
       });
@@ -114,6 +133,9 @@ export class BranchEditComponent {
           console.log('REMOVE_MANAGER_FROM_BRANCH');
           console.log(n.body);
           ngForm.resetForm();
+          this.bankService.findAllEmployeesUnderBranch(
+            this.selectedBrach!.branchId
+          );
         },
         error: (e) => console.log(e),
       });
