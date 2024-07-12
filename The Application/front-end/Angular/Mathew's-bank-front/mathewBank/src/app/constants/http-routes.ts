@@ -46,6 +46,8 @@ export class ApplicationHttpRoutes {
     this.SOCKET + '/admin/remove-clerk-from-bank-by-admin';
   static readonly PUT_CLERK_IN_BANK_ADMIN: string =
     this.SOCKET + '/admin/add-clerk-to-any-branch';
+  static readonly GET_BRANCH_BY_BRANCH_ID: string =
+    this.SOCKET + '/admin/branches_with_manager';
 
   //Branch Management
   static readonly LIST_ALL_BRANCHES: string =

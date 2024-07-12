@@ -38,7 +38,7 @@ export class BankService {
 
   //get employee by id
   public findEmployeeById(id: number) {
-    return this.http
+    this.http
       .get<EmployeeDataModel>(ApplicationHttpRoutes.FIND_EMPLOYEE_BY_ID, {
         params: new HttpParams().set('employeeId', id),
         observe: 'response',
@@ -46,12 +46,22 @@ export class BankService {
       })
       .subscribe({
         next: (n) => {
-          console.log('GET_ALL_EMPLOYEE_BY_UNDER_BRANCH');
           console.log(n.body);
           this.managerSubject.next(n.body);
         },
         error: (e) => console.log(e),
       });
+  }
+
+  public findEmployeeByIdWithoutSub(id: number) {
+    return this.http.get<EmployeeDataModel>(
+      ApplicationHttpRoutes.FIND_EMPLOYEE_BY_ID,
+      {
+        params: new HttpParams().set('employeeId', id),
+        observe: 'response',
+        withCredentials: true,
+      }
+    );
   }
 
   public findAllEmployeesUnderBranch(bankBranch: number) {
@@ -76,12 +86,23 @@ export class BankService {
       });
   }
 
-  public removeEmployeeFrommBranch(id: number) {
+  public removeManagerFrommBranch(id: number) {
     return this.http.patch<EmployeeDataModel>(
       ApplicationHttpRoutes.REMOVE_MANAGER_FROM_BRANCH,
       null,
       {
         params: new HttpParams().set('employeeAKAManager', id),
+        observe: 'response',
+        withCredentials: true,
+      }
+    );
+  }
+
+  public getBranchByBranchId(bankId: number) {
+    return this.http.get<EmployeeDataModel>(
+      ApplicationHttpRoutes.GET_BRANCH_BY_BRANCH_ID,
+      {
+        params: new HttpParams().set('bankId', bankId),
         observe: 'response',
         withCredentials: true,
       }

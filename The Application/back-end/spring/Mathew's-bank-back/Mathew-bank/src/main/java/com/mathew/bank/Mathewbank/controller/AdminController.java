@@ -133,4 +133,10 @@ public class AdminController {
 
         return this.employeeService.addClarkToAnyBranch(clerkId, branchId,httpServletResponse);
     }
+
+    @GetMapping("/branches_with_manager")
+    public BranchDTO getBranchById(@RequestParam int bankId, HttpServletResponse httpServletResponse){
+
+        return this.employeeService.getBankAndManager(bankId, httpServletResponse);
+    }
 }

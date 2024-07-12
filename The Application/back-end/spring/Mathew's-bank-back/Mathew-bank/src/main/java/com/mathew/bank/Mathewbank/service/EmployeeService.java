@@ -1,6 +1,7 @@
 package com.mathew.bank.Mathewbank.service;
 
 import com.mathew.bank.Mathewbank.DAO.EmployeeRepository;
+import com.mathew.bank.Mathewbank.DTO.BranchDTO;
 import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
 import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.DTO.UserApplicationDTO;
@@ -400,5 +401,18 @@ public class EmployeeService {
         });
 
         return rolesDtos;
+    }
+
+    public BranchDTO getBankAndManager(int bankId, HttpServletResponse httpServletResponse) {
+
+        try{
+            Branch branch = this.employeeRepository.getABranchById(bankId);
+
+            return new BranchDTO(branch.getId(),branch.getBranchName(),branch.getState(),branch.getCountry(), branch.isOpen(),branch.getBranchManager().getId());
+
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
     }
 }

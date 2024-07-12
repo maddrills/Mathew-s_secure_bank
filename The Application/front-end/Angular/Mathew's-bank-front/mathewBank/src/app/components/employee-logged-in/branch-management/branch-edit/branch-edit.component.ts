@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EmployeeManagementComponent } from '../../../employee-management/employee-management.component';
 import { BranchModel } from '../../../../model/branch-model';
 import { BankService } from '../../../../service/bank.service';
@@ -15,10 +15,14 @@ import { CommonModule } from '@angular/common';
   templateUrl: './branch-edit.component.html',
   styleUrl: './branch-edit.component.css',
 })
-export class BranchEditComponent {
+export class BranchEditComponent implements OnInit {
   selectedBrach: BranchModel | null = null;
   allEmployees: Map<number, EmployeeDataModel> = new Map();
   bankManager: EmployeeDataModel | null = null;
+
+  ngOnInit(): void {
+    this.allEmployees.clear();
+  }
 
   constructor(
     private bankService: BankService,
@@ -35,6 +39,7 @@ export class BranchEditComponent {
     this.bankService.findEmployeeById(this.selectedBrach!.branchManagerId);
     this.bankService.findAllEmployeesUnderBranch(this.selectedBrach!.branchId);
 
+    //clear map before populating it
     this.bankService.allEmployeesUnderBranch.subscribe({
       next: (employees) => {
         if (employees) {
@@ -66,12 +71,27 @@ export class BranchEditComponent {
     if (employeeID == this.bankManager?.empId) {
       console.log('Removing manager');
       //remove manager
-      this.bankService.removeEmployeeFrommBranch(employeeID).subscribe({
+      this.bankService.removeManagerFrommBranch(employeeID).subscribe({
         next: (n) => {
           console.log('REMOVE_MANAGER_FROM_BRANCH');
           console.log(n.body);
-          this.bankService.managerSubject.next(null);
+          //remove from map and local storage
           this.allEmployees.delete(employeeID);
+          this.bankService.managerSubject.next(null);
+          this.bankManager == null;
+          //this.findEmployeeByThereId(employeeID);
+          //this.findBankBranchById(this.selectedBrach?.branchId!);
+          const branch: BranchModel = JSON.parse(
+            localStorage.getItem('selectedBank')!
+          );
+          if (branch == null) {
+            throw 'Branch cant be null';
+          }
+          branch.branchManagerId = 0;
+          localStorage.setItem('selectedBank', JSON.stringify(branch));
+          this.selectedBrach = JSON.parse(
+            localStorage.getItem('selectedBank')!
+          );
         },
         error: (e) => console.log(e),
       });
@@ -84,6 +104,7 @@ export class BranchEditComponent {
           next: (n) => {
             console.log('REMOVE_EMPLOYEE_FROM_BRANCH_Admin');
             console.log(n.body);
+            //remove local store and manager storage
             this.allEmployees.delete(employeeID);
           },
           error: (e) => console.log(e),
@@ -100,14 +121,44 @@ export class BranchEditComponent {
         next: (n) => {
           console.log('REMOVE_MANAGER_FROM_BRANCH');
           console.log(n.body);
-          ngForm.resetForm();
+          this.findBankBranchById(this.selectedBrach?.branchId!);
+          //update the dom accordingly
+          this.bankService.findEmployeeById(formValue.manager);
           this.bankService.findAllEmployeesUnderBranch(
             this.selectedBrach!.branchId
           );
+          ngForm.resetForm();
         },
         error: (e) => console.log(e),
       });
   }
+
+  private findBankBranchById(bankId: number) {
+    console.log('-----Getting branch-----');
+    this.bankService.getBranchByBranchId(bankId).subscribe({
+      next: (n) => {
+        console.log('GET_EMPLOYEE_BY_UNDER_BRANCH');
+        console.log(n.body);
+        localStorage.removeItem('selectedBank');
+        localStorage.setItem('selectedBank', JSON.stringify(n.body));
+        this.selectedBrach = JSON.parse(localStorage.getItem('selectedBank')!);
+      },
+      error: (e) => console.log(e),
+    });
+  }
+
+  // private findEmployeeByThereId(id: number) {
+  //   this.bankService.findEmployeeById(id).subscribe({
+  //     next: (n) => {
+  //       console.log('GET_ALL_EMPLOYEE_BY_UNDER_BRANCH');
+  //       console.log(n.body);
+  //       //set the employee in LOCAL STORAGE
+  //       localStorage.removeItem('selectedBank');
+  //       localStorage.setItem('selectedBank', JSON.stringify(n.body));
+  //     },
+  //     error: (e) => console.log(e),
+  //   });
+  // }
 
   addClerkToBranch(ngForm: NgForm) {
     const clerkId: { clerk: number } = ngForm.form.value;

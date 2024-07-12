@@ -633,6 +633,21 @@ public class AdminService {
             httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return false;
         }
+        //check if only clerk
+        if(this.highestAccessLevel(this.empRepo.getEmployeeById(clerkId)) < 3){
+            //then no not clerk
+            httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return false;
+        };
+
+
+        // check if clerk is bank manager
+        Branch branch = this.empRepo.getABranchById(bankId);
+
+        if(branch.getBranchManager().getId() == clerkId){
+            httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return false;
+        }
 
         try {
             return this.empRepo.removeClerkFromBranchAdminControl(bankId, clerkId, Integer.parseInt(authentication.getName()));
@@ -755,4 +770,32 @@ public class AdminService {
         }
     }
     /*ABOVE is admin setup*/
+
+
+    //should put in another class for SOLID principle
+    private int highestAccessLevel(Employee employee) {
+
+        // 4 is the number of roles
+        int accessLevel = 4;
+
+        for (var level : employee.getRoles()) {
+            System.out.println(level.getRole());
+            if(level.getRole().equals("ROLE_admin")){
+                if(accessLevel > 1){
+                    accessLevel = 1;
+                }
+            }
+            if(level.getRole().equals("ROLE_manager")){
+                if(accessLevel > 2){
+                    accessLevel = 2;
+                }
+            }
+            if(level.getRole().equals("ROLE_clerk")){
+                if(accessLevel > 3){
+                    accessLevel = 3;
+                }
+            }
+        }
+        return accessLevel;
+    }
 }

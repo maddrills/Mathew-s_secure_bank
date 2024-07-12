@@ -798,6 +798,32 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "getBranchById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/branches_with_manager?bankId=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"branches_with_manager"
+					],
+					"query": [
+						{
+							"key": "bankId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
