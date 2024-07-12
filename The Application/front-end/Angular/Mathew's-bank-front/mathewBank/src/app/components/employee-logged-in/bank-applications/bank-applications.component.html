@@ -33,71 +33,29 @@
     <div class="applications-data">
       <table>
         <tr class="head prevent-select">
-          <th>From</th>
-          <th>To</th>
-          <th>Date Time</th>
-          <th>Amount</th>
+          <th>Application Id</th>
+          <th>Full Name</th>
+          <th>Date Of Birth</th>
+          <th>Applied On</th>
+          <th>Phone Number</th>
+          <th>Rejected</th>
+          <th>Status</th>
+          <th>Email</th>
+          <th>Branch Id</th>
         </tr>
+        @for( application of applications ; track application){
         <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
+          <td>{{ application.applicationId }}</td>
+          <td>{{ application.fullName }}</td>
+          <td>{{ application.dateOfBirth }}</td>
+          <td>{{ application.appliedOn }}</td>
+          <td>{{ application.phoneNumber }}</td>
+          <td>{{ application.rejected }}</td>
+          <td>{{ application.status }}</td>
+          <td>{{ application.email }}</td>
+          <td>{{ application.branchId }}</td>
         </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
-        <tr>
-          <td>192.168.10.1</td>
-          <td>172.168.2.1</td>
-          <td>sample</td>
-          <td>sample</td>
-        </tr>
+        }
       </table>
       <div class="next-bubble prevent-select">
         <svg

@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { EmployeeDataModel } from '../model/employee-model';
 import { BehaviorSubject } from 'rxjs';
 import { rolesModel } from '../model/roles-model';
+import { applicationsModel } from '../model/applications-model';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeeService {
@@ -118,6 +119,20 @@ export class EmployeeService {
         password,
         rolesName: rolesArray,
       },
+      {
+        //params: new HttpParams().append('employeeId', empId),
+        observe: 'response',
+        //send all relevant cookeys
+        withCredentials: true,
+      }
+    );
+  }
+
+  //fetch all user applications
+
+  public fetchAllUserApplications() {
+    return this.http.get<applicationsModel[]>(
+      ApplicationHttpRoutes.GET_ALL_APPLICATIONS,
       {
         //params: new HttpParams().append('employeeId', empId),
         observe: 'response',

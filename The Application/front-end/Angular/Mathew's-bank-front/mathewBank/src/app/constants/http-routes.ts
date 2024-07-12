@@ -36,6 +36,8 @@ export class ApplicationHttpRoutes {
     this.SOCKET + '/manager/get-employees-by-empId';
   static readonly GET_ALL_EMPLOYEE_BY_UNDER_BRANCH: string =
     this.SOCKET + '/manager/get-employees-by-branch';
+  static readonly GET_ALL_APPLICATIONS: string =
+    this.SOCKET + '/employee/getAllApplications';
 
   //admin exclusive
   static readonly REMOVE_MANAGER_FROM_BRANCH: string =
