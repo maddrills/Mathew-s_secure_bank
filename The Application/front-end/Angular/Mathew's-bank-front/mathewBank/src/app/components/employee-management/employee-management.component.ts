@@ -56,6 +56,11 @@ export class EmployeeManagementComponent {
     console.log(id);
     localStorage.removeItem('selectedEmployee');
 
+    //specific employee assigned applications logic
+    this.employeeService.authViewActive.next(true);
+    console.log('Sub EMP id is' + id);
+    this.employeeService.employeeSelected.next(id);
+
     if (this.allEmployeesCalledByAdmin != null) {
       this.employeeService.employeeById.next(
         this.allEmployeesCalledByAdmin[selectedIndex]

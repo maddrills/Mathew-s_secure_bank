@@ -2,6 +2,7 @@ package com.mathew.bank.Mathewbank.controller;
 
 import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
 import com.mathew.bank.Mathewbank.DTO.RolesDto;
+import com.mathew.bank.Mathewbank.DTO.UserApplicationDTO;
 import com.mathew.bank.Mathewbank.service.EmployeeService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/manager")
@@ -81,5 +83,11 @@ public class ManagerController {
     @GetMapping("/getAllAuthNames")
     public Collection<RolesDto> allRoles(){
         return this.employeeService.getAllRoles();
+    }
+
+    ///employee/getApplicationsUnderAnEmployee
+    @GetMapping("/getApplicationsUnderAnEmployee")
+    public List<UserApplicationDTO> getApplicationsUnderAnEmployee(@RequestParam int employeeId, HttpServletResponse response, Authentication authentication){
+        return this.employeeService.getAllApplicationsAssignedToAnEmployee(employeeId, response, authentication);
     }
 }

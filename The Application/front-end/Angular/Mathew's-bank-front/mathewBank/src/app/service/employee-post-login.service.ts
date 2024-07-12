@@ -20,6 +20,9 @@ export class EmployeeService {
   public rolesToBackend = new BehaviorSubject<Map<number, rolesModel> | null>(
     null
   );
+  //auth view for applications under employee
+  public authViewActive = new BehaviorSubject<boolean>(false);
+  public employeeSelected = new BehaviorSubject<number>(0);
 
   constructor(private http: HttpClient) {}
 
@@ -148,6 +151,19 @@ export class EmployeeService {
       ApplicationHttpRoutes.GET_APPLICATIONS_ASSIGNED_TO_ME,
       {
         //params: new HttpParams().append('employeeId', empId),
+        observe: 'response',
+        //send all relevant cookeys
+        withCredentials: true,
+      }
+    );
+  }
+
+  //fetch application data under any employee
+  public getAllApplicationsUnderAnyEmployee(employeeId: number) {
+    return this.http.get<applicationsModel[]>(
+      ApplicationHttpRoutes.GET_APPLICATIONS_ASSIGNED_To_SOMEONE,
+      {
+        params: new HttpParams().append('employeeId', employeeId),
         observe: 'response',
         //send all relevant cookeys
         withCredentials: true,

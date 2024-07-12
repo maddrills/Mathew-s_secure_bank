@@ -237,6 +237,32 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "getApplicationUnderSpecificEmployee",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/manager/getApplicationsUnderAnEmployee?employeeId=1000001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"manager",
+						"getApplicationsUnderAnEmployee"
+					],
+					"query": [
+						{
+							"key": "employeeId",
+							"value": "1000001"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

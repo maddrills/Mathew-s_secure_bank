@@ -12,7 +12,9 @@ import { applicationsModel } from '../../../model/applications-model';
 export class BankApplicationsComponent {
   applications: applicationsModel[] = [];
 
-  constructor(private employeeService: EmployeeService) {}
+  constructor(private employeeService: EmployeeService) {
+    this.employeeService.authViewActive.next(false);
+  }
 
   getData() {
     console.log('Get data');

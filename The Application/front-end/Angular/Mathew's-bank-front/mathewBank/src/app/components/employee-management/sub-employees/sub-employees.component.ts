@@ -48,6 +48,7 @@ export class SubEmployeesComponent {
       this.employeeData = JSON.parse(localStorage.getItem('selectedEmployee')!);
     }
 
+
     console.log('Indi emp is');
     console.log(this.employeeData);
     this.listOutAllSubEmployees();

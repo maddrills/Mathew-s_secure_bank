@@ -10,18 +10,40 @@ import { applicationsModel } from '../../../model/applications-model';
   styleUrl: './assigned-applications.component.css',
 })
 export class AssignedApplicationsComponent {
+  authViewActive: boolean = false;
+  employeeUnderView: number = 0;
   public applicationsUnderMe: applicationsModel[] = [];
 
-  constructor(private employeeService: EmployeeService) {}
+  constructor(private employeeService: EmployeeService) {
+    this.employeeService.authViewActive.subscribe({
+      next: (n) => (this.authViewActive = n),
+    });
+    this.employeeService.employeeSelected.subscribe({
+      next: (employeeId) => (this.employeeUnderView = employeeId),
+    });
+  }
 
   getData() {
     console.log('Get data');
-    this.employeeService.getAllApplicationsUnderMe().subscribe({
-      next: (roles) => {
-        console.log(roles.body);
-        this.applicationsUnderMe = roles.body!;
-      },
-      error: (er) => {},
-    });
+    if (this.authViewActive) {
+      console.log('Auth view');
+      this.employeeService
+        .getAllApplicationsUnderAnyEmployee(this.employeeUnderView)
+        .subscribe({
+          next: (roles) => {
+            console.log(roles.body);
+            this.applicationsUnderMe = roles.body!;
+          },
+          error: (er) => {},
+        });
+    } else {
+      this.employeeService.getAllApplicationsUnderMe().subscribe({
+        next: (roles) => {
+          console.log(roles.body);
+          this.applicationsUnderMe = roles.body!;
+        },
+        error: (er) => {},
+      });
+    }
   }
 }

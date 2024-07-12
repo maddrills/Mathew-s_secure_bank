@@ -1,10 +1,7 @@
 package com.mathew.bank.Mathewbank.service;
 
 import com.mathew.bank.Mathewbank.DAO.EmployeeRepository;
-import com.mathew.bank.Mathewbank.DTO.BranchDTO;
-import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
-import com.mathew.bank.Mathewbank.DTO.RolesDto;
-import com.mathew.bank.Mathewbank.DTO.UserApplicationDTO;
+import com.mathew.bank.Mathewbank.DTO.*;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
@@ -418,6 +415,42 @@ public class EmployeeService {
         }
     }
 
+    public List<UserApplicationDTO> getAllApplicationsAssignedToAnEmployee(int employeeId, HttpServletResponse response, Authentication authentication) {
+
+        if(employeeId <= 0){
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            return null;
+        }
+
+        try{
+            //get Employee information
+            Employee employee = this.employeeRepository.getEmployeeById(employeeId);
+            final List<UserApplicationDTO> userAndDetailsDTO = new ArrayList<>(employee.getUserApplications().size());
+
+            employee.getUserApplications().forEach(userApplication -> {
+                userAndDetailsDTO.add(new UserApplicationDTO(
+                        userApplication.getApplication_number(),
+                        userApplication.getFullName(),
+                        userApplication.getPhoneNumber(),
+                        userApplication.getDateOfBirth(),
+                        userApplication.getAge(),
+                        userApplication.getEmail(),
+                        userApplication.getAppliedOn(),
+                        userApplication.isStatus(),
+                        userApplication.isRejected(),
+                        userApplication.getBranch().getId()
+                ));
+            });
+
+            return userAndDetailsDTO;
+
+        }catch (Exception e){
+            System.out.println(e);
+            response.setStatus(HttpServletResponse.SC_EXPECTATION_FAILED);
+            return null;
+        }
+    }
+
 
 
     private int highestAccessLevel(Employee employee) {
@@ -445,5 +478,4 @@ public class EmployeeService {
         }
         return accessLevel;
     }
-
 }
