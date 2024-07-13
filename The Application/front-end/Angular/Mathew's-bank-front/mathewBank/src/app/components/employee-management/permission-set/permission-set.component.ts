@@ -42,8 +42,10 @@ export class PermissionSetComponent implements OnChanges {
 
                   //after that loop through roles and roles to be removed
                   rolesToBERemoved?.forEach((removeRole, index) => {
+                    //set the counter to the users permission len
                     this.permissionCount = rolesToBERemoved.length;
                     this.arrayOfPermissions.forEach((allValidRoles) => {
+                      //if roles match roles to be removed then update the field in the array object to true
                       if (removeRole.roleName == allValidRoles.roleName) {
                         allValidRoles.added = true;
                         this.permissions.set(index, allValidRoles);
@@ -55,6 +57,7 @@ export class PermissionSetComponent implements OnChanges {
             },
           });
         } else {
+          //new employee permissions
           this.employeeService.getAllOfficeRoles();
           this.employeeService.rolesFromBackend.subscribe((roles) => {
             if (roles != null) {
@@ -64,16 +67,7 @@ export class PermissionSetComponent implements OnChanges {
         }
       },
     });
-
-    this.employeeService.rolesToBackend.next(null);
   }
-  //TODO: replace with api data
-  // public arrayOfPermissions: rolesModel[] = [
-  //   new rolesModel('ROLE_employee', false),
-  //   new rolesModel('ROLE_clerk', false),
-  //   new rolesModel('ROLE_manager', false),
-  //   new rolesModel('ROLE_admin', false),
-  // ];
 
   addPermission(role: rolesModel) {
     this.openUp = !this.openUp;
