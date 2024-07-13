@@ -15,7 +15,7 @@ export class EmployeeService {
 
   public employeeById = new BehaviorSubject<EmployeeDataModel | null>(null);
 
-  //roles
+  //roles from adder
   public rolesFromBackend = new BehaviorSubject<rolesModel[] | null>(null);
   public rolesToBackend = new BehaviorSubject<Map<number, rolesModel> | null>(
     null
@@ -23,6 +23,11 @@ export class EmployeeService {
   //auth view for applications under employee
   public authViewActive = new BehaviorSubject<boolean>(false);
   public employeeSelected = new BehaviorSubject<number>(0);
+
+  //roles from remover
+  public rolesToBeRemovedFromBackend = new BehaviorSubject<rolesModel[] | null>(
+    null
+  );
 
   constructor(private http: HttpClient) {}
 
@@ -71,7 +76,7 @@ export class EmployeeService {
 
   //admin get employee under employee
   public getAllOfficeRoles() {
-    return this.http
+    this.http
       .get<rolesModel[]>(ApplicationHttpRoutes.GET_ALL_OFFICE_PERMISSIONS, {
         //params: new HttpParams().append('employeeId', empId),
         observe: 'response',

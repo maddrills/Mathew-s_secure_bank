@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnChanges } from '@angular/core';
 import { rolesModel } from '../../../model/roles-model';
 import { EmployeeService } from '../../../service/employee-post-login.service';
 
@@ -10,23 +10,66 @@ import { EmployeeService } from '../../../service/employee-post-login.service';
   templateUrl: './permission-set.component.html',
   styleUrl: './permission-set.component.css',
 })
-export class PermissionSetComponent {
+export class PermissionSetComponent implements OnChanges {
   public openUp: boolean = false;
   public permissionCount: number = 0;
   //map that hold the position and array ref
   public permissions: Map<number, rolesModel> = new Map();
   public arrayOfPermissions: rolesModel[] = [];
 
-  constructor(private employeeService: EmployeeService) {
-    this.employeeService.getAllOfficeRoles();
+  ngOnChanges() {
+    console.log('Change detected');
+  }
 
-    this.employeeService.rolesFromBackend.subscribe((roles) => {
-      console.log(roles);
-      if (roles != null) {
-        console.log('Subed roles');
-        console.log(roles);
-        this.arrayOfPermissions = roles;
-      }
+  constructor(private employeeService: EmployeeService) {
+    //reset
+    console.log('-------constructor------constructor------constructor------');
+    this.employeeService.rolesFromBackend.next(null);
+
+    this.employeeService.authViewActive.subscribe({
+      next: (condition) => {
+        console.log(`The Condition IS THIS ${condition}`);
+        if (condition) {
+          this.employeeService.rolesToBeRemovedFromBackend.subscribe({
+            next: (rolesToBERemoved) => {
+              //locker to prevent redundant calls
+              let locker1 = false;
+              console.log('---------------------Condition');
+              //gets all valid roles from db
+              this.employeeService.getAllOfficeRoles();
+              this.employeeService.rolesFromBackend.subscribe((roles) => {
+                this.reset();
+                if (roles != null) {
+                  console.log('Subed roles');
+                  console.log(roles);
+                  this.arrayOfPermissions = roles;
+
+                  //after that loop through roles and roles to be removed
+                  rolesToBERemoved?.forEach((removeRole, index) => {
+                    this.permissionCount = rolesToBERemoved.length;
+                    this.arrayOfPermissions.forEach((allValidRoles) => {
+                      if (removeRole.roleName == allValidRoles.roleName) {
+                        console.log('Remove Remove');
+                        allValidRoles.added = true;
+                        this.permissions.set(index, allValidRoles);
+                      }
+                    });
+                  });
+                }
+              });
+            },
+          });
+        } else {
+          this.reset();
+          this.employeeService.getAllOfficeRoles();
+          console.log('Incide Else Condition');
+          this.employeeService.rolesFromBackend.subscribe((roles) => {
+            if (roles != null) {
+              this.arrayOfPermissions = roles;
+            }
+          });
+        }
+      },
     });
 
     this.employeeService.rolesToBackend.next(null);
@@ -58,6 +101,8 @@ export class PermissionSetComponent {
 
   click() {
     console.log('option click click');
+    this.openUp = !this.openUp;
+    console.log(this.arrayOfPermissions);
   }
 
   remove(valueInMap: number) {
@@ -68,5 +113,12 @@ export class PermissionSetComponent {
       permissions.added = false;
       this.permissions.delete(valueInMap);
     }
+  }
+
+  private reset() {
+    // this.arrayOfPermissions = [];
+    console.log('---------------Reset all----------------');
+    this.arrayOfPermissions.forEach((arr) => (arr.added = false));
+    console.log(this.arrayOfPermissions);
   }
 }

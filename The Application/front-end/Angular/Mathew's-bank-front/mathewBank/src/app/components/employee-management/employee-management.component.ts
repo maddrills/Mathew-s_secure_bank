@@ -9,6 +9,7 @@ import { RefreshDataFetcherService } from '../../service/dataRefresh';
 import { EmployeeService } from '../../service/employee-post-login.service';
 import { EmployeeDataModel } from '../../model/employee-model';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { rolesModel } from '../../model/roles-model';
 
 @Component({
   selector: 'app-employee-management',
@@ -38,6 +39,8 @@ export class EmployeeManagementComponent {
     this.navBarGoldService.resetAll();
     this.navBarGoldService.empManagement.next(true);
     this.userDataRefreshUpDate.checkIfEmployeeDataAvailable();
+    //specific employee assigned applications logic
+    this.employeeService.authViewActive.next(false);
 
     this.allUsersDataRefresh();
 
@@ -56,14 +59,25 @@ export class EmployeeManagementComponent {
     console.log(id);
     localStorage.removeItem('selectedEmployee');
 
-    //specific employee assigned applications logic
-    this.employeeService.authViewActive.next(true);
-    console.log('Sub EMP id is' + id);
-    this.employeeService.employeeSelected.next(id);
-
     if (this.allEmployeesCalledByAdmin != null) {
-      this.employeeService.employeeById.next(
-        this.allEmployeesCalledByAdmin[selectedIndex]
+      //specific employee assigned applications logic
+      this.employeeService.authViewActive.next(true);
+      console.log('Sub EMP id is' + id);
+      this.employeeService.employeeSelected.next(id);
+
+      //specif data transfer
+      const chosenEmployee = this.allEmployeesCalledByAdmin[selectedIndex];
+      this.employeeService.employeeById.next(chosenEmployee);
+
+      //roles of selected
+      const employeePermissionMap: rolesModel[] = [];
+      if (chosenEmployee.rolesName) {
+        chosenEmployee.rolesName.forEach((role) => {
+          employeePermissionMap.push(role);
+        });
+      }
+      this.employeeService.rolesToBeRemovedFromBackend.next(
+        employeePermissionMap
       );
     } else return;
     //reroute to sub employee

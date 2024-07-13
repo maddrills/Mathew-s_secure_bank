@@ -102,4 +102,6 @@ export class SubEmployeesComponent {
     //get sub employees
     this.listOutAllSubEmployees();
   }
+
+  refreshPermissions() {}
 }

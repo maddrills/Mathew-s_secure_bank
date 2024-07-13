@@ -255,6 +255,11 @@ section {
   padding: 1rem 2rem;
   color: #ffd700;
   font-size: 2rem;
+  transition: all 0.33s;
+}
+.permission-set h6:hover {
+  cursor: pointer;
+  background-color: #343a40;
 }
 
 .permission-set button {

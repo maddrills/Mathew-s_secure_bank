@@ -40,7 +40,7 @@ export class EmployeeLoggedInComponent {
     console.log('Employee logged in');
     this.runUserService();
 
-    //nav bar reset
+    //nav bar reset/
     this.navBarGoldService.resetAll();
     this.navBarGoldService.inEmployeeHomeComponent.next(true);
     this.employeeService.authViewActive.next(false);
