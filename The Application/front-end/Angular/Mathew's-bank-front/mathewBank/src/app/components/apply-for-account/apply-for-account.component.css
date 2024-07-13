@@ -48,7 +48,6 @@
   font-weight: 700;
   color: #1864ab;
   border-radius: 2px;
-  width: 30rem;
   padding: 1rem 1.2rem;
   border: 1px solid #1864ab;
 }
@@ -58,7 +57,7 @@
 }
 
 .location div {
-  width: 20rem;
+  min-width: 20rem;
   display: flex;
   flex-direction: column;
   align-items: center;

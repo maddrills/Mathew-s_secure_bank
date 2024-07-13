@@ -1,6 +1,7 @@
 package com.mathew.bank.Mathewbank.DAO;
 
 import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
+import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
@@ -75,5 +76,7 @@ public interface EmpRepo extends User_emp_commonRepo {
     Collection<Role> getAllRoles();
 
     boolean updateEmployee(Employee clerk);
+
+    List<RolesDto> updateEmployeePermissions(int empId, List<RolesDto> roles);
 
 }

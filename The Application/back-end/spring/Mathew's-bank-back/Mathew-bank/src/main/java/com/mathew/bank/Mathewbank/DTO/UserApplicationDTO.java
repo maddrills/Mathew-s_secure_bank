@@ -24,6 +24,8 @@ public class UserApplicationDTO {
 
     private int branchId;
 
+    private int assignedTo;
+
     public UserApplicationDTO() {
     }
 
@@ -58,6 +60,20 @@ public class UserApplicationDTO {
         this.status = status;
         this.rejected = rejected;
         this.branchId = branchId;
+    }
+
+    public UserApplicationDTO(int applicationId, String fullName, String phoneNumber, LocalDate dateOfBirth, int age, String email, LocalDateTime appliedOn, boolean status, boolean rejected, int branchId, int assignedTo) {
+        this.applicationId = applicationId;
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.age = age;
+        this.email = email;
+        this.appliedOn = appliedOn;
+        this.status = status;
+        this.rejected = rejected;
+        this.branchId = branchId;
+        this.assignedTo = assignedTo;
     }
 
     public int getApplicationId() {
@@ -138,6 +154,14 @@ public class UserApplicationDTO {
 
     public void setBranchId(int branchId) {
         this.branchId = branchId;
+    }
+
+    public int getAssignedTo() {
+        return assignedTo;
+    }
+
+    public void setAssignedTo(int assignedTo) {
+        this.assignedTo = assignedTo;
     }
 
     @Override

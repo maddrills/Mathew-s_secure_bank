@@ -119,6 +119,14 @@ public class AdminController {
 
         return this.adminService.removeManagerFromBranch(employeeAKAManager, authentication, response);
     }
+    //updateEmployeePermission
+    @PatchMapping("/update-employee-permission-set")
+    public List<RolesDto> updateEmployeePermission(@RequestParam int employeeId,@RequestBody List<RolesDto> rolesDto,Authentication authentication ,HttpServletResponse response){
+
+        System.out.println(employeeId);
+
+        return this.adminService.updateEmployeePermission(employeeId,rolesDto, authentication, response);
+    }
 
     @PatchMapping("/remove-clerk-from-bank-by-admin")
     public boolean removeClerkFromBankByAdmin(@RequestParam int bankId,@RequestParam int clerkId, Authentication authentication, HttpServletResponse httpServletResponse ){
@@ -139,4 +147,5 @@ public class AdminController {
 
         return this.employeeService.getBankAndManager(bankId, httpServletResponse);
     }
+
 }

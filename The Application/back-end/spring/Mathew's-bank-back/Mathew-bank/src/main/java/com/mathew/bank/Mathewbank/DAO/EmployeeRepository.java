@@ -1,6 +1,7 @@
 package com.mathew.bank.Mathewbank.DAO;
 
 import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
+import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
@@ -780,6 +781,31 @@ public class EmployeeRepository implements EmpRepo {
             System.out.println(e);
             return false;
         }
+    }
+
+    @Override
+    @Transactional
+    public List<RolesDto> updateEmployeePermissions(int empId, List<RolesDto> roles) {
+
+        //holds the response depending on the Success of the persistence
+        List<RolesDto> respRoles = new LinkedList<>();
+        Employee employee = this.getEmployeeById(empId);
+
+        employee.getRoles().clear();
+
+        //only after that add the new permissions
+        for (var role : roles) {
+            System.out.println(role);
+            //fetch the role from db
+            Role matchingRoleEntity = this.findRoleByRoleName(role.getRoleName());
+            System.out.println(matchingRoleEntity.getRole());
+            employee.setARole(matchingRoleEntity);
+            role.setAdded(true);
+            respRoles.add(role);
+        }
+        employee.getRoles().forEach(System.out::println);
+        this.updateEmployee(employee);
+        return respRoles;
     }
 
 

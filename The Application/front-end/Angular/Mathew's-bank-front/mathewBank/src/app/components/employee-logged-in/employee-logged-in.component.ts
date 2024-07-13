@@ -11,6 +11,7 @@ import { EmployeeDataModel } from '../../model/employee-model';
 import { RefreshDataFetcherService } from '../../service/dataRefresh';
 import { CommonModule } from '@angular/common';
 import { NavBarGoldService } from '../../service/navBarService';
+import { EmployeeService } from '../../service/employee-post-login.service';
 
 @Component({
   selector: 'app-employee-logged-in',
@@ -33,7 +34,8 @@ export class EmployeeLoggedInComponent {
   constructor(
     private userService: UnRegService,
     private userDataRefreshUpDate: RefreshDataFetcherService,
-    private navBarGoldService: NavBarGoldService
+    private navBarGoldService: NavBarGoldService,
+    private employeeService: EmployeeService
   ) {
     console.log('Employee logged in');
     this.runUserService();
@@ -41,6 +43,7 @@ export class EmployeeLoggedInComponent {
     //nav bar reset
     this.navBarGoldService.resetAll();
     this.navBarGoldService.inEmployeeHomeComponent.next(true);
+    this.employeeService.authViewActive.next(false);
 
     this.userDataRefreshUpDate.checkIfEmployeeDataAvailable();
   }

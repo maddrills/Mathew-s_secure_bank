@@ -13,7 +13,7 @@ export class BankApplicationsComponent {
   applications: applicationsModel[] = [];
 
   constructor(private employeeService: EmployeeService) {
-    this.employeeService.authViewActive.next(false);
+    // this.employeeService.authViewActive.next(true);
   }
 
   getData() {

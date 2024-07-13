@@ -42,6 +42,7 @@
           <th>Status</th>
           <th>Email</th>
           <th>Branch Id</th>
+          <th>Assigned to</th>
         </tr>
         @for( application of applications ; track application){
         <tr>
@@ -54,6 +55,7 @@
           <td>{{ application.status }}</td>
           <td>{{ application.email }}</td>
           <td>{{ application.branchId }}</td>
+          <td>{{ application.assignedTo }}</td>
         </tr>
         }
       </table>

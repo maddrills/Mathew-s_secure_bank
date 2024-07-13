@@ -7,11 +7,18 @@ import { Router, RouterOutlet } from '@angular/router';
 import { RefreshDataFetcherService } from '../../../service/dataRefresh';
 import { EmployeeDataModel } from '../../../model/employee-model';
 import { BehaviorSubject } from 'rxjs';
+import { BankApplicationsComponent } from '../../employee-logged-in/bank-applications/bank-applications.component';
+import { PermissionSetComponent } from '../permission-set/permission-set.component';
 
 @Component({
   selector: 'app-sub-employees',
   standalone: true,
-  imports: [AssignedApplicationsComponent, RouterOutlet],
+  imports: [
+    AssignedApplicationsComponent,
+    RouterOutlet,
+    BankApplicationsComponent,
+    PermissionSetComponent,
+  ],
   templateUrl: './sub-employees.component.html',
   styleUrl: './sub-employees.component.css',
 })
@@ -47,7 +54,6 @@ export class SubEmployeesComponent {
     } else {
       this.employeeData = JSON.parse(localStorage.getItem('selectedEmployee')!);
     }
-
 
     console.log('Indi emp is');
     console.log(this.employeeData);

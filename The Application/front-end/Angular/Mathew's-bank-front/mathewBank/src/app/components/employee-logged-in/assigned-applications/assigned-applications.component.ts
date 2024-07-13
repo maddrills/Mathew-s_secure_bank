@@ -16,7 +16,11 @@ export class AssignedApplicationsComponent {
 
   constructor(private employeeService: EmployeeService) {
     this.employeeService.authViewActive.subscribe({
-      next: (n) => (this.authViewActive = n),
+      next: (n) => {
+        console.log('Auth under watch active');
+        console.log(n);
+        this.authViewActive = n;
+      },
     });
     this.employeeService.employeeSelected.subscribe({
       next: (employeeId) => (this.employeeUnderView = employeeId),

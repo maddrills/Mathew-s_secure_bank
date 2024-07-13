@@ -47,8 +47,8 @@ public class EmployeeService {
                                 userApplication.getAppliedOn(),
                                 userApplication.isStatus(),
                                 userApplication.isRejected(),
-                                userApplication.getBranch().getId()
-                        )
+                                userApplication.getBranch().getId(),
+                                userApplication.getAssignedTo().getId()                        )
                 )
         );
 

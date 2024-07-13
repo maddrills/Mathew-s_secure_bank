@@ -95,6 +95,7 @@ public class ProjectSecurityConfig {
                                 "/admin/remove_employee_permission",
                                 "/admin/add_employee_permission",
                                 "/employee/getAllApplications",
+                                "/admin/update-employee-permission-set",
                                 "/manager/**").hasAnyRole("manager")
 
                         .requestMatchers(

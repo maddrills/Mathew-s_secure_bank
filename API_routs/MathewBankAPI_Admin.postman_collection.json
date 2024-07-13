@@ -824,6 +824,41 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "updateEmployeePermissions",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"roleName\": \"admin\"\r\n    },\r\n    {\r\n        \"roleName\": \"manager\"\r\n    }\r\n    ,\r\n    {\r\n        \"roleName\": \"employee\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/admin/update-employee-permission-set?employeeId=1000014",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"update-employee-permission-set"
+					],
+					"query": [
+						{
+							"key": "employeeId",
+							"value": "1000014"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

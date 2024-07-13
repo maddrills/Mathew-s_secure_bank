@@ -323,6 +323,37 @@ public class AdminService {
         return respRoles;
     }
 
+    //UPDATE employee role
+    public List<RolesDto> updateEmployeePermission(int empId, List<RolesDto> roles,  Authentication authentication, HttpServletResponse response) {
+
+        int authLevel = accessLevelAuthCheck(authentication);
+
+        if (authLevel == 3) {
+            //then manager is adding a role
+            //make sure he cant add manager as a role
+            for (RolesDto rolesDto : roles) {
+                if (rolesDto.getRoleName().equals("manager")) {
+                    response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                    return null;
+                }
+            }
+        }
+        // forbid any illegal and Admin permission remove
+        if (!this.SanityCheckForEmpPermission(empId, roles)) {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            return null;
+        }
+
+        try{
+            return this.empRepo.updateEmployeePermissions(empId, roles);
+            //remove all permissions from employee
+
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+
     public List<RolesDto> addAnEmployeeRole(int empId, List<RolesDto> roles, HttpServletResponse response, Authentication authentication) {
 
         int authLevel = accessLevelAuthCheck(authentication);

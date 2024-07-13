@@ -9,6 +9,7 @@ export class applicationsModel {
     public fullName: string = '',
     public phoneNumber: string = '',
     public rejected: boolean = false,
-    public status: boolean = false
+    public status: boolean = false,
+    public assignedTo: number = 0
   ) {}
 }

@@ -243,3 +243,31 @@ section {
   border: 1px solid #ffd700;
   grid-column: -4/-1;
 }
+
+.permission-set {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.permission-set h6 {
+  background-color: #212529;
+  text-transform: capitalize;
+  padding: 1rem 2rem;
+  color: #ffd700;
+  font-size: 2rem;
+}
+
+.permission-set button {
+  background-color: #212529;
+  color: #fff;
+  padding: 1rem 2rem;
+  transition: all 0.33s;
+}
+
+.permission-set button:hover,
+.permission-set button:active {
+  cursor: pointer;
+  background-color: #f1f3f5;
+  color: #212529;
+  padding: 1rem 2rem;
+}
