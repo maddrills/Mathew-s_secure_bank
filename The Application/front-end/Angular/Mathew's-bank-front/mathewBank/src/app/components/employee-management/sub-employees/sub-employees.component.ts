@@ -73,8 +73,35 @@ export class SubEmployeesComponent {
         .getEmployeesUnderEmployee(this.employeeData.empId)
         .subscribe({
           next: (employee) => {
+            this.navBarGoldService.empManagement.next(true);
             //this.subEmployees.next(employee.body);
             this.subEmployees = employee.body;
+            this.employeeService.rolesToBeRemovedFromBackend.next(null);
+            this.employeeService.authViewActive.next(true);
+            console.log('Sub EMP id is' + this.employeeData?.empId);
+            this.employeeService.employeeSelected.next(
+              this.employeeData?.empId!
+            );
+            //specif data transfer
+            this.employeeService.employeeById.next(this.employeeData);
+
+            const employeePermissionSet = this.employeeData?.rolesName;
+            if (employeePermissionSet) {
+              this.employeeService.rolesToBeRemovedFromBackend.next(
+                employeePermissionSet
+              );
+            }
+
+            //checking
+            this.employeeService.employeeById.subscribe((emp) => {
+              console.log(emp);
+              if (emp != null) {
+                localStorage.setItem('selectedEmployee', JSON.stringify(emp));
+              }
+              this.employeeData = JSON.parse(
+                localStorage.getItem('selectedEmployee')!
+              );
+            });
           },
           error: (err) =>
             console.log(err, 'while getting an employee by id from backend'),
@@ -93,7 +120,7 @@ export class SubEmployeesComponent {
     console.log(id);
 
     this.employeeService.getEmployeeById(id);
-    //find employee by this id
+    //find employee by this id/
     this.employeeService.employeeById.subscribe((employee) => {
       console.log(employee);
       this.employeeData = employee;
