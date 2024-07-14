@@ -128,6 +128,8 @@ export class SubEmployeesComponent {
 
     //get sub employees
     this.listOutAllSubEmployees();
+
+    location.reload();
   }
 
   refreshPermissions() {}
