@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnChanges } from '@angular/core';
+import { Component, OnChanges, OnDestroy } from '@angular/core';
 import { rolesModel } from '../../../model/roles-model';
 import { EmployeeService } from '../../../service/employee-post-login.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-permission-set',
@@ -10,7 +11,7 @@ import { EmployeeService } from '../../../service/employee-post-login.service';
   templateUrl: './permission-set.component.html',
   styleUrl: './permission-set.component.css',
 })
-export class PermissionSetComponent implements OnChanges {
+export class PermissionSetComponent implements OnChanges, OnDestroy {
   public openUp: boolean = false;
   public permissionCount: number = 0;
   //map that hold the position and array ref
@@ -18,6 +19,9 @@ export class PermissionSetComponent implements OnChanges {
   public arrayOfPermissions: rolesModel[] = [];
   public subEmployee: boolean = false;
   public clickedReset: boolean = false;
+
+  //sub tracker
+  private subs: Subscription[] = [];
 
   ngOnChanges() {
     console.log('Change detected');
@@ -27,47 +31,53 @@ export class PermissionSetComponent implements OnChanges {
     console.log('Change detected Constructor');
     //reset
     this.employeeService.rolesFromBackend.next(null);
+    //gets all valid roles from db
+    this.employeeService.getAllOfficeRoles();
 
-    this.employeeService.authViewActive.subscribe({
-      next: (condition) => {
-        if (condition) {
-          this.subEmployee = condition;
-          this.employeeService.rolesToBeRemovedFromBackend.subscribe({
-            next: (rolesToBERemoved) => {
-              //gets all valid roles from db
-              this.employeeService.getAllOfficeRoles();
-              this.employeeService.rolesFromBackend.subscribe((roles) => {
-                this.reset();
-                if (roles != null) {
-                  this.arrayOfPermissions = roles;
+    this.subs.push(
+      this.employeeService.authViewActive.subscribe({
+        next: (condition) => {
+          if (condition) {
+            this.subEmployee = condition;
+            //RESET to allow for a new permission set
+            this.reset();
+            this.employeeService.rolesToBeRemovedFromBackend.subscribe({
+              next: (rolesToBERemoved) => {
+                this.employeeService.rolesFromBackend.subscribe((roles) => {
+                  if (roles != null) {
+                    this.arrayOfPermissions = roles;
 
-                  //after that loop through roles and roles to be removed
-                  rolesToBERemoved?.forEach((removeRole, index) => {
-                    //set the counter to the users permission len
-                    this.permissionCount = rolesToBERemoved.length;
-                    this.arrayOfPermissions.forEach((allValidRoles) => {
-                      //if roles match roles to be removed then update the field in the array object to true
-                      if (removeRole.roleName == allValidRoles.roleName) {
-                        allValidRoles.added = true;
-                        this.permissions.set(index, allValidRoles);
-                      }
+                    //after that loop through roles and roles to be removed
+                    rolesToBERemoved?.forEach((removeRole, index) => {
+                      //set the counter to the users permission len
+                      this.permissionCount = rolesToBERemoved.length;
+                      this.arrayOfPermissions.forEach((allValidRoles) => {
+                        //if roles match roles to be removed then update the field in the array object to true
+                        if (removeRole.roleName == allValidRoles.roleName) {
+                          allValidRoles.added = true;
+                          this.permissions.set(index, allValidRoles);
+                        }
+                      });
                     });
-                  });
-                }
-              });
-            },
-          });
-        } else {
-          //new employee permissions
-          this.employeeService.getAllOfficeRoles();
-          this.employeeService.rolesFromBackend.subscribe((roles) => {
-            if (roles != null) {
-              this.arrayOfPermissions = roles;
-            }
-          });
-        }
-      },
-    });
+                  }
+                });
+              },
+            });
+          } else {
+            //new employee permissions
+            // this.employeeService.getAllOfficeRoles();
+            this.employeeService.rolesFromBackend.subscribe((roles) => {
+              if (roles != null) {
+                this.arrayOfPermissions = roles;
+              }
+            });
+          }
+        },
+      })
+    );
+  }
+  ngOnDestroy(): void {
+    this.subs.forEach((s) => s.unsubscribe());
   }
 
   addPermission(role: rolesModel) {
