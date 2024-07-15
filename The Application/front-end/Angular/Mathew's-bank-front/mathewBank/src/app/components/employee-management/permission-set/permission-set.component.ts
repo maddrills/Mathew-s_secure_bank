@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, OnDestroy } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { rolesModel } from '../../../model/roles-model';
 import { EmployeeService } from '../../../service/employee-post-login.service';
 import { Subscription } from 'rxjs';
@@ -30,7 +30,7 @@ export class PermissionSetComponent implements OnChanges, OnDestroy {
   constructor(private employeeService: EmployeeService) {
     console.log('----Change detected Constructor--------');
     //reset
-    this.employeeService.rolesFromBackend.next(null);
+    //this.employeeService.rolesFromBackend.next(null);
     //gets all valid roles from db
     this.employeeService.getAllOfficeRoles();
 
@@ -45,28 +45,31 @@ export class PermissionSetComponent implements OnChanges, OnDestroy {
             //get roles to be removed
             this.employeeService.rolesToBeRemovedFromBackend.subscribe({
               next: (rolesToBERemoved) => {
-                this.employeeService.rolesFromBackend.subscribe((roles) => {
-                  console.log('CHANGE 2');
-                  console.log(rolesToBERemoved);
-                  console.log(roles);
-                  if (roles != null) {
-                    this.arrayOfPermissions = roles;
-                    console.log('CHANGE 3');
-                    //after that loop through roles and roles to be removed
-                    rolesToBERemoved?.forEach((removeRole, index) => {
-                      //set the counter to the users permission len
-                      this.permissionCount = rolesToBERemoved.length;
-                      this.arrayOfPermissions.forEach((allValidRoles) => {
-                        //if roles match roles to be removed then update the field in the array object to true
-                        if (removeRole.roleName == allValidRoles.roleName) {
-                          allValidRoles.added = true;
-                          this.permissions.set(index, allValidRoles);
-                        }
+                this.employeeService
+                  //make a call for all the ROLES available
+                  .getAllOfficeRolesSubType()
+                  .subscribe((roles) => {
+                    console.log('CHANGE 2');
+                    console.log(rolesToBERemoved);
+                    console.log(roles.body);
+                    if (roles != null) {
+                      this.arrayOfPermissions = roles.body!;
+                      console.log('CHANGE 3');
+                      //after that loop through roles and roles to be removed
+                      rolesToBERemoved?.forEach((removeRole, index) => {
+                        //set the counter to the users permission len
+                        this.permissionCount = rolesToBERemoved.length;
+                        this.arrayOfPermissions.forEach((allValidRoles) => {
+                          //if roles match roles to be removed then update the field in the array object to true
+                          if (removeRole.roleName == allValidRoles.roleName) {
+                            allValidRoles.added = true;
+                            this.permissions.set(index, allValidRoles);
+                          }
+                        });
                       });
-                    });
-                  }
-                  this.employeeService.rolesToBackend.next(this.permissions);
-                });
+                    }
+                    this.employeeService.rolesToBackend.next(this.permissions);
+                  });
               },
             });
           } else {

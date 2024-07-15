@@ -92,6 +92,17 @@ export class EmployeeService {
         error: (er) => {},
       });
   }
+  public getAllOfficeRolesSubType() {
+    return this.http.get<rolesModel[]>(
+      ApplicationHttpRoutes.GET_ALL_OFFICE_PERMISSIONS,
+      {
+        //params: new HttpParams().append('employeeId', empId),
+        observe: 'response',
+        //send all relevant cookeys
+        withCredentials: true,
+      }
+    );
+  }
 
   public createAnEmployee(
     phone_number: number,
