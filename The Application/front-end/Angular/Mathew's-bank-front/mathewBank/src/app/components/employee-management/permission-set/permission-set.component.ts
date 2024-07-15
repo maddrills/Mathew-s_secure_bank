@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnChanges, OnDestroy } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy } from '@angular/core';
 import { rolesModel } from '../../../model/roles-model';
 import { EmployeeService } from '../../../service/employee-post-login.service';
 import { Subscription } from 'rxjs';
@@ -28,7 +28,7 @@ export class PermissionSetComponent implements OnChanges, OnDestroy {
   }
 
   constructor(private employeeService: EmployeeService) {
-    console.log('Change detected Constructor');
+    console.log('----Change detected Constructor--------');
     //reset
     this.employeeService.rolesFromBackend.next(null);
     //gets all valid roles from db
@@ -37,16 +37,21 @@ export class PermissionSetComponent implements OnChanges, OnDestroy {
     this.subs.push(
       this.employeeService.authViewActive.subscribe({
         next: (condition) => {
+          console.log('CHANGE 1');
           if (condition) {
             this.subEmployee = condition;
             //RESET to allow for a new permission set
             this.reset();
+            //get roles to be removed
             this.employeeService.rolesToBeRemovedFromBackend.subscribe({
               next: (rolesToBERemoved) => {
                 this.employeeService.rolesFromBackend.subscribe((roles) => {
+                  console.log('CHANGE 2');
+                  console.log(rolesToBERemoved);
+                  console.log(roles);
                   if (roles != null) {
                     this.arrayOfPermissions = roles;
-
+                    console.log('CHANGE 3');
                     //after that loop through roles and roles to be removed
                     rolesToBERemoved?.forEach((removeRole, index) => {
                       //set the counter to the users permission len
@@ -60,6 +65,7 @@ export class PermissionSetComponent implements OnChanges, OnDestroy {
                       });
                     });
                   }
+                  this.employeeService.rolesToBackend.next(this.permissions);
                 });
               },
             });
@@ -116,5 +122,6 @@ export class PermissionSetComponent implements OnChanges, OnDestroy {
     console.log('---------------Reset all----------------');
     this.arrayOfPermissions.forEach((arr) => (arr.added = false));
     console.log(this.arrayOfPermissions);
+    this.permissions.clear();
   }
 }

@@ -176,4 +176,60 @@ export class EmployeeService {
       }
     );
   }
+
+  public changeEmployeePermissions(employeeId: number) {
+    let rolesArray: rolesModel[] = [];
+    //list out all the sending permissions
+    // this.rolesToBackend.subscribe((permission) => {
+    //   permission?.forEach((value, key, fullArray) => {
+    //     console.log('createAnEmployee Keys');
+    //     console.log(key);
+    //     console.log(value);
+    //     console.log(fullArray);
+    //     rolesArray.push(new rolesModel(value.roleName.slice(5), false));
+    //   });
+    // });
+    this.rolesToBackend.subscribe((permission) => {
+      permission?.forEach((value, key, fullArray) => {
+        console.log('createAnEmployee Keys');
+        console.log(key);
+        console.log(value);
+        console.log(fullArray);
+        rolesArray.push(new rolesModel(value.roleName.slice(5), false));
+      });
+    });
+
+    // let rolesArray: IterableIterator<rolesModel> | null = null;
+    // //list out all the sending permissions
+    // // this.rolesToBackend.subscribe((permission) => {
+    // //   permission?.forEach((value, key, fullArray) => {
+    // //     console.log('createAnEmployee Keys');
+    // //     console.log(key);
+    // //     console.log(value);
+    // //     console.log(fullArray);
+    // //     rolesArray.push(new rolesModel(value.roleName.slice(5), false));
+    // //   });
+    // // });
+    // this.rolesToBackend.subscribe((permission) => {
+    //   const allRoles = permission?.values();
+    //   if (allRoles) {
+    //     rolesArray = allRoles;
+    //   }
+    // });
+
+    console.log('Employee -- permissions are');
+    console.log(rolesArray);
+    console.log(employeeId);
+
+    return this.http.patch<rolesModel[]>(
+      ApplicationHttpRoutes.CHANGE_EMPLOYEE_PERMISSION_SET,
+      rolesArray,
+      {
+        params: new HttpParams().append('employeeId', employeeId),
+        observe: 'response',
+        //send all relevant cookeys
+        withCredentials: true,
+      }
+    );
+  }
 }

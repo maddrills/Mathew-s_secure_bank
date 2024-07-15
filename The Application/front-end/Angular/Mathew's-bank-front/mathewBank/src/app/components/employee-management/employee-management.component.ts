@@ -69,7 +69,7 @@ export class EmployeeManagementComponent {
       const chosenEmployee = this.allEmployeesCalledByAdmin[selectedIndex];
       this.employeeService.employeeById.next(chosenEmployee);
 
-      //roles of selected
+      //roles of selected/
       const employeePermissionMap: rolesModel[] = [];
       if (chosenEmployee.rolesName) {
         chosenEmployee.rolesName.forEach((role) => {

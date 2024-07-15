@@ -124,7 +124,7 @@ public class AdminController {
     public List<RolesDto> updateEmployeePermission(@RequestParam int employeeId,@RequestBody List<RolesDto> rolesDto,Authentication authentication ,HttpServletResponse response){
 
         System.out.println(employeeId);
-
+        rolesDto.forEach(System.out::println);
         return this.adminService.updateEmployeePermission(employeeId,rolesDto, authentication, response);
     }
 

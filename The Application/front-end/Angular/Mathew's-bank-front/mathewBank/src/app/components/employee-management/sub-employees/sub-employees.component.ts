@@ -1,14 +1,22 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { AssignedApplicationsComponent } from '../../employee-logged-in/assigned-applications/assigned-applications.component';
 import { EmployeeManagementComponent } from '../employee-management.component';
 import { NavBarGoldService } from '../../../service/navBarService';
 import { EmployeeService } from '../../../service/employee-post-login.service';
-import { Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { RefreshDataFetcherService } from '../../../service/dataRefresh';
 import { EmployeeDataModel } from '../../../model/employee-model';
 import { BehaviorSubject } from 'rxjs';
 import { BankApplicationsComponent } from '../../employee-logged-in/bank-applications/bank-applications.component';
 import { PermissionSetComponent } from '../permission-set/permission-set.component';
+import { rolesModel } from '../../../model/roles-model';
 
 @Component({
   selector: 'app-sub-employees',
@@ -22,7 +30,7 @@ import { PermissionSetComponent } from '../permission-set/permission-set.compone
   templateUrl: './sub-employees.component.html',
   styleUrl: './sub-employees.component.css',
 })
-export class SubEmployeesComponent {
+export class SubEmployeesComponent implements OnDestroy {
   //fetch data from this point
   employeeData: EmployeeDataModel | null = null;
 
@@ -34,14 +42,24 @@ export class SubEmployeesComponent {
     private navBarGoldService: NavBarGoldService,
     private userDataRefreshUpDate: RefreshDataFetcherService,
     private employeeService: EmployeeService,
-    private route: Router
+    private route: Router,
+    private urlRoute: ActivatedRoute
   ) {
+    console.log('selectedEmployee');
+    //a full reset
     this.navBarGoldService.resetAll();
     this.navBarGoldService.empManagement.next(true);
     this.userDataRefreshUpDate.checkIfEmployeeDataAvailable();
 
     const storage = localStorage.getItem('selectedEmployee');
+    console.log('Local storage is ' + storage);
+    //if local storage has no employee
     if (storage == null) {
+      console.log('Null entry point');
+
+      //get if from url
+      // const empId: number = +this.urlRoute.snapshot.paramMap.get('employeeId')!;
+      // this.employeeService.getEmployeeById(empId);
       this.employeeService.employeeById.subscribe((emp) => {
         console.log(emp);
         if (emp != null) {
@@ -60,9 +78,14 @@ export class SubEmployeesComponent {
     this.listOutAllSubEmployees();
     window.scrollTo(0, 0);
   }
+  ngOnDestroy(): void {
+    location.reload();
+  }
 
   goBack() {
-    this.route.navigate(['/employee-welcome/emp-management/all-employees']);
+    this.route.navigate([
+      '/employee-welcome/emp-management/all-employees/add-employee',
+    ]);
   }
 
   listOutAllSubEmployees() {
@@ -76,6 +99,7 @@ export class SubEmployeesComponent {
             this.navBarGoldService.empManagement.next(true);
             //this.subEmployees.next(employee.body);
             this.subEmployees = employee.body;
+            this.employeeService.rolesFromBackend.next(null);
             this.employeeService.rolesToBeRemovedFromBackend.next(null);
             this.employeeService.authViewActive.next(true);
             console.log('Sub EMP id is' + this.employeeData?.empId);
@@ -130,6 +154,32 @@ export class SubEmployeesComponent {
     this.listOutAllSubEmployees();
 
     location.reload();
+  }
+
+  changeEmployeePermissionsSet() {
+    this.employeeService
+      .changeEmployeePermissions(this.employeeData?.empId!)
+      .subscribe({
+        next: (n) => {
+          console.log('Return Result');
+          const employeePermissionSet: rolesModel[] | null = n.body;
+          console.log(employeePermissionSet);
+          employeePermissionSet?.forEach((changeInPermissions) => {
+            changeInPermissions.added = true;
+          });
+          console.log(employeePermissionSet);
+          this.employeeService.rolesToBeRemovedFromBackend.next(
+            employeePermissionSet
+          );
+          const activeData: EmployeeDataModel = JSON.parse(
+            localStorage.getItem('selectedEmployee')!
+          );
+          this.employeeService.getEmployeeById(activeData.empId);
+          this.listOutAllSubEmployees();
+          location.reload();
+        },
+        error: (er) => console.log(er),
+      });
   }
 
   refreshPermissions() {}
