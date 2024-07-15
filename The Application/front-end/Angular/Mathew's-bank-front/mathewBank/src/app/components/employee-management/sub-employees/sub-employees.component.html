@@ -28,9 +28,18 @@
           <h6>Employee Id</h6>
           <div>{{ employeeData?.empId }}</div>
         </div>
-        <div class="capitalize">
+        <div
+          class="capitalize reports-to"
+          (click)="personId(employeeData?.reportsTo!)"
+        >
           <h6>Report's To</h6>
+          @if( employeeData?.reportsTo ){
+          <button>
+            <div>{{ employeeData?.reportsTo }}</div>
+          </button>
+          }@else{
           <div>{{ employeeData?.reportsTo }}</div>
+          }
         </div>
         <div>
           <h6 class="capitalize">Branch Id</h6>
