@@ -410,6 +410,32 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "getApplicationsUnderBranch",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/employee/get-applications-under-branch?branchId=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee",
+						"get-applications-under-branch"
+					],
+					"query": [
+						{
+							"key": "branchId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

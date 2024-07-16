@@ -42,7 +42,7 @@ export class PermissionSetComponent implements OnChanges, OnDestroy {
             this.subEmployee = condition;
             //RESET to allow for a new permission set
             this.reset();
-            //get roles to be removed
+            //get roles to be removed // replace with switchMap using RxJs
             this.employeeService.rolesToBeRemovedFromBackend.subscribe({
               next: (rolesToBERemoved) => {
                 this.employeeService

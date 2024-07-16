@@ -1,7 +1,13 @@
 <section class="container">
   <div class="bank-application-heading">
     <div class="open-up-section-common" (click)="getData()">
+      @if(subEmployeeActive){ @if(getAllApplications){
+      <h5>All Bank Applications</h5>
+      }@else{
+      <h5>Bank Applications Under : {{ employeeData?.branchName }}</h5>
+      } }@else {
       <h5>Bank Applications</h5>
+      }
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="32"
@@ -21,14 +27,28 @@
           <input type="text" id="phone-or-email" name="" />
         </div>
         <div>
-          <label for="branch">Branch</label>
-          <input type="text" id="branch" name="" />
+          <label for="branch">Branch Id</label>
+          <input type="number" id="branch" name="" />
         </div>
         <div class="button">
           <button>Look up</button>
         </div>
       </form>
       <div class="count"><span>count </span><span class="num">55</span></div>
+      <div class="button-change">
+        <!-- get all branches -->
+        @if(getAllApplications){
+        <button
+          class="bank-button"
+          (click)="getAllTheApplicationsUnderBranch()"
+        >
+          Get Applications Under Branch
+        </button>
+        }@else{
+        <button class="bank-button" (click)="getAllTheApplications()">
+          Get All Applications</button
+        >}
+      </div>
     </div>
     <div class="applications-data">
       <table>

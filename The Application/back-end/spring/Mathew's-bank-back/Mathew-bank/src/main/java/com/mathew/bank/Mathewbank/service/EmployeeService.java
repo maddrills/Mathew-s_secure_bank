@@ -452,6 +452,50 @@ public class EmployeeService {
     }
 
 
+    public List<UserApplicationDTO> getAllApplicationsUnderBranch(int branchId, HttpServletResponse response) {
+        try{
+            //get the branch with branch name
+            Branch branch = this.employeeRepository.getABranchById(branchId);
+
+            if(branch == null){
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                return null;
+            }
+
+            final List<UserApplication> allUserApplications = branch.getUserApplications();
+            if(allUserApplications == null){
+                response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                return null;
+            }
+
+            final List<UserApplicationDTO> userApplicationsUnderBranchDTO = new ArrayList<>(allUserApplications.size());
+
+            allUserApplications.forEach(userApplication -> {
+                userApplicationsUnderBranchDTO.add(new UserApplicationDTO(
+                        userApplication.getApplication_number(),
+                        userApplication.getFullName(),
+                        userApplication.getPhoneNumber(),
+                        userApplication.getDateOfBirth(),
+                        userApplication.getAge(),
+                        userApplication.getEmail(),
+                        userApplication.getAppliedOn(),
+                        userApplication.isStatus(),
+                        userApplication.isRejected(),
+                        userApplication.getBranch().getId(),
+                        userApplication.getAssignedTo().getId()
+                ));
+            });
+
+            return userApplicationsUnderBranchDTO;
+
+        }catch (Exception e){
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            System.out.println(e);
+            return null;
+        }
+
+    }
+
 
     private int highestAccessLevel(Employee employee) {
 

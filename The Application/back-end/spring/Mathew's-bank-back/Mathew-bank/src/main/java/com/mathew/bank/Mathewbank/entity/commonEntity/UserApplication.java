@@ -50,7 +50,7 @@ final public class UserApplication {
     @JoinColumn(name = "created_user_id")
     private User createdUser;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "branch_id")
     private Branch branch;
 

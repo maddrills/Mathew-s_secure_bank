@@ -89,4 +89,10 @@ public class EmployeeController {
     public List<UserApplicationDTO> getAllApplicationUnderME(HttpServletResponse response, Authentication authentication){
         return this.employeeService.getAllApplicationsAssignedToMe(response, authentication);
     }
+
+    @GetMapping("/get-applications-under-branch")
+    public List<UserApplicationDTO> getApplicationsUnderBranch(@RequestParam int branchId,HttpServletResponse response){
+        System.out.println(branchId);
+        return this.employeeService.getAllApplicationsUnderBranch(branchId, response);
+    }
 }

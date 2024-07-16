@@ -188,6 +188,19 @@ export class EmployeeService {
     );
   }
 
+  //fetch application data under any branch
+  public getAllApplicationsUnderAnyBranch(branchId: number) {
+    return this.http.get<applicationsModel[]>(
+      ApplicationHttpRoutes.GET_BANK_BRANCH_BY_ID,
+      {
+        params: new HttpParams().append('branchId', branchId),
+        observe: 'response',
+        //send all relevant cookeys
+        withCredentials: true,
+      }
+    );
+  }
+
   public changeEmployeePermissions(employeeId: number) {
     let rolesArray: rolesModel[] = [];
     //list out all the sending permissions

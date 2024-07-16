@@ -1,8 +1,11 @@
 package com.mathew.bank.Mathewbank.entity.employeeOnlyEntity;
 
+import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import jakarta.persistence.*;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -32,6 +35,13 @@ final public class Branch {
     @JoinColumn(name = "branch_manager")
     Employee branchManager;
 
+    @OneToMany(mappedBy = "branch",fetch = FetchType.LAZY,cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST,
+            CascadeType.REFRESH,
+    })
+    private List<UserApplication> userApplications;
 
     public Branch() {
     }
@@ -87,6 +97,18 @@ final public class Branch {
 
     public void setBranchManager(Employee branchManager) {
         this.branchManager = branchManager;
+    }
+
+    public List<UserApplication> getUserApplications() {
+        return userApplications;
+    }
+
+    // convenience method
+    public void setUserApplication(UserApplication userApplication) {
+        if(this.userApplications == null){
+            this.userApplications = new LinkedList<>();
+        }
+        this.userApplications.add(userApplication);
     }
 
     @Override
