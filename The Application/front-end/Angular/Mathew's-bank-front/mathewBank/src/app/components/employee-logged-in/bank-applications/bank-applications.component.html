@@ -32,30 +32,54 @@
     </div>
     <div class="applications-data">
       <table>
-        <tr class="head prevent-select">
+        <tr class="head prevent-select table-data-row">
           <th>Application Id</th>
           <th>Full Name</th>
-          <th>Date Of Birth</th>
           <th>Applied On</th>
-          <th>Phone Number</th>
-          <th>Rejected</th>
           <th>Status</th>
-          <th>Email</th>
           <th>Branch Id</th>
-          <th>Assigned to</th>
         </tr>
-        @for( application of applications ; track application){
-        <tr>
-          <td>{{ application.applicationId }}</td>
+        @for( application of applications ; track application; let pos =
+        $index){
+        <tr class="table-data-row">
+          <td>
+            <button
+              class="expand-application-button"
+              (click)="expandAssignedArea(pos)"
+            >
+              {{ application.applicationId }}
+            </button>
+          </td>
           <td>{{ application.fullName }}</td>
-          <td>{{ application.dateOfBirth }}</td>
           <td>{{ application.appliedOn }}</td>
-          <td>{{ application.phoneNumber }}</td>
           <td>{{ application.rejected }}</td>
-          <td>{{ application.status }}</td>
-          <td>{{ application.email }}</td>
           <td>{{ application.branchId }}</td>
-          <td>{{ application.assignedTo }}</td>
+          @if(pos === expand){
+          <div class="expansion">
+            <div class="grid grid--4-cols gap-spacing">
+              <div>
+                <h6>Email</h6>
+                <p>{{ application.email }}</p>
+              </div>
+              <div>
+                <h6>Phone Number</h6>
+                <p>{{ application.phoneNumber }}</p>
+              </div>
+              <div>
+                <h6>Date Of Birth</h6>
+                <p>{{ application.dateOfBirth }}</p>
+              </div>
+              <div>
+                <h6>Accept</h6>
+                <button>{{ application.status }}</button>
+              </div>
+              <div>
+                <h6>Reject</h6>
+                <button>{{ application.rejected }}</button>
+              </div>
+            </div>
+          </div>
+          }
         </tr>
         }
       </table>

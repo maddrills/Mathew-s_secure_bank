@@ -12,6 +12,8 @@ import { applicationsModel } from '../../../model/applications-model';
 export class BankApplicationsComponent {
   applications: applicationsModel[] = [];
 
+  expand: number = -1;
+
   constructor(private employeeService: EmployeeService) {
     // this.employeeService.authViewActive.next(true);
   }
@@ -25,5 +27,9 @@ export class BankApplicationsComponent {
       },
       error: (er) => {},
     });
+  }
+
+  expandAssignedArea(expander: number) {
+    this.expand = expander;
   }
 }
