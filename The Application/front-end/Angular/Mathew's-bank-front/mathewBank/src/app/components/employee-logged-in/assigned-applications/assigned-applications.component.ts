@@ -12,6 +12,7 @@ import { applicationsModel } from '../../../model/applications-model';
 export class AssignedApplicationsComponent {
   authViewActive: boolean = false;
   employeeUnderView: number = 0;
+  expand: number = -1;
   public applicationsUnderMe: applicationsModel[] = [];
 
   constructor(private employeeService: EmployeeService) {
@@ -49,5 +50,9 @@ export class AssignedApplicationsComponent {
         error: (er) => {},
       });
     }
+  }
+
+  expandAssignedArea(expander: number) {
+    this.expand = expander;
   }
 }

@@ -158,3 +158,52 @@ section {
 .three-dotes {
   align-self: center;
 }
+
+.table-data-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.expansion {
+  grid-column: 1/6;
+  margin-bottom: 1rem;
+}
+.gap-spacing {
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.expansion h6 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.expansion p {
+  font-size: 1.6rem;
+}
+
+.expansion button {
+  padding: 0.5rem 1rem;
+}
+
+.expansion button:hover {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+
+.expand-application-button {
+  border: 0;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  background-image: linear-gradient(#339af0, #1864ab);
+}
+
+.expand-application-button:hover {
+  cursor: pointer;
+}
+
+.expand-application-button:active {
+  cursor: pointer;
+  background-image: linear-gradient(#1864ab, #339af0);
+}
