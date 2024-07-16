@@ -262,7 +262,7 @@ export class EmployeeService {
     applicationNumber: number
   ) {
     console.log(employeeNumber, applicationNumber);
-    return this.http.patch<any>(
+    return this.http.patch<boolean>(
       ApplicationHttpRoutes.CHANGE_APPLICATION_ASSIGNED_TO,
       null,
 

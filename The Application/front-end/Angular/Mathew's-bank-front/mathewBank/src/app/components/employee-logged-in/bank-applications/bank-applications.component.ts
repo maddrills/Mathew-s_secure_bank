@@ -18,6 +18,8 @@ export class BankApplicationsComponent {
   employeeData: EmployeeDataModel | null = null;
   subEmployeeActive: boolean = false;
   getAllApplications: boolean = false;
+  transferError: boolean = false;
+  transferDone: boolean = false;
 
   constructor(private employeeService: EmployeeService) {
     // this.employeeService.authViewActive.next(true);//
@@ -66,6 +68,8 @@ export class BankApplicationsComponent {
 
   expandAssignedArea(expander: number) {
     this.expand = expander;
+    this.transferError = false;
+    this.transferDone = false;
   }
 
   getAllTheApplications() {
@@ -78,7 +82,7 @@ export class BankApplicationsComponent {
     this.getData();
   }
 
-  reAssignTo(applicationId: number | undefined) {
+  reAssignTo(applicationId: number | undefined, pos: number) {
     if (applicationId == undefined || applicationId < 0) {
       throw new Error('Method not implemented.');
     }
@@ -86,7 +90,16 @@ export class BankApplicationsComponent {
     this.employeeService
       .reAssignApplicationToAnother(this.employeeUnderView, applicationId)
       .subscribe({
-        next: (n) => console.log(n),
+        next: (n) => {
+          console.log(n.body);
+          if (n.body) {
+            //then change dom
+            this.applications[pos].assignedTo = this.employeeUnderView;
+            this.transferDone = true;
+          } else {
+            this.transferError = true;
+          }
+        },
         error: (e) => console.log(e),
       });
   }

@@ -97,12 +97,14 @@
                 <p>{{ application.assignedTo }}</p>
                 }
               </div>
+              @if(subEmployeeActive){
               <div>
                 <h6>Assign To:</h6>
-                <button (click)="reAssignTo(application.applicationId)">
+                <button (click)="reAssignTo(application.applicationId, pos)">
                   {{ employeeData?.full_name }}
                 </button>
               </div>
+              }
               <div>
                 <h6>Accept</h6>
                 <button>{{ application.status }}</button>
@@ -113,10 +115,16 @@
               </div>
             </div>
             <div>
+              @if(subEmployeeActive){
               <p>
                 Note you can only transfer an application to another employee
                 under a branch
               </p>
+              } @if(transferError){
+              <p style="color: red">Error While Reassigning</p>
+              } @if(transferDone){
+              <p style="color: green">Transfer Success</p>
+              }
             </div>
           </div>
           }
