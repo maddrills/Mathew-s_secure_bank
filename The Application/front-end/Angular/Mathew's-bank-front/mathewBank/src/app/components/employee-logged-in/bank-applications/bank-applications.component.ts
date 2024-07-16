@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { EmployeeService } from '../../../service/employee-post-login.service';
 import { applicationsModel } from '../../../model/applications-model';
 import { EmployeeDataModel } from '../../../model/employee-model';
+import { BankService } from '../../../service/bank.service';
 
 @Component({
   selector: 'app-bank-applications',
@@ -21,7 +22,10 @@ export class BankApplicationsComponent {
   transferError: boolean = false;
   transferDone: boolean = false;
 
-  constructor(private employeeService: EmployeeService) {
+  constructor(
+    private employeeService: EmployeeService,
+    private bankService: BankService
+  ) {
     // this.employeeService.authViewActive.next(true);//
 
     employeeService.authViewActive.subscribe({

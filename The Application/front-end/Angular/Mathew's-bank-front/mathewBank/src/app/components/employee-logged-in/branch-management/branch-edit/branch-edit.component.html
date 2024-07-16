@@ -93,7 +93,14 @@
           <th>Remove</th>
         </tr>
         <tr *ngFor="let employee of allEmployees | keyvalue">
-          <td>{{ employee.value.empId }}</td>
+          <td>
+            <button
+              class="employee-jump"
+              (click)="jumpToEmployee(employee.value.empId)"
+            >
+              {{ employee.value.empId }}
+            </button>
+          </td>
           <td>{{ employee.value.full_name }}</td>
           <td>{{ employee.value.phone_number }}</td>
           <td>
@@ -138,5 +145,6 @@
       </div>
     </div>
     <!-- <app-employee-management></app-employee-management> -->
+    <app-bank-applications></app-bank-applications>
   </div>
 </section>

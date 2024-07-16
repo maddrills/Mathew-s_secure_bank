@@ -80,7 +80,7 @@ export class EmployeeManagementComponent {
         employeePermissionMap
       );
     } else return;
-    //reroute to sub employee
+    //reroute to sub employee/
     this.route.navigate(
       [
         `/employee-welcome/emp-management/sub-employee`,

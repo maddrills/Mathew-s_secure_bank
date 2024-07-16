@@ -61,6 +61,21 @@ export class EmployeeService {
       });
   }
 
+  //get employee by id
+  public getEmployeeByIdWithSub(empId: number) {
+    // TODO: assign number as a parameter to the route
+
+    return this.http.get<EmployeeDataModel>(
+      ApplicationHttpRoutes.GET_EMPLOYEE_BY_ID,
+      {
+        params: new HttpParams().append('employeeId', empId),
+        observe: 'response',
+        //send all relevant cookeys
+        withCredentials: true,
+      }
+    );
+  }
+
   //admin get employee under employee
   public getEmployeesUnderEmployee(empId: number) {
     return this.http.get<EmployeeDataModel[]>(

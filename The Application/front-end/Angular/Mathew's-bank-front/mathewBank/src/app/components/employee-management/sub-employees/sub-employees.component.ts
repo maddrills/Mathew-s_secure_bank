@@ -131,8 +131,8 @@ export class SubEmployeesComponent implements OnDestroy {
             console.log(err, 'while getting an employee by id from backend'),
         });
     } else {
-      alert('No employee set');
-      console.log('No employee set');
+      // alert('No employee set');
+      console.log('No employee set yet');
     }
 
     console.log('click');

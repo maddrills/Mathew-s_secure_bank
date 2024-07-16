@@ -283,3 +283,18 @@ button:active {
   cursor: pointer;
   background-image: linear-gradient(#2b8a3e, #37b24d);
 }
+
+.employee-jump {
+  background-color: #364fc7;
+  background-image: linear-gradient(#4263eb, #364fc7);
+}
+
+.employee-jump:hover {
+  background-color: #364fc7;
+  background-image: linear-gradient(#4263eb, #364fc7);
+}
+
+.employee-jump:active {
+  background-color: #364fc7;
+  background-image: linear-gradient(#364fc7, #4263eb);
+}

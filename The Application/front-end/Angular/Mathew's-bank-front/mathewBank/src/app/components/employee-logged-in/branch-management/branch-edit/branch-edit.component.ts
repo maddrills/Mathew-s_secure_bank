@@ -7,11 +7,24 @@ import { NavBarGoldService } from '../../../../service/navBarService';
 import { RefreshDataFetcherService } from '../../../../service/dataRefresh';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { BranchManagementComponent } from '../branch-management.component';
+import { AssignedApplicationsComponent } from '../../assigned-applications/assigned-applications.component';
+import { BankApplicationsComponent } from '../../bank-applications/bank-applications.component';
+import { EmployeeService } from '../../../../service/employee-post-login.service';
+import { rolesModel } from '../../../../model/roles-model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-branch-edit',
   standalone: true,
-  imports: [EmployeeManagementComponent, FormsModule, CommonModule],
+  imports: [
+    EmployeeManagementComponent,
+    FormsModule,
+    CommonModule,
+    BankApplicationsComponent,
+    AssignedApplicationsComponent,
+    BranchManagementComponent,
+  ],
   templateUrl: './branch-edit.component.html',
   styleUrl: './branch-edit.component.css',
 })
@@ -27,7 +40,9 @@ export class BranchEditComponent implements OnInit {
   constructor(
     private bankService: BankService,
     private navBarGoldService: NavBarGoldService,
-    private userDataRefreshUpDate: RefreshDataFetcherService
+    private userDataRefreshUpDate: RefreshDataFetcherService,
+    private employeeService: EmployeeService,
+    private router: Router
   ) {
     //refresh statefullness
     this.navBarGoldService.resetAll();
@@ -197,5 +212,43 @@ export class BranchEditComponent implements OnInit {
     if (!employeeID) throw 'Not a valid input';
     //check if manager
     return employeeID == this.bankManager?.empId;
+  }
+
+  public jumpToEmployee(id: number) {
+    console.log(id);
+    localStorage.removeItem('selectedEmployee');
+
+    //specific employee assigned applications logic
+    this.employeeService.authViewActive.next(true);
+    console.log('Sub EMP id is' + id);
+    this.employeeService.employeeSelected.next(id);
+
+    //specif data transfer
+    const chosenEmployee = this.employeeService
+      .getEmployeeByIdWithSub(id)
+      .subscribe({
+        next: (employee) => {
+          const employeeData: EmployeeDataModel = employee.body!;
+          this.employeeService.employeeById.next(employeeData);
+          //roles of selected/
+          const employeePermissionMap: rolesModel[] = [];
+          if (employeeData.rolesName) {
+            employeeData.rolesName.forEach((role) => {
+              employeePermissionMap.push(role);
+            });
+          }
+          this.employeeService.rolesToBeRemovedFromBackend.next(
+            employeePermissionMap
+          );
+        },
+        error: (err) =>
+          console.log(err, 'while getting an employee by id from backend'),
+      });
+
+    //reroute to sub employee
+    this.router.navigate([
+      `/employee-welcome/emp-management/sub-employee`,
+      { employeeId: id },
+    ]);
   }
 }
