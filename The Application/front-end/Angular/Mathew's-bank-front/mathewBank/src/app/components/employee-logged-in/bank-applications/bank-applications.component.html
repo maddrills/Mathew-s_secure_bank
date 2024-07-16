@@ -90,6 +90,20 @@
                 <p>{{ application.dateOfBirth }}</p>
               </div>
               <div>
+                <h6>Assigned to:</h6>
+                @if(application.assignedTo == employeeData?.reportsTo){
+                <p>{{ application.assignedTo }} (Manager)</p>
+                }@else{
+                <p>{{ application.assignedTo }}</p>
+                }
+              </div>
+              <div>
+                <h6>Assign To:</h6>
+                <button (click)="reAssignTo(application.applicationId)">
+                  {{ employeeData?.full_name }}
+                </button>
+              </div>
+              <div>
                 <h6>Accept</h6>
                 <button>{{ application.status }}</button>
               </div>
@@ -97,6 +111,12 @@
                 <h6>Reject</h6>
                 <button>{{ application.rejected }}</button>
               </div>
+            </div>
+            <div>
+              <p>
+                Note you can only transfer an application to another employee
+                under a branch
+              </p>
             </div>
           </div>
           }

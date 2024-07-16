@@ -77,4 +77,17 @@ export class BankApplicationsComponent {
     this.getAllApplications = false;
     this.getData();
   }
+
+  reAssignTo(applicationId: number | undefined) {
+    if (applicationId == undefined || applicationId < 0) {
+      throw new Error('Method not implemented.');
+    }
+
+    this.employeeService
+      .reAssignApplicationToAnother(this.employeeUnderView, applicationId)
+      .subscribe({
+        next: (n) => console.log(n),
+        error: (e) => console.log(e),
+      });
+  }
 }

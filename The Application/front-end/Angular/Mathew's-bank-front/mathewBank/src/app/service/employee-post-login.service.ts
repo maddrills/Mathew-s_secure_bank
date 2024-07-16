@@ -256,4 +256,24 @@ export class EmployeeService {
       }
     );
   }
+
+  reAssignApplicationToAnother(
+    employeeNumber: number,
+    applicationNumber: number
+  ) {
+    console.log(employeeNumber, applicationNumber);
+    return this.http.patch<any>(
+      ApplicationHttpRoutes.CHANGE_APPLICATION_ASSIGNED_TO,
+      null,
+
+      {
+        params: new HttpParams()
+          .set('employeeNumber', employeeNumber)
+          .set('applicationNumber', applicationNumber),
+        observe: 'response',
+        //send all relevant cookeys
+        withCredentials: true,
+      }
+    );
+  }
 }

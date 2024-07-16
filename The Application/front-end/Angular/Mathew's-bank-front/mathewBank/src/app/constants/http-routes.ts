@@ -40,6 +40,8 @@ export class ApplicationHttpRoutes {
     this.SOCKET + '/employee/getAllApplications';
   static readonly CHANGE_EMPLOYEE_PERMISSION_SET: string =
     this.SOCKET + '/admin/update-employee-permission-set';
+  static readonly CHANGE_APPLICATION_ASSIGNED_TO: string =
+    this.SOCKET + '/manager/assign-application-to';
 
   //admin exclusive
   static readonly REMOVE_MANAGER_FROM_BRANCH: string =
