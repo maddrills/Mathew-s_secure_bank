@@ -159,7 +159,6 @@ export class SubEmployeesComponent implements OnDestroy {
 
     //get sub employees
     this.listOutAllSubEmployees();
-
     location.reload();
   }
 

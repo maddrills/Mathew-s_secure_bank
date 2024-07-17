@@ -139,4 +139,54 @@ export class BankApplicationsComponent {
         error: (e) => console.log(e),
       });
   }
+
+  acceptApplicationMethod(applicationId: number, pos: number) {
+    if (applicationId == undefined || applicationId < 0) {
+      throw new Error('Method not implemented.');
+    }
+
+    const activeUser: EmployeeDataModel = JSON.parse(
+      localStorage.getItem('employeeData')!
+    );
+
+    this.employeeService.acceptApplication(applicationId).subscribe({
+      next: (n) => {
+        console.log(n.body);
+        if (n.body) {
+          //then change dom
+          this.applications[pos].status = true;
+          this.applications[pos].approvedBy = activeUser.empId;
+          alert('User Accepting');
+        } else {
+          alert('Error Accepting User');
+        }
+      },
+      error: (e) => console.log(e),
+    });
+  }
+
+  rejectApplicationMethod(applicationId: number, pos: number) {
+    if (applicationId == undefined || applicationId < 0) {
+      throw new Error('Method not implemented.');
+    }
+
+    const activeUser: EmployeeDataModel = JSON.parse(
+      localStorage.getItem('employeeData')!
+    );
+
+    this.employeeService.rejectApplication(applicationId).subscribe({
+      next: (n) => {
+        console.log(n.body);
+        if (n.body) {
+          //then change dom
+          this.applications[pos].rejected = true;
+          this.applications[pos].approvedBy = activeUser.empId;
+          alert('Rejection Successful');
+        } else {
+          alert('Rejection failed');
+        }
+      },
+      error: (e) => console.log(e),
+    });
+  }
 }

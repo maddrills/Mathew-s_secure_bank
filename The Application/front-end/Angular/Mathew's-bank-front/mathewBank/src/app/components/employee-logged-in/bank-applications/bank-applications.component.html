@@ -113,11 +113,23 @@
               }
               <div>
                 <h6>Accept</h6>
-                <button>{{ application.status }}</button>
+                <button
+                  (click)="
+                    acceptApplicationMethod(application.applicationId, pos)
+                  "
+                >
+                  {{ application.status }}
+                </button>
               </div>
               <div>
                 <h6>Reject</h6>
-                <button>{{ application.rejected }}</button>
+                <button
+                  (click)="
+                    rejectApplicationMethod(application.applicationId, pos)
+                  "
+                >
+                  {{ application.rejected }}
+                </button>
               </div>
               <div>
                 <h6>Change Caused by</h6>

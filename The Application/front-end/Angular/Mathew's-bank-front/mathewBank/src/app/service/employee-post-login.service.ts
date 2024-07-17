@@ -291,4 +291,34 @@ export class EmployeeService {
       }
     );
   }
+
+  acceptApplication(applicationNumber: number) {
+    console.log(applicationNumber);
+    return this.http.patch<boolean>(
+      ApplicationHttpRoutes.ACCEPT_APPLICATION,
+      null,
+
+      {
+        params: new HttpParams().set('applicationNumber', applicationNumber),
+        observe: 'response',
+        //send all relevant cookeys
+        withCredentials: true,
+      }
+    );
+  }
+
+  rejectApplication(applicationNumber: number) {
+    console.log(applicationNumber);
+    return this.http.patch<boolean>(
+      ApplicationHttpRoutes.DENY_APPLICATION,
+      null,
+
+      {
+        params: new HttpParams().set('applicationNumber', applicationNumber),
+        observe: 'response',
+        //send all relevant cookeys
+        withCredentials: true,
+      }
+    );
+  }
 }
