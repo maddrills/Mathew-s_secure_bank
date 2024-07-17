@@ -26,15 +26,19 @@
           <label for="phone-or-email">Find by Phone or Email</label>
           <input type="text" id="phone-or-email" name="" />
         </div>
+        @if(subEmployeeActive){
         <div>
           <label for="branch">Branch Id</label>
           <input type="number" id="branch" name="" />
         </div>
+        }
+
         <div class="button">
           <button>Look up</button>
         </div>
       </form>
       <div class="count"><span>count </span><span class="num">55</span></div>
+      @if(subEmployeeActive){
       <div class="button-change">
         <!-- get all branches -->
         @if(getAllApplications){
@@ -49,6 +53,7 @@
           Get All Applications</button
         >}
       </div>
+      }
     </div>
     <div class="applications-data">
       <table>

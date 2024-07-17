@@ -65,6 +65,10 @@ export class BranchEditComponent implements OnInit {
       },
     });
 
+    //for bank applications
+    this.employeeService.authViewActive.next(false);
+    this.bankService.bankBranchViewData.next(this.selectedBrach);
+
     this.bankService.managerSubject.subscribe({
       next: (manager) => {
         this.bankManager = manager!;

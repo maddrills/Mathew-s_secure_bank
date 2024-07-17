@@ -97,6 +97,7 @@ export class SubEmployeesComponent implements OnDestroy {
   listOutAllSubEmployees() {
     //TODO optimise
     //only check if employee data available
+    this.bankService.bankBranchViewData.next(null);
     if (this.employeeData) {
       this.employeeService
         .getEmployeesUnderEmployee(this.employeeData.empId)

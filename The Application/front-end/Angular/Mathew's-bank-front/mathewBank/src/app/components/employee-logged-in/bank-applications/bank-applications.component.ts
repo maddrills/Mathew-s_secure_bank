@@ -3,6 +3,7 @@ import { EmployeeService } from '../../../service/employee-post-login.service';
 import { applicationsModel } from '../../../model/applications-model';
 import { EmployeeDataModel } from '../../../model/employee-model';
 import { BankService } from '../../../service/bank.service';
+import { BranchModel } from '../../../model/branch-model';
 
 @Component({
   selector: 'app-bank-applications',
@@ -22,6 +23,9 @@ export class BankApplicationsComponent {
   transferError: boolean = false;
   transferDone: boolean = false;
 
+  //bank
+  bankDataView: BranchModel | null = null;
+
   constructor(
     private employeeService: EmployeeService,
     private bankService: BankService
@@ -36,6 +40,14 @@ export class BankApplicationsComponent {
       next: (employeeId) => (this.employeeUnderView = employeeId),
     });
 
+    // this.bankService.getAllApplicationsUnderAnyBranch();
+
+    this.bankService.bankBranchViewData.subscribe({
+      next: (bankBranch) => {
+        this.bankDataView = bankBranch;
+      },
+    });
+
     this.employeeData = JSON.parse(localStorage.getItem('selectedEmployee')!);
   }
 
@@ -45,8 +57,28 @@ export class BankApplicationsComponent {
       console.log(this.employeeUnderView);
       //if user has no branch
       if (!this.employeeData?.branchId) return;
+
+      //under employee view
       this.employeeService
         .getAllApplicationsUnderAnyBranch(this.employeeData?.branchId!)
+        .subscribe({
+          next: (applicationsBack) => {
+            console.log(applicationsBack.body);
+            this.applications = applicationsBack.body!;
+            this.getAllApplications = false;
+          },
+          error: (er) => {
+            console.log(er);
+          },
+        });
+      return;
+    }
+
+    console.log(this.bankDataView);
+    //under branch view
+    if (this.bankDataView != null) {
+      this.employeeService
+        .getAllApplicationsUnderAnyBranch(this.bankDataView.branchId)
         .subscribe({
           next: (applicationsBack) => {
             console.log(applicationsBack.body);

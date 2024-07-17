@@ -12,6 +12,7 @@ export class BankService {
   >(null);
 
   public managerSubject = new BehaviorSubject<EmployeeDataModel | null>(null);
+  public bankBranchViewData = new BehaviorSubject<BranchModel | null>(null);
 
   constructor(private http: HttpClient) {}
 
