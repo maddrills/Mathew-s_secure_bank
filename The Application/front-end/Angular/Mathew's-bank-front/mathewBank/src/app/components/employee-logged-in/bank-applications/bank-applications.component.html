@@ -107,6 +107,7 @@
                 <h6>Assign To:</h6>
                 <button (click)="reAssignTo(application.applicationId, pos)">
                   {{ employeeData?.full_name }}
+                  <span>({{ employeeData?.empId }})</span>
                 </button>
               </div>
               }
@@ -117,6 +118,14 @@
               <div>
                 <h6>Reject</h6>
                 <button>{{ application.rejected }}</button>
+              </div>
+              <div>
+                <h6>Change Caused by</h6>
+                <button>{{ application.approvedBy }}</button>
+              </div>
+              <div>
+                <h6>Created Employee</h6>
+                <button>{{ application.createdUser }}</button>
               </div>
             </div>
             <div>

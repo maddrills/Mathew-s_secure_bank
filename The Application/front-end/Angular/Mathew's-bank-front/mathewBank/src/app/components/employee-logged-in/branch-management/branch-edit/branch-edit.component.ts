@@ -244,6 +244,7 @@ export class BranchEditComponent implements OnInit {
           this.employeeService.rolesToBeRemovedFromBackend.next(
             employeePermissionMap
           );
+          location.reload();
         },
         error: (err) =>
           console.log(err, 'while getting an employee by id from backend'),

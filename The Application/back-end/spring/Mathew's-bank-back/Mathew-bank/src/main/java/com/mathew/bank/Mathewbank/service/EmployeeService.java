@@ -48,7 +48,9 @@ public class EmployeeService {
                                 userApplication.isStatus(),
                                 userApplication.isRejected(),
                                 userApplication.getBranch().getId(),
-                                userApplication.getAssignedTo().getId()                        )
+                                userApplication.getAssignedTo().getId(),
+                                userApplication.getApprovedBy() == null ? 0 :userApplication.getApprovedBy().getId(),
+                                userApplication.getCreatedUser() == null ? 0 :userApplication.getCreatedUser().getId())
                 )
         );
 
@@ -82,7 +84,11 @@ public class EmployeeService {
                 userApplication.getAppliedOn(),
                 userApplication.isStatus(),
                 userApplication.isRejected(),
-                userApplication.getBranch().getId()
+                userApplication.getBranch().getId(),
+                userApplication.getAssignedTo().getId(),
+                userApplication.getApprovedBy() == null ? 0 :userApplication.getApprovedBy().getId(),
+                userApplication.getCreatedUser() == null ? 0 :userApplication.getCreatedUser().getId()
+
         );
     }
 
@@ -403,7 +409,11 @@ public class EmployeeService {
                         userApplication.getAppliedOn(),
                         userApplication.isStatus(),
                         userApplication.isRejected(),
-                        userApplication.getBranch().getId()
+                        userApplication.getBranch().getId(),
+                        userApplication.getAssignedTo().getId(),
+                        userApplication.getApprovedBy() == null ? 0 :userApplication.getApprovedBy().getId(),
+                        userApplication.getCreatedUser() == null ? 0 :userApplication.getCreatedUser().getId()
+
                 ));
             });
             //get all corresponding applications
@@ -438,7 +448,11 @@ public class EmployeeService {
                         userApplication.getAppliedOn(),
                         userApplication.isStatus(),
                         userApplication.isRejected(),
-                        userApplication.getBranch().getId()
+                        userApplication.getBranch().getId(),
+                        userApplication.getAssignedTo().getId(),
+                        userApplication.getApprovedBy() == null ? 0 :userApplication.getApprovedBy().getId(),
+                        userApplication.getCreatedUser() == null ? 0 :userApplication.getCreatedUser().getId()
+
                 ));
             });
 
@@ -482,7 +496,9 @@ public class EmployeeService {
                         userApplication.isStatus(),
                         userApplication.isRejected(),
                         userApplication.getBranch().getId(),
-                        userApplication.getAssignedTo().getId()
+                        userApplication.getAssignedTo().getId(),
+                        userApplication.getApprovedBy() == null ? 0 :userApplication.getApprovedBy().getId(),
+                        userApplication.getCreatedUser() == null ? 0 :userApplication.getCreatedUser().getId()
                 ));
             });
 

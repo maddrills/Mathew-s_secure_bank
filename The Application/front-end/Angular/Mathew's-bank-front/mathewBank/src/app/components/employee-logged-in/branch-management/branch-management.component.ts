@@ -8,6 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 import { BranchModel } from '../../../model/branch-model';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { EmployeeService } from '../../../service/employee-post-login.service';
 
 @Component({
   selector: 'app-branch-management',
@@ -24,12 +25,14 @@ export class BranchManagementComponent {
     private navBarGoldService: NavBarGoldService,
     private userDataRefreshUpDate: RefreshDataFetcherService,
     private bankService: BankService,
+    private employeeService: EmployeeService,
     private router: Router
   ) {
     this.navBarGoldService.resetAll();
     this.navBarGoldService.bankManagement.next(true);
     userDataRefreshUpDate.checkIfEmployeeDataAvailable();
     this.getAllBranchesFrommDb();
+    //this.employeeService.authViewActive.next(false);
   }
 
   public getAllBranchesFrommDb() {

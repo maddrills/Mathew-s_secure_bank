@@ -166,7 +166,11 @@ public class UnRegUserService {
                     userApplication.getAppliedOn(),
                     userApplication.isStatus(),
                     userApplication.isRejected(),
-                    userApplication.getBranch().getId()
+                    userApplication.getBranch().getId(),
+                    userApplication.getAssignedTo().getId(),
+                    userApplication.getApprovedBy() == null ? 0 :userApplication.getApprovedBy().getId(),
+                    userApplication.getCreatedUser() == null ? 0 :userApplication.getCreatedUser().getId()
+
             );
         }
 
@@ -196,7 +200,11 @@ public class UnRegUserService {
                     userApplication.getAppliedOn(),
                     userApplication.isStatus(),
                     userApplication.isRejected(),
-                    userApplication.getBranch().getId()
+                    userApplication.getBranch().getId(),
+                    userApplication.getAssignedTo().getId(),
+                    userApplication.getApprovedBy() == null ? 0 :userApplication.getApprovedBy().getId(),
+                    userApplication.getCreatedUser() == null ? 0 :userApplication.getCreatedUser().getId()
+
             );
         }
         response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

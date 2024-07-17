@@ -10,6 +10,8 @@ export class applicationsModel {
     public phoneNumber: string = '',
     public rejected: boolean = false,
     public status: boolean = false,
-    public assignedTo: number = 0
+    public assignedTo: number = 0,
+    public approvedBy: number = 0,
+    public createdUser: number = 0
   ) {}
 }

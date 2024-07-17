@@ -26,6 +26,10 @@ public class UserApplicationDTO {
 
     private int assignedTo;
 
+    private int approvedBy;
+
+    private int createdUser;
+
     public UserApplicationDTO() {
     }
 
@@ -74,6 +78,39 @@ public class UserApplicationDTO {
         this.rejected = rejected;
         this.branchId = branchId;
         this.assignedTo = assignedTo;
+    }
+
+    public UserApplicationDTO(int applicationId, String fullName, String phoneNumber, LocalDate dateOfBirth, int age, String email, LocalDateTime appliedOn, boolean status, boolean rejected, int branchId, int assignedTo,int approvedBy, int createdUser) {
+        this.applicationId = applicationId;
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.age = age;
+        this.email = email;
+        this.appliedOn = appliedOn;
+        this.status = status;
+        this.rejected = rejected;
+        this.branchId = branchId;
+        this.assignedTo = assignedTo;
+        this.approvedBy = approvedBy;
+        this.createdUser = createdUser;
+    }
+
+
+    public int getApprovedBy() {
+        return approvedBy;
+    }
+
+    public void setApprovedBy(int approvedBy) {
+        this.approvedBy = approvedBy;
+    }
+
+    public int getCreatedUser() {
+        return createdUser;
+    }
+
+    public void setCreatedUser(int createdUser) {
+        this.createdUser = createdUser;
     }
 
     public int getApplicationId() {
