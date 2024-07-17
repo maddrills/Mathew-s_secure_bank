@@ -39,6 +39,11 @@ public class BankUser {
         return this.userInBankService.getAllUserAccounts(response, authentication);
     }
 
+    @GetMapping("/get_all_account_settings")
+    public List<TimeSpaceDTO> getAllAccountSettings(){
+        return this.userInBankService.getAllAccountTypes();
+    }
+
     @GetMapping("/get_account_settings")
     public TimeSpaceDTO getAccountSettings(@RequestParam String accountType, Authentication authentication){
         return this.userInBankService.getAccountSettingsByAccountType(accountType, authentication);
@@ -86,6 +91,18 @@ public class BankUser {
 
         try{
             return this.userInBankService.getAllUserTransactions(authentication, httpServletResponse);
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
+
+    }
+
+    @GetMapping("/getUserBankAccounts")
+    public Collection<UserDeepAccountDTO> getAllUserAccountsByThereAuths(Authentication authentication, HttpServletResponse httpServletResponse){
+
+        try{
+            return this.userInBankService.getAllUserAccountsByUserAuth(authentication, httpServletResponse);
         }catch (Exception e){
             System.out.println(e);
             return null;

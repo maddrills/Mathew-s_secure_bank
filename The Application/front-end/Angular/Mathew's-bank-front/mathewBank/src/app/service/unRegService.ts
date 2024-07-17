@@ -66,6 +66,8 @@ export class UnRegService {
             resultBody?.rolesDto
           )
         );
+        const resultBodyString = JSON.stringify(resultBody);
+        localStorage.setItem('activeUser', resultBodyString);
         //navigate to user
         this.router.navigate(['user-welcome']);
       },

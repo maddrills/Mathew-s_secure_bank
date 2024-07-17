@@ -4,6 +4,8 @@ import { applicationsModel } from '../../../model/applications-model';
 import { EmployeeDataModel } from '../../../model/employee-model';
 import { BankService } from '../../../service/bank.service';
 import { BranchModel } from '../../../model/branch-model';
+import { Router } from '@angular/router';
+import { rolesModel } from '../../../model/roles-model';
 
 @Component({
   selector: 'app-bank-applications',
@@ -28,7 +30,8 @@ export class BankApplicationsComponent {
 
   constructor(
     private employeeService: EmployeeService,
-    private bankService: BankService
+    private bankService: BankService,
+    private router: Router
   ) {
     // this.employeeService.authViewActive.next(true);//
 
@@ -188,5 +191,44 @@ export class BankApplicationsComponent {
       },
       error: (e) => console.log(e),
     });
+  }
+
+  public jumpToEmployee(id: number) {
+    console.log(id);
+    localStorage.removeItem('selectedEmployee');
+
+    //specific employee assigned applications logic
+    this.employeeService.authViewActive.next(true);
+    console.log('Sub EMP id is' + id);
+    this.employeeService.employeeSelected.next(id);
+
+    //specif data transfer
+    const chosenEmployee = this.employeeService
+      .getEmployeeByIdWithSub(id)
+      .subscribe({
+        next: (employee) => {
+          const employeeData: EmployeeDataModel = employee.body!;
+          this.employeeService.employeeById.next(employeeData);
+          //roles of selected/
+          const employeePermissionMap: rolesModel[] = [];
+          if (employeeData.rolesName) {
+            employeeData.rolesName.forEach((role) => {
+              employeePermissionMap.push(role);
+            });
+          }
+          this.employeeService.rolesToBeRemovedFromBackend.next(
+            employeePermissionMap
+          );
+          location.reload();
+        },
+        error: (err) =>
+          console.log(err, 'while getting an employee by id from backend'),
+      });
+
+    //reroute to sub employee
+    this.router.navigate([
+      `/employee-welcome/emp-management/sub-employee`,
+      { employeeId: id },
+    ]);
   }
 }

@@ -5,6 +5,9 @@ export class UserAccountModel {
     public checkingID: number = 0,
     public buildUpID: number = 0,
     public jointAccountsID: number = 0,
-    public frozen: boolean = false
+    public frozen: boolean = false,
+    public lastWithdrawalDate: string = '',
+    public periodicWithdrawalCount: string = '',
+    public WithdrawalCount: string = ''
   ) {}
 }

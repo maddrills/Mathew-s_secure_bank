@@ -97,9 +97,13 @@
               <div>
                 <h6>Assigned to:</h6>
                 @if(application.assignedTo == employeeData?.reportsTo){
-                <p>{{ application.assignedTo }} (Manager)</p>
+                <button (click)="jumpToEmployee(application.assignedTo)">
+                  {{ application.assignedTo }}(Manager)
+                </button>
                 }@else{
-                <p>{{ application.assignedTo }}</p>
+                <button (click)="jumpToEmployee(application.assignedTo)">
+                  {{ application.assignedTo }}
+                </button>
                 }
               </div>
               @if(subEmployeeActive){
@@ -133,7 +137,9 @@
               </div>
               <div>
                 <h6>Change Caused by</h6>
-                <button>{{ application.approvedBy }}</button>
+                <button (click)="jumpToEmployee(application.approvedBy)">
+                  {{ application.approvedBy }}
+                </button>
               </div>
               <div>
                 <h6>Created Employee</h6>

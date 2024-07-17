@@ -12,6 +12,7 @@ import { RefreshDataFetcherService } from '../../service/dataRefresh';
 import { CommonModule } from '@angular/common';
 import { NavBarGoldService } from '../../service/navBarService';
 import { EmployeeService } from '../../service/employee-post-login.service';
+import { BankService } from '../../service/bank.service';
 
 @Component({
   selector: 'app-employee-logged-in',
@@ -35,7 +36,8 @@ export class EmployeeLoggedInComponent {
     private userService: UnRegService,
     private userDataRefreshUpDate: RefreshDataFetcherService,
     private navBarGoldService: NavBarGoldService,
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    private bankService: BankService
   ) {
     console.log('Employee logged in');
     this.runUserService();
@@ -46,6 +48,7 @@ export class EmployeeLoggedInComponent {
     this.employeeService.authViewActive.next(false);
 
     this.userDataRefreshUpDate.checkIfEmployeeDataAvailable();
+    this.bankService.bankBranchViewData.next(null);
   }
   runUserService() {
     this.userService.employeeData.subscribe((data) => {

@@ -637,6 +637,26 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "getAllAccountSettings",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/bankUser/get_all_account_settings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bankUser",
+						"get_all_account_settings"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

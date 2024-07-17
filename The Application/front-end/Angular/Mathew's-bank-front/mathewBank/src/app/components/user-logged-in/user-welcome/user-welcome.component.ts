@@ -3,6 +3,8 @@ import { NavBarComponent } from '../../top-down/nav-bar/nav-bar.component';
 import { FooterSectionComponent } from '../../top-down/footer-section/footer-section.component';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../../../service/user.service';
+import { UserModel } from '../../../model/user-model';
 
 @Component({
   selector: 'app-user-welcome',
@@ -12,8 +14,20 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './user-welcome.component.css',
 })
 export class UserWelcomeComponent {
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
-  userName = 'Mathew Francis';
+  activeUser: UserModel | null = null;
+  fullName = '';
+
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private activatedRoute: ActivatedRoute
+  ) {
+    //get user info from local storage
+    this.activeUser = JSON.parse(localStorage.getItem('activeUser')!);
+    this.fullName = this.activeUser?.fullName!;
+
+    //get all account related info
+  }
 
   savingsVisible: boolean = false;
   checkingVisible: boolean = false;

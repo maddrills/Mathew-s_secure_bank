@@ -53,6 +53,7 @@
   align-items: baseline;
   gap: 0rem;
   background-color: #fff;
+  text-transform: capitalize;
 }
 
 .accounts {

@@ -387,6 +387,15 @@ public class UserRepository implements UserRepo {
     }
 
     @Override
+    public List<TimeSpace> getAllTimeSpacesOrAccountTypes() {
+
+        TypedQuery<TimeSpace> query = this.entityManager.createQuery(
+                "SELECT ts FROM TimeSpace AS ts", TimeSpace.class);
+
+        return query.getResultList();
+    }
+
+    @Override
     public TimeSpace getAccountTypeByName(String name) {
 
         return this.entityManager.find(TimeSpace.class, name);

@@ -23,6 +23,12 @@ public class UserDeepAccountDTO {
 
     private boolean jointAccount;
 
+    private LocalDateTime lastWithdrawalDate;
+
+    private int periodicWithdrawalCount;
+
+    private int WithdrawalCount;
+
     private TimeSpace accountType;
 
     private String accountTypeName;
@@ -48,6 +54,21 @@ public class UserDeepAccountDTO {
         this.frozen = frozen;
         this.jointAccount = jointAccount;
         this.accountTypeName = accountTypeName;
+    }
+
+    public UserDeepAccountDTO(int id, boolean hold, boolean active, double amount, LocalDateTime nextInterestOn, LocalDateTime createdOn, boolean frozen, boolean jointAccount, String accountTypeName, LocalDateTime lastWithdrawalDate, int periodicWithdrawalCount, int WithdrawalCount) {
+        this.id = id;
+        this.hold = hold;
+        this.active = active;
+        this.amount = amount;
+        this.nextInterestOn = nextInterestOn;
+        this.createdOn = createdOn;
+        this.frozen = frozen;
+        this.jointAccount = jointAccount;
+        this.accountTypeName = accountTypeName;
+        this.lastWithdrawalDate = lastWithdrawalDate;
+        this.periodicWithdrawalCount = periodicWithdrawalCount;
+        this.WithdrawalCount = WithdrawalCount;
     }
 
     public String getAccountTypeName() {
@@ -128,5 +149,29 @@ public class UserDeepAccountDTO {
 
     public void setAccountType(TimeSpace accountType) {
         this.accountType = accountType;
+    }
+
+    public LocalDateTime getLastWithdrawalDate() {
+        return lastWithdrawalDate;
+    }
+
+    public void setLastWithdrawalDate(LocalDateTime lastWithdrawalDate) {
+        this.lastWithdrawalDate = lastWithdrawalDate;
+    }
+
+    public int getWithdrawalCount() {
+        return WithdrawalCount;
+    }
+
+    public void setWithdrawalCount(int withdrawalCount) {
+        WithdrawalCount = withdrawalCount;
+    }
+
+    public int getPeriodicWithdrawalCount() {
+        return periodicWithdrawalCount;
+    }
+
+    public void setPeriodicWithdrawalCount(int periodicWithdrawalCount) {
+        this.periodicWithdrawalCount = periodicWithdrawalCount;
     }
 }

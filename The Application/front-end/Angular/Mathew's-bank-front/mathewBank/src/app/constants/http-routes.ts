@@ -70,4 +70,15 @@ export class ApplicationHttpRoutes {
     this.SOCKET + '/admin/list_all_branches_with_manager';
   static readonly ADD_A_BRANCH_WITH_OR_WITHOUT_A_MANAGER: string =
     this.SOCKET + '/admin/create_a_branch';
+
+  // Bank User
+
+  static readonly USER_GET_DETAILS: string =
+    this.SOCKET + '/bankUser/user-details';
+  static readonly GET_ALL_ACCOUNT_TYPES: string =
+    this.SOCKET + '/bankUser/get_all_account_settings';
+  static readonly CREATE_USER_BANK_ACCOUNT_By_TYPE_PUT: string =
+    this.SOCKET + '/bankUser/createNewSavingsAccount';
+  static readonly GET_ALL_USER_ACCOUNTS: string =
+    this.SOCKET + '/bankUser/getUserBankAccounts';
 }

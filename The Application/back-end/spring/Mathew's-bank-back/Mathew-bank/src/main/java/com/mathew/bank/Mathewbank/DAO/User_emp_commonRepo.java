@@ -2,6 +2,7 @@ package com.mathew.bank.Mathewbank.DAO;
 
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
+import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.TimeSpace;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Account;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
@@ -27,4 +28,7 @@ public interface User_emp_commonRepo {
     User getUserDetailsByUserName(String userName);
 
     public Employee getEmployeeById(int empId);
+
+    List<TimeSpace> getAllTimeSpacesOrAccountTypes();
+
 }

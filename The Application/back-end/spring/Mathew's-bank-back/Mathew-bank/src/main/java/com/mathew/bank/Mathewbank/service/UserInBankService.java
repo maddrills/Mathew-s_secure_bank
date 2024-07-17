@@ -5,6 +5,7 @@ import com.mathew.bank.Mathewbank.DTO.*;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.TimeSpace;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.Transactions;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.accounts.Account;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.UserDetails;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class UserInBankService {
@@ -344,6 +342,80 @@ public class UserInBankService {
         });
 
         return transactionsDTOS;
+    }
+
+    public List<TimeSpaceDTO> getAllAccountTypes() {
+
+        try{
+            List<TimeSpace> timeSpaces = this.userRepository.getAllTimeSpacesOrAccountTypes();
+
+            List<TimeSpaceDTO> timeSpaceDTOS = new ArrayList<>(timeSpaces.size());
+
+            timeSpaces.forEach(accountType ->{
+
+                timeSpaceDTOS.add(new TimeSpaceDTO(
+                        accountType.getAccountType(),
+                        accountType.getSecond(),
+                        accountType.getMin(),
+                        accountType.getHour(),
+                        accountType.getDays(),
+                        accountType.getMonths(),
+                        accountType.getYears(),
+                        accountType.getBaseInterestRate(),
+                        accountType.isAJointAccount(),
+                        accountType.getMinStartingAmount(),
+                        accountType.getWithdrawalCountLimit(),
+                        accountType.getMoneyTransferLimit(),
+                        accountType.getBaseLimit(),
+                        accountType.getMonthlyDraw(),
+                        accountType.getDailyDraw(),
+                        accountType.getHourlyDraw(),
+                        accountType.getMinutesDraw()
+                ));
+            });
+
+
+            return timeSpaceDTOS;
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    public Collection<UserDeepAccountDTO> getAllUserAccountsByUserAuth(Authentication authentication, HttpServletResponse httpServletResponse) {
+
+
+        try{
+            UserAuthDecodedValues userAuthDecodedValues = this.authenticatedUserDecoder(authentication.getName());
+
+            //get user account that holds all the accounts
+            UserAccounts userAccounts = this.userRepository.getAllUserAccounts(userAuthDecodedValues.accountID);
+            Collection<Account> accounts = userAccounts.getAllUserAccounts();
+            //create an array of specific size
+            Collection<UserDeepAccountDTO> userDeepAccountDTOS = new ArrayList<>(accounts.size());
+
+            //convert the account data
+            accounts.forEach(account -> {
+                userDeepAccountDTOS.add(new UserDeepAccountDTO(
+                        account.getId(),
+                        account.isActive(),
+                        account.isHold(),
+                        account.getAmount(),
+                        account.getNextInterestOn(),
+                        account.getCreatedOn(),
+                        account.isFrozen(),
+                        account.isJointAccount(),
+                        account.getAccountType().getAccountType(),
+                        account.getLastWithdrawalDate(),
+                        account.getPeriodicWithdrawalCount(),
+                        account.getWithdrawalCount()
+                ));
+            });
+            return userDeepAccountDTOS;
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
     }
 
     //this class is used to access decoded values

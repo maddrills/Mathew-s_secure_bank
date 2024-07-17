@@ -5,6 +5,7 @@ import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.entity.commonEntity.Role;
 import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
+import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.TimeSpace;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDetails;
 import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
@@ -808,5 +809,10 @@ public class EmployeeRepository implements EmpRepo {
         return respRoles;
     }
 
+    // TODO implement method when needed
+    @Override
+    public List<TimeSpace> getAllTimeSpacesOrAccountTypes() {
+        return List.of();
+    }
 
 }
