@@ -41,9 +41,18 @@
           <div>{{ employeeData?.reportsTo }}</div>
           }
         </div>
-        <div>
+        <div
+          class="capitalize reports-to"
+          (click)="openBranch(employeeData?.branchId!)"
+        >
           <h6 class="capitalize">Branch Id</h6>
+          @if(employeeData?.branchId ){
+          <button>
+            <div>{{ employeeData?.branchId }}</div>
+          </button>
+          }@else{
           <div>{{ employeeData?.branchId }}</div>
+          }
         </div>
         <div>
           <h6>Branch Name</h6>

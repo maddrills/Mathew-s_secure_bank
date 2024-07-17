@@ -376,7 +376,7 @@ public class EmployeeService {
         try{
             Branch branch = this.employeeRepository.getABranchById(bankId);
 
-            return new BranchDTO(branch.getId(),branch.getBranchName(),branch.getState(),branch.getCountry(), branch.isOpen(),branch.getBranchManager().getId());
+            return new BranchDTO(branch.getId(),branch.getBranchName(),branch.getState(),branch.getCountry(), branch.isOpen(),branch.getBranchManager() == null ? 0 : branch.getBranchManager().getId());
 
         }catch (Exception e){
             System.out.println(e);

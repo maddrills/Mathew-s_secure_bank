@@ -206,7 +206,7 @@ export class EmployeeService {
   //fetch application data under any branch
   public getAllApplicationsUnderAnyBranch(branchId: number) {
     return this.http.get<applicationsModel[]>(
-      ApplicationHttpRoutes.GET_BANK_BRANCH_BY_ID,
+      ApplicationHttpRoutes.GET_BANK_APPLICATIONS_BRANCH_BY_ID,
       {
         params: new HttpParams().append('branchId', branchId),
         observe: 'response',

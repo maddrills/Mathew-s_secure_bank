@@ -58,7 +58,7 @@ export class ApplicationHttpRoutes {
     this.SOCKET + '/employee/getApplicationsAssignedToMe';
   static readonly GET_APPLICATIONS_ASSIGNED_To_SOMEONE: string =
     this.SOCKET + '/manager/getApplicationsUnderAnEmployee';
-  static readonly GET_BANK_BRANCH_BY_ID: string =
+  static readonly GET_BANK_APPLICATIONS_BRANCH_BY_ID: string =
     this.SOCKET + '/employee/get-applications-under-branch';
 
   //Branch Management

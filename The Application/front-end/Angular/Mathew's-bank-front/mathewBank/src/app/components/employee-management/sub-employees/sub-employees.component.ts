@@ -17,6 +17,8 @@ import { BehaviorSubject } from 'rxjs';
 import { BankApplicationsComponent } from '../../employee-logged-in/bank-applications/bank-applications.component';
 import { PermissionSetComponent } from '../permission-set/permission-set.component';
 import { rolesModel } from '../../../model/roles-model';
+import { Location } from '@angular/common';
+import { BankService } from '../../../service/bank.service';
 
 @Component({
   selector: 'app-sub-employees',
@@ -42,7 +44,9 @@ export class SubEmployeesComponent implements OnDestroy {
     private navBarGoldService: NavBarGoldService,
     private userDataRefreshUpDate: RefreshDataFetcherService,
     private employeeService: EmployeeService,
+    private bankService: BankService,
     private route: Router,
+    private _location: Location,
     private urlRoute: ActivatedRoute
   ) {
     console.log('selectedEmployee');
@@ -83,9 +87,11 @@ export class SubEmployeesComponent implements OnDestroy {
   }
 
   goBack() {
-    this.route.navigate([
-      '/employee-welcome/emp-management/all-employees/add-employee',
-    ]);
+    // this.route.navigate([
+    //   '/employee-welcome/emp-management/all-employees/add-employee',
+    // ]);
+
+    this._location.back();
   }
 
   listOutAllSubEmployees() {
@@ -182,5 +188,27 @@ export class SubEmployeesComponent implements OnDestroy {
       });
   }
 
+  public openBranch(selectedBranchId: number) {
+    console.log(selectedBranchId);
+
+    //getBranchByBranchId(bankId: number)
+    if (selectedBranchId) {
+      localStorage.removeItem('selectedBank');
+      this.bankService.managerSubject.next(null);
+      this.bankService.getBranchByBranchId(selectedBranchId).subscribe({
+        next: (branchInfo) => {
+          localStorage.setItem('selectedBank', JSON.stringify(branchInfo.body));
+          this.route.navigate(['/employee-welcome/branch-edit-component']);
+        },
+        error: (er) => console.log(er),
+      });
+
+      // console.log('findAllEmployeesUnderBranch');
+      // this.bankService.findEmployeeById(chosenBranch.branchManagerId);
+      // this.bankService.findAllEmployeesUnderBranch(chosenBranch.branchId);
+    } else {
+      alert('Not a valid Branch id');
+    }
+  }
   refreshPermissions() {}
 }
