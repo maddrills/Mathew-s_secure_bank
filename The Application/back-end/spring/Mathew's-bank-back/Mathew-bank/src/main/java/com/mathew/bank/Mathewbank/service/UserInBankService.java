@@ -398,8 +398,8 @@ public class UserInBankService {
             accounts.forEach(account -> {
                 userDeepAccountDTOS.add(new UserDeepAccountDTO(
                         account.getId(),
-                        account.isActive(),
                         account.isHold(),
+                        account.isActive(),
                         account.getAmount(),
                         account.getNextInterestOn(),
                         account.getCreatedOn(),

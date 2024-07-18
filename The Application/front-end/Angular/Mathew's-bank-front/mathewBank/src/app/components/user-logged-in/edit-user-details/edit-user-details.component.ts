@@ -3,6 +3,10 @@ import { NavBarComponent } from '../../top-down/nav-bar/nav-bar.component';
 import { FooterSectionComponent } from '../../top-down/footer-section/footer-section.component';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { UserService } from '../../../service/user.service';
+import { UserAccountDeepModel } from '../../../model/user-account-deep-model';
+import { UserModel } from '../../../model/user-model';
+import { AccountTimeSpace } from '../../../model/time-space-model';
 
 @Component({
   selector: 'app-edit-user-details',
@@ -20,7 +24,17 @@ export class EditUserDetailsComponent {
   inactiveAccount: boolean = this.startPoint;
   closeAccount: boolean = this.startPoint;
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  activeUser: UserModel | null = null;
+  fullName = '';
+  selectedAllAccount: UserAccountDeepModel | null = null;
+  accountSettings: AccountTimeSpace | null = null;
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private activatedRoute: ActivatedRoute
+  ) {
     //gets the router param number to reveal the Ui
     // console.log(router.url);
     // console.log(this.route.snapshot.queryParams['openDetailsUi']);
@@ -30,6 +44,30 @@ export class EditUserDetailsComponent {
     );
 
     this.openPartOdUi(paramNumber);
+
+    //get user info from local storage
+    this.activeUser = JSON.parse(localStorage.getItem('activeUser')!);
+    this.fullName = this.activeUser?.fullName!;
+
+    //account refresh
+    this.selectedAllAccount = JSON.parse(
+      localStorage.getItem('selectedAccount')!
+    );
+    // this.userService.selectedAccountByUser.subscribe({
+    //   next: (account) => {
+    //     this.selectedAllAccount = account;
+    //   },
+    // });
+    //get interest rate using account type
+    this.userService
+      .getAccountSettingsByAccountName(
+        this.selectedAllAccount?.accountTypeName!
+      )
+      .subscribe({
+        next: (accountSettings) => {
+          this.accountSettings = accountSettings.body;
+        },
+      });
   }
 
   // check the query param and opens up a ui element accordingly

@@ -81,4 +81,7 @@ export class ApplicationHttpRoutes {
     this.SOCKET + '/bankUser/createNewSavingsAccount';
   static readonly GET_ALL_USER_ACCOUNTS: string =
     this.SOCKET + '/bankUser/getUserBankAccounts';
+  static readonly GET_ACCOUNT_SETTINGS: string =
+    this.SOCKET + '/bankUser/get_account_settings';
+  ///bankUser/get_account_settings
 }

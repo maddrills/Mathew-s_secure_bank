@@ -3,7 +3,7 @@
   <section class="grid grid--3-cols">
     <div class="savings-account">
       <div class="LHS prevent-select">
-        <label>Savings Account</label>
+        <label>{{ selectedAllAccount?.accountTypeName }} Account</label>
         <span class="back" (click)="backToUserHome()">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +21,11 @@
       </div>
       <hr />
       <div>
-        <span><h6>Interest rate : 0.7%</h6></span>
+        <span
+          ><h6>
+            Interest rate : {{ accountSettings?.baseInterestRate }}%
+          </h6></span
+        >
         <article>
           <p>
             savings account is commonly used as a salary account or a quick draw
@@ -33,11 +37,11 @@
     <div class="account-details">
       <div class="account">
         <h6>Account number</h6>
-        <label>726318927</label>
+        <label>{{ selectedAllAccount?.id }}</label>
       </div>
       <div class="amount">
         <h6>Balance</h6>
-        <label>1,231,234 $</label>
+        <label>{{ selectedAllAccount?.amount }} $</label>
       </div>
     </div>
 

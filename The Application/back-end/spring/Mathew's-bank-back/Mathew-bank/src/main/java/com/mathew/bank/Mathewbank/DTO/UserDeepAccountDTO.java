@@ -174,4 +174,23 @@ public class UserDeepAccountDTO {
     public void setPeriodicWithdrawalCount(int periodicWithdrawalCount) {
         this.periodicWithdrawalCount = periodicWithdrawalCount;
     }
+
+    @Override
+    public String toString() {
+        return "UserDeepAccountDTO{" +
+                "id=" + id +
+                ", hold=" + hold +
+                ", active=" + active +
+                ", amount=" + amount +
+                ", nextInterestOn=" + nextInterestOn +
+                ", createdOn=" + createdOn +
+                ", frozen=" + frozen +
+                ", jointAccount=" + jointAccount +
+                ", lastWithdrawalDate=" + lastWithdrawalDate +
+                ", periodicWithdrawalCount=" + periodicWithdrawalCount +
+                ", WithdrawalCount=" + WithdrawalCount +
+                ", accountType=" + accountType +
+                ", accountTypeName='" + accountTypeName + '\'' +
+                '}';
+    }
 }

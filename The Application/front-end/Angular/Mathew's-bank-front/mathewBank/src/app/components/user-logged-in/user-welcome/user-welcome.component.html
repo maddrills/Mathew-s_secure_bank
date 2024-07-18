@@ -23,9 +23,11 @@
 
   <div class="accounts common-container prevent-select">
     <h4>User's Bank Accounts</h4>
+    @for(userAccount of allAccounts; track userAccount; let pos = $index){
     <div class="account-type savings">
       <h5 (click)="savingsVisible = !savingsVisible">
-        Savings
+        <!-- account type -->
+        {{ userAccount.accountTypeName }}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="32"
@@ -41,19 +43,23 @@
       </h5>
       @if (savingsVisible){
       <div class="container account-info">
-        <div><span>balance :</span><span>100,000</span></div>
+        <div>
+          <span>balance :</span><span>{{ userAccount.amount }}</span>
+        </div>
         <div class="account-number">
-          <span>Account number :</span><span>112 - 323 - 423</span>
+          <span>Account number :</span><span>{{ userAccount.id }}</span>
         </div>
         <div class="options-button">
-          <button (click)="transferFund('accountNumber')">Transfer Fund</button>
-          <button (click)="transactions('accountNumber')">Transactions</button>
-          <button (click)="editDetails('accountNumber')">Edit details</button>
+          <button (click)="transferFund(pos)">Transfer Fund</button>
+          <button (click)="transactions(pos)">Transactions</button>
+          <button (click)="editDetails(pos)">Edit details</button>
         </div>
       </div>
       }
     </div>
-    <div class="account-type checking">
+    }
+
+    <!-- <div class="account-type checking">
       <h5 (click)="checkingVisible = !checkingVisible">
         Checking
         <svg
@@ -112,7 +118,7 @@
         </div>
       </div>
       }
-    </div>
+    </div> -->
   </div>
 </section>
 <!-- <app-footer-section></app-footer-section> -->

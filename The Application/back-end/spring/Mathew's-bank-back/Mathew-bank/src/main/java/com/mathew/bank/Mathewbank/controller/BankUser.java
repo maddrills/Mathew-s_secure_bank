@@ -102,6 +102,7 @@ public class BankUser {
     public Collection<UserDeepAccountDTO> getAllUserAccountsByThereAuths(Authentication authentication, HttpServletResponse httpServletResponse){
 
         try{
+            this.userInBankService.getAllUserAccountsByUserAuth(authentication, httpServletResponse).forEach(System.out::println);
             return this.userInBankService.getAllUserAccountsByUserAuth(authentication, httpServletResponse);
         }catch (Exception e){
             System.out.println(e);

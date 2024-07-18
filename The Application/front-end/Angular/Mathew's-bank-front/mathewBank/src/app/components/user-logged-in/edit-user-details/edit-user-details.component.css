@@ -434,3 +434,7 @@
   background-color: #1971c2;
   border: 1px solid #1971c2;
 }
+
+.LHS.prevent-select label {
+  text-transform: capitalize;
+}
