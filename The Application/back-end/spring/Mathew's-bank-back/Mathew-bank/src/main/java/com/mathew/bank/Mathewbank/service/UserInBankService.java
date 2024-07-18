@@ -420,6 +420,47 @@ public class UserInBankService {
         }
     }
 
+    public UserDeepAccountDTO getAccountByAccountNumber(int accountNumber, Authentication authentication, HttpServletResponse httpServletResponse) {
+
+        //get the users details from authentication
+        UserAuthDecodedValues userAuthDecodedValues = this.authenticatedUserDecoder(authentication.getName());
+
+        //first check if account in users accounts
+        UserAccounts userAccounts = this.userRepository.getAllUserAccounts(userAuthDecodedValues.getAccountID());
+
+        //create an account
+        Account accountToBeAssigned = null;
+
+        //now cycle through all the user accounts from a match
+        for(var account : userAccounts.getAllUserAccounts()){
+            if(account.getId() == accountNumber){
+                //then user has the account
+                accountToBeAssigned = account;
+            }
+        }
+
+        UserDeepAccountDTO userDeepAccountDTO = null;
+        //if value found then make the exchange
+        if(accountToBeAssigned != null){
+            userDeepAccountDTO =  new UserDeepAccountDTO(
+                    accountToBeAssigned.getId(),
+                    accountToBeAssigned.isHold(),
+                    accountToBeAssigned.isActive(),
+                    accountToBeAssigned.getAmount(),
+                    accountToBeAssigned.getNextInterestOn(),
+                    accountToBeAssigned.getCreatedOn(),
+                    accountToBeAssigned.isFrozen(),
+                    accountToBeAssigned.isJointAccount(),
+                    accountToBeAssigned.getAccountType().getAccountType(),
+                    accountToBeAssigned.getLastWithdrawalDate(),
+                    accountToBeAssigned.getPeriodicWithdrawalCount(),
+                    accountToBeAssigned.getWithdrawalCount()
+            );
+        }
+
+        return userDeepAccountDTO;
+    }
+
     //this class is used to access decoded values
     private class UserAuthDecodedValues {
 

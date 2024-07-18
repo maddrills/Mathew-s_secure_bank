@@ -84,6 +84,9 @@ export class EditUserDetailsComponent {
     //private UnRegService: UnRegService,
     //import { UnRegService } from '../../../service/unRegService';
     UnRegService.checkIfUserIsLoggedIn();
+    if (this.selectedAllAccount) {
+      this.updateUserAccountDetails(this.selectedAllAccount.id);
+    }
   }
 
   // check the query param and opens up a ui element accordingly
@@ -175,5 +178,34 @@ export class EditUserDetailsComponent {
       error: (er) => {},
     });
     this.transactions = true;
+  }
+
+  //get updated user details
+  updateUserAccountDetails(accountNumber: number) {
+    this.userService.getUserData().subscribe({
+      next: (n) => {
+        console.log('Activated account');
+        console.log(n.body);
+
+        //then the storage
+        const values = JSON.stringify(n.body);
+        localStorage.setItem('activeUser', values);
+      },
+      error: (e) => console.log(e),
+    });
+
+    console.log(accountNumber);
+    this.userService.getAccountByAccountNumber(accountNumber).subscribe({
+      next: (n) => {
+        console.log('Selected account');
+        console.log(n.body);
+        console.log(`end`);
+
+        //then the storage
+        const values = JSON.stringify(n.body);
+        localStorage.setItem('selectedAccount', values);
+      },
+      error: (e) => console.log(e),
+    });
   }
 }

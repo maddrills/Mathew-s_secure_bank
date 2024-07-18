@@ -111,6 +111,18 @@ public class BankUser {
 
     }
 
+    @GetMapping("/getBasicUserDetails")
+    //this.userInBankService.getUserAndUserDetailsFromService(nameOrID, response);
+    public UserAndDetailsDTO getUserDetailsOnly(Authentication authentication, HttpServletResponse httpServletResponse){
+        return this.userInBankService.getUserAndUserDetailsFromService(authentication, httpServletResponse);
+    }
+
+
+    @GetMapping("/getAccountByAccountNumber")
+    public UserDeepAccountDTO getAccountByAccountNumber(@RequestParam int accountNumber, Authentication authentication, HttpServletResponse httpServletResponse){
+        return this.userInBankService.getAccountByAccountNumber(accountNumber, authentication, httpServletResponse);
+    }
+
 
     //returns two types of outputs either of type UserAndDetailsDTO or EmployeeDTO
     // the generic <T extends AllowedLoginOutputGeneric> is used to enforce the above condition

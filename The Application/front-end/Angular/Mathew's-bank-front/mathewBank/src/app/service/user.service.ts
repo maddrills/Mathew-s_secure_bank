@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserModel } from '../model/user-model';
 import { ApplicationHttpRoutes } from '../constants/http-routes';
@@ -89,6 +89,24 @@ export class UserService {
     return this.http.get<TransactionsModel[]>(
       ApplicationHttpRoutes.GET_ALL_TRANSACTIONS,
       {
+        observe: 'response',
+        withCredentials: true,
+      }
+    );
+  }
+
+  public getUserData() {
+    return this.http.get<UserModel>(ApplicationHttpRoutes.USER_GET_DETAILS, {
+      observe: 'response',
+      withCredentials: true,
+    });
+  }
+
+  public getAccountByAccountNumber(accountNumber: number) {
+    return this.http.get<UserAccountDeepModel>(
+      ApplicationHttpRoutes.GET_ACCOUNT_DETAILS_BY_ACCOUNT_NUMBER,
+      {
+        params: new HttpParams().set('accountNumber', accountNumber),
         observe: 'response',
         withCredentials: true,
       }

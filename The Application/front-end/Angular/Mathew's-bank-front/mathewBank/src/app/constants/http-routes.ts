@@ -72,9 +72,8 @@ export class ApplicationHttpRoutes {
     this.SOCKET + '/admin/create_a_branch';
 
   // Bank User
-
   static readonly USER_GET_DETAILS: string =
-    this.SOCKET + '/bankUser/user-details';
+    this.SOCKET + '/bankUser/getBasicUserDetails';
   static readonly GET_ALL_ACCOUNT_TYPES: string =
     this.SOCKET + '/bankUser/get_all_account_settings';
   static readonly CREATE_USER_BANK_ACCOUNT_By_TYPE_PUT: string =
@@ -89,4 +88,6 @@ export class ApplicationHttpRoutes {
     this.SOCKET + '/bankUser/get_all_account_settings';
   static readonly GET_ALL_TRANSACTIONS: string =
     this.SOCKET + '/bankUser/get_all_user_transactions';
+  static readonly GET_ACCOUNT_DETAILS_BY_ACCOUNT_NUMBER: string =
+    this.SOCKET + '/bankUser/getAccountByAccountNumber';
 }

@@ -31,7 +31,7 @@ export class UserWelcomeComponent {
     private router: Router,
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
-    private UnRegService: UnRegService,
+    private unRegService: UnRegService
   ) {
     //get user info from local storage
     this.activeUser = JSON.parse(localStorage.getItem('activeUser')!);
@@ -48,7 +48,7 @@ export class UserWelcomeComponent {
     //remove last local storage
     //localStorage.removeItem('selectedAccount');
     //private UnRegService: UnRegService,
-    UnRegService.checkIfUserIsLoggedIn();
+    this.unRegService.checkIfUserIsLoggedIn();
   }
 
   savingsVisible: boolean = false;
@@ -141,5 +141,13 @@ export class UserWelcomeComponent {
         next: (n) => location.reload(),
         error: (er) => console.log(er),
       });
+  }
+
+  //get updated user details
+  updateUserAccountDetails() {
+    this.userService.getUserData().subscribe({
+      next: (n) => console.log(n.body),
+      error: (e) => console.log(e),
+    });
   }
 }

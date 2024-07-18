@@ -659,7 +659,7 @@
 			"response": []
 		},
 		{
-			"name": "getAllUserAccountsByThereAuths",
+			"name": "getAllUserAccountsWhenAuth",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -673,6 +673,32 @@
 					"path": [
 						"bankUser",
 						"getUserBankAccounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAccountByAccountNumber",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/bankUser/getAccountByAccountNumber?accountNumber=101000004",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bankUser",
+						"getAccountByAccountNumber"
+					],
+					"query": [
+						{
+							"key": "accountNumber",
+							"value": "101000004"
+						}
 					]
 				}
 			},
