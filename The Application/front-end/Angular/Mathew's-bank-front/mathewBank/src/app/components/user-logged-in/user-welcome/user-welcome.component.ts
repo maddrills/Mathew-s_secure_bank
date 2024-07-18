@@ -119,4 +119,21 @@ export class UserWelcomeComponent {
     this.selectAnAccount = false;
     this.accountSet = null;
   }
+
+  createABankAccount() {
+    //if null
+    if (!this.accountSet) {
+      throw new Error('Method not implemented.');
+    }
+
+    this.userService
+      .createABankAccount(
+        this.accountSet.accountType,
+        this.accountSet.minStartingAmount
+      )
+      .subscribe({
+        next: (n) => location.reload(),
+        error: (er) => console.log(er),
+      });
+  }
 }

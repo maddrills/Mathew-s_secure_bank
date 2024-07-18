@@ -69,12 +69,17 @@ export class UserService {
   }
 
   public createABankAccount(accountName: string, initialAmount: number) {
-    return this.http.put<boolean>(ApplicationHttpRoutes.TRANSFER_MONEY_PATCH, {
-      params: new HttpParams()
-        .set('accountName', accountName)
-        .set('initialAmount', initialAmount),
-      observe: 'response',
-      withCredentials: true,
-    });
+    console.log(accountName, initialAmount);
+    return this.http.put<boolean>(
+      ApplicationHttpRoutes.CREATE_USER_BANK_ACCOUNT_By_TYPE_PUT,
+      null,
+      {
+        params: new HttpParams()
+          .set('accountName', accountName)
+          .set('initialAmount', initialAmount),
+        observe: 'response',
+        withCredentials: true,
+      }
+    );
   }
 }
