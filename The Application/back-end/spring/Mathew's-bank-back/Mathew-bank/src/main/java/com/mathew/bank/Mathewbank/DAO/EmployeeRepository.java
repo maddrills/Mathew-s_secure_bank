@@ -67,6 +67,7 @@ public class EmployeeRepository implements EmpRepo {
             //added repointing manager to employee to be added
 
             entityManager.persist(employeeDetails);
+            return;
         }
         //without any reporting manager
         entityManager.persist(employeeDetails);

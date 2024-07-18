@@ -127,23 +127,14 @@ export class EmployeeService {
     salary: number,
     password: string
   ) {
-    console.log('called');
     const rolesArray: rolesModel[] = [];
     //list out all the sending permissions
     this.rolesToBackend.subscribe((permission) => {
       permission?.forEach((value, key, fullArray) => {
-        console.log('createAnEmployee Keys');
-        console.log(key);
-        console.log(value);
-        console.log(fullArray);
         rolesArray.push(new rolesModel(value.roleName.slice(5), false));
       });
     });
-
-    console.log('Full array is this');
-    console.log(rolesArray);
-    console.log('Form info is');
-    return this.http.post<any>(
+    return this.http.post<string>(
       ApplicationHttpRoutes.POST_AN_EMPLOYEE,
       {
         phone_number,

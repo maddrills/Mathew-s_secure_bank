@@ -45,10 +45,11 @@ export class AddNewEmployeeComponent {
       )
       .subscribe({
         next: (roles) => {
-          console.log(roles.body);
           fullForm.resetForm();
         },
-        error: (er) => {},
+        error: (er) => {
+          console.log(er);
+        },
       });
   }
 }

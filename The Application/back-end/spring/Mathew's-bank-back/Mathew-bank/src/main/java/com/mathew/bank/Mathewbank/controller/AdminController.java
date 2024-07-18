@@ -89,7 +89,7 @@ public class AdminController {
 
     //adds an employee to db with or without a ROLE
     @PostMapping("/add_an_employee")
-    public String addAnEmployee(@RequestBody EmployeeDTO employeeDTO,  HttpServletResponse response, Authentication authentication){
+    public boolean addAnEmployee(@RequestBody EmployeeDTO employeeDTO,  HttpServletResponse response, Authentication authentication){
 
         //check if auth
         System.out.println(employeeDTO);

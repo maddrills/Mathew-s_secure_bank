@@ -103,12 +103,12 @@ public class AdminService {
     }
 
     //adds an employee with his or her credentials and at least one role
-    public String addAnyEmployee(EmployeeDTO employeeDTO, HttpServletResponse response, Authentication authentication) {
+    public boolean addAnyEmployee(EmployeeDTO employeeDTO, HttpServletResponse response, Authentication authentication) {
 
         // sanity check
         if (employeeDTO == null) {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            return "error null entry";
+            return false;
         }
 
         int accessLevel = accessLevelAuthCheck(authentication);
@@ -119,7 +119,7 @@ public class AdminService {
             for (RolesDto role : employeeDTO.getRolesName()) {
                 if (role.getRoleName().equals("admin") || role.getRoleName().equals("manager")) {
                     response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                    return "manager cannot add role manager";
+                    return false;
                 }
             }
         }
@@ -135,7 +135,7 @@ public class AdminService {
             //forbid if someone added admin role
             if (role.getRoleName().equals("admin")) {
                 response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                return "ROLE Admin not allowed";
+                return false;
             }
 
             // check if employee role was added
@@ -164,10 +164,10 @@ public class AdminService {
                 allowedRoles
         ).equals("error")) {
             response.setStatus(HttpServletResponse.SC_CONFLICT);
-            return "Error";
+            return false;
         }
         response.setStatus(HttpServletResponse.SC_CREATED);
-        return "Success";
+        return true;
     }
 
     private String addEmployeeAndDetails(
