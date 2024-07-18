@@ -8,6 +8,7 @@ import { UserAccountDeepModel } from '../../../model/user-account-deep-model';
 import { UserModel } from '../../../model/user-model';
 import { AccountTimeSpace } from '../../../model/time-space-model';
 import { FormsModule, NgForm } from '@angular/forms';
+import { TransactionsModel } from '../../../model/transactions-model';
 
 @Component({
   selector: 'app-edit-user-details',
@@ -29,6 +30,9 @@ export class EditUserDetailsComponent {
   fullName = '';
   selectedAllAccount: UserAccountDeepModel | null = null;
   accountSettings: AccountTimeSpace | null = null;
+
+  //Transactions
+  allUserTransactions: TransactionsModel[] | null = null;
 
   constructor(
     private router: Router,
@@ -69,6 +73,11 @@ export class EditUserDetailsComponent {
           this.accountSettings = accountSettings.body;
         },
       });
+
+    //check if transactions is open
+    if (this.transactions) {
+      this.getAllUserTransactions();
+    }
   }
 
   // check the query param and opens up a ui element accordingly
@@ -142,5 +151,20 @@ export class EditUserDetailsComponent {
         },
         error: (e) => console.log(e),
       });
+  }
+
+  getAllUserTransactions() {
+    if (this.transactions) {
+      this.transactions = !this.transactions;
+      return;
+    }
+    this.userService.getAllTransactions().subscribe({
+      next: (n) => {
+        console.log(n.body);
+        this.allUserTransactions = n.body;
+      },
+      error: (er) => {},
+    });
+    this.transactions = true;
   }
 }

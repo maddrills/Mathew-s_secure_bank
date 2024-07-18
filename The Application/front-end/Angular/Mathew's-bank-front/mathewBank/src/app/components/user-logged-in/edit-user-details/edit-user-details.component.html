@@ -86,7 +86,7 @@
     <section class="transactions">
       <div
         class="transactions-heading prevent-select"
-        (click)="transactions = !transactions"
+        (click)="getAllUserTransactions()"
       >
         <h4>transactions</h4>
         <svg
@@ -124,66 +124,14 @@
             <th>Date Time</th>
             <th>Amount</th>
           </tr>
+          @for(transaction of allUserTransactions; track transaction){
           <tr>
-            <td>192.168.10.1</td>
-            <td>172.168.2.1</td>
-            <td>sample</td>
-            <td>sample</td>
+            <td>{{ transaction.fromAccountNumber }}</td>
+            <td>{{ transaction.toAccountNumber }}</td>
+            <td>{{ transaction.transactionDate }}</td>
+            <td>{{ transaction.amount }}</td>
           </tr>
-          <tr>
-            <td>192.168.10.1</td>
-            <td>172.168.2.1</td>
-            <td>sample</td>
-            <td>sample</td>
-          </tr>
-          <tr>
-            <td>192.168.10.1</td>
-            <td>172.168.2.1</td>
-            <td>sample</td>
-            <td>sample</td>
-          </tr>
-          <tr>
-            <td>192.168.10.1</td>
-            <td>172.168.2.1</td>
-            <td>sample</td>
-            <td>sample</td>
-          </tr>
-          <tr>
-            <td>192.168.10.1</td>
-            <td>172.168.2.1</td>
-            <td>sample</td>
-            <td>sample</td>
-          </tr>
-          <tr>
-            <td>192.168.10.1</td>
-            <td>172.168.2.1</td>
-            <td>sample</td>
-            <td>sample</td>
-          </tr>
-          <tr>
-            <td>192.168.10.1</td>
-            <td>172.168.2.1</td>
-            <td>sample</td>
-            <td>sample</td>
-          </tr>
-          <tr>
-            <td>192.168.10.1</td>
-            <td>172.168.2.1</td>
-            <td>sample</td>
-            <td>sample</td>
-          </tr>
-          <tr>
-            <td>192.168.10.1</td>
-            <td>172.168.2.1</td>
-            <td>sample</td>
-            <td>sample</td>
-          </tr>
-          <tr>
-            <td>192.168.10.1</td>
-            <td>172.168.2.1</td>
-            <td>sample</td>
-            <td>sample</td>
-          </tr>
+          }
         </table>
         <div class="next-bubble prevent-select">
           <svg

@@ -44,7 +44,7 @@ export class UserWelcomeComponent {
     });
 
     //remove last local storage
-    localStorage.removeItem('selectedAccount');
+    //localStorage.removeItem('selectedAccount');
   }
 
   savingsVisible: boolean = false;

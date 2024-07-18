@@ -5,6 +5,7 @@ import { ApplicationHttpRoutes } from '../constants/http-routes';
 import { UserAccountDeepModel } from '../model/user-account-deep-model';
 import { AccountTimeSpace } from '../model/time-space-model';
 import { BehaviorSubject } from 'rxjs';
+import { TransactionsModel } from '../model/transactions-model';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -77,6 +78,16 @@ export class UserService {
         params: new HttpParams()
           .set('accountName', accountName)
           .set('initialAmount', initialAmount),
+        observe: 'response',
+        withCredentials: true,
+      }
+    );
+  }
+
+  public getAllTransactions() {
+    return this.http.get<TransactionsModel[]>(
+      ApplicationHttpRoutes.GET_ALL_TRANSACTIONS,
+      {
         observe: 'response',
         withCredentials: true,
       }

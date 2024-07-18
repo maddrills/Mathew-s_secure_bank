@@ -87,4 +87,6 @@ export class ApplicationHttpRoutes {
     this.SOCKET + '/bankUser/send-money-via-account-number';
   static readonly GET_ALL_ACCOUNT_SETTINGS: string =
     this.SOCKET + '/bankUser/get_all_account_settings';
+  static readonly GET_ALL_TRANSACTIONS: string =
+    this.SOCKET + '/bankUser/get_all_user_transactions';
 }
