@@ -67,12 +67,17 @@
       @if(moneyTransferActive){
       <div class="container money-transfer-container">
         <h6>IMPS money transfer</h6>
-        <form>
+        <form (ngSubmit)="transferCash(f)" #f="ngForm">
           <label for="to-account-number">beneficiary account number</label>
-          <input id="to-account-number" />
+          <input
+            id="to-account-number"
+            type="number"
+            name="accountNumber"
+            ngModel
+          />
           <label for="destination-amount">Amount</label>
-          <input id="destination-amount" />
-          <button>Pay</button>
+          <input id="destination-amount" type="number" name="amount" ngModel />
+          <button type="submit">Pay</button>
         </form>
       </div>
       }

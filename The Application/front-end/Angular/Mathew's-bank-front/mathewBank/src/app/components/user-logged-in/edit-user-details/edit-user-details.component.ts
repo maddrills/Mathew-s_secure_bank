@@ -7,11 +7,12 @@ import { UserService } from '../../../service/user.service';
 import { UserAccountDeepModel } from '../../../model/user-account-deep-model';
 import { UserModel } from '../../../model/user-model';
 import { AccountTimeSpace } from '../../../model/time-space-model';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-user-details',
   standalone: true,
-  imports: [NavBarComponent, FooterSectionComponent, CommonModule],
+  imports: [NavBarComponent, FooterSectionComponent, CommonModule, FormsModule],
   templateUrl: './edit-user-details.component.html',
   styleUrl: './edit-user-details.component.css',
 })
@@ -99,5 +100,47 @@ export class EditUserDetailsComponent {
 
   backToUserHome() {
     this.router.navigate(['user-welcome']);
+  }
+
+  transferCash(fullForm: NgForm) {
+    const toData: { accountNumber: number; amount: number } =
+      fullForm.form.value;
+
+    console.log(toData);
+
+    if (
+      !this.selectedAllAccount?.id ||
+      !toData.accountNumber ||
+      !toData.amount
+    ) {
+      return;
+    }
+    this.userService
+      .moneyTransfer(
+        this.selectedAllAccount?.id,
+        toData.accountNumber,
+        toData.amount
+      )
+      .subscribe({
+        next: (n) => {
+          console.log(n);
+          //reset the balance value
+          let updateValue = this.selectedAllAccount?.amount;
+          updateValue = updateValue! - toData.amount;
+
+          const updateAccount: UserAccountDeepModel = JSON.parse(
+            localStorage.getItem('selectedAccount')!
+          );
+
+          //update the UI
+          updateAccount.amount = updateValue;
+          this.selectedAllAccount = updateAccount;
+          //then the storage
+          const values = JSON.stringify(updateAccount);
+          localStorage.setItem('selectedAccount', values);
+          fullForm.resetForm();
+        },
+        error: (e) => console.log(e),
+      });
   }
 }
