@@ -299,6 +299,7 @@ public class UserRepository implements UserRepo {
                 fromAccountEntity.getAccountType().getAccountType()+" Account Money going out",
                 accountNumberTo,
                 accountNumberFrom,
+
                 LocalDateTime.now(),
                 false,
                 amount,
@@ -319,8 +320,8 @@ public class UserRepository implements UserRepo {
         toAccountEntity.setAmount(toAccountEntity.getAmount() + amount);
         userTransactionsToAccountEntity = new Transactions(
                 fromAccountEntity.getAccountType().getAccountType()+" Account Credited",
-                accountNumberFrom,
                 accountNumberTo,
+                accountNumberFrom,
                 LocalDateTime.now(),
                 true,
                 amount,

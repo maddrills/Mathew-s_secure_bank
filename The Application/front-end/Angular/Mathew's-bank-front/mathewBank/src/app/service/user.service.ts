@@ -6,6 +6,7 @@ import { UserAccountDeepModel } from '../model/user-account-deep-model';
 import { AccountTimeSpace } from '../model/time-space-model';
 import { BehaviorSubject } from 'rxjs';
 import { TransactionsModel } from '../model/transactions-model';
+import { EmployeeDataModel } from '../model/employee-model';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {

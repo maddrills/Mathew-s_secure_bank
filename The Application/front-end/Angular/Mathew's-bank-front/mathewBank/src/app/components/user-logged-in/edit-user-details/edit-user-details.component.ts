@@ -9,6 +9,7 @@ import { UserModel } from '../../../model/user-model';
 import { AccountTimeSpace } from '../../../model/time-space-model';
 import { FormsModule, NgForm } from '@angular/forms';
 import { TransactionsModel } from '../../../model/transactions-model';
+import { UnRegService } from '../../../service/unRegService';
 
 @Component({
   selector: 'app-edit-user-details',
@@ -38,7 +39,8 @@ export class EditUserDetailsComponent {
     private router: Router,
     private route: ActivatedRoute,
     private userService: UserService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private UnRegService: UnRegService
   ) {
     //gets the router param number to reveal the Ui
     // console.log(router.url);
@@ -78,6 +80,10 @@ export class EditUserDetailsComponent {
     // if (this.transactions) {
     //   this.getAllUserTransactions();
     // }
+
+    //private UnRegService: UnRegService,
+    //import { UnRegService } from '../../../service/unRegService';
+    UnRegService.checkIfUserIsLoggedIn();
   }
 
   // check the query param and opens up a ui element accordingly

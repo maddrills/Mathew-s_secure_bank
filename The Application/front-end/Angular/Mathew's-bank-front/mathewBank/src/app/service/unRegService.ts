@@ -215,4 +215,25 @@ export class UnRegService {
       }
     );
   }
+
+  public checkIfUserIsLoggedIn() {
+    //first time submit ***
+    const empData: EmployeeDataModel | null = JSON.parse(
+      localStorage.getItem('employeeData')!
+    );
+
+    if (!localStorage.getItem('activeUser')) {
+      this.userDetails.next(null);
+      this.logInDetected.next(false);
+      this.bankUserLoggedIn.next(false);
+      return;
+    }
+    //bank user presence
+    const resultBodyString: UserModel = JSON.parse(
+      localStorage.getItem('activeUser')!
+    );
+    this.userDetails.next(resultBodyString);
+    this.logInDetected.next(true);
+    this.bankUserLoggedIn.next(true);
+  }
 }

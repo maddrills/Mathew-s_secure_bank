@@ -7,6 +7,7 @@ import { UserService } from '../../../service/user.service';
 import { UserModel } from '../../../model/user-model';
 import { UserAccountDeepModel } from '../../../model/user-account-deep-model';
 import { AccountTimeSpace } from '../../../model/time-space-model';
+import { UnRegService } from '../../../service/unRegService';
 
 @Component({
   selector: 'app-user-welcome',
@@ -29,7 +30,8 @@ export class UserWelcomeComponent {
   constructor(
     private router: Router,
     private userService: UserService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private UnRegService: UnRegService,
   ) {
     //get user info from local storage
     this.activeUser = JSON.parse(localStorage.getItem('activeUser')!);
@@ -45,6 +47,8 @@ export class UserWelcomeComponent {
 
     //remove last local storage
     //localStorage.removeItem('selectedAccount');
+    //private UnRegService: UnRegService,
+    UnRegService.checkIfUserIsLoggedIn();
   }
 
   savingsVisible: boolean = false;
