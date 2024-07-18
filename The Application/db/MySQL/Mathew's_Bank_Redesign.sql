@@ -414,3 +414,9 @@ SELECT * FROM `transactions`;
 DESC `account`;
 SELECT * FROM `user_application`;
 DESCRIBE `user_application`;
+
+-- SELECT * FROM `user_application` WHERE status = 1;
+-- UPDATE  `user_application` SET status = 0;
+
+-- SELECT * FROM `user_application` WHERE rejected = 1;
+-- UPDATE `user_application` SET rejected = 0;

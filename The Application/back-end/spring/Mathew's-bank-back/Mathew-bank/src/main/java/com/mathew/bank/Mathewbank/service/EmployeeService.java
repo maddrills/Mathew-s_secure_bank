@@ -7,9 +7,13 @@ import com.mathew.bank.Mathewbank.entity.commonEntity.UserApplication;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.Branch;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.Employee;
 import com.mathew.bank.Mathewbank.entity.employeeOnlyEntity.employees.EmployeeDetails;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.UserAccounts;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.User;
+import com.mathew.bank.Mathewbank.entity.userOnlyEntity.users.UserDetails;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -19,6 +23,9 @@ public class EmployeeService {
 
     @Autowired
     EmployeeRepository employeeRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
 
     //get all user applications
@@ -92,14 +99,92 @@ public class EmployeeService {
         );
     }
 
+    private boolean acceptUserApplication(UserApplication userApplication){
+
+        try{
+            //create a basic account
+            UserAccounts basicAccount = new UserAccounts(false);
+
+            //create an employee and employee details a default username of full nname and password oof 12345 will be made
+            User user = new User(
+                    //the default username is the first name + last name with no uppercases
+                    userApplication.getFullName().replaceAll("\\s", "").toLowerCase(),
+                    this.passwordEncoder.encode("12345"),
+                    basicAccount,
+                    null
+            );
+            //get user role
+            Role roles = this.employeeRepository.findRoleByRoleName("user");
+            user.setARole(roles);
+            //add user to user details
+            UserDetails userDetails = new UserDetails(
+                    userApplication.getFullName(),
+                    userApplication.getPhoneNumber(),
+                    userApplication.getDateOfBirth(),
+                    userApplication.getAge(),
+                    userApplication.getEmail(),
+                    user
+            );
+
+            //join details with user
+            user.setUserDetails(userDetails);
+
+            //finally commit the user
+            this.employeeRepository.updateUser(user);
+
+            return true;
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
+    }
 
     //turns the status field to true and after that relays the application data to user table
     public boolean acceptAnApplicationNyId(int applicationNumber, int employeeId, HttpServletResponse servletResponse) {
-
-        if (applicationNumber <= 0) {
-            servletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return false;
-        }
+//
+//        if (applicationNumber <= 0) {
+//            servletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+//            return false;
+//        }
+//
+//        try{
+//
+//            //find if user application rejected
+//            UserApplication userApplication = this.employeeRepository.getApplicationByIdNumber(applicationNumber);
+//            if(userApplication.isStatus() || userApplication.isRejected()) return false;
+//
+//
+//            //find the employee from db
+//            Employee employee = this.employeeRepository.getEmployeeById(Integer.parseInt(employeeId));
+//            int empLevel = this.highestAccessLevel(employee);
+//
+//            switch(empLevel){
+//                case 1:
+//                    //admin can accept application from anywhere
+//                    break;
+//
+//                case 2:
+//                    //manager can accept any application under the branch he is assigned to or any application directly assigned to him
+//                    //check if directly assigned
+//
+//                    break;
+//                case 3:
+//                    //clerk ony accept applications directly assigned to him
+//                    //only if directly assigned
+//                    break;
+//                case 4:
+//                    //employee reject
+//                    return false;
+//                default:
+//                    System.out.println("Role doesn't exist");
+//                    return false;
+//            }
+//            return false;
+//
+//        }catch (Exception e){
+//            System.out.println(e);
+//            return false;
+//        }
 
         try {
             return this.employeeRepository.acceptUserApplication(applicationNumber, employeeId);

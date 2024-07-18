@@ -129,7 +129,11 @@
             <td>{{ transaction.fromAccountNumber }}</td>
             <td>{{ transaction.toAccountNumber }}</td>
             <td>{{ transaction.transactionDate }}</td>
-            <td>{{ transaction.amount }}</td>
+            @if(selectedAllAccount?.id == transaction.fromAccountNumber){
+            <td class="gone">-{{ transaction.amount }}</td>
+            }@else{
+            <td class="got">+{{ transaction.amount }}</td>
+            }
           </tr>
           }
         </table>

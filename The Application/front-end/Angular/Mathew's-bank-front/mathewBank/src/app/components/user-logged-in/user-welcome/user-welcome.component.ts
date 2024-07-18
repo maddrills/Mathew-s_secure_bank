@@ -66,6 +66,7 @@ export class UserWelcomeComponent {
 
   transactions(pos: number) {
     console.log(pos);
+    this.privateSelectedAccount(pos);
     this.router.navigate(['details'], {
       queryParams: { openDetailsUi: 2 },
       relativeTo: this.activatedRoute,
@@ -74,6 +75,7 @@ export class UserWelcomeComponent {
 
   editDetails(pos: number) {
     console.log(pos);
+    this.privateSelectedAccount(pos);
     this.router.navigate(['details'], {
       queryParams: { openDetailsUi: 3 },
       relativeTo: this.activatedRoute,

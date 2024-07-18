@@ -438,3 +438,13 @@
 .LHS.prevent-select label {
   text-transform: capitalize;
 }
+
+.gone {
+  /* background-color: #fff5f5; */
+  color: #c92a2a;
+}
+
+.got {
+  /* background-color: #ebfbee; */
+  color: #2b8a3e;
+}

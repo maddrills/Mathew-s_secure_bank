@@ -448,7 +448,7 @@ public class EmployeeRepository implements EmpRepo {
                 false
         );
 
-        //check if employee and application are of the same branch
+        //check if employee and application are of the same branch /
         if(!checkIfApplicationAndEmployeeAreOfTheSameBranchAdminException(userApplication, employeeId)) return false;
 
         //create an employee and employee details a default username of full nname and password oof 12345 will be made
@@ -807,6 +807,12 @@ public class EmployeeRepository implements EmpRepo {
         employee.getRoles().forEach(System.out::println);
         this.updateEmployee(employee);
         return respRoles;
+    }
+
+    @Override
+    @Transactional
+    public void updateUser(User user) {
+        this.entityManager.merge(user);
     }
 
     // TODO implement method when needed

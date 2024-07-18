@@ -75,9 +75,9 @@ export class EditUserDetailsComponent {
       });
 
     //check if transactions is open
-    if (this.transactions) {
-      this.getAllUserTransactions();
-    }
+    // if (this.transactions) {
+    //   this.getAllUserTransactions();
+    // }
   }
 
   // check the query param and opens up a ui element accordingly
@@ -89,6 +89,7 @@ export class EditUserDetailsComponent {
         break;
       case 2:
         this.transactions = true;
+        this.getAllUserTransactions();
         break;
       case 3:
         this.editSavingsAccount = true;
@@ -153,8 +154,9 @@ export class EditUserDetailsComponent {
       });
   }
 
+  private gitData = false;
   getAllUserTransactions() {
-    if (this.transactions) {
+    if (this.transactions && this.gitData) {
       this.transactions = !this.transactions;
       return;
     }
@@ -162,6 +164,7 @@ export class EditUserDetailsComponent {
       next: (n) => {
         console.log(n.body);
         this.allUserTransactions = n.body;
+        this.gitData = true;
       },
       error: (er) => {},
     });

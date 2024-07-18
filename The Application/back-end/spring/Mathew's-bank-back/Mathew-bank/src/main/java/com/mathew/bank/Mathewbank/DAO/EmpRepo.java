@@ -79,4 +79,6 @@ public interface EmpRepo extends User_emp_commonRepo {
 
     List<RolesDto> updateEmployeePermissions(int empId, List<RolesDto> roles);
 
+    void updateUser(User user);
+
 }
