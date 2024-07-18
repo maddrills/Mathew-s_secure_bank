@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../service/user.service';
 import { UserModel } from '../../../model/user-model';
 import { UserAccountDeepModel } from '../../../model/user-account-deep-model';
+import { AccountTimeSpace } from '../../../model/time-space-model';
 
 @Component({
   selector: 'app-user-welcome',
@@ -18,6 +19,12 @@ export class UserWelcomeComponent {
   activeUser: UserModel | null = null;
   fullName = '';
   allAccounts: UserAccountDeepModel[] | null = null;
+
+  //ui
+  selectAnAccount: boolean = false;
+  openCreateAccount: boolean = false;
+  accountSettings: AccountTimeSpace[] | null = null;
+  accountSet: AccountTimeSpace | null = null;
 
   constructor(
     private router: Router,
@@ -81,5 +88,35 @@ export class UserWelcomeComponent {
       'selectedAccount',
       JSON.stringify(this.allAccounts![accountArrayPosition])
     );
+  }
+
+  public displayAllAccountSettings() {
+    console.log('Inverter');
+    let invert = false;
+    //get all user accounts
+    if (this.selectAnAccount) {
+      this.selectAnAccount = invert;
+      console.log('return');
+      return;
+    }
+    this.userService.getAllAccountSetting().subscribe({
+      next: (allAccountSettings) => {
+        console.log(allAccountSettings.body);
+        this.accountSettings = allAccountSettings.body;
+        this.selectAnAccount = !invert;
+      },
+    });
+  }
+
+  selectThisAccount(pos: number) {
+    console.log(pos);
+    this.selectAnAccount = !this.selectAnAccount;
+    this.accountSet = this.accountSettings![pos];
+  }
+
+  openUpAccountCreateSection() {
+    this.openCreateAccount = !this.openCreateAccount;
+    this.selectAnAccount = false;
+    this.accountSet = null;
   }
 }

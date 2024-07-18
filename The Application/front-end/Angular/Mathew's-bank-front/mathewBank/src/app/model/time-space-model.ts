@@ -8,7 +8,7 @@ export class AccountTimeSpace {
     public months: number = 0,
     public years: number = 0,
     public baseInterestRate: number = 0,
-    public isAJointAccount: boolean = false,
+    public ajointAccount: boolean = false,
     public minStartingAmount: number = 0,
 
     public withdrawalCountLimit: number = 0,
@@ -18,6 +18,6 @@ export class AccountTimeSpace {
     public dailyDraw: number = 0,
     public hourlyDraw: number = 0,
     public minutesDraw: number = 0,
-    public isPeriodic: boolean = false
+    public periodic: boolean = false
   ) {}
 }

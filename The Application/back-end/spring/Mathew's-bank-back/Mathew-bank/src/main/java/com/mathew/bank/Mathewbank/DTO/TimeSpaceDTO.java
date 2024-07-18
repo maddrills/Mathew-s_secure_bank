@@ -38,7 +38,9 @@ public class TimeSpaceDTO {
 
     private int minutesDraw;
 
-    public TimeSpaceDTO(String accountType, int second, int min, int hour, int days, int months, int years, double baseInterestRate, boolean isAJointAccount, double minStartingAmount, double withdrawalCountLimit, double moneyTransferLimit, int baseLimit, int monthlyDraw, int dailyDraw, int hourlyDraw, int minutesDraw) {
+    private boolean periodic;
+
+    public TimeSpaceDTO(String accountType, int second, int min, int hour, int days, int months, int years, double baseInterestRate, boolean isAJointAccount, double minStartingAmount, double withdrawalCountLimit, double moneyTransferLimit, int baseLimit, int monthlyDraw, int dailyDraw, int hourlyDraw, int minutesDraw,  boolean periodic) {
         this.accountType = accountType;
         this.second = second;
         this.min = min;
@@ -56,6 +58,7 @@ public class TimeSpaceDTO {
         this.dailyDraw = dailyDraw;
         this.hourlyDraw = hourlyDraw;
         this.minutesDraw = minutesDraw;
+        this.periodic = periodic;
     }
 
     public int getMinutesDraw() {
@@ -192,6 +195,14 @@ public class TimeSpaceDTO {
 
     public void setAccountType(String accountType) {
         this.accountType = accountType;
+    }
+
+    public boolean isPeriodic() {
+        return periodic;
+    }
+
+    public void setPeriodic(boolean periodic) {
+        this.periodic = periodic;
     }
 
     @Override

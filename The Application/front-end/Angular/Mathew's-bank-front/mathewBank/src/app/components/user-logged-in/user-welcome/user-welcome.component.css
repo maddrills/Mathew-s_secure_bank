@@ -173,3 +173,97 @@
 .options-button button {
   min-width: 15rem;
 }
+
+.create-an-account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+  align-self: center;
+}
+
+.create-an-account svg {
+  fill: #1864ab;
+}
+.create-an-account svg:hover {
+  fill: #1864ab;
+  cursor: pointer;
+}
+.create-an-account svg:active {
+  fill: #74c0fc;
+  cursor: pointer;
+}
+
+.account_info {
+  background-color: #e6fcf5;
+  border-radius: 12px;
+}
+
+.create-an-account h5 {
+  font-size: 1.8rem;
+}
+
+.account-options h6 {
+  font-size: 1.8rem;
+  text-transform: capitalize;
+  color: #087f5b;
+  padding: 2rem;
+  background-color: #96f2d7;
+  border-top-left-radius: 12px;
+  transition: all 0.33s;
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.07);
+}
+.account-options h6:hover {
+  cursor: pointer;
+  background-color: #c3fae8;
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0);
+}
+
+.account-options ul {
+  list-style: none;
+  font-size: 1.4rem;
+  position: absolute;
+  background-color: #fff;
+  padding: 0.2rem 0.6rem;
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.07);
+}
+.account-options ul li {
+  margin: 0.5rem 1.2rem;
+  transition: all 0.33s;
+}
+.account-options ul li:hover {
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  background-color: #555;
+  color: #fff;
+}
+
+.time-info {
+  padding: 1rem;
+}
+
+.time-info h6 {
+  font-size: 1.4rem;
+  color: #0ca678;
+  margin-bottom: 2rem;
+}
+
+.time-info p {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.time-info button {
+  padding: 1rem;
+  border-radius: 12px;
+  border: 0;
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.07);
+  transition: all 0.33s;
+  /* color: #fff; */
+  background-color: #fff;
+}
+
+.time-info button:hover {
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0);
+  cursor: pointer;
+}

@@ -83,5 +83,8 @@ export class ApplicationHttpRoutes {
     this.SOCKET + '/bankUser/getUserBankAccounts';
   static readonly GET_ACCOUNT_SETTINGS: string =
     this.SOCKET + '/bankUser/get_account_settings';
-  ///bankUser/get_account_settings
+  static readonly TRANSFER_MONEY_PATCH: string =
+    this.SOCKET + '/bankUser/send-money-via-account-number';
+  static readonly GET_ALL_ACCOUNT_SETTINGS: string =
+    this.SOCKET + '/bankUser/get_all_account_settings';
 }

@@ -23,6 +23,76 @@
 
   <div class="accounts common-container prevent-select">
     <h4>User's Bank Accounts</h4>
+    <div class="create-an-account">
+      <h5>Create a new account</h5>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="32"
+        fill="#000000"
+        viewBox="0 0 256 256"
+        (click)="openUpAccountCreateSection()"
+      >
+        <path
+          d="M224,128a96,96,0,1,1-96-96A96,96,0,0,1,224,128Z"
+          opacity="0.2"
+        ></path>
+        <path
+          d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm45.66-109.66a8,8,0,0,1,0,11.32l-40,40a8,8,0,0,1-11.32,0l-40-40a8,8,0,0,1,11.32-11.32L128,140.69l34.34-34.35A8,8,0,0,1,173.66,106.34Z"
+        ></path>
+      </svg>
+      @if(openCreateAccount){
+      <div class="account_info grid grid--4-cols">
+        <div class="account-options">
+          <h6 (click)="displayAllAccountSettings()">
+            @if(accountSet){
+            {{ accountSet.accountType }}
+            }@else{ Select Account }
+          </h6>
+          @if(selectAnAccount){
+          <ul>
+            @for(accountSettings of accountSettings; track accountSettings; let
+            pos = $index){
+            <li (click)="selectThisAccount(pos)">
+              {{ accountSettings.accountType }}
+            </li>
+            }
+          </ul>
+          }
+        </div>
+        <div class="time-info">
+          <h6>Base Interest Rate</h6>
+          <p>{{ accountSet?.baseInterestRate }}</p>
+        </div>
+        <div class="time-info">
+          <h6>Joint Account</h6>
+          <p>{{ accountSet?.ajointAccount }}</p>
+        </div>
+        <div class="time-info">
+          <h6>Min Starting Amount</h6>
+          <p>{{ accountSet?.minStartingAmount }}</p>
+        </div>
+        <div class="time-info">
+          <h6>Withdrawal count limit</h6>
+          <p>{{ accountSet?.withdrawalCountLimit }}</p>
+        </div>
+        <div class="time-info">
+          <h6>Money Transfer Limit</h6>
+          <p>{{ accountSet?.moneyTransferLimit }}</p>
+        </div>
+        <div class="time-info">
+          <h6>Base Limit</h6>
+          <p>{{ accountSet?.baseLimit }}</p>
+        </div>
+        <div class="time-info">
+          <h6>Create Account</h6>
+          @if(accountSet){
+          <button>Create Bank Account</button>
+          }
+        </div>
+      </div>
+      }
+    </div>
     @for(userAccount of allAccounts; track userAccount; let pos = $index){
     <div class="account-type savings">
       <h5 (click)="savingsVisible = !savingsVisible">

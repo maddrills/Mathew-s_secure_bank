@@ -41,4 +41,40 @@ export class UserService {
       }
     );
   }
+
+  public getAllAccountSetting() {
+    return this.http.get<AccountTimeSpace[]>(
+      ApplicationHttpRoutes.GET_ALL_ACCOUNT_SETTINGS,
+      {
+        observe: 'response',
+        withCredentials: true,
+      }
+    );
+  }
+
+  //TRANSFER_MONEY_PATCH
+  public moneyTransfer(from: number, to: number, amount: number) {
+    return this.http.patch<boolean>(
+      ApplicationHttpRoutes.TRANSFER_MONEY_PATCH,
+      null,
+      {
+        params: new HttpParams()
+          .set('accountNumberFrom', from)
+          .set('accountNumberTo', to)
+          .set('amount', amount),
+        observe: 'response',
+        withCredentials: true,
+      }
+    );
+  }
+
+  public createABankAccount(accountName: string, initialAmount: number) {
+    return this.http.put<boolean>(ApplicationHttpRoutes.TRANSFER_MONEY_PATCH, {
+      params: new HttpParams()
+        .set('accountName', accountName)
+        .set('initialAmount', initialAmount),
+      observe: 'response',
+      withCredentials: true,
+    });
+  }
 }

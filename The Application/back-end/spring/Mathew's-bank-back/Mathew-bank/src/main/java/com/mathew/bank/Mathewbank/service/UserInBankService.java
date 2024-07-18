@@ -309,7 +309,8 @@ public class UserInBankService {
                     timeSpace.getMonthlyDraw(),
                     timeSpace.getDailyDraw(),
                     timeSpace.getHourlyDraw(),
-                    timeSpace.getMinutesDraw()
+                    timeSpace.getMinutesDraw(),
+                    timeSpace.isPeriodic()
             );
 
         }catch (Exception e){
@@ -370,7 +371,8 @@ public class UserInBankService {
                         accountType.getMonthlyDraw(),
                         accountType.getDailyDraw(),
                         accountType.getHourlyDraw(),
-                        accountType.getMinutesDraw()
+                        accountType.getMinutesDraw(),
+                        accountType.isPeriodic()
                 ));
             });
 
