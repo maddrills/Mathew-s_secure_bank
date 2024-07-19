@@ -263,6 +263,26 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "getCurrentBranch",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/manager/getCurrentBranch",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"manager",
+						"getCurrentBranch"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

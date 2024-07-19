@@ -79,11 +79,9 @@ public class ProjectSecurityConfig {
                         .requestMatchers(
                                 "/admin/get_all_users",
                                 "/admin/list_all_branches_with_manager",
-                                "/admin/get_all_employees_by_a_role_name",
-                                "/admin/get_all_employees",
                                 "/admin/create_a_branch",
                                 "/admin/manager_to_branch",
-                                "/admin/get_all_employees_under",
+
                                 "/admin/remove-manager-from-branch",
                                 "/admin/remove-clerk-from-bank-by-admin",
                                 "/admin/add-clerk-to-any-branch",
@@ -91,6 +89,9 @@ public class ProjectSecurityConfig {
                         ).hasAnyRole("admin")
 
                         .requestMatchers(
+                                "/admin/get_all_employees_under",
+                                "/admin/get_all_employees_by_a_role_name",
+                                "/admin/get_all_employees",
                                 "/admin/add_an_employee",
                                 "/admin/remove_employee_permission",
                                 "/admin/add_employee_permission",
