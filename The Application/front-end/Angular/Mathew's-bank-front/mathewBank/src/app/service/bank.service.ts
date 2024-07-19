@@ -150,4 +150,14 @@ export class BankService {
       }
     );
   }
+
+  public getEmployeesCurrentBankAccount() {
+    return this.http.get<BranchModel[]>(
+      ApplicationHttpRoutes.GET_CURRENT_BRANCH,
+      {
+        observe: 'response',
+        withCredentials: true,
+      }
+    );
+  }
 }

@@ -42,7 +42,7 @@ export const EMPLOYEE_LOGGED_IN: Route[] = [
   {
     path: 'bank-management',
     component: BranchManagementComponent,
-    canActivate: [AuthGuardAdminService.checkAdmin],
+    canActivate: [AuthGuardAdminService.checkManager],
   },
   {
     path: 'branch-edit-component',

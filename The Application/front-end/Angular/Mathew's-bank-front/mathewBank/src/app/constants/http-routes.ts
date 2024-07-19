@@ -70,6 +70,9 @@ export class ApplicationHttpRoutes {
     this.SOCKET + '/admin/list_all_branches_with_manager';
   static readonly ADD_A_BRANCH_WITH_OR_WITHOUT_A_MANAGER: string =
     this.SOCKET + '/admin/create_a_branch';
+  static readonly GET_CURRENT_BRANCH: string =
+    this.SOCKET + '/manager/getCurrentBranch';
+  //http://localhost:8080/manager/getCurrentBranch
 
   // Bank User
   static readonly USER_GET_DETAILS: string =

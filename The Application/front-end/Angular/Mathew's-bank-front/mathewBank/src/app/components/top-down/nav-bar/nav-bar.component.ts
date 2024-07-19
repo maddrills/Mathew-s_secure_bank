@@ -128,9 +128,9 @@ export class NavBarComponent {
     this.loginActive = false;
     //local storage null
     localStorage.clear();
-    // this.employeePermissionService.isAdminSub.next(false);
-    // this.employeePermissionService.isManagerSub.next(false);
-    // this.employeePermissionService.isClerkSub.next(false);
+    this.employeePermissionService.isAdminSub.next(false);
+    this.employeePermissionService.isManagerSub.next(false);
+    this.employeePermissionService.isClerkSub.next(false);
     this.unRegService.logUserOut();
     this.router.navigate(['welcome']);
     //location.reload();

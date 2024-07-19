@@ -13,6 +13,7 @@ import { BankApplicationsComponent } from '../../bank-applications/bank-applicat
 import { EmployeeService } from '../../../../service/employee-post-login.service';
 import { rolesModel } from '../../../../model/roles-model';
 import { Router } from '@angular/router';
+import { EmployeePermissionService } from '../../../../service/employee-permission.service';
 
 @Component({
   selector: 'app-branch-edit',
@@ -42,6 +43,7 @@ export class BranchEditComponent implements OnInit {
     private navBarGoldService: NavBarGoldService,
     private userDataRefreshUpDate: RefreshDataFetcherService,
     private employeeService: EmployeeService,
+    private employeePermissionService: EmployeePermissionService,
     private router: Router
   ) {
     //refresh statefullness
@@ -78,6 +80,13 @@ export class BranchEditComponent implements OnInit {
     console.log('All employees');
     console.log(this.allEmployees);
     console.log(this.userDataRefreshUpDate);
+
+    //private employeePermissionService : EmployeePermissionService,
+    employeePermissionService.isManagerSub.subscribe((manager) => {
+      if (manager) {
+        //get bank by from user credentials
+      }
+    });
   }
 
   //remove employee

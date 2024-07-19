@@ -597,6 +597,32 @@ public class EmployeeService {
 
     }
 
+    public Collection<BranchDTO> getCurrentBranch(HttpServletResponse response, Authentication authentication) {
+
+        try{
+            //get the corresponding employee
+            Employee employee = this.employeeRepository.getEmployeeById(Integer.parseInt(authentication.getName()));
+
+            //get
+            Branch branch = this.employeeRepository.getABranchById(employee.getBankBranch().getId());
+
+            Collection<BranchDTO> branches = new ArrayList<>(1);
+
+            branches.add(new BranchDTO(
+                    branch.getId(),
+                    branch.getBranchName(),
+                    branch.getState(),
+                    branch.getCountry(),
+                    branch.isOpen(),
+                    branch.getBranchManager() == null ? 0 : branch.getBranchManager().getId()));
+
+            return branches;
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+
 
     private int highestAccessLevel(Employee employee) {
 

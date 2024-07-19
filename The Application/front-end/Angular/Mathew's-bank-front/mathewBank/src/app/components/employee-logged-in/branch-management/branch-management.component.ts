@@ -4,11 +4,12 @@ import { NavBarComponent } from '../../top-down/nav-bar/nav-bar.component';
 import { FooterSectionComponent } from '../../top-down/footer-section/footer-section.component';
 import { RefreshDataFetcherService } from '../../../service/dataRefresh';
 import { BankService } from '../../../service/bank.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, filter, switchMap } from 'rxjs';
 import { BranchModel } from '../../../model/branch-model';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EmployeeService } from '../../../service/employee-post-login.service';
+import { EmployeePermissionService } from '../../../service/employee-permission.service';
 
 @Component({
   selector: 'app-branch-management',
@@ -20,21 +21,72 @@ import { EmployeeService } from '../../../service/employee-post-login.service';
 export class BranchManagementComponent {
   //allBankNames = new BehaviorSubject<BankService[] | null>(null);
   allBankNames: BranchModel[] | null = null;
+  currentUserIsAdmin: boolean = false;
+
+  //isManager;
 
   constructor(
     private navBarGoldService: NavBarGoldService,
     private userDataRefreshUpDate: RefreshDataFetcherService,
     private bankService: BankService,
     private employeeService: EmployeeService,
+    private employeePermissionService: EmployeePermissionService,
     private router: Router
   ) {
     this.navBarGoldService.resetAll();
     this.navBarGoldService.bankManagement.next(true);
     userDataRefreshUpDate.checkIfEmployeeDataAvailable();
-    this.getAllBranchesFrommDb();
+
+    this.employeePermissionService.isAdminSub
+      .pipe(
+        switchMap((isAdmin) => {
+          if (isAdmin) {
+            this.currentUserIsAdmin = true;
+            return this.bankService.getAllBankBranches();
+          } else {
+            console.log('Is Manager');
+            this.currentUserIsAdmin = false;
+            return this.bankService.getEmployeesCurrentBankAccount();
+          }
+        })
+      )
+      .subscribe({
+        next: (n) => {
+          console.log('switch map observable is');
+          console.log(n.body);
+          this.allBankNames = n.body;
+        },
+      });
+
+    // this.employeePermissionService.isManagerSub
+    //   .pipe(
+    //     switchMap(() => {
+    //       //first check if admin
+    //       return this.employeePermissionService.isAdminSub.pipe(
+    //         filter((isAdmin) => isAdmin == true),
+    //         switchMap(() => {
+    //           return this.bankService.getAllBankBranches();
+    //         })
+    //       );
+    //     })
+    //     // filter((isManager) => isManager == true),
+    //     // switchMap(() => {
+    //     //   return this.bankService.getAllBankBranches();
+    //     // })
+    //   )
+    //   .subscribe({
+    //     next: (n) => {
+    //       console.log('switch map observable is');
+    //       console.log(n.body);
+    //       this.allBankNames = n.body;
+    //     },
+    //   });
+
+    //this.getAllBranchesFrommDb();
     //this.employeeService.authViewActive.next(false);
   }
 
+  //check if admin is present
   public getAllBranchesFrommDb() {
     this.bankService.getAllBankBranches().subscribe({
       next: (n) => {

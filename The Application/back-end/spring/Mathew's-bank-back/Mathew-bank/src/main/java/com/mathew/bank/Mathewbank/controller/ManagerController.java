@@ -1,5 +1,6 @@
 package com.mathew.bank.Mathewbank.controller;
 
+import com.mathew.bank.Mathewbank.DTO.BranchDTO;
 import com.mathew.bank.Mathewbank.DTO.EmployeeDTO;
 import com.mathew.bank.Mathewbank.DTO.RolesDto;
 import com.mathew.bank.Mathewbank.DTO.UserApplicationDTO;
@@ -90,4 +91,12 @@ public class ManagerController {
     public List<UserApplicationDTO> getApplicationsUnderAnEmployee(@RequestParam int employeeId, HttpServletResponse response, Authentication authentication){
         return this.employeeService.getAllApplicationsAssignedToAnEmployee(employeeId, response, authentication);
     }
+
+    ///employee/getApplicationsUnderAnEmployee
+    @GetMapping("/getCurrentBranch")
+    public Collection<BranchDTO> getCurrentBranch(HttpServletResponse response, Authentication authentication){
+        return this.employeeService.getCurrentBranch(response, authentication);
+    }
+
+
 }
