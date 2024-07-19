@@ -169,11 +169,9 @@ export class SubEmployeesComponent implements OnDestroy {
         next: (n) => {
           console.log('Return Result');
           const employeePermissionSet: rolesModel[] | null = n.body;
-          console.log(employeePermissionSet);
           employeePermissionSet?.forEach((changeInPermissions) => {
             changeInPermissions.added = true;
           });
-          console.log(employeePermissionSet);
           this.employeeService.rolesToBeRemovedFromBackend.next(
             employeePermissionSet
           );

@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { EmployeeLoggedInComponent } from './components/employee-logged-in/employee-logged-in.component';
 import { FooterSectionComponent } from './components/top-down/footer-section/footer-section.component';
 import { NavBarComponent } from './components/top-down/nav-bar/nav-bar.component';
+import { EmployeePermissionService } from './service/employee-permission.service';
 
 @Component({
   selector: 'app-root',
@@ -27,5 +28,9 @@ import { NavBarComponent } from './components/top-down/nav-bar/nav-bar.component
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+  constructor(private employeePermissionService: EmployeePermissionService) {
+    // private employeePermissionService: EmployeePermissionService
+    this.employeePermissionService.checkUserAuth();
+  }
   title = 'mathewBank';
 }

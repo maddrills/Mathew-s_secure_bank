@@ -7,30 +7,47 @@ import { EmployeeManagementShellComponent } from '../employee-management/employe
 import { LogInPageComponent } from '../log-in-page/log-in-page.component';
 import { AddNewEmployeeComponent } from '../employee-management/add-new-employee/add-new-employee.component';
 import { BranchEditComponent } from './branch-management/branch-edit/branch-edit.component';
+import { AuthGuardAdminService } from '../../service/guards/authAdmin.guard';
 
 export const EMPLOYEE_LOGGED_IN: Route[] = [
-  { path: '', component: EmployeeLoggedInComponent },
+  {
+    path: '',
+    component: EmployeeLoggedInComponent,
+    //canActivate: [AuthGuardAdminService.checkAdmin],
+  },
   {
     path: 'emp-management',
     component: EmployeeManagementShellComponent,
+    canActivate: [AuthGuardAdminService.checkManager],
     children: [
       {
         path: 'all-employees',
         component: EmployeeManagementComponent,
+        canActivate: [AuthGuardAdminService.checkManager],
         children: [
           {
             path: 'add-employee',
             component: AddNewEmployeeComponent,
+            canActivate: [AuthGuardAdminService.checkManager],
           },
         ],
       },
       {
         path: 'sub-employee',
         component: SubEmployeesComponent,
+        canActivate: [AuthGuardAdminService.checkManager],
       },
     ],
   },
-  { path: 'bank-management', component: BranchManagementComponent },
-  { path: 'branch-edit-component', component: BranchEditComponent },
+  {
+    path: 'bank-management',
+    component: BranchManagementComponent,
+    canActivate: [AuthGuardAdminService.checkAdmin],
+  },
+  {
+    path: 'branch-edit-component',
+    component: BranchEditComponent,
+    canActivate: [AuthGuardAdminService.checkManager],
+  },
   // { path: 'sub-employee', component: SubEmployeesComponent },
 ];

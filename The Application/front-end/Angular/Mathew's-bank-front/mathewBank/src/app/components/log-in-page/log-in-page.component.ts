@@ -7,6 +7,7 @@ import { UnRegService } from '../../service/unRegService';
 import { Router } from '@angular/router';
 import { NavBarGoldService } from '../../service/navBarService';
 import { EmployeeDataModel } from '../../model/employee-model';
+import { EmployeePermissionService } from '../../service/employee-permission.service';
 
 @Component({
   selector: 'app-log-in-page',
@@ -19,7 +20,8 @@ export class LogInPageComponent {
   constructor(
     private unRegService: UnRegService,
     private router: Router,
-    private navBarGoldService: NavBarGoldService
+    private navBarGoldService: NavBarGoldService,
+    private employeePermissionService: EmployeePermissionService
   ) {
     this.navBarGoldService.resetAll();
     this.navBarGoldService.logIn.next(true);
@@ -46,6 +48,8 @@ export class LogInPageComponent {
     const empData: EmployeeDataModel | null = JSON.parse(
       localStorage.getItem('employeeData')!
     );
+    // private employeePermissionService: EmployeePermissionService
+    //this.employeePermissionService.checkUserAuth();
 
     if (empData != null) {
       this.unRegService.logInDetected.next(true);

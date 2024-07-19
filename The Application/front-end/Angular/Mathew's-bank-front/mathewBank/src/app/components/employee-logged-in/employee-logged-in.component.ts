@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { NavBarGoldService } from '../../service/navBarService';
 import { EmployeeService } from '../../service/employee-post-login.service';
 import { BankService } from '../../service/bank.service';
+import { EmployeePermissionService } from '../../service/employee-permission.service';
 
 @Component({
   selector: 'app-employee-logged-in',
@@ -37,7 +38,8 @@ export class EmployeeLoggedInComponent {
     private userDataRefreshUpDate: RefreshDataFetcherService,
     private navBarGoldService: NavBarGoldService,
     private employeeService: EmployeeService,
-    private bankService: BankService
+    private bankService: BankService,
+    private employeePermissionService: EmployeePermissionService
   ) {
     console.log('Employee logged in');
     this.runUserService();
@@ -49,6 +51,9 @@ export class EmployeeLoggedInComponent {
 
     this.userDataRefreshUpDate.checkIfEmployeeDataAvailable();
     this.bankService.bankBranchViewData.next(null);
+
+    // private employeePermissionService: EmployeePermissionService
+    this.employeePermissionService.checkUserAuth();
   }
   runUserService() {
     this.userService.employeeData.subscribe((data) => {

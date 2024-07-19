@@ -4,6 +4,7 @@ import { UnRegService } from '../../../service/unRegService';
 import { CommonModule } from '@angular/common';
 import { NavBarGoldService } from '../../../service/navBarService';
 import { EmployeeService } from '../../../service/employee-post-login.service';
+import { EmployeePermissionService } from '../../../service/employee-permission.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -39,8 +40,12 @@ export class NavBarComponent {
     private unRegService: UnRegService,
     private activatedRoute: ActivatedRoute,
     private navBarComponent: NavBarGoldService,
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    private employeePermissionService: EmployeePermissionService
   ) {
+    //Guard
+    // private employeePermissionService: EmployeePermissionService
+
     //check for login
     unRegService.logInDetected.subscribe(
       (userIn) => (this.loginActive = userIn)
@@ -123,7 +128,11 @@ export class NavBarComponent {
     this.loginActive = false;
     //local storage null
     localStorage.clear();
-    this.router.navigate(['welcome']);
+    // this.employeePermissionService.isAdminSub.next(false);
+    // this.employeePermissionService.isManagerSub.next(false);
+    // this.employeePermissionService.isClerkSub.next(false);
     this.unRegService.logUserOut();
+    this.router.navigate(['welcome']);
+    //location.reload();
   }
 }

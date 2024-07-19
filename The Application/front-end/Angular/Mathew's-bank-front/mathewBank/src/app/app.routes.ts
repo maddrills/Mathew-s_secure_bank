@@ -3,6 +3,7 @@ import { WelcomePageComponent } from './components/welcome-page/welcome-page.com
 import { ApplyForAccountComponent } from './components/apply-for-account/apply-for-account.component';
 import { LogInPageComponent } from './components/log-in-page/log-in-page.component';
 import { UserWelcomeComponent } from './components/user-logged-in/user-welcome/user-welcome.component';
+import { AuthGuardAdminService } from './service/guards/authAdmin.guard';
 export const routes: Routes = [
   {
     path: '',
