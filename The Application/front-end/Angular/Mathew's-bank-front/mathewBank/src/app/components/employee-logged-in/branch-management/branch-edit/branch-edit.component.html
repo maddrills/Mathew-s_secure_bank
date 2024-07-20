@@ -56,10 +56,13 @@
           <h6>Salary</h6>
           <p>{{ bankManager?.salary }}</p>
         </div>
+        @if(isAdmin){
         <div class="manager-info">
           <button (click)="remove(bankManager?.empId)">Remove Manager</button>
         </div>
+        }
       </div>
+      @if(isAdmin){
       <div class="add-manager">
         <h4>Add manager to branch</h4>
         <form #f="ngForm" (ngSubmit)="addMangerToBranch(f)">
@@ -70,6 +73,7 @@
           <button class="add-manager-button">Add Manger To Branch</button>
         </form>
       </div>
+      }
       <div class="add-manager">
         <h4>Add Clerk to branch</h4>
         <form #c="ngForm" (ngSubmit)="addClerkToBranch(c)">
@@ -109,9 +113,12 @@
             }
           </td>
           <td>{{ employee.value.salary }}</td>
+          @if(employee.value.empId != selectedBrach?.branchManagerId ||
+          isAdmin){
           <td>
             <button (click)="remove(employee.value.empId)">Remove</button>
           </td>
+          }
         </tr>
       </table>
       <div class="next-bubble prevent-select">

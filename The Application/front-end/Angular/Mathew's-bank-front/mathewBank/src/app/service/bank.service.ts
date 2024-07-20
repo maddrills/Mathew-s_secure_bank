@@ -160,4 +160,28 @@ export class BankService {
       }
     );
   }
+
+  public mangerRemoveSubEmployee(employeeId: number) {
+    return this.http.patch<boolean>(
+      ApplicationHttpRoutes.REMOVE_CLERK_FROM_BRANCH_MANAGER_PATCH,
+      null,
+      {
+        params: new HttpParams().set('employeeClerk', employeeId),
+        observe: 'response',
+        withCredentials: true,
+      }
+    );
+  }
+
+  public managerAddEmployee(employeeId: number) {
+    return this.http.put<boolean>(
+      ApplicationHttpRoutes.ADD_CLERK_FROM_BRANCH_MANAGER_PUT,
+      null,
+      {
+        params: new HttpParams().set('employeeClerk', employeeId),
+        observe: 'response',
+        withCredentials: true,
+      }
+    );
+  }
 }

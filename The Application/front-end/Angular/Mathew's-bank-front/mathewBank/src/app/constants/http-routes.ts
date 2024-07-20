@@ -93,4 +93,10 @@ export class ApplicationHttpRoutes {
     this.SOCKET + '/bankUser/get_all_user_transactions';
   static readonly GET_ACCOUNT_DETAILS_BY_ACCOUNT_NUMBER: string =
     this.SOCKET + '/bankUser/getAccountByAccountNumber';
+
+  //manager
+  static readonly REMOVE_CLERK_FROM_BRANCH_MANAGER_PATCH: string =
+    this.SOCKET + '/manager/remove-clerk-from-managers-branch';
+  static readonly ADD_CLERK_FROM_BRANCH_MANAGER_PUT: string =
+    this.SOCKET + '/manager/add-clark-to-branch';
 }

@@ -33,6 +33,7 @@ export class BranchEditComponent implements OnInit {
   selectedBrach: BranchModel | null = null;
   allEmployees: Map<number, EmployeeDataModel> = new Map();
   bankManager: EmployeeDataModel | null = null;
+  isAdmin: boolean = false;
 
   ngOnInit(): void {
     this.allEmployees.clear();
@@ -82,9 +83,12 @@ export class BranchEditComponent implements OnInit {
     console.log(this.userDataRefreshUpDate);
 
     //private employeePermissionService : EmployeePermissionService,
-    employeePermissionService.isManagerSub.subscribe((manager) => {
-      if (manager) {
+    employeePermissionService.isAdminSub.subscribe((admin) => {
+      if (admin) {
         //get bank by from user credentials
+        this.isAdmin = true;
+      } else {
+        this.isAdmin = false;
       }
     });
   }
@@ -126,17 +130,28 @@ export class BranchEditComponent implements OnInit {
     } else {
       //remove clerks
       console.log('Removing clerk');
-      this.bankService
-        .removeAClerkFromABranch(employeeID!, this.selectedBrach?.branchId!)
-        .subscribe({
+      if (this.isAdmin) {
+        this.bankService
+          .removeAClerkFromABranch(employeeID!, this.selectedBrach?.branchId!)
+          .subscribe({
+            next: (n) => {
+              console.log('REMOVE_EMPLOYEE_FROM_BRANCH_Admin');
+              console.log(n.body);
+              //remove local store and manager storage
+              this.allEmployees.delete(employeeID);
+            },
+            error: (e) => console.log(e),
+          });
+      } else {
+        //if manager
+        this.bankService.mangerRemoveSubEmployee(employeeID).subscribe({
           next: (n) => {
-            console.log('REMOVE_EMPLOYEE_FROM_BRANCH_Admin');
-            console.log(n.body);
-            //remove local store and manager storage
+            console.log(n);
             this.allEmployees.delete(employeeID);
           },
           error: (e) => console.log(e),
         });
+      }
     }
   }
 
@@ -204,20 +219,32 @@ export class BranchEditComponent implements OnInit {
       console.log('Manager not allowed here');
       return;
     }
-    console.log('is Clerk');
-    this.bankService
-      .addAClerkToABranch(clerkId.clerk, this.selectedBrach?.branchId!)
-      .subscribe({
+    if (this.isAdmin) {
+      console.log('is Clerk');
+      this.bankService
+        .addAClerkToABranch(clerkId.clerk, this.selectedBrach?.branchId!)
+        .subscribe({
+          next: (n) => {
+            console.log(n.body);
+            ngForm.resetForm();
+            this.bankService.findAllEmployeesUnderBranch(
+              this.selectedBrach!.branchId
+            );
+          },
+          error: (e) => console.log(e),
+        });
+    } else {
+      this.bankService.managerAddEmployee(clerkId.clerk).subscribe({
         next: (n) => {
-          console.log('REMOVE_MANAGER_FROM_BRANCH');
           console.log(n.body);
           ngForm.resetForm();
           this.bankService.findAllEmployeesUnderBranch(
             this.selectedBrach!.branchId
           );
         },
-        error: (e) => console.log(e),
+        error: (er) => {},
       });
+    }
   }
 
   private checkIfManager(employeeID: number | undefined): boolean {
