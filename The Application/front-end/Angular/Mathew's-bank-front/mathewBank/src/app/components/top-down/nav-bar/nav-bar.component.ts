@@ -32,6 +32,8 @@ export class NavBarComponent {
   public employeeLoggedIn: boolean = false;
   //employee access level
   public isAdmin: boolean = false;
+  public isManager: boolean = false;
+  public isClerk: boolean = false;
 
   public url = this.router.url;
 
@@ -82,6 +84,13 @@ export class NavBarComponent {
     //this.mathewBackHome = this.navBarComponent.onMathewsBank;
     console.log(this.employeeHomeSelected);
     console.log(this.mathewBackHome);
+
+    this.employeePermissionService.isClerkSub.subscribe({
+      next: (n) => (this.isClerk = n),
+    });
+    this.employeePermissionService.isManagerSub.subscribe({
+      next: (n) => (this.isManager = n),
+    });
   }
 
   userHomePage() {

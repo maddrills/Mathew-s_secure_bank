@@ -42,6 +42,7 @@
         >
           <div>home</div>
         </div>
+        @if(isAdmin || isManager){
         <div
           class="login RHS-common"
           (click)="empManagement()"
@@ -58,7 +59,7 @@
         >
           <div>Bank-Management</div>
         </div>
-        }
+        } }
 
         <hr />
         <div class="log-out RHS-common inviableInlay" (click)="logOutPage()">
