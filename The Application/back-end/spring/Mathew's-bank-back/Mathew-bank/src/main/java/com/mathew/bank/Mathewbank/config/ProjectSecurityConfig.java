@@ -97,7 +97,7 @@ public class ProjectSecurityConfig {
                                 "/admin/add_an_employee",
                                 "/admin/remove_employee_permission",
                                 "/admin/add_employee_permission",
-                                "/employee/getAllApplications",
+
                                 "/admin/update-employee-permission-set",
                                 "/manager/**").hasAnyRole("manager")
 
@@ -107,7 +107,8 @@ public class ProjectSecurityConfig {
                                 "/employee/acceptApplication",
                                 "/employee/rejectApplication",
                                 "/employee/getApplicationsAssignedToMe",
-                                "/employee/get-applications-under-branch").hasAnyRole("clerk")
+                                "/employee/get-applications-under-branch",
+                                "/employee/getAllApplications").hasAnyRole("clerk")
 
                         .requestMatchers("/employee/employee-login").hasAnyRole("employee")
                         //any one who is authenticated can access /logout

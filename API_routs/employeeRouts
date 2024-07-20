@@ -436,6 +436,26 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get All Application",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/employee/getAllApplications",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee",
+						"getAllApplications"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
