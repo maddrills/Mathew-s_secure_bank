@@ -25,7 +25,7 @@ public interface EmpRepo extends User_emp_commonRepo {
 
     public void addOeUpdateEmployeeBankAccount(int EmployeeId, int BankAccountNumber);
 
-    public void removeRoleFromEmployee(int empId, String role);
+    public void removeRoleFromEmployee(int empId,boolean isManager, String role);
 
     public void addARoleToAnEmployee(int empId, String role);
 
@@ -77,7 +77,7 @@ public interface EmpRepo extends User_emp_commonRepo {
 
     boolean updateEmployee(Employee clerk);
 
-    List<RolesDto> updateEmployeePermissions(int empId, List<RolesDto> roles);
+    List<RolesDto> updateEmployeePermissions(int empId,boolean isManager, List<RolesDto> roles);
 
     void updateUser(User user);
 

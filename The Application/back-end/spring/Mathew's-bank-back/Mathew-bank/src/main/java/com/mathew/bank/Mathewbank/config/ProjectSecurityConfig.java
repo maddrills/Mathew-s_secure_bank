@@ -90,7 +90,7 @@ public class ProjectSecurityConfig {
 
                         .requestMatchers(
                                 "/admin/get_all_employees_under",
-                                
+
                                 "/admin/get_all_employees_by_a_role_name",
                                 "/admin/get_all_employees",
 

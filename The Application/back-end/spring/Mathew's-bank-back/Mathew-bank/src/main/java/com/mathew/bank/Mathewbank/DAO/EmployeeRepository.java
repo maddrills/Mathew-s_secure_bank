@@ -180,9 +180,22 @@ public class EmployeeRepository implements EmpRepo {
 
     @Override
     @Transactional
-    public void removeRoleFromEmployee(int empId, String role) {
+    public void removeRoleFromEmployee(int empId,boolean isManager, String role) {
+
         //get the employee
         Employee employee = getEmployeeById(empId);
+
+        if(isManager){
+            //then limit the roles update
+            for(var employeeRole : employee.getRoles()){
+                if (employeeRole.getRole().equals("ROLE_manager")){
+                    return;
+                }
+            }
+            //remove the object (Role) from the list of romes
+            employee.getRoles().removeIf(a -> a.getRole().equals("ROLE_" + role));
+            return;
+        }
         //remove the object (Role) from the list of romes
         employee.getRoles().removeIf(a -> a.getRole().equals("ROLE_" + role));
         //persist the change
@@ -787,11 +800,21 @@ public class EmployeeRepository implements EmpRepo {
 
     @Override
     @Transactional
-    public List<RolesDto> updateEmployeePermissions(int empId, List<RolesDto> roles) {
+    public List<RolesDto> updateEmployeePermissions(int empId,boolean isManager, List<RolesDto> roles) {
 
         //holds the response depending on the Success of the persistence
         List<RolesDto> respRoles = new LinkedList<>();
         Employee employee = this.getEmployeeById(empId);
+
+        if(isManager){
+            //if manager is modifying another manager
+            Collection<Role> roles1 = employee.getRoles();
+            for (Role role : roles1) {
+                if (role.getRole().equals("ROLE_manager")) {
+                    return null;
+                }
+            }
+        }
 
         employee.getRoles().clear();
 

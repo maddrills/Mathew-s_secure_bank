@@ -289,6 +289,7 @@ public class AdminService {
     public List<RolesDto> changeEmployeePermission(int empId, List<RolesDto> roles, HttpServletResponse response, Authentication authentication) {
 
         int authLevel = accessLevelAuthCheck(authentication);
+        boolean isManager = false;
 
         if (authLevel == 3) {
             //then manager is adding a role
@@ -299,6 +300,7 @@ public class AdminService {
                     return null;
                 }
             }
+            isManager = true;
         }
         // forbid any illegal
         if (!this.SanityCheckForEmpPermission(empId, roles)) {
@@ -311,7 +313,7 @@ public class AdminService {
 
         for (var role : roles) {
             try {
-                this.empRepo.removeRoleFromEmployee(empId, role.getRoleName());
+                this.empRepo.removeRoleFromEmployee(empId,isManager, role.getRoleName());
                 role.setAdded(true);
                 respRoles.add(role);
 
@@ -326,7 +328,9 @@ public class AdminService {
     //UPDATE employee role
     public List<RolesDto> updateEmployeePermission(int empId, List<RolesDto> roles,  Authentication authentication, HttpServletResponse response) {
 
+        System.out.println("Updating permissions 1");
         int authLevel = accessLevelAuthCheck(authentication);
+        boolean isManager = false;
 
         if (authLevel == 3) {
             //then manager is adding a role
@@ -337,6 +341,8 @@ public class AdminService {
                     return null;
                 }
             }
+            System.out.println("Updating permissions 2");
+            isManager = true;
         }
         // forbid any illegal and Admin permission remove
         if (!this.SanityCheckForEmpPermission(empId, roles)) {
@@ -345,7 +351,9 @@ public class AdminService {
         }
 
         try{
-            return this.empRepo.updateEmployeePermissions(empId, roles);
+            System.out.println("Updating permissions 3");
+            System.out.println(isManager);
+            return this.empRepo.updateEmployeePermissions(empId,isManager, roles);
             //remove all permissions from employee
 
         }catch (Exception e){
