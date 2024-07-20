@@ -91,6 +91,9 @@ export class NavBarComponent {
     this.employeePermissionService.isManagerSub.subscribe({
       next: (n) => (this.isManager = n),
     });
+    this.employeePermissionService.isAdminSub.subscribe({
+      next: (n) => (this.isAdmin = n),
+    });
   }
 
   userHomePage() {
