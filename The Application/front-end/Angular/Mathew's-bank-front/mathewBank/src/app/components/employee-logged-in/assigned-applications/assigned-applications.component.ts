@@ -55,4 +55,39 @@ export class AssignedApplicationsComponent {
   expandAssignedArea(expander: number) {
     this.expand = expander;
   }
+
+  rejectApplication(applicationId: number) {
+    if (!applicationId) {
+      throw new Error('Method not implemented.');
+    }
+    this.employeeService.rejectApplication(applicationId).subscribe({
+      next: (n) => {
+        console.log(n.body);
+        if (n.body) {
+          //then change dom
+          alert('Rejection Successful');
+        } else {
+          alert('Rejection failed');
+        }
+      },
+      error: (e) => console.log(e),
+    });
+  }
+  acceptApplication(applicationId: number) {
+    if (!applicationId) {
+      throw new Error('Method not implemented.');
+    }
+    this.employeeService.acceptApplication(applicationId).subscribe({
+      next: (n) => {
+        console.log(n.body);
+        if (n.body) {
+          //then change dom
+          alert('User Accepting');
+        } else {
+          alert('Error Accepting User');
+        }
+      },
+      error: (e) => console.log(e),
+    });
+  }
 }

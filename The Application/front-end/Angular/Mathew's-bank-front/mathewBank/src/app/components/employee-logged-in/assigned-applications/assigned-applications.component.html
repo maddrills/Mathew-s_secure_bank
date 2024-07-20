@@ -55,11 +55,19 @@
               </div>
               <div>
                 <h6>Accept</h6>
-                <button>{{ applicationUnderMe.status }}</button>
+                <button
+                  (click)="acceptApplication(applicationUnderMe.applicationId)"
+                >
+                  {{ applicationUnderMe.status }}
+                </button>
               </div>
               <div>
                 <h6>Reject</h6>
-                <button>{{ applicationUnderMe.rejected }}</button>
+                <button
+                  (click)="rejectApplication(applicationUnderMe.applicationId)"
+                >
+                  {{ applicationUnderMe.rejected }}
+                </button>
               </div>
             </div>
           </div>
