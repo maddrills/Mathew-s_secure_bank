@@ -15,6 +15,8 @@ export class AssignedApplicationsComponent {
   expand: number = -1;
   public applicationsUnderMe: applicationsModel[] = [];
 
+  assignedApplication: boolean = false;
+
   constructor(private employeeService: EmployeeService) {
     this.employeeService.authViewActive.subscribe({
       next: (n) => {
@@ -29,6 +31,8 @@ export class AssignedApplicationsComponent {
   }
 
   getData() {
+    this.assignedApplication = !this.assignedApplication;
+
     console.log('Get data');
     if (this.authViewActive) {
       console.log('Auth view');

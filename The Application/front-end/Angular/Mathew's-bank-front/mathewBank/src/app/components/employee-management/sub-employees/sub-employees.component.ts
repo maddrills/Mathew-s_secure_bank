@@ -40,6 +40,9 @@ export class SubEmployeesComponent implements OnDestroy {
   //subEmployees = new BehaviorSubject<EmployeeDataModel[] | null>(null);
   subEmployees: EmployeeDataModel[] | null = null;
 
+  //open up ui control
+  employeeUnder: boolean = false;
+
   constructor(
     private navBarGoldService: NavBarGoldService,
     private userDataRefreshUpDate: RefreshDataFetcherService,
@@ -95,6 +98,7 @@ export class SubEmployeesComponent implements OnDestroy {
   }
 
   listOutAllSubEmployees() {
+    this.employeeUnder = !this.employeeUnder;
     //TODO optimise
     //only check if employee data available
     this.bankService.bankBranchViewData.next(null);

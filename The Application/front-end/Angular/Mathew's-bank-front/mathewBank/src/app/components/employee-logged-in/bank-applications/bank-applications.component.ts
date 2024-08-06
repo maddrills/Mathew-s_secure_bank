@@ -28,6 +28,8 @@ export class BankApplicationsComponent {
   //bank
   bankDataView: BranchModel | null = null;
 
+  bankApplicationUnder: boolean = false;
+
   constructor(
     private employeeService: EmployeeService,
     private bankService: BankService,
@@ -55,6 +57,7 @@ export class BankApplicationsComponent {
   }
 
   getData() {
+    this.bankApplicationUnder = !this.bankApplicationUnder;
     //get only sub branches
     if (this.subEmployeeActive && !this.getAllApplications) {
       console.log(this.employeeUnderView);
